@@ -9,7 +9,8 @@ import shutil
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "_lib"))
-from opsdoc import TYPES, as_list, read_frontmatter, repo_root  # noqa: E402
+from opsdoc import TYPES, as_list, filename_problem, read_frontmatter, repo_root  # noqa: E402
+from vcs import accept_commit_date  # noqa: E402
 
 HEADER = "<!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — docs-index skill 이 만든다. -->\n"
 
@@ -58,14 +59,36 @@ for dirpath, dirnames, filenames in os.walk(docs):
         if not subjects:
             warnings.append("subjects 가 비었다 — 정밀 검색에서 사라진다: %s" % rel)
 
+        problem = filename_problem(path, fm)
+        if problem:
+            warnings.append(problem.replace("\n", " ") + " — " + rel)
+
+        status = fm.get("status", "(없음)")
+        accepted_at = fm.get("accepted_at", "")
+
+        # accepted_at 은 **비권위적 편의 필드**다 — 진실 원본은 git(accept 커밋)이다.
+        # 어긋나면 경고만 한다. 권위 없는 필드를 도구가 강제하면 그건 권위를 준 것이다.
+        if status == "accepted":
+            if not accepted_at:
+                warnings.append("accepted 인데 accepted_at 이 없다 (accept.py 를 거치지 않았다): %s" % rel)
+            else:
+                # **날짜 단위로만** 비교한다. accept 시각과 커밋 시각은 본질적으로 몇 분~몇 시간
+                # 어긋나므로, 초 단위로 비교하면 언제나 경고가 뜬다 — 늘 울리는 경보는 경보가 아니다.
+                committed = accept_commit_date(root, rel)
+                if committed and committed != accepted_at[:10]:
+                    warnings.append(
+                        "accepted_at(%s) ≠ accept 커밋 날짜(%s) — git 이 진실이다: %s"
+                        % (accepted_at, committed, rel))
+
         entries.append({
             "path": path, "rel": rel,
             "id": fm.get("id", ""),
             "type": doc_type,
             "topic": topic,
             "subjects": subjects,
-            "status": fm.get("status", "(없음)"),
+            "status": status,
             "parent": fm.get("parent", ""),
+            "accepted_at": accepted_at,
             "title": title_of(path, name),
         })
 
@@ -125,10 +148,11 @@ for subject in sorted({s for e in entries for s in e["subjects"]}):
           + table(rows, d, ("id", "type", "topic", "status")))
 
 accepted = sorted([e for e in entries if e["type"] == "adr" and e["status"] == "accepted"],
-                  key=sort_key)
+                  key=lambda e: (e["accepted_at"] or "9999-99-99", e["id"]))   # 시간순 (§7)
 lines = ["# decisions-log — accepted ADR", "",
-         "*ADR id 순. frontmatter 에 날짜 필드가 없어 시각순이 아니다 (§7) — 초판의 한계.*", ""]
-lines += table(accepted, index_dir, ("id", "topic", "subjects", "parent")) if accepted else ["*(없음)*"]
+         "*accept 순. `accepted_at` 은 편의 필드이며 진실 원본은 git 이다 (§7).*", ""]
+lines += (table(accepted, index_dir, ("id", "accepted_at", "topic", "subjects", "parent"))
+          if accepted else ["*(없음)*"])
 write(os.path.join(index_dir, "decisions-log.md"), lines)
 
 # ── 보고 ──────────────────────────────────────────────────────────────────

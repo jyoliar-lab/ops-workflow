@@ -29,8 +29,9 @@ description: ADR 문서를 저작·accept·supersede한다. "ADR을 쓴다", "�
 | `subjects` | **★ 기존 목록을 보여주고 묻는다** — `scripts/list-subjects.py` 실행 후 그 결과를 제시한다 |
 | `parent` | **묻는다.** founding인가 sub인가? sub라면 부모 ADR id. 계층은 **2단에서 멈춘다** |
 | `ticket` | **묻는다.** 없으면 비운다 (`jyoliar-lab/ops-workflow#N`) |
-| 슬러그 | **묻는다.** 파일명이 된다 |
-| `id` | **자동** — `scripts/next-id.sh` (순수 기계) |
+| 슬러그 | **묻는다.** 파일명이 된다 — 소문자 kebab-case, 3~6 단어 |
+| `id` | **자동** — `scripts/next-id.py` (순수 기계) |
+| `accepted_at` | **자동** — accept 할 때 `scripts/accept.py` 가 채운다. **손으로 적지 않는다** |
 | "무효화 조건" | **묻는다. 못 채우면 비운 채로 둔다** — 억지로 지어내지 않는다. 채택 여부는 실측으로 판정한다 |
 
 ```bash
@@ -44,9 +45,17 @@ description: ADR 문서를 저작·accept·supersede한다. "ADR을 쓴다", "�
 
 ## 2. 쓴다
 
-경로: `docs/{topic}/adr/{ID}-{슬러그}.md` — **타입 폴더는 lazy 생성**(§7). 이 ADR이 그 topic의 첫 ADR이면 여기서 `adr/`가 처음 생긴다.
+경로는 스크립트가 도출한다 — 슬러그를 여기서 검증한다:
 
-> ⚠ 파일명 규약(`{ID}-{슬러그}.md`)은 **규약에 없다. 이 skill이 잠정으로 정한 것**이다 → 마찰 로그.
+```bash
+.claude/skills/adr/scripts/doc-path.py --topic <t> --id ADR-0001 --slug <slug>
+# → docs/{topic}/adr/adr-0001-<slug>.md
+```
+
+파일명은 **소문자**이고 **id가 선두**다(§7) — 인용키로 바로 찾기 위해서다. frontmatter의 `id`는 대문자(`ADR-0001`), 파일명은 소문자(`adr-0001-…`)다.
+**타입 폴더는 lazy 생성**(§7) — 이 ADR이 그 topic의 첫 ADR이면 여기서 `adr/`가 처음 생긴다.
+
+> ⚠ **이름은 accept 시 얼어붙는다** — 그 뒤로 rename은 금지다(경로를 갈면 인용이 깨진다). 슬러그를 지금 제대로 고른다.
 
 ```yaml
 ---
@@ -55,6 +64,7 @@ type: adr
 topic: ops-workflow
 subjects: [a, b]
 status: proposed
+accepted_at:       # 비운다. accept.py 가 채운다 — 손으로 적지 않는다
 parent:            # sub-ADR일 때만. founding이면 지운다
 superseded_by:
 ticket:
@@ -63,7 +73,7 @@ ticket:
 # ADR-0001 — <결정 한 문장>
 
 ## Context
-<왜 지금 이 결정이 필요한가. 제약. **자족적으로** 쓴다 — 외부 볼트 문서를 인용·링크하지 않는다>
+<왜 지금 이 결정이 필요한가. 제약. **자족적으로** 쓴다 — 이 저장소 밖 문서에 기대지 않는다>
 
 ## Decision
 <무엇을 정했나. "왜"만. 파라미터·구현은 코드의 관할>
@@ -82,9 +92,17 @@ ticket:
 
 ## 3. accept — 동결선을 넘는다
 
-`proposed` → 셀프 리뷰 → `status: accepted`. **여기서부터 본문은 동결된다**(§3).
+`proposed` → 셀프 리뷰 → **스크립트가 넘긴다.** 손으로 `status:` 줄을 고치지 않는다.
 
-accept 이후 허용되는 편집은 딱 둘: **`status`** · **`superseded_by`**. 유예 기간은 없다.
+```bash
+.claude/skills/adr/scripts/accept.py ADR-0001
+```
+
+이 스크립트는 `status`와 `accepted_at`을 함께 기록하고, **파일명이 규약에 맞는지 마지막으로 검사**한다 — 이름이 잘못된 채 얼면 되돌릴 방법이 없기 때문이다(rename 금지).
+
+**여기서부터 본문도, 경로도 동결된다**(§3). 이후 허용되는 편집은 딱 둘: **`status`** · **`superseded_by`**. 유예 기간은 없다.
+
+> `accepted_at`은 **비권위적 편의 필드**다. 진실 원본은 **git(accept 커밋)**이고, 어긋나면 git이 이긴다. 그래서 인덱스는 어긋남을 **경고만** 하고 실패시키지 않는다 — 권위 없는 필드를 도구가 강제하면 그건 권위를 준 것이다.
 
 ## 4. 동결된 문서를 건드리려 할 때
 
@@ -92,7 +110,10 @@ accept 이후 허용되는 편집은 딱 둘: **`status`** · **`superseded_by`*
 
 ```bash
 .claude/skills/adr/scripts/freeze-check.py <path>   # accepted/superseded/frozen → exit 1
+.claude/skills/adr/scripts/freeze-check.py          # 동결 문서 전량의 경로 변경을 훑는다
 ```
+
+**동결은 경로에도 걸린다.** 본문을 얼려 놓고 파일을 옮기면 그 ADR을 가리키던 인용이 전부 깨진다 — 얼린 의미가 없다. 인자 없이 돌리면 HEAD와 대조해 **옮겨진 동결 문서**를 찾아낸다.
 
 **exit 1은 우회하지 않는다.** 결정을 바꾸려면 **새 ADR로 supersede**한다 — 옛 ADR을 고치지 않는다.
 

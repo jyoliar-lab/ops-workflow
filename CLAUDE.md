@@ -166,6 +166,18 @@ docs/
 - **ADR 번호는 전역 순차**(`ADR-0012`). topic이 달라도 유일하다 — 어디서든 안정적으로 인용하기 위해.
 - **`_index/`는 도구가 생성**한다(frontmatter 스캔). **수동 MOC를 만들지 않는다** — drift를 구조적으로 제거한다.
 
+### 파일명
+
+| 타입 | 파일명 |
+|---|---|
+| **adr** | `adr-0012-<slug>.md` — 인용키가 선두 |
+| **discussion** | `YYMMDD_HHmm_<slug>.md` — 작성 시각 |
+| **postmortem** | `YYMMDD_HHmm_<slug>.md` — **장애 발생일** (작성일이 아니다) |
+
+전부 **소문자 kebab-case**. 한글·대문자·밑줄·공백을 쓰지 않는다. 슬러그는 **3~6 단어**.
+
+**accept 후 rename 금지.** 동결은 본문만이 아니라 **경로에도** 걸린다 — 옮기면 인용이 깨진다.
+
 ### frontmatter
 
 ```yaml
@@ -174,12 +186,15 @@ type: adr                                 # adr | discussion | postmortem
 topic: monitoring                         # 폴더와 일치 (검증용 중복). 거친 1축
 subjects: [loki, object-storage, minio]   # 다중값. 정밀 검색용
 status: accepted                          # proposed | accepted | rejected | superseded
+accepted_at: 2026-07-12T17:31:04+09:00    # accept 시 도구가 채운다. 손으로 적지 않는다
 parent: ADR-0007                          # sub-ADR일 때만
 superseded_by:                            # supersede 시
 ticket: jyoliar-lab/ops-workflow#42
 ```
 
 *수명주기 필드(`lifecycle` 등)는 없다 — 모든 문서가 동결형이므로 타입에서 파생된다.*
+
+**`accepted_at`은 비권위적이다.** 진실 원본은 **git**(accept 커밋)이고, 어긋나면 **git이 이긴다.** 도구가 채우므로 **손으로 적지 않는다.**
 
 ### `topic` vs `subjects` — 왜 둘인가
 
