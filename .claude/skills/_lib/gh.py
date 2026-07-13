@@ -26,7 +26,12 @@ def _run(args):
 def graphql(query, **variables):
     args = ["gh", "api", "graphql", "-f", "query=" + query]
     for k, v in variables.items():
-        args += ["-F", "%s=%s" % (k, v)]        # -F 는 숫자·불리언을 형에 맞춰 넘긴다
+        # 플래그를 **파이썬 타입으로** 가른다.
+        #   -F : 값을 형에 맞춰 넘긴다 (숫자·불리언). Int! 변수(이슈 번호)에 필요하다.
+        #   -f : 언제나 raw string.
+        # 문자열에 -F 를 쓰면 안 된다 — 숫자꼴 문자열이 Integer 로 넘어가 String! 이 거부한다.
+        # Project 의 SingleSelect 옵션 id 는 실제로 숫자꼴이 나온다 (Backlog = "53153770").
+        args += ["-F" if isinstance(v, (int, bool)) else "-f", "%s=%s" % (k, v)]
     payload = json.loads(_run(args))
     if payload.get("errors"):
         die("거부: GraphQL 오류",
@@ -94,6 +99,61 @@ def add_sub_issue(parent_id, child_id):
         "{issue{number} subIssue{number}}}",
         p=parent_id, c=child_id)
     return data["addSubIssue"]
+
+
+# ── Projects ─────────────────────────────────────────────────────────────
+# 근거 ADR 은 **Project 필드**에 담는다 (CLAUDE.md §5).
+# 이슈 자체에는 임의 필드를 붙일 수 없고(스키마 고정), 라벨은 다중·평면이라 단일 값 속성을 담기엔 헐겁다.
+# Project 필드는 단일 값 속성이라 성격이 맞는다 — 그리고 보드는 어차피 컨트롤 플레인의 뷰다.
+
+
+def project(org, number):
+    """org Project → {id, fields: {name: {id, dataType, options}}}"""
+    data = graphql(
+        "query($o:String!,$n:Int!){organization(login:$o){projectV2(number:$n){id "
+        "fields(first:30){nodes{"
+        "... on ProjectV2Field{id name dataType} "
+        "... on ProjectV2SingleSelectField{id name dataType options{id name}}}}}}}",
+        o=org, n=number)
+    p = (data.get("organization") or {}).get("projectV2")
+    if not p:
+        die("거부: %s 의 Project #%d 를 찾지 못했다." % (org, number))
+    fields = {}
+    for f in p["fields"]["nodes"]:
+        if f:
+            fields[f["name"]] = f
+    return {"id": p["id"], "fields": fields}
+
+
+def add_to_project(project_id, issue_id):
+    data = graphql(
+        "mutation($p:ID!,$c:ID!){addProjectV2ItemById(input:{projectId:$p,contentId:$c})"
+        "{item{id}}}",
+        p=project_id, c=issue_id)
+    return data["addProjectV2ItemById"]["item"]["id"]
+
+
+def set_text_field(project_id, item_id, field_id, value):
+    graphql(
+        "mutation($p:ID!,$i:ID!,$f:ID!,$v:String!){updateProjectV2ItemFieldValue("
+        "input:{projectId:$p,itemId:$i,fieldId:$f,value:{text:$v}}){projectV2Item{id}}}",
+        p=project_id, i=item_id, f=field_id, v=value)
+
+
+def set_select_field(project_id, item_id, field_id, option_id):
+    graphql(
+        "mutation($p:ID!,$i:ID!,$f:ID!,$v:String!){updateProjectV2ItemFieldValue("
+        "input:{projectId:$p,itemId:$i,fieldId:$f,value:{singleSelectOptionId:$v}})"
+        "{projectV2Item{id}}}",
+        p=project_id, i=item_id, f=field_id, v=option_id)
+
+
+def option_id(field, name):
+    for o in field.get("options") or []:
+        if o["name"] == name:
+            return o["id"]
+    die("거부: '%s' 필드에 '%s' 옵션이 없다." % (field["name"], name),
+        "  있는 옵션: " + ", ".join(o["name"] for o in field.get("options") or []))
 
 
 # close 하는 함수가 없다 (CLAUDE.md §5).

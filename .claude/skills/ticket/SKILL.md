@@ -31,11 +31,13 @@ description: GitHub Issue를 발행하고 계층을 연결한다 (Issue Type 지
   [--adr ADR-0001]        # epic·feature 는 필수
 ```
 
-`gh issue create` + GraphQL `updateIssueIssueType`. (`gh issue create` 에는 `--type` 플래그가 없다 — Issue Type 지정은 GraphQL로만 된다.)
+`gh issue create` + GraphQL `updateIssueIssueType` + Project 등록. (`gh issue create` 에는 `--type` 플래그가 없다 — Issue Type 지정은 GraphQL로만 된다.)
 
 **컨테이너 티켓은 accepted ADR을 전제한다**(§5). `--adr` 없이 epic·feature를 만들려 하면, 또는 그 ADR이 `accepted`가 아니면 **스크립트가 거부한다**(exit 1). **우회하지 않는다** — 굳지 않은 결정으로 일하지 않는다.
 
-**본문에 문서 경로를 링크한다**(§1 브리지). 그리고 문서의 frontmatter `ticket:` 에 이슈 번호를 되쓴다. 다리는 양쪽에서 놓는다.
+**근거 ADR은 스크립트가 두 곳에 박는다**(§1 브리지) — **이슈 본문**(사람이 읽고 문서로 건너간다)과 **Project의 `ADR` 필드**(기계가 정확히 필터한다). **문서 쪽에는 되쓰지 않는다** — 동결 문서는 살아 있는 필드를 담지 못한다. 브리지는 이슈가 문서를 가리키는 단방향이다.
+
+새 티켓은 Project #1에 **`Status: Backlog`** 로 들어간다. **도구는 초기값만 넣는다** — 이후 전이는 사람의 것이다.
 
 ## 3. 계층을 잇는다
 
@@ -56,4 +58,4 @@ founding ADR ★accepted★ ──→ Epic
 
 - **close**(§5) — 스크립트가 없다. 사람이 한다.
 - **`Closes #N`** 을 PR·커밋에 쓰지 않는다.
-- **Projects Status 필드 조작** — 초판에 없다. *어느 Status로 들어가야 하는지가 규약에 없기* 때문이다(미결). 조용히 기본값을 넣지 않는다. 필요해지면 마찰 로그에 적고 정한다.
+- **Status 전이** — 초기값(`Backlog`) 이후는 건드리지 않는다. 사람이 보드에서 옮긴다.

@@ -38,17 +38,25 @@ def repo_root():
 
 
 def read_frontmatter(path):
+    """파일의 머리말을 dict 로 읽는다."""
+    try:
+        with open(path, encoding="utf-8") as f:
+            return parse_frontmatter(f.read())
+    except OSError:
+        return {}
+
+
+def parse_frontmatter(text):
     """--- 로 감싼 머리말을 dict 로 읽는다.
+
+    파일이 아니라 **텍스트**를 받는다 — git 이 준 사본(워킹 트리가 아닌 커밋된 것)도
+    같은 파서로 읽어야 하기 때문이다. 사본마다 다르게 읽으면 게이트가 거짓말을 한다.
 
     지원: 스칼라(`k: v`) · 인라인 리스트(`k: [a, b]`) · 블록 리스트(`k:` 다음 줄 `- a`).
     값이 비면 빈 문자열/빈 리스트다 — 키가 없는 것과 구분한다.
     """
     fields, key = {}, None
-    try:
-        with open(path, encoding="utf-8") as f:
-            lines = f.read().splitlines()
-    except OSError:
-        return fields
+    lines = text.splitlines()
     if not lines or lines[0].strip() != "---":
         return fields
 

@@ -13,10 +13,10 @@
 
 둘은 상호 보완이다. 대체하지 않는다.
 
-**브리지**
-- Issue 본문 → 문서 경로 링크
-- 문서 frontmatter `ticket:` → `jyoliar-lab/ops-workflow#N`
+**브리지 — 이슈가 문서를 가리킨다. 문서는 이슈를 가리키지 않는다.**
+- Issue 본문 → **근거 ADR의 id와 경로** (도구가 박는다)
 - 코드 저장소의 PR·커밋 → `jyoliar-lab/ops-workflow#N` 참조 (이슈 타임라인에 역링크 자동)
+- **ADR → 티켓 조회는 GitHub 검색**이 한다 — `repo:jyoliar-lab/ops-workflow ADR-0001`
 
 > **코드는 다른 저장소에 있다.** 이 저장소에 코드는 없다. 모든 이슈가 여기 모이고, 코드 저장소는 **참조만** 남긴다.
 
@@ -54,6 +54,8 @@
 
 - `status` 필드
 - `superseded_by` 링크
+
+**동결은 공표(push) 시점에 발효한다.** 워킹 트리의 accept는 아직 아무도 보지 못한 결정이므로 되돌릴 수 있다 — 진실 원본은 git이다. `origin/main`에 올라가는 순간 얼어붙는다.
 
 **유예 기간 없음.** Accept 직후라도 결정을 바꾸려면 **새 ADR로 supersede**한다.
 **부분 supersede 불허** — 옛 ADR 전체를 superseded로 바꾸고, 여전히 유효한 부분은 새 ADR에 **재진술**한다. (`accepted`가 문서 전체에 대해 참/거짓 이분이어야 agent가 신뢰할 수 있다.)
@@ -124,6 +126,12 @@ founding ADR ★accepted★ ──→ Epic
 탐색·사고는 **지식 플레인의 활동**이다. `discussion` 문서의 `status`가 스스로 상태를 표현하므로, 컨트롤 플레인에 중복시키지 않는다.
 *계획된* 조사를 백로그에 올리고 싶으면 `Task`로 발행한다(완료 조건 = discussion 문서 커밋).
 
+### Project — 도구는 초기값만 넣는다
+
+새 티켓은 **Project #1에 등록**되고 **`Status: Backlog`** 로 들어간다. 근거 ADR은 Project의 **`ADR` 필드**에 담긴다(§1의 브리지).
+
+**그 이후의 Status 전이는 사람의 것이다.** GitHub은 타입별 허용 상태나 전이 규칙을 강제할 수단을 주지 않는다 — 보드는 누구나 끌어다 놓을 수 있다. **강제는 우리가 매개하는 문(스크립트·스키마)에서만 성립한다.** Status를 붙들려 하지 않는다.
+
 ### 자동 close를 쓰지 않는다
 
 `Closes #N` 을 쓰지 않는다. **PR 머지 ≠ 티켓 종료.**
@@ -189,7 +197,6 @@ status: accepted                          # proposed | accepted | rejected | sup
 accepted_at: 2026-07-12T17:31:04+09:00    # accept 시 도구가 채운다. 손으로 적지 않는다
 parent: ADR-0007                          # sub-ADR일 때만
 superseded_by:                            # supersede 시
-ticket: jyoliar-lab/ops-workflow#42
 ```
 
 *수명주기 필드(`lifecycle` 등)는 없다 — 모든 문서가 동결형이므로 타입에서 파생된다.*
