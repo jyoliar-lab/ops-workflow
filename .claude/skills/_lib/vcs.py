@@ -1,10 +1,15 @@
 """git 조회 공용 모듈. 표준 라이브러리(subprocess)만 쓴다.
 
-**`accepted_at` 의 진실 원본은 git 이다** (CLAUDE.md §7). frontmatter 의 `accepted_at` 은
-읽기 편하라고 둔 **비권위적 편의 필드**이며, git 과 어긋나면 **git 이 이긴다.**
+**git 에 묻는 것은 딱 하나다 — "이것이 공표됐는가".** (CLAUDE.md §3)
 
-그래서 여기 있는 함수는 전부 **읽기**다. git 을 근거로 문서를 고치지 않는다 —
-어긋남은 경고로 드러내고, 판단은 사람이 한다. 권위 없는 필드를 도구가 강제하면 그건 권위를 준 것이다.
+동결은 **시각이 아니라 상태**이고, 그 상태는 `origin/main` 에 있느냐로만 판정된다.
+문서 밖의 사실이므로 필드로 두지 않는다 — 그래서 여기서 파생한다.
+
+**`accepted_at` 은 git 에 묻지 않는다.** 그것은 *"검토가 언제 끝났는가"* 이고
+**문서 자신의 사실**이며 **권위 있다**(§7 · ADR-0004). accept 한 날과 커밋한 날이
+어긋나는 것은 **정상**이다 — 둘은 다른 사실이다.
+
+여기 있는 함수는 전부 **읽기**다. git 을 근거로 문서를 고치지 않는다.
 """
 import subprocess
 
@@ -26,17 +31,6 @@ def head_path_of_id(root, doc_id):
                "HEAD", "--", "docs")
     paths = [line.split(":", 1)[1] for line in out.splitlines() if ":" in line]
     return paths[0] if len(paths) == 1 else None
-
-
-def accept_commit_date(root, rel_path):
-    """이 문서를 accepted 로 바꾼 **가장 이른** 커밋의 날짜(YYYY-MM-DD). 없으면 None.
-
-    아직 커밋 전이면 None 이다 — 그것도 정상이다(작업 트리에서 방금 accept 한 상태).
-    """
-    out = _git(root, "log", "--reverse", "--format=%ad", "--date=short",
-               "-S", "status: accepted", "--", rel_path)
-    lines = out.splitlines()
-    return lines[0].strip() if lines else None
 
 
 def is_tracked(root, rel_path):

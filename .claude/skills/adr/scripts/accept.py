@@ -14,8 +14,9 @@
   1. 파일명이 규약에 맞는가 — accept 후에는 rename 이 금지되므로, **여기가 마지막 기회**다
   2. status 가 정말 proposed 인가
 
-`accepted_at` 은 여기서 채운다. **사람이 손으로 적지 않는다.**
-다만 이 필드는 **비권위적**이다 — 진실 원본은 git(accept 커밋)이고, 어긋나면 git 이 이긴다.
+`accepted_at` 은 여기서 채운다 — *"검토가 언제 끝났는가"*. **권위 있는 필드**이므로
+**사람이 손으로 적지 않는다**: 틀리면 문서가 거짓말을 하고, 대조할 바깥이 없다.
+**동결 시각이 아니다** — 동결은 공표(push) 시점에 발효하며, 그것은 저장소의 사실이다.
 """
 import datetime
 import os
@@ -97,5 +98,5 @@ print()
 print("★ 여기서부터 동결이다. 본문도, 파일 경로도 바뀌지 않는다.")
 print("  결정을 바꾸려면 → 새 ADR 을 쓰고 supersede.py 로 대체한다.")
 print()
-print("다음: 이 변경을 커밋한다 (accepted_at 의 진실 원본은 accept 커밋이다).")
+print("다음: 이 변경을 커밋하고 push 한다 — **동결은 공표 시점에 발효한다.**")
 print("      인덱스를 다시 만든다 → docs-index skill (decisions-log 가 바뀐다).")

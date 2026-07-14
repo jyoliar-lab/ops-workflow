@@ -2,6 +2,6 @@
 
 # decisions-log — accepted ADR
 
-*accept 순. `accepted_at` 은 편의 필드이며 진실 원본은 git 이다 (§7).*
+*accept 순 — 검토가 끝난 시각(`accepted_at`) 기준. **동결(공표) 순서와는 다를 수 있다.***
 
 *(없음)*

@@ -10,7 +10,6 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "_lib"))
 from opsdoc import TYPES, as_list, filename_problem, read_frontmatter, repo_root  # noqa: E402
-from vcs import accept_commit_date  # noqa: E402
 
 HEADER = "<!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — docs-index skill 이 만든다. -->\n"
 
@@ -66,19 +65,13 @@ for dirpath, dirnames, filenames in os.walk(docs):
         status = fm.get("status", "(없음)")
         accepted_at = fm.get("accepted_at", "")
 
-        # accepted_at 은 **비권위적 편의 필드**다 — 진실 원본은 git(accept 커밋)이다.
-        # 어긋나면 경고만 한다. 권위 없는 필드를 도구가 강제하면 그건 권위를 준 것이다.
-        if status == "accepted":
-            if not accepted_at:
-                warnings.append("accepted 인데 accepted_at 이 없다 (accept.py 를 거치지 않았다): %s" % rel)
-            else:
-                # **날짜 단위로만** 비교한다. accept 시각과 커밋 시각은 본질적으로 몇 분~몇 시간
-                # 어긋나므로, 초 단위로 비교하면 언제나 경고가 뜬다 — 늘 울리는 경보는 경보가 아니다.
-                committed = accept_commit_date(root, rel)
-                if committed and committed != accepted_at[:10]:
-                    warnings.append(
-                        "accepted_at(%s) ≠ accept 커밋 날짜(%s) — git 이 진실이다: %s"
-                        % (accepted_at, committed, rel))
+        # accepted_at 은 **권위 있는 필드**다 (§7 · ADR-0004) — *"검토가 언제 끝났는가"* 에
+        # 문서가 스스로 답한다. git 과 대조하지 않는다: accept 한 날과 커밋한 날이 어긋나는 것은
+        # **정상**이다(다른 사실이다). 여기서 볼 수 있는 것은 **짝이 맞는가** 뿐이다.
+        if status == "accepted" and not accepted_at:
+            warnings.append("accepted 인데 accepted_at 이 없다 (accept.py 를 거치지 않았다): %s" % rel)
+        if status == "superseded" and not fm.get("superseded_by"):
+            warnings.append("superseded 인데 superseded_by 가 비었다 — 무엇이 대체했는지 알 수 없다: %s" % rel)
 
         entries.append({
             "path": path, "rel": rel,
@@ -150,7 +143,7 @@ for subject in sorted({s for e in entries for s in e["subjects"]}):
 accepted = sorted([e for e in entries if e["type"] == "adr" and e["status"] == "accepted"],
                   key=lambda e: (e["accepted_at"] or "9999-99-99", e["id"]))   # 시간순 (§7)
 lines = ["# decisions-log — accepted ADR", "",
-         "*accept 순. `accepted_at` 은 편의 필드이며 진실 원본은 git 이다 (§7).*", ""]
+         "*accept 순 — 검토가 끝난 시각(`accepted_at`) 기준. **동결(공표) 순서와는 다를 수 있다.***", ""]
 lines += (table(accepted, index_dir, ("id", "accepted_at", "topic", "subjects", "parent"))
           if accepted else ["*(없음)*"])
 write(os.path.join(index_dir, "decisions-log.md"), lines)
