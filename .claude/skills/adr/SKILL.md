@@ -27,7 +27,7 @@ description: ADR 문서를 저작·accept·supersede한다. "ADR을 쓴다", "�
 |---|---|
 | `topic` | **묻는다.** 폴더 이름이 된다(`docs/{topic}/adr/`). 기존 topic 목록: `ls docs/` |
 | `subjects` | **★ 기존 목록을 보여주고 묻는다** — `scripts/list-subjects.py` 실행 후 그 결과를 제시한다 |
-| `parent` | **묻는다.** founding인가 sub인가? sub라면 부모 ADR id. 계층은 **2단에서 멈춘다** |
+| `parent` | **묻는다.** 이 결정이 딛고 선 **직상위 축**의 ADR id. 없으면 비운다 — **깊이 제한은 없다** |
 | 슬러그 | **묻는다.** 파일명이 된다 — 소문자 kebab-case, 3~6 단어 |
 | `id` | **자동** — `scripts/next-id.py` (순수 기계) |
 | `accepted_at` | **자동** — accept 할 때 `scripts/accept.py` 가 채운다. **손으로 적지 않는다** |
@@ -64,7 +64,7 @@ topic: ops-workflow
 subjects: [a, b]
 status: proposed
 accepted_at:       # 비운다. accept.py 가 채운다 — 손으로 적지 않는다
-parent:            # sub-ADR일 때만. founding이면 지운다
+parent:            # 직상위 축의 ADR id. 루트면 지운다
 superseded_by:
 ---
 

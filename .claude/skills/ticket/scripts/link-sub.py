@@ -5,7 +5,8 @@
 
 계층은 **3층에서 멈춘다**: Epic → (Feature) → Task·Bug
   리프(Task·Bug)는 부모가 될 수 없고, Feature 밑에 Feature 는 오지 않는다 → 거부한다.
-  (ADR 계층이 2단이므로 티켓 계층도 3층에서 멈춘다.)
+  3층은 **GitHub 의 제약**(Epic·Feature·Task)이지 ADR 깊이의 함수가 아니다.
+  ADR 계층은 깊이 제한이 없다 — 그것을 티켓에 그대로 옮기려 들지 않는다.
 """
 import argparse
 import os

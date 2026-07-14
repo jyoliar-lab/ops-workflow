@@ -5,7 +5,7 @@ topic: ops-workflow
 subjects: [adr]
 status: proposed
 accepted_at:
-parent: ADR-0001
+parent: ADR-0002
 superseded_by:
 ---
 

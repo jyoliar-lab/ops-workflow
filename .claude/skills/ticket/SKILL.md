@@ -13,8 +13,8 @@ description: GitHub Issue를 발행하고 계층을 연결한다 (Issue Type 지
 
 | 타입 | 성격 | 전제 |
 |---|---|---|
-| **Epic** | 컨테이너 | **accepted founding ADR** |
-| **Feature** | 컨테이너 (**선택적**) | **accepted sub-ADR** |
+| **Epic** | 컨테이너 | **accepted 근거 ADR** |
+| **Feature** | 컨테이너 (**선택적**) | **accepted ADR** — Epic 근거 ADR의 하위 축 |
 | **Task** / **Bug** | 리프 | 없음 |
 
 - **Feature는 "epic이 방대해서" 만들지 않는다.** Task가 20개여도 결정이 하나면 Feature는 없다. **독립적으로 뒤집힐 수 있는 하위 축의 결정(sub-ADR)이 생겼을 때만** 만든다.
@@ -45,13 +45,13 @@ description: GitHub Issue를 발행하고 계층을 연결한다 (Issue Type 지
 .claude/skills/ticket/scripts/link-sub.py --parent <N> --child <M>
 ```
 
-GraphQL `addSubIssue`. 계층은 **3층에서 멈춘다**(§5) — 스크립트가 검사한다: 리프(Task·Bug)는 부모가 될 수 없고, Feature 밑에는 Feature가 오지 않는다.
+GraphQL `addSubIssue`. 계층은 **3층에서 멈춘다**(§5) — **GitHub의 제약**이지 ADR 깊이의 함수가 아니다. 스크립트가 검사한다: 리프(Task·Bug)는 부모가 될 수 없고, Feature 밑에는 Feature가 오지 않는다.
 
 ```
-founding ADR ★accepted★ ──→ Epic
-                             ├─ Task            ← 평시: 바로 연결
-   sub-ADR ★accepted★ ──→   └─ Feature         ← 독립 하위 축의 결정이 생겼을 때만
-                                 └─ Task
+근거 ADR ★accepted★ ──→ Epic
+                          ├─ Task            ← 평시: 바로 연결
+ 하위 축 ADR ★accepted★ ─→ └─ Feature         ← 독립 하위 축의 결정이 생겼을 때만
+                                └─ Task
 ```
 
 ## 4. 하지 않는 것

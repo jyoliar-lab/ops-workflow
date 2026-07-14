@@ -74,15 +74,18 @@ if os.path.isfile(local_path):
         print("경고: 워킹 트리의 status 가 공표된 것과 다르다 — 티켓은 공표된 사본(%s)을 근거로 삼는다."
               % status, file=sys.stderr)
 
-# founding / sub 는 경고까지만 한다.
-# 판정 근거가 parent 필드 하나뿐이라 거부로 올리기엔 이르다 — 실측 후 판단한다(마찰 로그).
+# "founding / sub" 는 **절대적 구분이 아니다** — parent 에 깊이 제한이 없으므로(§4③),
+# 어떤 ADR 이든 다른 ADR 의 하위 축일 수 있다. 그래서 Epic 의 근거 ADR 이 parent 를
+# 갖는 것은 **정상**이다. 그것을 이상하다고 경고하지 않는다.
+#
+# 남는 검사는 하나다: Feature 는 **하위 축의 결정**을 전제하므로 parent 가 있어야 한다.
+# 경고까지만 한다 — Feature 의 근거 ADR 이 *그 Epic 의 근거 ADR* 의 하위 축인지까지는
+# 아직 확인하지 않는다(티켓 ADR 에서 정한다).
 parent = fm.get("parent", "")
-if ticket_type == "epic" and parent:
-    print("경고: Epic 의 근거 ADR인데 parent(%s)가 있다 — sub-ADR 로 보인다. founding ADR 이 맞나?"
-          % parent, file=sys.stderr)
 if ticket_type == "feature" and not parent:
-    print("경고: Feature 의 근거 ADR인데 parent 가 없다 — founding ADR 로 보인다.", file=sys.stderr)
-    print("      Feature 는 sub-ADR 을 전제한다. 정말 Feature 인가, Task 면 충분한가?", file=sys.stderr)
+    print("경고: Feature 의 근거 ADR 에 parent 가 없다 — 하위 축이 아니다.", file=sys.stderr)
+    print("      Feature 는 독립 하위 축의 결정을 전제한다. 정말 Feature 인가, Task 면 충분한가?",
+          file=sys.stderr)
 
 sha = vcs.ref_sha(root)
 print("통과: %s accepted — 공표됨 (%s:%s)" % (adr_id, vcs.PUBLISHED, path), file=sys.stderr)
