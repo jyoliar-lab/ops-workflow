@@ -5,6 +5,7 @@ topic: ops-workflow
 subjects: [github-issues, github-projects]
 status: proposed
 accepted_at:
+references:
 superseded_by:
 ---
 
