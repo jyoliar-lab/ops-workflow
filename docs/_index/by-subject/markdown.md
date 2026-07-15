@@ -6,4 +6,4 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 
 | id | type | topic | status | 문서 |
 |---|---|---|---|---|
-| ADR-0005 | adr | ops-workflow | proposed | [ADR-0005 — ADR은 Markdown 본문과 YAML frontmatter로 적는다](../../ops-workflow/adr/adr-0005-markdown-yaml-format.md) |
+| ADR-0005 | adr | ops-workflow | proposed | [ADR-0005 — ADR 본문은 Markdown(GFM)으로 적는다](../../ops-workflow/adr/adr-0005-markdown-gfm-body.md) |
