@@ -55,7 +55,7 @@ description: ADR 문서를 저작·accept·supersede한다. "ADR을 쓴다", "�
 파일명은 **소문자**이고 **id가 선두**다(§7) — 인용키로 바로 찾기 위해서다. frontmatter의 `id`는 대문자(`ADR-0001`), 파일명은 소문자(`adr-0001-…`)다.
 **타입 폴더는 lazy 생성**(§7) — 이 ADR이 그 topic의 첫 ADR이면 여기서 `adr/`가 처음 생긴다.
 
-> ⚠ **이름은 accept 시 얼어붙는다** — 그 뒤로 rename은 금지다(경로를 갈면 인용이 깨진다). 슬러그를 지금 제대로 고른다.
+> **슬러그를 지금 제대로 고른다.** 경로는 얼지 않아 나중에 rename도 되지만(ADR-0006), accept가 이름 규약을 확인하는 관문이라 — 어긋나면 accept가 거부한다.
 
 ```yaml
 ---
@@ -104,9 +104,9 @@ superseded_by:
 .claude/skills/adr/scripts/accept.py ADR-0001
 ```
 
-이 스크립트는 `status`와 `accepted_at`을 함께 기록하고, **파일명이 규약에 맞는지 마지막으로 검사**한다 — 이름이 잘못된 채 얼면 되돌릴 방법이 없기 때문이다(rename 금지).
+이 스크립트는 `status`와 `accepted_at`을 함께 기록하고, **파일명이 규약에 맞는지 확인**한다 — accept는 좋은 이름을 맞추는 관문이다(경로는 얼지 않으니 나중에 rename도 되지만, 확정 시점에 맞춰 둔다).
 
-**여기서부터 본문도, 경로도 동결된다**(§3). 이후 허용되는 편집은 딱 둘: **`status`** · **`superseded_by`**. 유예 기간은 없다.
+**여기서부터 본문(결정의 의미)이 동결된다**(ADR-0006). 그것을 고쳐 결정을 바꾸려면 supersede뿐이다. **경로·포맷은 얼지 않고, 분류(`topic`·`subjects`)와 생명주기 필드도 얼음 밖이다**(ADR-0004) — 문서 관리는 계속 개선한다. 유예 기간은 없다.
 
 > **`accepted_at`은 권위 있다** (§7 · ADR-0004) — *"검토가 언제 끝났는가"* 에 **문서가 스스로 답한다.** 그래서 **사람이 손으로 적지 않는다**: 틀리면 문서가 거짓말을 하고, **대조할 바깥이 없다.**
 >
@@ -117,11 +117,10 @@ superseded_by:
 **본문을 고치기 전에 반드시 먼저 돌린다:**
 
 ```bash
-.claude/skills/adr/scripts/freeze-check.py <path>   # accepted/superseded/frozen → exit 1
-.claude/skills/adr/scripts/freeze-check.py          # 동결 문서 전량의 경로 변경을 훑는다
+.claude/skills/adr/scripts/freeze-check.py <path>   # 공표된 status 가 동결(proposed 밖)이면 exit 1
 ```
 
-**동결은 경로에도 걸린다.** 본문을 얼려 놓고 파일을 옮기면 그 ADR을 가리키던 인용이 전부 깨진다 — 얼린 의미가 없다. 인자 없이 돌리면 HEAD와 대조해 **옮겨진 동결 문서**를 찾아낸다.
+**얼어붙는 것은 본문(결정의 의미)이다** — 그것과 `id`·`type`·`parent`·`references`를 고쳐 결정을 바꿀 수 없다. **경로·포맷은 얼지 않고**(파일을 옮기거나 이름을 바꿔도 참조는 id로 걸려 산다), **분류(`topic`·`subjects`)·생명주기 필드도 얼음 밖이다**(ADR-0004).
 
 **exit 1은 우회하지 않는다.** 결정을 바꾸려면 **새 ADR로 supersede**한다 — 옛 ADR을 고치지 않는다.
 

@@ -3,10 +3,10 @@
 
   supersede.py --old ADR-0001 --by ADR-0007
 
-동결된 문서에 허용되는 편집은 **status · superseded_by 두 필드뿐**이다.
+supersede 는 옛 문서의 **status · superseded_by 두 필드만** 바꾼다 — **본문에는 손대지 않는다.**
 그 둘을 사람 손이 아니라 이 스크립트가 한다 — **본문에 손댈 방법이 없는 것**이
-동결을 규율이 아니라 구조로 만든다. (freeze-check.py 는 본문 수정을 거부하고,
-이 스크립트는 frontmatter 두 줄 말고는 아무것도 건드리지 않는다.)
+동결(본문=결정의 의미, ADR-0006)을 규율이 아니라 구조로 만든다. (freeze-check.py 는 본문 수정을
+거부하고, 이 스크립트는 frontmatter 두 줄 말고는 아무것도 건드리지 않는다.)
 
 부분 supersede 는 없다 — 옛 ADR **전체**가 superseded 가 된다.
 여전히 유효한 부분은 새 ADR에 **재진술**한다. 재진술 여부는 이 스크립트가 검사할 수 없다(사람 판단).
@@ -39,7 +39,8 @@ if old_status == "superseded":
         % (old_id, old_fm.get("superseded_by") or "?"))
 if old_status != "accepted":
     die("거부: %s 의 status 가 '%s' 다. accepted 인 결정만 supersede 한다." % (old_id, old_status or "없음"),
-        "  (proposed 라면 그냥 고치거나 rejected 로 닫는다 — 동결선을 넘지 않았다.)")
+        "  (proposed 면 아직 가변이니 그냥 고친다 — supersede 가 필요 없다.",
+        "   rejected 는 이미 닫힌 결정이라 supersede 하지 않는다 — 되살리려면 새 ADR 을 쓴다.)")
 
 # 새 ADR — 굳지 않은 결정으로 옛 결정을 무효화하지 않는다.
 new_status = new_fm.get("status", "")

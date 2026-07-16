@@ -9,8 +9,9 @@ import os
 import re
 import sys
 
-# 동결 상태 (CLAUDE.md §3): adr = accepted|superseded · postmortem = frozen
-FROZEN = {"accepted", "superseded", "frozen"}
+# 본문이 얼어붙는 상태 (ADR-0006): adr = accepted|rejected|superseded · postmortem = frozen
+# proposed 만 가변. proposed 를 벗어나면 본문(결정의 의미)이 언다.
+FROZEN = {"accepted", "rejected", "superseded", "frozen"}
 TYPES = ["adr", "discussion", "postmortem"]
 
 # 파일명 규약 (CLAUDE.md §7): adr-0012-<slug>.md

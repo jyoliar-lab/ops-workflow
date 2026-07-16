@@ -40,8 +40,7 @@ description: 문서(discussion·ADR·postmortem) 저작을 보조하고 티켓�
 | 금지 | 왜 |
 |---|---|
 | **Issue를 close한다** | PR 머지 ≠ 티켓 종료. 그 사이에 **사용자 검수**가 산다. close는 언제나 사람이 정한다 |
-| **`accepted` ADR·`frozen` postmortem의 본문을 고친다** | 동결이다(§3). 바꾸려면 **새 ADR로 supersede**한다 |
-| **accept한 문서를 rename·이동한다** | 경로도 얼어붙는다 — 인용이 깨진다 |
+| **확정된(proposed 밖) ADR·`frozen` postmortem의 본문을 고친다** | 동결이다(ADR-0006). 바꾸려면 **새 ADR로 supersede**한다 |
 | **accepted ADR 없이 컨테이너 티켓을 만든다** | 굳지 않은 결정으로 일하지 않는다(§5) |
 | **runbook·reference·onboarding 문서를 쓴다** | 문서는 3종뿐이다(§3). 나머지는 코드·관측성 스택의 관할이다 |
 | **`docs/`에 쓴 것을 사람 승인 없이 커밋한다** | 지식 플레인의 최종 저자는 사람이다(§6) |
