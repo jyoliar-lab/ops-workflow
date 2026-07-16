@@ -6,7 +6,7 @@ subjects: [adr, yaml]
 status: proposed
 accepted_at:
 parent: ADR-0005
-references: [ADR-0004]
+references: [ADR-0004, ADR-0006]
 superseded_by:
 ---
 
@@ -18,7 +18,7 @@ superseded_by:
 
 이 결정은 본문 문법 위에 얹힌다. **본문을 Markdown으로 적기로 한 것이 이 결정의 전제다** — frontmatter를 적는 관례는 본문 문법에 딸려 있어서, 본문이 다른 문법이면(예: AsciiDoc) 인코딩도 그 문법의 속성 문법으로 바뀐다. 그래서 이 결정은 ADR-0005(본문 = Markdown)를 부모로 딛는다.
 
-지금 정해야 하는 이유도 같다 — **되돌리기 어렵기 때문**이다. accept한 ADR은 본문도 경로도 얼어붙으므로, 인코딩을 나중에 바꾸면 코퍼스가 두 문법으로 갈린다.
+지금 정해야 하는 이유도 같다 — **되돌리기 어렵기 때문**이다. accept한 ADR은 **본문이 얼어붙으므로**, 인코딩을 나중에 바꿔도 이미 얼어붙은 문서는 되쓸 수 없어 코퍼스가 두 문법으로 갈린다.
 
 ## Decision
 
