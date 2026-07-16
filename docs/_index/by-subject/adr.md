@@ -10,7 +10,7 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | ADR-0003 | adr | ops-workflow | proposed | [ADR-0003 — ADR 본문은 다섯 부분으로 이루어진다](../../ops-workflow/adr/adr-0003-adr-body-structure.md) |
 | ADR-0004 | adr | ops-workflow | proposed | [ADR-0004 — ADR은 본문을 읽지 않고 답할 메타데이터를 갖는다](../../ops-workflow/adr/adr-0004-adr-metadata-fields.md) |
 | ADR-0005 | adr | ops-workflow | proposed | [ADR-0005 — ADR 본문은 Markdown(GFM)으로 적는다](../../ops-workflow/adr/adr-0005-markdown-gfm-body.md) |
-| ADR-0006 | adr | ops-workflow | proposed | [ADR-0006 — accepted된 ADR은 전체 단위로 얼어붙는다](../../ops-workflow/adr/adr-0006-accepted-adr-freezes-whole.md) |
+| ADR-0006 | adr | ops-workflow | proposed | [ADR-0006 — ADR 본문은 proposed를 벗어나면 통째로 얼어붙는다](../../ops-workflow/adr/adr-0006-accepted-adr-freezes-whole.md) |
 | ADR-0007 | adr | ops-workflow | proposed | [ADR-0007 — ADR의 크기는 공동무효 단위로 정한다](../../ops-workflow/adr/adr-0007-adr-size-by-cotermination.md) |
 | ADR-0008 | adr | ops-workflow | proposed | [ADR-0008 — ADR 메타데이터는 YAML frontmatter로 인코딩한다](../../ops-workflow/adr/adr-0008-yaml-frontmatter-encoding.md) |
 | — | discussion | ops-workflow | active | [ADR 선행 사례 조사 — 무엇이 표준이고, 무엇이 우리 발명이고, 무엇이 실패하는가](../../ops-workflow/discussion/260714_1417_adr-prior-art-survey.md) |
