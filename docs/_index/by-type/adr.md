@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — docs-index skill 이 만든다. -->
 
-# by-type / adr (8)
+# by-type / adr (10)
 
 | id | status | topic | subjects | 문서 |
 |---|---|---|---|---|
@@ -12,3 +12,5 @@
 | ADR-0006 | proposed | ops-workflow | adr | [ADR-0006 — accepted된 ADR은 전체 단위로 얼어붙는다](../../ops-workflow/adr/adr-0006-accepted-adr-freezes-whole.md) |
 | ADR-0007 | proposed | ops-workflow | adr | [ADR-0007 — ADR의 크기는 공동무효 단위로 정한다](../../ops-workflow/adr/adr-0007-adr-size-by-cotermination.md) |
 | ADR-0008 | proposed | ops-workflow | adr, yaml | [ADR-0008 — ADR 메타데이터는 YAML frontmatter로 인코딩한다](../../ops-workflow/adr/adr-0008-yaml-frontmatter-encoding.md) |
+| ADR-0009 | proposed | ops-workflow | github-issues, issue-types | [ADR-0009 — 작업 이슈는 정확히 하나의 타입을 갖는다](../../ops-workflow/adr/adr-0009-single-type-per-work-item.md) |
+| ADR-0010 | proposed | ops-workflow | github-issues, issue-types | [ADR-0010 — 이슈 타입은 묶는 것과 수행하는 것으로 갈린다](../../ops-workflow/adr/adr-0010-container-and-leaf-types.md) |
