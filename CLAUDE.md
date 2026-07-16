@@ -155,8 +155,10 @@
 | | 컨트롤 플레인 | 지식 플레인 (`docs/`) | 시스템·코드 |
 |---|---|---|---|
 | **자율 agent** (진단) | **write** (티켓 생성·코멘트) | **불허** (도구 수준) | read only |
-| **대화형 agent** | write | write **+ 사람 승인 게이트** | — |
+| **대화형 agent** | write | write **+ 사람 승인 게이트** | **read only** (hook 수준) |
 | **사람** | write | **write** (최종 저자) | write |
+
+**코드는 읽되 고치지 않는다.** desired를 코드가 답하는 이상(§2), 결정을 논하려면 코드를 **읽어야 한다** — 코드 저장소 루트는 **`CODE_ROOT`** env var로 주입한다(`.claude/settings.local.json` · **gitignored · PC별**. 절대경로를 하드코딩하지 않는다). 쓰기는 `.claude/hooks/guard-write.py`가 이 저장소 밖 Write/Edit을 거부해 **구조적으로** 막는다(§8). **코드 변경이 필요하다는 결론은 티켓이지 agent의 Edit이 아니다.**
 
 **왜 — 자기오염 차단.** agent의 미검증 가설이 지식 코퍼스에 들어가면, 다음 장애에서 agent가 **자기가 쓴 추정을 근거로 인용**한다. 오진이 자기강화된다.
 
@@ -270,5 +272,6 @@ _index/
 - 자율 agent에 지식 플레인 write 권한이 **없어서** 자기오염이 차단된다
 - 도구에 close 기능이 **없어서** 수동 close가 지켜진다
 - 동결 검사가 **거부**해서 `accepted` ADR이 보호된다
+- PreToolUse hook가 이 저장소 밖 Write를 **거부**해서 코드 저장소가 read only로 남는다
 
 "하지 마세요"라고 적어두는 규칙을 최소화하고, **할 수 없게** 만든다.
