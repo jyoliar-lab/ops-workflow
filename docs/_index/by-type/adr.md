@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — docs-index skill 이 만든다. -->
 
-# by-type / adr (10)
+# by-type / adr (12)
 
 | id | status | topic | subjects | 문서 |
 |---|---|---|---|---|
@@ -14,3 +14,5 @@
 | ADR-0008 | proposed | ops-workflow | adr, yaml | [ADR-0008 — ADR 메타데이터는 YAML frontmatter로 인코딩한다](../../ops-workflow/adr/adr-0008-yaml-frontmatter-encoding.md) |
 | ADR-0009 | proposed | ops-workflow | github-issues, issue-types | [ADR-0009 — 작업 이슈는 정확히 하나의 타입을 갖는다](../../ops-workflow/adr/adr-0009-single-type-per-work-item.md) |
 | ADR-0010 | proposed | ops-workflow | github-issues, issue-types | [ADR-0010 — 이슈 타입은 묶는 것과 수행하는 것으로 갈린다](../../ops-workflow/adr/adr-0010-container-and-leaf-types.md) |
+| ADR-0011 | proposed | careerhub-front | — | [ADR-0011 — careerhub-front를 재작성한다 (점진 개선하지 않는다)](../../careerhub-front/adr/adr-0011-rewrite-frontend-from-scratch.md) |
+| ADR-0012 | proposed | careerhub-front | nextjs, react | [ADR-0012 — careerhub-front의 스택으로 Next.js(React)를 채택한다](../../careerhub-front/adr/adr-0012-adopt-nextjs-for-frontend.md) |
