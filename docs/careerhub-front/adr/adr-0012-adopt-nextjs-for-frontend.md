@@ -3,8 +3,8 @@ id: ADR-0012
 type: adr
 topic: careerhub-front
 subjects: [nextjs, react]
-status: proposed
-accepted_at:
+status: accepted
+accepted_at: 2026-07-18T15:12:53+09:00
 parent: ADR-0011
 references:
 superseded_by:

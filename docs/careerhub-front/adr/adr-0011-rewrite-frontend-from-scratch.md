@@ -3,8 +3,8 @@ id: ADR-0011
 type: adr
 topic: careerhub-front
 subjects:
-status: proposed
-accepted_at:
+status: accepted
+accepted_at: 2026-07-18T15:12:52+09:00
 parent:
 references:
 superseded_by:
