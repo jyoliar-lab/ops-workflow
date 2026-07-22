@@ -6,4 +6,4 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 
 | id | type | topic | status | 문서 |
 |---|---|---|---|---|
-| ADR-0015 | adr | careerhub-front | proposed | [ADR-0015 — 스타일 토큰을 Tailwind로 강제한다 (정의만 하고 강제하지 않는 방식을 쓰지 않는다)](../../careerhub-front/adr/adr-0015-enforce-style-tokens-with-tailwind.md) |
+| ADR-0015 | adr | careerhub-front | proposed | [ADR-0015 — 스타일 토큰을 Tailwind로 강제한다 (정의에 그치지 않는다)](../../careerhub-front/adr/adr-0015-enforce-style-tokens-with-tailwind.md) |
