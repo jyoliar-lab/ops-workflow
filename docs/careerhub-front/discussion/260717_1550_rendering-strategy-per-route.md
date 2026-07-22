@@ -7,6 +7,11 @@ status: active
 
 # 렌더링 전략 — 화면별로 어디서, 언제 그리나 (축 B)
 
+> ⚠ **§7의 화면 배정표는 코드로 반증됐다** — **공고 목록과 공고 상세가 개인화된다.**
+> `api-composer/.../jobposting_controller.go:66-71,123-131` 이 클레임 유무로 응답을 가른다(`JobPostingsWithClaims` vs `JobPostings`). 프론트도 이 둘을 `withAccessToken` 으로 부른다(`view/job_posting/api.js` · `view/job_posting/postingId/api.js`).
+> **그런데 §7은 공고 상세를 SSG/ISR로 배정했다.** 같은 문서 §8이 *"개인화하면 캐시가 죽는다"* 를 축으로 적어놓고도, **어느 화면이 실제로 개인화되는지를 확인하지 않았다.**
+> 배정을 인용하기 전에 `260722_1617_token-storage-after-server-exists.md` §1·§7 을 먼저 읽는다. 아래 원문은 사고의 기록으로 그대로 둔다.
+
 프레임워크 결정이 "스위치가 놓일 자리"를 정했다. 이 문서는 **스위치의 방향**을 다룬다.
 
 ---
