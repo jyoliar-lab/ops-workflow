@@ -3,10 +3,10 @@ id: ADR-0014
 type: adr
 topic: careerhub-front
 subjects: [openapi, api-composer]
-status: proposed
-accepted_at:
-parent: ADR-0012
-references: [ADR-0013]
+status: accepted
+accepted_at: 2026-07-22T17:44:23+09:00
+parent: ADR-0013
+references:
 superseded_by:
 ---
 

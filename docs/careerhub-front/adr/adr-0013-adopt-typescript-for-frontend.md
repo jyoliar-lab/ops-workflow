@@ -3,10 +3,10 @@ id: ADR-0013
 type: adr
 topic: careerhub-front
 subjects: [typescript]
-status: proposed
-accepted_at:
-parent: ADR-0012
-references:
+status: accepted
+accepted_at: 2026-07-22T17:44:23+09:00
+parent: ADR-0011
+references: [ADR-0012]
 superseded_by:
 ---
 

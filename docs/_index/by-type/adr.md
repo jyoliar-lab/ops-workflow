@@ -16,6 +16,6 @@
 | ADR-0010 | proposed | ops-workflow | github-issues, issue-types | [ADR-0010 — 이슈 타입은 묶는 것과 수행하는 것으로 갈린다](../../ops-workflow/adr/adr-0010-container-and-leaf-types.md) |
 | ADR-0011 | accepted | careerhub-front | — | [ADR-0011 — careerhub-front를 재작성한다 (점진 개선하지 않는다)](../../careerhub-front/adr/adr-0011-rewrite-frontend-from-scratch.md) |
 | ADR-0012 | accepted | careerhub-front | nextjs, react | [ADR-0012 — careerhub-front의 스택으로 Next.js(React)를 채택한다](../../careerhub-front/adr/adr-0012-adopt-nextjs-for-frontend.md) |
-| ADR-0013 | proposed | careerhub-front | typescript | [ADR-0013 — careerhub-front를 TypeScript로 짓는다 (순수 JavaScript로 짓지 않는다)](../../careerhub-front/adr/adr-0013-adopt-typescript-for-frontend.md) |
-| ADR-0014 | proposed | careerhub-front | openapi, api-composer | [ADR-0014 — 프론트가 쓰는 REST 타입을 백엔드 스펙에서 생성한다 (손으로 선언하지 않는다)](../../careerhub-front/adr/adr-0014-derive-rest-types-from-backend-spec.md) |
-| ADR-0015 | proposed | careerhub-front | tailwind | [ADR-0015 — 스타일 토큰을 Tailwind로 강제한다 (정의에 그치지 않는다)](../../careerhub-front/adr/adr-0015-enforce-style-tokens-with-tailwind.md) |
+| ADR-0013 | accepted | careerhub-front | typescript | [ADR-0013 — careerhub-front를 TypeScript로 짓는다 (순수 JavaScript로 짓지 않는다)](../../careerhub-front/adr/adr-0013-adopt-typescript-for-frontend.md) |
+| ADR-0014 | accepted | careerhub-front | openapi, api-composer | [ADR-0014 — 프론트가 쓰는 REST 타입을 백엔드 스펙에서 생성한다 (손으로 선언하지 않는다)](../../careerhub-front/adr/adr-0014-derive-rest-types-from-backend-spec.md) |
+| ADR-0015 | accepted | careerhub-front | tailwind | [ADR-0015 — 스타일 토큰을 Tailwind로 강제한다 (정의에 그치지 않는다)](../../careerhub-front/adr/adr-0015-enforce-style-tokens-with-tailwind.md) |
