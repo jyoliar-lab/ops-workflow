@@ -62,6 +62,13 @@ for dirpath, dirnames, filenames in os.walk(docs):
         if problem:
             warnings.append(problem.replace("\n", " ") + " — " + rel)
 
+        # id 는 ADR 에만 있다(§7 — 전역 순차). discussion·postmortem 에는 원래 없으므로
+        # "비었음"만으로는 이상을 알 수 없다 — **type 을 함께 봐야** 보인다.
+        # 실제로 놓쳤다: 포매터가 `id: ADR-0015` 를 `## id:` 헤딩으로 바꾸자 나머지 필드는
+        # 다 살아남고 id 만 사라져, ADR 이 id 칸 `—` 로 조용히 등재됐다.
+        if doc_type == "adr" and not fm.get("id"):
+            warnings.append("adr 인데 id 가 없다 — frontmatter 가 깨졌을 수 있다: %s" % rel)
+
         status = fm.get("status", "(없음)")
         accepted_at = fm.get("accepted_at", "")
 
