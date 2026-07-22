@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — docs-index skill 이 만든다. -->
 
-# by-topic / ops-workflow (15)
+# by-topic / ops-workflow (16)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -14,6 +14,7 @@
 | ADR-0008 | adr | proposed | adr, yaml | [ADR-0008 — ADR 메타데이터는 YAML frontmatter로 인코딩한다](../../ops-workflow/adr/adr-0008-yaml-frontmatter-encoding.md) |
 | ADR-0009 | adr | proposed | github-issues, issue-types | [ADR-0009 — 작업 이슈는 정확히 하나의 타입을 갖는다](../../ops-workflow/adr/adr-0009-single-type-per-work-item.md) |
 | ADR-0010 | adr | proposed | github-issues, issue-types | [ADR-0010 — 이슈 타입은 묶는 것과 수행하는 것으로 갈린다](../../ops-workflow/adr/adr-0010-container-and-leaf-types.md) |
+| ADR-0016 | adr | proposed | github-issues, github-projects | [ADR-0016 — 리프 티켓은 수정 대상 저장소와 참조 저장소를 명시한다](../../ops-workflow/adr/adr-0016-leaf-ticket-declares-repo-context.md) |
 | — | discussion | active | claude-code-skills | [skill 초판 마찰 로그](../../ops-workflow/discussion/260712_1731_skill-friction-log.md) |
 | — | discussion | active | adr | [ADR 선행 사례 조사 — 무엇이 표준이고, 무엇이 우리 발명이고, 무엇이 실패하는가](../../ops-workflow/discussion/260714_1417_adr-prior-art-survey.md) |
 | — | discussion | active | adr | [ADR 문서를 무슨 포맷으로 적을 것인가](../../ops-workflow/discussion/260715_1401_adr-document-format.md) |

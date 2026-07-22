@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — docs-index skill 이 만든다. -->
 
-# by-type / adr (15)
+# by-type / adr (16)
 
 | id | status | topic | subjects | 문서 |
 |---|---|---|---|---|
@@ -19,3 +19,4 @@
 | ADR-0013 | accepted | careerhub-front | typescript | [ADR-0013 — careerhub-front를 TypeScript로 짓는다 (순수 JavaScript로 짓지 않는다)](../../careerhub-front/adr/adr-0013-adopt-typescript-for-frontend.md) |
 | ADR-0014 | accepted | careerhub-front | openapi, api-composer | [ADR-0014 — 프론트가 쓰는 REST 타입을 백엔드 스펙에서 생성한다 (손으로 선언하지 않는다)](../../careerhub-front/adr/adr-0014-derive-rest-types-from-backend-spec.md) |
 | ADR-0015 | accepted | careerhub-front | tailwind | [ADR-0015 — 스타일 토큰을 Tailwind로 강제한다 (정의에 그치지 않는다)](../../careerhub-front/adr/adr-0015-enforce-style-tokens-with-tailwind.md) |
+| ADR-0016 | proposed | ops-workflow | github-issues, github-projects | [ADR-0016 — 리프 티켓은 수정 대상 저장소와 참조 저장소를 명시한다](../../ops-workflow/adr/adr-0016-leaf-ticket-declares-repo-context.md) |
