@@ -56,17 +56,35 @@ def create_issue(repo, title, body_file):
     return int(number), url
 
 
-def issue_node(repo, number):
-    """이슈 번호 → (node id, Issue Type 이름). 타입이 없으면 이름은 None."""
+def issue_view(repo, number):
+    """이슈 번호 → (node id, Issue Type 이름, 본문). 타입이 없으면 이름은 None.
+
+    본문까지 읽는 이유: 사후 갱신(set-repos.py)은 기존 본문의 절을 교체해야 한다 —
+    본문 없이 덮어쓰면 발행 이후 사람이 고친 산문이 날아간다.
+    """
     owner, name = split_repo(repo)
     data = graphql(
         "query($o:String!,$r:String!,$n:Int!)"
-        "{repository(owner:$o,name:$r){issue(number:$n){id issueType{name}}}}",
+        "{repository(owner:$o,name:$r){issue(number:$n){id body issueType{name}}}}",
         o=owner, r=name, n=number)
     issue = (data.get("repository") or {}).get("issue")
     if not issue:
         die("거부: %s#%d 를 찾지 못했다." % (repo, number))
-    return issue["id"], (issue.get("issueType") or {}).get("name")
+    return issue["id"], (issue.get("issueType") or {}).get("name"), issue.get("body") or ""
+
+
+def issue_node(repo, number):
+    """이슈 번호 → (node id, Issue Type 이름)."""
+    issue_id, type_name, _ = issue_view(repo, number)
+    return issue_id, type_name
+
+
+def update_issue_body(issue_id, body):
+    """이슈 본문 교체. 호출자가 기존 본문 위에 절만 갈아 끼운 값을 넘긴다 — 통짜 덮어쓰기가 아니다."""
+    data = graphql(
+        "mutation($i:ID!,$b:String!){updateIssue(input:{id:$i,body:$b}){issue{number}}}",
+        i=issue_id, b=body)
+    return data["updateIssue"]["issue"]
 
 
 def issue_type_id(repo, type_name):
@@ -123,6 +141,23 @@ def project(org, number):
         if f:
             fields[f["name"]] = f
     return {"id": p["id"], "fields": fields}
+
+
+def project_item(issue_id, project_id):
+    """이슈의 **기존** Project item id. 미등록이면 None — 등록하지 않는다.
+
+    등록(+초기 Status)은 발행(create.py)의 일이다. 조회 함수가 슬쩍 등록하면
+    Status 없는 항목이 생기고, 그 항목은 보드에서 유령이 된다.
+    """
+    data = graphql(
+        "query($i:ID!){node(id:$i){... on Issue{"
+        "projectItems(first:20){nodes{id project{id}}}}}}",
+        i=issue_id)
+    nodes = ((data.get("node") or {}).get("projectItems") or {}).get("nodes") or []
+    for n in nodes:
+        if n and (n.get("project") or {}).get("id") == project_id:
+            return n["id"]
+    return None
 
 
 def add_to_project(project_id, issue_id):
