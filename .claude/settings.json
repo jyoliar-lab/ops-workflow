@@ -1,5 +1,30 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(list-subjects.py:*)",
+      "Bash(next-id.py:*)",
+      "Bash(doc-path.py:*)",
+      "Bash(accept.py:*)",
+      "Bash(unaccept.py:*)",
+      "Bash(supersede.py:*)",
+      "Bash(freeze-check.py:*)",
+      "Bash(build-index.py:*)",
+      "Bash(create.py:*)",
+      "Bash(adr-gate.py:*)",
+      "Bash(link-sub.py:*)"
+    ]
+  },
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$CLAUDE_PROJECT_DIR/.claude/hooks/session-path.sh\""
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Write|Edit|MultiEdit",

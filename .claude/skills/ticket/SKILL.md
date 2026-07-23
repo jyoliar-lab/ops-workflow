@@ -24,7 +24,7 @@ description: GitHub Issue를 발행하고 계층을 연결한다 (Issue Type 지
 ## 2. 발행한다
 
 ```bash
-.claude/skills/ticket/scripts/create.py \
+create.py \
   --type epic|feature|task|bug \
   --title "..." \
   --body-file <path> \
@@ -51,7 +51,7 @@ description: GitHub Issue를 발행하고 계층을 연결한다 (Issue Type 지
 ## 3. 계층을 잇는다
 
 ```bash
-.claude/skills/ticket/scripts/link-sub.py --parent <N> --child <M>
+link-sub.py --parent <N> --child <M>
 ```
 
 GraphQL `addSubIssue`. 계층은 **3층에서 멈춘다**(§5) — **GitHub의 제약**이지 ADR 깊이의 함수가 아니다. 스크립트가 검사한다: 리프(Task·Bug)는 부모가 될 수 없고, Feature 밑에는 Feature가 오지 않는다.

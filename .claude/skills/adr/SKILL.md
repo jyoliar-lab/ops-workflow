@@ -26,18 +26,20 @@ description: ADR 문서를 저작·accept·supersede한다. "ADR을 쓴다", "�
 | 인자 | 어떻게 |
 |---|---|
 | `topic` | **묻는다.** 폴더 이름이 된다(`docs/{topic}/adr/`). 기존 topic 목록: `ls docs/` |
-| `subjects` | **★ 기존 목록을 보여주고 묻는다** — `scripts/list-subjects.py` 실행 후 그 결과를 제시한다 |
+| `subjects` | **★ 기존 목록을 보여주고 묻는다** — `list-subjects.py` 실행 후 그 결과를 제시한다 |
 | `parent` | **묻는다.** 이 결정이 딛고 선 **직상위 축**의 ADR id. 없으면 비운다 — **깊이 제한은 없다** |
 | `references` | **묻는다.** parent가 아니나 이 결정을 온전히 이해하는 데 필요한 다른 결정들의 id(여럿 가능). 없으면 비운다(§7 · ADR-0004) |
 | 슬러그 | **묻는다.** 파일명이 된다 — 소문자 kebab-case, 3~6 단어 |
-| `id` | **자동** — `scripts/next-id.py` (순수 기계) |
-| `accepted_at` | **자동** — accept 할 때 `scripts/accept.py` 가 채운다. **손으로 적지 않는다** |
+| `id` | **자동** — `next-id.py` (순수 기계) |
+| `accepted_at` | **자동** — accept 할 때 `accept.py` 가 채운다. **손으로 적지 않는다** |
 | "무효화 조건" | **묻는다. 못 채우면 비운 채로 둔다** — 억지로 지어내지 않는다. 채택 여부는 실측으로 판정한다 |
 
 ```bash
-.claude/skills/adr/scripts/list-subjects.py     # 기존 subjects 어휘 + 인덱스 드리프트 경고
-.claude/skills/adr/scripts/next-id.py           # 전역 순차 ADR 번호 (충돌 감지)
+list-subjects.py     # 기존 subjects 어휘 + 인덱스 드리프트 경고
+next-id.py           # 전역 순차 ADR 번호 (충돌 감지)
 ```
+
+(스킬 스크립트는 SessionStart hook가 PATH에 올린다 — bare name으로 실행한다. 위치는 `.claude/skills/<skill>/scripts/`.)
 
 **`subjects`는 구체 명사만**(§7). 판별: ***"이것이 시스템에 실제로 존재하는가?"*** `architecture`·`performance` 같은 **범주는 subject가 아니다.**
 
@@ -48,7 +50,7 @@ description: ADR 문서를 저작·accept·supersede한다. "ADR을 쓴다", "�
 경로는 스크립트가 도출한다 — 슬러그를 여기서 검증한다:
 
 ```bash
-.claude/skills/adr/scripts/doc-path.py --topic <t> --id ADR-0001 --slug <slug>
+doc-path.py --topic <t> --id ADR-0001 --slug <slug>
 # → docs/{topic}/adr/adr-0001-<slug>.md
 ```
 
@@ -118,7 +120,7 @@ superseded_by:
 `proposed` → 셀프 리뷰 → **스크립트가 넘긴다.** 손으로 `status:` 줄을 고치지 않는다.
 
 ```bash
-.claude/skills/adr/scripts/accept.py ADR-0001
+accept.py ADR-0001
 ```
 
 이 스크립트는 `status`와 `accepted_at`을 함께 기록하고, **파일명이 규약에 맞는지 확인**한다 — accept는 좋은 이름을 맞추는 관문이다(경로는 얼지 않으니 나중에 rename도 되지만, 확정 시점에 맞춰 둔다).
@@ -134,7 +136,7 @@ superseded_by:
 **본문을 고치기 전에 반드시 먼저 돌린다:**
 
 ```bash
-.claude/skills/adr/scripts/freeze-check.py <path>   # 공표된 status 가 동결(proposed 밖)이면 exit 1
+freeze-check.py <path>   # 공표된 status 가 동결(proposed 밖)이면 exit 1
 ```
 
 **얼어붙는 것은 본문(결정의 의미)이다** — 그것과 `id`·`type`·`parent`·`references`를 고쳐 결정을 바꿀 수 없다. **경로·포맷은 얼지 않고**(파일을 옮기거나 이름을 바꿔도 참조는 id로 걸려 산다), **분류(`topic`·`subjects`)·생명주기 필드도 얼음 밖이다**(ADR-0004).
@@ -144,7 +146,7 @@ superseded_by:
 **부분 supersede는 없다.** 옛 ADR 전체가 `superseded`가 되고, 여전히 유효한 부분은 **새 ADR에 재진술**한다.
 
 ```bash
-.claude/skills/adr/scripts/supersede.py --old ADR-0001 --by ADR-0007
+supersede.py --old ADR-0001 --by ADR-0007
 ```
 
 이 스크립트는 **frontmatter의 두 필드만** 건드린다 — 본문에 손댈 방법이 없다. 그것이 R4를 규율이 아니라 구조로 만든다.

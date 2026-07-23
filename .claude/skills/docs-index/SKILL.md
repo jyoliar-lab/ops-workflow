@@ -8,7 +8,7 @@ description: docs/ 의 frontmatter를 스캔해 docs/_index/ 를 생성한다 (b
 > **잠정판(관측 장비).** 고쳤다면 고친 이유를 마찰 로그에 남긴다.
 
 ```bash
-.claude/skills/docs-index/scripts/build-index.py
+build-index.py
 ```
 
 `docs/_index/` 를 **통째로 다시 만든다.** 판단이 없다 — 순수 기계다.
