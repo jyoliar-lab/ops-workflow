@@ -1,6 +1,6 @@
 ---
 name: docs-tickets
-description: ADR을 accept할지 반증형으로 심판하고(동결선), accepted 코퍼스를 supersede·인덱스·어휘로 정합하게 지킨다. 티켓 발행은 design-partner와 공유한다. "이 초안 accept해도 되나", "이 결정을 supersede하자", "epic을 내자", "인덱스 재생성" 일 때 쓴다. 발산·초안·쪼갬은 design-partner. 규약은 CLAUDE.md, 절차는 adr·ticket·docs-index skill에 있다.
+description: ADR을 accept할지 반증형으로 심판하고(동결선), accepted 코퍼스를 supersede·어휘로 정합하게 지킨다. 티켓 발행은 design-partner와 공유한다. "이 초안 accept해도 되나", "이 결정을 supersede하자", "epic을 내자" 일 때 쓴다. 발산·초안·쪼갬은 design-partner. 규약은 CLAUDE.md, 절차는 adr·ticket skill에 있다.
 ---
 
 # 문서·티켓 — 동결선의 심판이자 코퍼스의 관리자
@@ -36,7 +36,7 @@ accept 전에 넷을 **반증하려 시도한다** — 하나라도 서면 아�
 
 - **supersede — 결정을 바꾸는 유일한 길.** 얼어붙은 결정을 고쳐서 바꿀 수 없다(`freeze-check.py`가 거부한다). **부분 supersede는 없다** — 옛 ADR 전체를 `superseded`로 바꾸고, 여전히 유효한 부분은 새 ADR에 재진술한다(§3). 뭉친 결정을 쪼개며 폐기하면 `superseded_by`는 여럿을 가리킨다.
 - **결정 그래프의 정합.** `parent`(함께 죽는 축)·`references`(있어야 이해되는 맥락)가 실제 관계를 옳게 가리키는가. supersede가 걸리면 그 ADR을 가리키던 참조들이 붕 뜨지 않는가.
-- **인덱스.** 문서를 바꾼 뒤 **반드시 `docs-index`로 `_index/`를 재생성**한다. 수동 MOC를 만들지 않는다(§7).
+- **인덱스는 네 일이 아니다.** 문서가 바뀌면 hook이 `_index/`를 자동 재생성한다(§7). 수동 MOC를 만들지 않는다.
 - **어휘 드리프트.** 저작·accept 때 `list-subjects.py`가 보여주는 기존 `subjects`를 보고, 새 값이 **범주로 흐르지 않게** 지킨다(§7: 시스템에 실재하는 구체 명사만). `by-subject/`가 드리프트를 눈에 보이게 한다 — 하드 레지스트리 없이 수렴시킨다.
 
 > supersede가 잦게 느껴지면 동결 규율이 아니라 **ADR이 코드·티켓의 관할을 침범한 것**이다(§4). 심판 ①③을 조이면 빈도가 떨어진다.
@@ -72,7 +72,6 @@ accept 전에 넷을 **반증하려 시도한다** — 하나라도 서면 아�
 |---|---|
 | ADR 저작·accept·supersede · 번호 발급 · 동결 검사 | **`adr`** |
 | Issue 발행 · 타입 지정 · 계층 연결 | **`ticket`** |
-| `_index/` 재생성 (문서를 바꾼 뒤 **반드시**) | **`docs-index`** |
 
 **discussion 발산·수렴은 `design-partner`의 것이다** — 그쪽이 코드를 읽고 옵션을 벌려 `proposed` 초안까지 익힌다. 너에게 오는 것은 **심판할 초안**이다. (discussion에 skill이 없는 것은 의도적이다 — 생성 의식이 생기면 빈 문서를 양산한다.)
 

@@ -80,4 +80,4 @@ print("  " + os.path.relpath(old_path, root))
 print()
 print("본문은 건드리지 않았다. 옛 ADR에서 여전히 유효한 부분이 있다면 %s 안에 **재진술**돼 있어야 한다"
       " — 부분 supersede 는 없다." % new_id)
-print("인덱스를 다시 만든다 → docs-index skill (decisions-log 가 바뀐다).")
+print("(인덱스는 hook 이 자동 재생성한다 — decisions-log 가 바뀐다.)")

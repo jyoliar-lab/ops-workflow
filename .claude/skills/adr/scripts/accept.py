@@ -100,4 +100,4 @@ print("★ 여기서부터 본문(결정의 의미)이 얼어붙는다. 바꾸�
 print("  경로·포맷·분류(topic·subjects)는 얼음 밖 — 문서 관리는 계속 개선할 수 있다.")
 print()
 print("다음: 이 변경을 커밋하고 push 한다 — **동결은 공표 시점에 발효한다.**")
-print("      인덱스를 다시 만든다 → docs-index skill (decisions-log 가 바뀐다).")
+print("      (인덱스는 hook 이 자동 재생성한다 — decisions-log 가 바뀐다.)")

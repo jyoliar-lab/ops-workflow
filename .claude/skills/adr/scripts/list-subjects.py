@@ -41,4 +41,5 @@ if os.path.isdir(by_subject):
             print("  인덱스에 없음: " + ", ".join(sorted(live - indexed)), file=sys.stderr)
         if indexed - live:
             print("  문서에 없음:   " + ", ".join(sorted(indexed - live)), file=sys.stderr)
-        print("  → docs-index skill 을 다시 돌린다.", file=sys.stderr)
+        print("  → 인덱스가 낡았다. 보통은 hook 이 자동 재생성한다 — 계속 어긋나면"
+              " 사람에게 /docs-index 재생성을 요청한다.", file=sys.stderr)

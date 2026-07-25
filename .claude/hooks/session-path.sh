@@ -4,5 +4,6 @@
 # CLAUDE_ENV_FILE에 쓴 export만 이후 모든 Bash 호출 전에 source된다.
 [ -n "$CLAUDE_ENV_FILE" ] || exit 0
 dirs=$(find "$CLAUDE_PROJECT_DIR/.claude/skills" -type d -name scripts 2>/dev/null | paste -sd: -)
+[ -d "$CLAUDE_PROJECT_DIR/.claude/scripts" ] && dirs="${dirs:+$dirs:}$CLAUDE_PROJECT_DIR/.claude/scripts"
 [ -n "$dirs" ] || exit 0
 printf 'export PATH="%s:$PATH"\n' "$dirs" >> "$CLAUDE_ENV_FILE"

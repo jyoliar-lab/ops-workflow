@@ -1,6 +1,32 @@
 {
   "permissions": {
     "allow": [
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git branch:*)",
+      "Bash(git show:*)",
+      "Bash(git status:*)",
+      "Bash(git fetch:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git rev-list:*)",
+      "Bash(git ls-remote:*)",
+      "Bash(git remote:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(which:*)",
+      "Bash(echo:*)",
+      "Bash(pwd)",
+      "Bash(env)",
+      "Bash(pbcopy)",
+      "Bash(gh pr create)",
+      "Bash(jq:*)",
+      "Bash(yq:*)",
+      "Bash(awk:*)",
+      "Bash(sort:*)",
+      "Bash(uniq:*)",
       "Bash(list-subjects.py:*)",
       "Bash(next-id.py:*)",
       "Bash(doc-path.py:*)",
@@ -8,10 +34,14 @@
       "Bash(unaccept.py:*)",
       "Bash(supersede.py:*)",
       "Bash(freeze-check.py:*)",
-      "Bash(build-index.py:*)",
       "Bash(create.py:*)",
       "Bash(adr-gate.py:*)",
-      "Bash(link-sub.py:*)"
+      "Bash(link-sub.py:*)",
+      "Bash(set-adr.py:*)",
+      "Bash(set-repos.py:*)",
+      "WebSearch",
+      "WebFetch",
+      "Fetch"
     ]
   },
   "hooks": {
@@ -27,11 +57,22 @@
     ],
     "PreToolUse": [
       {
-        "matcher": "Write|Edit|MultiEdit",
+        "matcher": "Write|Edit|MultiEdit|Bash",
         "hooks": [
           {
             "type": "command",
             "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard-write.py\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/reindex-docs.py\""
           }
         ]
       }

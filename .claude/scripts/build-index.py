@@ -8,10 +8,11 @@ import os
 import shutil
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "_lib"))
+# _lib 는 스킬들의 공유 라이브러리다 — 이 스크립트는 .claude/scripts/ 로 나왔지만 같은 것을 쓴다
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "skills", "_lib"))
 from opsdoc import TYPES, as_list, filename_problem, read_frontmatter, repo_root  # noqa: E402
 
-HEADER = "<!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — docs-index skill 이 만든다. -->\n"
+HEADER = "<!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->\n"
 
 root = repo_root()
 docs = os.path.join(root, "docs")
