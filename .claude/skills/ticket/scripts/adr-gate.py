@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""컨테이너 티켓의 ADR 게이트 (CLAUDE.md §5).
+"""티켓의 ADR 게이트 (CLAUDE.md §5).
 
-  adr-gate.py --adr ADR-0001 --type epic|feature
+  adr-gate.py --adr ADR-0001 --type epic|feature|task|bug
 
 컨테이너 티켓(epic·feature)은 **accepted ADR을 전제한다.** 굳지 않은 결정으로 일하지 않는다.
+리프(task·bug)는 근거를 전제하지 않는다 — 그러나 **명시했다면 같은 검사를 지난다**:
+답하지 않아도 되지만, 답하면 참이어야 한다(accepted·공표).
   exit 0 = 통과 · exit 1 = 거부
 
 ★ **워킹 트리가 아니라 공표된 사본(origin/main)을 읽는다.**
@@ -16,6 +18,7 @@
 출력(통과 시, stdout):
   path=<공표된 사본의 경로>
   sha=<그 시점 origin/main 커밋>
+  title=<공표된 사본 H1 의 제목 문장 (id 접두어 제외 · 없으면 빈 값)>
 """
 import os
 import sys
@@ -26,14 +29,19 @@ from opsdoc import die, iter_docs, parse_frontmatter, repo_root  # noqa: E402
 
 args = sys.argv[1:]
 if len(args) != 4 or args[0] != "--adr" or args[2] != "--type":
-    print("usage: adr-gate.py --adr ADR-NNNN --type epic|feature", file=sys.stderr)
+    print("usage: adr-gate.py --adr ADR-NNNN --type epic|feature|task|bug", file=sys.stderr)
     sys.exit(2)
 adr_id, ticket_type = args[1], args[3]
 
-if ticket_type not in ("epic", "feature"):
-    print("거부: 게이트는 컨테이너 티켓(epic·feature)에만 건다. 리프(task·bug)는 ADR을 전제하지 않는다.",
-          file=sys.stderr)
+if ticket_type not in ("epic", "feature", "task", "bug"):
+    print("거부: 모르는 티켓 타입이다 — %s" % ticket_type, file=sys.stderr)
     sys.exit(2)
+
+is_container = ticket_type in ("epic", "feature")
+# 검사 내용은 같다 — 다른 것은 전제의 강도다:
+#   컨테이너: 근거가 필수다(전제).  리프: 선택이지만, 답했으면 참이어야 한다.
+premise = ("컨테이너 티켓(%s)은 accepted ADR을 전제한다" % ticket_type) if is_container \
+    else ("리프(%s)의 근거는 선택이지만, 명시한 근거는 accepted·공표여야 한다" % ticket_type)
 
 root = repo_root()
 
@@ -54,17 +62,29 @@ if not path:
             "  이 상태로 티켓을 만들면 티켓의 문서 링크가 죽은 링크가 된다.",
             "  결정을 먼저 **커밋·푸시**한다. 공표되지 않은 결정으로 일하지 않는다.")
     die("거부: %s 을 찾지 못했다 (%s · 워킹 트리 양쪽 모두)." % (adr_id, vcs.PUBLISHED),
-        "  컨테이너 티켓(%s)은 accepted ADR을 전제한다 — 결정을 먼저 굳힌다." % ticket_type)
+        "  %s — 결정을 먼저 굳힌다." % premise)
 
-fm = parse_frontmatter(vcs.read_at(root, path))
+published = vcs.read_at(root, path)
+fm = parse_frontmatter(published)
 status = fm.get("status", "")
+
+# 제목 — H1("# ADR-NNNN — <제목 문장>")에서 뽑는다. id 는 따로 다니므로 접두어는 벗긴다.
+title = ""
+for line in published.splitlines():
+    if line.startswith("# "):
+        title = line[2:].strip()
+        prefix = "%s —" % adr_id
+        if title.startswith(prefix):
+            title = title[len(prefix):].strip()
+        break
 
 if status != "accepted":
     die("거부: %s 의 status 가 '%s' 다 — accepted 가 아니다." % (adr_id, status or "없음"),
         "  %s:%s" % (vcs.PUBLISHED, path),
         "",
-        "  컨테이너 티켓(%s)은 accepted ADR을 전제한다 (CLAUDE.md §5)." % ticket_type,
-        "  굳지 않은 결정으로 일하지 않는다. ADR을 먼저 accept 하거나, 리프 티켓(task·bug)으로 발행한다.")
+        "  %s (CLAUDE.md §5). 굳지 않은 결정으로 일하지 않는다." % premise,
+        "  ADR을 먼저 accept 하거나, " + ("리프 티켓(task·bug)으로 발행한다."
+                                    if is_container else "--adr 없이 발행한다."))
 
 # 워킹 트리가 공표된 사본보다 앞서 있으면 알린다 — 티켓은 **공표된 것**을 근거로 삼는다.
 local_path = os.path.join(root, path)
@@ -91,3 +111,4 @@ sha = vcs.ref_sha(root)
 print("통과: %s accepted — 공표됨 (%s:%s)" % (adr_id, vcs.PUBLISHED, path), file=sys.stderr)
 print("path=%s" % path)
 print("sha=%s" % sha)
+print("title=%s" % title)
