@@ -31,7 +31,9 @@ create.py \
   [--adr ADR-0001]... \              # 반복 가능. 컨테이너 필수 · 리프 선택(직접 이행하는 결정만)
   [--target-repo owner/name]... \    # task·bug 는 이것 또는 --no-target-repo 가 필수
   [--no-target-repo] \               # 수정 대상 부재의 명시적 선언 (신규 저장소 생성 등)
-  [--ref-repo owner/name]...         # 참조 저장소 (선택 · 비완전 목록)
+  [--ref-repo owner/name]... \       # 참조 저장소 (선택 · 비완전 목록)
+  [--blocked-by N]... \              # 선행 티켓. task·bug 는 이것 또는 --no-deps 가 필수
+  [--no-deps]                        # 선행 없음의 명시적 선언
 ```
 
 `gh issue create` + GraphQL `updateIssueIssueType` + Project 등록. `gh issue create`에는 `--type` 플래그가 없다 — Issue Type 지정은 GraphQL로만 된다.
@@ -69,7 +71,14 @@ create.py \
   - 이슈 본문 **'저장소' 절** — YAML 펜스 블록. 사람과 집행 도구가 같은 표기 하나를 읽는다.
   - Project **`Target Repos` 필드** — *"이 저장소를 고치는 열린 리프"* 를 기계가 필터한다.
 
-### 사후 기입·갱신 — `set-adr.py` · `set-repos.py`
+### 선행 의존 — `--blocked-by` · `--no-deps` (ADR-0017 파일럿)
+
+- **리프는 선행 의존에 답해야 발행된다.** 선행 티켓을 `--blocked-by`(반복 가능)로 걸거나, 없으면 `--no-deps`로 무의존을 명시적으로 선언한다. 침묵은 스크립트가 거부한다.
+- **GitHub 네이티브 의존 관계(blocked by)에 건다** — 본문 절·Project 필드는 없다. **사이드바에서 손으로 걸지 않는다** — 갱신은 언제나 `set-deps.py`다(발행과 같은 게이트).
+- **선행은 열린 리프만.** 닫힌 이슈·컨테이너는 게이트가 거부한다. 컨테이너 티켓은 의존을 담지 않는다.
+- **열린 선행 위의 착수는 집행 도구가 거부한다** — 선행의 완료 기준은 close(사람 검수)다. 작업 중 미기재 선행을 발견하면 `set-deps.py`로 **먼저 갱신한다(필수)**.
+
+### 사후 기입·갱신 — `set-adr.py` · `set-repos.py` · `set-deps.py`
 
 ```bash
 set-adr.py --issue <N> --adr ADR-NNNN... | --clear
@@ -77,13 +86,15 @@ set-adr.py --issue <N> --adr ADR-NNNN... | --clear
 set-repos.py --issue <N> \
   --target-repo owner/name... | --no-target-repo \
   [--ref-repo owner/name]...
+
+set-deps.py --issue <N> --blocked-by <M>... | --no-deps
 ```
 
-두 스크립트의 공통 규칙:
+세 스크립트의 공통 규칙:
 
-- 발행과 **같은 게이트**를 지나 **같은 두 자리**(본문 절 + Project 필드)를 다시 쓴다.
-- 절이 있으면 **통째로 교체**, 없으면 소급 기입. 부분 수정이 아니라 전체 답을 다시 낸다. 절은 언제나 하나다.
-- **블록을 손으로 고치지 않는다.** 집행 도구의 파서가 엄격해서(emit 되는 부분집합만 수용) 형식 이탈을 거부한다. 갱신은 언제나 스크립트다.
+- 발행과 **같은 게이트**를 지나 **같은 자리**를 다시 쓴다 (`set-adr`·`set-repos`는 본문 절 + Project 필드, `set-deps`는 네이티브 의존 관계).
+- **통째로 교체** — 부분 수정이 아니라 전체 답을 다시 낸다. 답의 자리는 언제나 하나다.
+- **손으로 고치지 않는다.** 본문 블록은 집행 도구의 파서가 형식 이탈을 거부하고, 의존은 사이드바 손편집이 게이트를 건너뛴다. 갱신은 언제나 스크립트다.
 
 `set-adr.py`:
 
@@ -94,6 +105,11 @@ set-repos.py --issue <N> \
 - **ADR-0016 이전에 발행된 리프**(저장소 절이 없는 티켓)에는 절을 소급 기입한다 — docs-tickets가 기존 티켓에 저장소를 연결할 때 이것을 쓴다.
 - 구식 산문 절도 YAML 블록으로 교체된다 — 이 스크립트 한 번이 곧 마이그레이션이다.
 - 컨테이너(Epic·Feature)와 Project 미등록 이슈는 거부한다.
+
+`set-deps.py`:
+
+- `--blocked-by` 나열이 **선행의 전부**가 된다 — 나열 밖 기존 관계는 제거된다. `--no-deps`는 전부 제거(무의존).
+- 컨테이너와 닫힌 이슈는 거부한다. 순환은 GitHub이 거부한다 — 우회하지 않는다.
 
 ## 3. 계층을 잇는다
 

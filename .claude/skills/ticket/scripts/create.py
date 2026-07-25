@@ -4,6 +4,7 @@
   create.py --type epic|feature|task|bug --title "..." --body-file <path>
             [--adr ADR-NNNN]... [--repo owner/name]
             [--target-repo owner/name]... | --no-target-repo   [--ref-repo owner/name]...
+            [--blocked-by N]... | --no-deps
 
 ★ 리프(task·bug)는 저장소 맥락에 답해야 발행된다 (ADR-0016 파일럿):
   - 수정 대상(target) — 집행자가 고쳐도 되는 저장소의 전부(다수 가능). 지정하거나
@@ -13,6 +14,12 @@
   두 곳에 박는다: 이슈 본문 '저장소' 절(YAML 블록 — 사람·집행 도구 공용 표기) + Project 'Target Repos' 필드(보드 질의).
   컨테이너(epic·feature)는 담지 않는다 — 집행 맥락은 수행 단위(리프)의 것이다.
   게이트·렌더링은 repo_context.py 에 산다 — 사후 기입·갱신(set-repos.py)과 같은 코드다.
+
+★ 리프는 선행 의존에도 답해야 발행된다 (ADR-0017 파일럿):
+  --blocked-by N (반복 가능) XOR --no-deps. 침묵은 거부다.
+  GitHub 네이티브 의존 관계(blocked by)에 건다 — 본문 절·Project 필드 없음.
+  게이트·기입은 dep_context.py — 사후 갱신(set-deps.py)과 같은 코드다.
+  컨테이너(epic·feature)는 의존을 담지 않는다.
 
 ★ 근거 ADR 은 목록이다(--adr 반복 가능) — 게이트는 명시된 전부에 걸린다.
   컨테이너: 필수(전제). 리프: 선택 — **직접 이행하는** 결정이 있을 때만 명시하고,
@@ -43,6 +50,7 @@ sys.path.insert(0, os.path.join(HERE, "..", "..", "_lib"))
 import gh  # noqa: E402
 import repo_context  # noqa: E402  (같은 디렉터리 — ADR-0016 저장소 맥락 공용 로직)
 import adr_context  # noqa: E402  (같은 디렉터리 — '근거 ADR' 절 공용 로직)
+import dep_context  # noqa: E402  (같은 디렉터리 — ADR-0017 선행 의존 공용 로직)
 from opsdoc import die  # noqa: E402
 
 # Issue Types 4종 (§5). story·spike 는 없다 — argparse 가 그 값을 받지 않는다.
@@ -60,6 +68,7 @@ parser.add_argument("--adr", action="append",
                     help="근거 ADR. 반복 가능. 컨테이너는 필수 · 리프는 선택(직접 이행하는 결정만)")
 parser.add_argument("--repo", default=os.environ.get("OPS_REPO", "jyoliar-lab/ops-workflow"))
 repo_context.add_args(parser)   # --target-repo / --no-target-repo / --ref-repo
+dep_context.add_args(parser)    # --blocked-by / --no-deps
 args = parser.parse_args()
 
 if not os.path.isfile(args.body_file):
@@ -73,6 +82,17 @@ if args.type in CONTAINERS:
 else:
     repo_context.validate_answer(args.target_repo, args.no_target_repo, args.ref_repo,
                                  TYPE_NAMES[args.type])
+
+# ★ 선행 의존 게이트 — 리프는 "무엇 다음인가"에도 답해야 발행된다 (ADR-0017 파일럿).
+#   발행 **전에** 선행 전부를 검증한다 — 열린 리프만 선행이 될 수 있다.
+dep_entries = []
+if args.type in CONTAINERS:
+    if args.blocked_by or args.no_deps:
+        die("거부: 컨테이너(%s)는 선행 의존을 담지 않는다." % TYPE_NAMES[args.type],
+            "  의존은 수행 단위(리프) 간 실행 순서다 — 묶음 사이의 순서는 로드맵의 의미다 (ADR-0017).")
+else:
+    dep_context.validate_answer(args.blocked_by, args.no_deps, TYPE_NAMES[args.type])
+    dep_entries = dep_context.gate(args.repo, args.blocked_by)
 
 # ★ 게이트 — 근거 ADR 은 **목록**이다(1개 이상). 티켓 하나가 여러 결정에서 비롯될 수 있다.
 #   컨테이너: 근거 필수(전제 — CLAUDE.md §5). 침묵은 거부다.
@@ -133,6 +153,11 @@ issue_id, _ = gh.issue_node(args.repo, number)
 type_id = gh.issue_type_id(args.repo, TYPE_NAMES[args.type])
 issue = gh.set_issue_type(issue_id, type_id)
 print("타입 지정: #%s → %s" % (issue["number"], issue["issueType"]["name"]))
+
+# ── 선행 의존 기입 — GitHub 네이티브 관계 한 자리 (ADR-0017). 본문 사본 없음 ──
+if args.type not in CONTAINERS:
+    dep_context.apply(issue_id, dep_entries)
+    print("선행 의존 (blocked by): %s" % dep_context.describe(dep_entries))
 
 # ── Project 등록 — 근거 ADR 이 사는 곳 ────────────────────────────────────
 org = args.repo.split("/")[0]

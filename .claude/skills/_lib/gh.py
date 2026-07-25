@@ -79,6 +79,51 @@ def issue_node(repo, number):
     return issue_id, type_name
 
 
+def issue_brief(repo, number):
+    """이슈 번호 → {id, state, type, title}. 의존 게이트가 선행 이슈를 검증할 때 쓴다 (ADR-0017)."""
+    owner, name = split_repo(repo)
+    data = graphql(
+        "query($o:String!,$r:String!,$n:Int!)"
+        "{repository(owner:$o,name:$r){issue(number:$n){id state title issueType{name}}}}",
+        o=owner, r=name, n=number)
+    issue = (data.get("repository") or {}).get("issue")
+    if not issue:
+        die("거부: %s#%d 를 찾지 못했다." % (repo, number))
+    return {"id": issue["id"], "state": issue["state"], "title": issue["title"],
+            "type": (issue.get("issueType") or {}).get("name")}
+
+
+# ── 선행 의존 (ADR-0017) — GitHub 네이티브 의존 관계(blocked by). 게이트는 dep_context.py ──
+
+
+def issue_blocked_by(repo, number):
+    """이슈의 blocked-by 목록 → [{id, number, state, title}] (네이티브 의존 관계)."""
+    owner, name = split_repo(repo)
+    data = graphql(
+        "query($o:String!,$r:String!,$n:Int!){repository(owner:$o,name:$r){issue(number:$n){"
+        "blockedBy(first:50){nodes{id number state title}}}}}",
+        o=owner, r=name, n=number)
+    issue = (data.get("repository") or {}).get("issue")
+    if not issue:
+        die("거부: %s#%d 를 찾지 못했다." % (repo, number))
+    return [b for b in (issue.get("blockedBy") or {}).get("nodes") or [] if b]
+
+
+def add_blocked_by(issue_id, blocking_id):
+    """issue_id 가 blocking_id 에 막혀 있다고 건다. 순환은 GitHub이 거부한다 — 오류를 그대로 전파."""
+    graphql(
+        "mutation($i:ID!,$b:ID!){addBlockedBy(input:{issueId:$i,blockingIssueId:$b})"
+        "{issue{number}}}",
+        i=issue_id, b=blocking_id)
+
+
+def remove_blocked_by(issue_id, blocking_id):
+    graphql(
+        "mutation($i:ID!,$b:ID!){removeBlockedBy(input:{issueId:$i,blockingIssueId:$b})"
+        "{issue{number}}}",
+        i=issue_id, b=blocking_id)
+
+
 def update_issue_body(issue_id, body):
     """이슈 본문 교체. 호출자가 기존 본문 위에 절만 갈아 끼운 값을 넘긴다 — 통짜 덮어쓰기가 아니다."""
     data = graphql(
