@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — docs-index skill 이 만든다. -->
 
-# by-type / discussion (14)
+# by-type / discussion (15)
 
 | id | status | topic | subjects | 문서 |
 |---|---|---|---|---|
@@ -18,3 +18,4 @@
 | — | active | ops-workflow | adr | [ADR은 다른 ADR을 어디까지, 어떻게 참조하는가](../../ops-workflow/discussion/260715_1551_cross-adr-references.md) |
 | — | active | ops-workflow | github-issues, github-projects, issue-types | [티켓(컨트롤 플레인) 결정을 ADR로 승격하기 — 후보 분해와 논점](../../ops-workflow/discussion/260716_1348_ticket-decisions-adr-candidates.md) |
 | — | done | ops-workflow | ticket-engineer | [ticket-engineer 워크스페이스 엣지 케이스 — 낡은 클론·남의 브랜치·중단된 작업](../../ops-workflow/discussion/260722_2030_ticket-engineer-workspace-edge-cases.md) |
+| — | active | ops-workflow | github-issues, issue-types | [티켓 본문 구성 — 공통 계약과 타입별 절의 층화 제안](../../ops-workflow/discussion/260723_2039_ticket-body-structure.md) |

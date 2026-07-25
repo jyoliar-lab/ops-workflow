@@ -28,13 +28,21 @@ create.py \
   --type epic|feature|task|bug \
   --title "..." \
   --body-file <path> \
-  [--adr ADR-0001] \                 # epic·feature 는 필수
+  [--adr ADR-0001] \                 # epic·feature 만 — 필수. 리프에 오면 거부된다
   [--target-repo owner/name]... \    # task·bug 는 이것 또는 --no-target-repo 가 필수
   [--no-target-repo] \               # 수정 대상 부재의 명시적 선언 (신규 저장소 생성 등)
   [--ref-repo owner/name]...         # 참조 저장소 (선택 · 비완전 목록)
 ```
 
 `gh issue create` + GraphQL `updateIssueIssueType` + Project 등록. (`gh issue create` 에는 `--type` 플래그가 없다 — Issue Type 지정은 GraphQL로만 된다.)
+
+**본문은 `templates/`의 타입별 템플릿에서 시작한다** — `epic.md`(Feature도 이것 — 컨테이너 공통) · `task.md` · `bug.md`.
+
+- **공통 절(Context · Goal · Acceptance Criteria · References)은 이름까지 한 벌이다** — 같은 질문은 같은 자리·같은 이름에서 답한다. 닫는 사람과 집행자가 그 이름을 찾는다. (Bug에는 Goal이 없다 — Expected Behavior가 그 질문에 답한다.)
+- **선택 절(Requirements · Technical Notes · Environment · Evidence)은 지우지 않고 부재를 "없음"으로 명시한다** — 빈 절은 누락인지 비해당인지 말하지 못한다.
+- **ADR 링크·'저장소' 절은 템플릿에 없다** — 스크립트가 박는다. 본문에 손으로 다시 적지 않는다 — 사본은 낡는다.
+
+**리프는 근거 ADR을 담지 않는다** — `--adr`이 오면 스크립트가 거부한다. 근거는 계층의 최상단(컨테이너)에 한 번 산다 — ADR을 쓸 일이면 단일 Task로 끝날 일이어도 Epic을 먼저 세우고 그 밑에 단다.
 
 **컨테이너 티켓은 accepted ADR을 전제한다**(§5). `--adr` 없이 epic·feature를 만들려 하면, 또는 그 ADR이 `accepted`가 아니면 **스크립트가 거부한다**(exit 1). **우회하지 않는다** — 굳지 않은 결정으로 일하지 않는다.
 

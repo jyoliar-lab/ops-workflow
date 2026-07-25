@@ -14,6 +14,13 @@
   컨테이너(epic·feature)는 담지 않는다 — 집행 맥락은 수행 단위(리프)의 것이다.
   게이트·렌더링은 repo_context.py 에 산다 — 사후 기입·갱신(set-repos.py)과 같은 코드다.
 
+★ 근거 ADR 은 컨테이너의 것이다 — 리프(task·bug)에 --adr 이 오면 거부한다.
+  근거는 계층의 최상단에 한 번 산다. ADR 을 쓸 일이면 단일 Task 여도 Epic 을 먼저 세운다.
+
+★ 본문은 templates/ 의 타입별 템플릿에서 시작한다 (epic.md — Feature 도 이것 · task.md · bug.md).
+  공통 절(Context·Goal·Acceptance Criteria·References)은 이름까지 한 벌이다.
+  ADR 링크·'저장소' 절은 템플릿에 없다 — 이 스크립트가 박는다.
+
 `gh issue create` 에는 --type 플래그가 없다 → Issue Type 은 GraphQL 로만 지정된다.
 
 브리지는 **이슈가 문서를 가리키는** 방향으로만 놓인다 (§1) — 동결 문서는 살아 있는 필드를 담지 못하므로.
@@ -62,6 +69,13 @@ if args.type in CONTAINERS:
 else:
     repo_context.validate_answer(args.target_repo, args.no_target_repo, args.ref_repo,
                                  TYPE_NAMES[args.type])
+
+# ★ 근거 ADR 은 컨테이너의 것이다 — 리프에 오면 거부한다.
+#   근거는 계층의 최상단에 한 번 산다 — 하위가 반복하면 사본이고, 사본은 낡는다.
+if args.type not in CONTAINERS and args.adr:
+    die("거부: 리프(%s)는 근거 ADR을 담지 않는다." % TYPE_NAMES[args.type],
+        "  근거는 계층의 최상단(컨테이너)에 한 번 산다 (CLAUDE.md §5).",
+        "  ADR을 쓸 일이면 단일 Task로 끝날 일이어도 Epic을 먼저 세우고 그 밑에 단다.")
 
 # ★ 게이트 — 컨테이너 티켓은 accepted ADR을 전제한다. (공표된 사본을 읽는다)
 adr_path, adr_sha = None, None
