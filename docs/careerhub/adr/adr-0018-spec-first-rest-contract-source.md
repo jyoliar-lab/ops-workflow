@@ -3,10 +3,10 @@ id: ADR-0018
 type: adr
 topic: careerhub
 subjects: [openapi, api-composer]
-status: proposed
-accepted_at:
-parent: ADR-0014
-references:
+status: accepted
+accepted_at: 2026-07-26T18:26:11+09:00
+parent:
+references: [ADR-0014]
 superseded_by:
 ---
 
@@ -27,7 +27,7 @@ code-first는 즉시 값을 내고 가역적이지만, 구조적 한계가 있�
 
 이행 가능성은 확인됐다. 코드 생성 도구가 현행 라우터에 생성 핸들러를 공존시키는 것을 지원하므로, 전면 중단 없이 컨트롤러 단위로 점진 전환할 수 있다.
 
-이 결정은 실증된 아픔에 대한 대응이 아니라 **선제적 결정**이다. code-first의 한계가 실제로 아프기 전이지만, 전환 비용은 핸들러 수에 비례해 커지므로 엔드포인트가 가장 적은 지금이 전환이 가장 싼 시점이다.
+이 결정은 실증된 문제에 대한 대응이 아니라 **선제적 결정**이다. code-first의 한계가 아직 실제 비용으로 드러나기 전이지만, 전환 비용은 핸들러 수에 비례해 커지므로 엔드포인트가 가장 적은 지금이 전환이 가장 싼 시점이다.
 
 ## Decision
 

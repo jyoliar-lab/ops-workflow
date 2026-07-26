@@ -11,3 +11,4 @@
 | ADR-0013 | 2026-07-22T17:44:23+09:00 | careerhub-front | typescript | ADR-0011 | [ADR-0013 — careerhub-front를 TypeScript로 짓는다 (순수 JavaScript로 짓지 않는다)](../careerhub-front/adr/adr-0013-adopt-typescript-for-frontend.md) |
 | ADR-0014 | 2026-07-22T17:44:23+09:00 | careerhub-front | openapi, api-composer | ADR-0013 | [ADR-0014 — 프론트가 쓰는 REST 타입을 백엔드 스펙에서 생성한다 (손으로 선언하지 않는다)](../careerhub-front/adr/adr-0014-derive-rest-types-from-backend-spec.md) |
 | ADR-0015 | 2026-07-22T17:44:23+09:00 | careerhub-front | tailwind | ADR-0011 | [ADR-0015 — 스타일 토큰을 Tailwind로 강제한다 (정의에 그치지 않는다)](../careerhub-front/adr/adr-0015-enforce-style-tokens-with-tailwind.md) |
+| ADR-0018 | 2026-07-26T18:26:11+09:00 | careerhub | openapi, api-composer | — | [ADR-0018 — REST 계약의 원천을 코드에서 독립한 명세에 두고, 서버를 생성 인터페이스로 구속한다](../careerhub/adr/adr-0018-spec-first-rest-contract-source.md) |
