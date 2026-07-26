@@ -5,7 +5,8 @@ CLAUDE.md 의 산문 규칙 중 구조로 옮길 수 있는 것을 여기서 강
 §8("규율이 아니라 구조")대로.
 
 Write/Edit/MultiEdit:
-  허용 — $CLAUDE_PROJECT_DIR/**       (이 저장소: docs/ · .claude/ · CLAUDE.md)
+  허용 — $CLAUDE_PROJECT_DIR/**       (이 저장소: docs/ · .claude/ · CLAUDE.md
+                                       · staging/ — 하네스 마찰 로그 인박스. §6)
   거부 — docs/_index/**               (생성물 — 도구만 쓴다. §7. 재생성은 hook 자동)
   거부 — 그 외 전부. 특히 $CODE_ROOT 이하의 코드 저장소 — agent 는 **읽고
          인용할 뿐** 고치지 않는다(§6). 코드 변경은 그 저장소의 PR 로, 사람이 한다.
