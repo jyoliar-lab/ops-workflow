@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / adr (17)
+# by-type / adr (18)
 
 | id | status | topic | subjects | 문서 |
 |---|---|---|---|---|
@@ -21,3 +21,4 @@
 | ADR-0015 | accepted | careerhub-front | tailwind | [ADR-0015 — 스타일 토큰을 Tailwind로 강제한다 (정의에 그치지 않는다)](../../careerhub-front/adr/adr-0015-enforce-style-tokens-with-tailwind.md) |
 | ADR-0016 | proposed | ops-workflow | github-issues, github-projects | [ADR-0016 — 리프 티켓은 수정 대상 저장소와 참조 저장소를 명시한다](../../ops-workflow/adr/adr-0016-leaf-ticket-declares-repo-context.md) |
 | ADR-0017 | proposed | ops-workflow | github-issues, ticket-engineer | [ADR-0017 — 리프 티켓은 선행 의존을 명시하고, 열린 선행 위에는 착수하지 않는다](../../ops-workflow/adr/adr-0017-leaf-ticket-declares-dependencies.md) |
+| ADR-0018 | proposed | careerhub | openapi, api-composer | [ADR-0018 — REST 계약의 원천을 코드에서 독립한 명세에 두고, 서버를 생성 인터페이스로 구속한다](../../careerhub/adr/adr-0018-spec-first-rest-contract-source.md) |
