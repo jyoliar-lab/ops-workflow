@@ -89,6 +89,8 @@
 
 **코드는 읽되 고치지 않는다.** 결정을 논하려면 코드를 읽어야 한다(§2). 코드 저장소 루트는 **`CODE_ROOT`** env var로 주입한다(`.claude/settings.local.json` · gitignored · PC별). 쓰기는 `.claude/hooks/guard-write.py`가 이 저장소 밖 Write/Edit을 거부해 구조적으로 막는다(§8). **코드 변경이 필요하다는 결론은 티켓이지 agent의 Edit이 아니다.**
 
+**홈랩 Kubernetes(actual)는 자기 자격증명으로 읽는다.** 클러스터 접근은 `KUBECONFIG` env var로 주입된다(같은 `settings.local.json`) — `kubectl`을 그대로 쓰면 전용 ServiceAccount(`system:serviceaccount:agents:ops-workflow-agent`)로 동작한다. 권한은 **클러스터 전역 읽기 전용**이고, Secret 값 읽기와 모든 쓰기는 클러스터 RBAC가 거부한다 — read only가 hook이 아니라 서버 쪽 구조로 강제되는 경우다(§8).
+
 **왜 — 자기오염 차단.** agent의 미검증 가설이 지식 코퍼스에 들어가면, 다음 장애에서 agent가 **자기가 쓴 추정을 근거로 인용**한다. 오진이 자기강화된다.
 
 → **agent의 관찰은 티켓 코멘트에 쌓이고, 사람이 증류해 postmortem으로 옮길 때만 지식이 된다.**
