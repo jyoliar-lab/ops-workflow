@@ -8,8 +8,9 @@ Write/Edit/MultiEdit:
   허용 — $CLAUDE_PROJECT_DIR/**       (이 저장소: docs/ · .claude/ · CLAUDE.md
                                        · staging/ — 하네스 마찰 로그 인박스. §6)
   거부 — docs/_index/**               (생성물 — 도구만 쓴다. §7. 재생성은 hook 자동)
-  거부 — 그 외 전부. 특히 $CODE_ROOT 이하의 코드 저장소 — agent 는 **읽고
-         인용할 뿐** 고치지 않는다(§6). 코드 변경은 그 저장소의 PR 로, 사람이 한다.
+  거부 — workspace/**                 (참조 저장소 로컬 클론 — agent 는 **읽고
+         인용할 뿐** 고치지 않는다(§6). 코드 변경은 그 저장소의 PR 로, 사람이 한다)
+  거부 — 그 외 전부(이 저장소 밖).
 
 Bash:
   거부 — `gh issue close`             (close 는 언제나 사람 — §5)
@@ -94,16 +95,16 @@ def main():
         out_deny("docs/_index/ 는 생성물이다(CLAUDE.md §7) — 손으로 고치지 않는다. "
                  "고칠 곳은 원본 문서의 frontmatter 이고, 재생성은 도구가 한다(hook 자동).")
 
-    if under(fp, proj):
-        allow()
-
-    code_root = os.environ.get("CODE_ROOT")
-    if under(fp, code_root):
+    if under(fp, os.path.join(proj, "workspace")):
         out_deny(
-            "코드 저장소는 read only 다(CLAUDE.md §6): %s — 이 저장소에 코드는 없다(§1). "
+            "참조 저장소는 read only 다(CLAUDE.md §6): %s — workspace/ref 는 코드를 "
+            "읽고 인용하기 위한 로컬 클론이다(이 저장소에 코드는 없다 — §1). "
             "코드를 읽고 결정의 '왜'를 여기 문서로 남기되, 코드 자체는 고치지 않는다. "
             "변경이 필요하면 티켓으로 남기고, 그 저장소의 PR 로 사람이 한다." % fp
         )
+
+    if under(fp, proj):
+        allow()
 
     out_deny(
         "쓰기 경계 위반: %s — 이 하네스는 $CLAUDE_PROJECT_DIR(%s) 안에만 쓴다. "

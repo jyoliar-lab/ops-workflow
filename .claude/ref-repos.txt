@@ -1,0 +1,25 @@
+# 참조 저장소 목록 — SessionStart hook(refresh-refs.py)가 읽는다.
+# 한 줄에 clone URL 하나. `#` 로 시작하는 줄은 주석.
+# clone 위치는 workspace/ref/<repo명>(URL 끝 이름 · gitignored · 읽기 전용).
+# 새 저장소가 필요하면 여기 추가하고 hook 를 다시 돌린다:
+#   python3 .claude/hooks/refresh-refs.py
+
+# careerhub 서비스
+https://github.com/jyoliar-careerhub/auth-service.git
+https://github.com/jyoliar-careerhub/careerhub-api-composer.git
+https://github.com/jyoliar-careerhub/careerhub-front.git
+https://github.com/jyoliar-careerhub/careerhub-incident-agent.git
+https://github.com/jyoliar-careerhub/careerhub-posting-provider.git
+https://github.com/jyoliar-careerhub/careerhub-posting-service.git
+https://github.com/jyoliar-careerhub/careerhub-posting-skillscanner.git
+https://github.com/jyoliar-careerhub/careerhub-review-crawler.git
+https://github.com/jyoliar-careerhub/careerhub-review-service.git
+https://github.com/jyoliar-careerhub/careerhub-userinfo-service.git
+
+# 공용 라이브러리
+https://github.com/jae2274/goutils.git
+
+# 인프라 (k8s 매니페스트 · ansible · terraform)
+https://github.com/jyoliar-careerhub/onpremise-k8s.git
+https://github.com/jae2274/jyoliar-k8s.git
+https://github.com/jyoliar-careerhub/jyoliar-platform-terraform.git
