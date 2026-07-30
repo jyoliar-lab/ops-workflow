@@ -39,8 +39,25 @@ def repo_name(url):
     return name[:-4] if name.endswith(".git") else name
 
 
-def main():
+def project_root():
+    """hook 컨텍스트에서는 CLAUDE_PROJECT_DIR, 수동 실행에서는 스크립트 위치로 역산.
+
+    이 스크립트는 <프로젝트>/.claude/hooks/ 에 산다 — cwd 와 무관하게 루트를 찾는다.
+    둘 다 실패하면 무음 no-op 이 아니라 경고를 낸다(수동 실행의 무음 실패 방지).
+    """
     proj = os.environ.get("CLAUDE_PROJECT_DIR")
+    if proj:
+        return proj
+    guess = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    if os.path.isfile(os.path.join(guess, LIST_REL)):
+        return guess
+    warn("경고: CLAUDE_PROJECT_DIR 없음, 스크립트 위치(%s)에서도 %s 를 찾지 못했다 "
+         "— 아무것도 하지 않는다." % (guess, LIST_REL))
+    return None
+
+
+def main():
+    proj = project_root()
     if not proj:
         return
     ref = os.path.join(proj, "workspace", "ref")

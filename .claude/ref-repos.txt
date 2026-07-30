@@ -8,6 +8,7 @@
 https://github.com/jyoliar-careerhub/auth-service.git
 https://github.com/jyoliar-careerhub/careerhub-api-composer.git
 https://github.com/jyoliar-careerhub/careerhub-front.git
+https://github.com/jyoliar-careerhub/careerhub-web.git
 https://github.com/jyoliar-careerhub/careerhub-incident-agent.git
 https://github.com/jyoliar-careerhub/careerhub-posting-provider.git
 https://github.com/jyoliar-careerhub/careerhub-posting-service.git
