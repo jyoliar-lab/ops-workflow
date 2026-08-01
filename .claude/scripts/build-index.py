@@ -5,6 +5,7 @@
 게이트는 린터의 몫이다. 인덱스가 커밋을 막으면 dogfood 가 막힌다.
 """
 import os
+import re
 import shutil
 import sys
 
@@ -59,6 +60,13 @@ for dirpath, dirnames, filenames in os.walk(docs):
         if not subjects:
             warnings.append("subjects 가 비었다 — 정밀 검색에서 사라진다: %s" % rel)
 
+        # ref-adrs 는 discussion 전용이다 (ADR-0022) — 이 논의가 다루거나 낳은 ADR 의 id 목록.
+        # ADR 은 자족성 때문에 discussion 을 가리키지 않으므로, 이 관계는 여기서만 나온다.
+        ref_adrs = as_list(fm.get("ref-adrs")) if doc_type == "discussion" else []
+        for rid in ref_adrs:
+            if not re.fullmatch(r"ADR-\d{4}", str(rid)):
+                warnings.append("ref-adrs 값이 ADR id 꼴이 아니다 (%r): %s" % (rid, rel))
+
         problem = filename_problem(path, fm)
         if problem:
             warnings.append(problem.replace("\n", " ") + " — " + rel)
@@ -90,8 +98,16 @@ for dirpath, dirnames, filenames in os.walk(docs):
             "status": status,
             "parent": fm.get("parent", ""),
             "accepted_at": accepted_at,
+            "ref-adrs": ref_adrs,
             "title": title_of(path, name),
         })
+
+# ref-adrs 해석 검사 — 가리킨 ADR 이 코퍼스에 실제로 있는가 (경고만 — 게이트는 린터의 몫)
+known_adr_ids = {e["id"] for e in entries if e["type"] == "adr" and e["id"]}
+for e in entries:
+    for rid in e["ref-adrs"]:
+        if re.fullmatch(r"ADR-\d{4}", str(rid)) and rid not in known_adr_ids:
+            warnings.append("ref-adrs 가 가리키는 ADR 이 코퍼스에 없다 (%s): %s" % (rid, e["rel"]))
 
 # ── 방출 ──────────────────────────────────────────────────────────────────
 index_dir = os.path.join(docs, "_index")
@@ -128,10 +144,13 @@ for t in TYPES:
     rows = sorted([e for e in entries if e["type"] == t], key=sort_key)
     if not rows:
         continue                            # 없는 타입의 빈 인덱스는 만들지 않는다 (lazy, §7)
+    # discussion 은 id 가 없고 ref-adrs 를 가진다 (ADR-0022) — 열을 타입에 맞춘다
+    cols = (("status", "topic", "subjects", "ref-adrs") if t == "discussion"
+            else ("id", "status", "topic", "subjects"))
     d = os.path.join(index_dir, "by-type")
     write(os.path.join(d, t + ".md"),
           ["# by-type / %s (%d)" % (t, len(rows)), ""]
-          + table(rows, d, ("id", "status", "topic", "subjects")))
+          + table(rows, d, cols))
 
 for topic in sorted({e["topic"] for e in entries}):
     rows = sorted([e for e in entries if e["topic"] == topic], key=sort_key)
@@ -156,13 +175,36 @@ lines += (table(accepted, index_dir, ("id", "accepted_at", "topic", "subjects", 
           if accepted else ["*(없음)*"])
 write(os.path.join(index_dir, "decisions-log.md"), lines)
 
+# ── by-ref-adr — 결정과 얽힌 논의 (ADR-0022) ──────────────────────────────
+# ADR 은 discussion 을 가리키지 않는다(자족성) — "이 결정과 얽힌 논의"는 여기서 파생한다.
+adr_by_id = {e["id"]: e for e in entries if e["type"] == "adr" and e["id"]}
+refmap = {}
+for e in entries:
+    for rid in e["ref-adrs"]:
+        refmap.setdefault(rid, []).append(e)
+lines = ["# by-ref-adr — 결정과 얽힌 논의 (discussion `ref-adrs` 에서 파생)", "",
+         "*ADR 은 discussion 을 가리키지 않는다(자족성) — 역방향 조회는 이 뷰가 답한다. "
+         "discussion 은 보관을 약속하지 않으므로 이 목록은 편의이지 근거가 아니다.*", ""]
+if refmap:
+    for rid in sorted(refmap):
+        t = adr_by_id.get(rid)
+        lines.append("## " + (t["title"] if t else rid + " *(코퍼스에 없음)*"))
+        lines.append("")
+        for e in sorted(refmap[rid], key=lambda x: x["rel"]):
+            lines.append("- [%s](%s) — `%s`" % (e["title"], os.path.relpath(e["path"], index_dir), e["status"]))
+        lines.append("")
+else:
+    lines.append("*(없음)*")
+write(os.path.join(index_dir, "by-ref-adr.md"), lines)
+
 # ── 보고 ──────────────────────────────────────────────────────────────────
 print("문서 %d건 → docs/_index/" % len(entries))
-print("  by-type: %d · by-topic: %d · by-subject: %d · accepted ADR: %d"
+print("  by-type: %d · by-topic: %d · by-subject: %d · accepted ADR: %d · ref-adrs 링크: %d"
       % (len({e["type"] for e in entries}),
          len({e["topic"] for e in entries}),
          len({s for e in entries for s in e["subjects"]}),
-         len(accepted)))
+         len(accepted),
+         sum(len(e["ref-adrs"]) for e in entries)))
 if warnings:
     print("\n경고 %d건 (인덱스는 만들었다 — 검증은 린터의 몫):" % len(warnings), file=sys.stderr)
     for w in warnings:

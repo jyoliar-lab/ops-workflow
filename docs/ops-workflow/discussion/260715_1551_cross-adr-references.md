@@ -3,6 +3,7 @@ type: discussion
 topic: ops-workflow
 subjects: [adr]
 status: active
+ref-adrs: [ADR-0004, ADR-0005]
 ---
 
 # ADR은 다른 ADR을 어디까지, 어떻게 참조하는가
