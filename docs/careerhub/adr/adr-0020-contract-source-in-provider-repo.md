@@ -3,8 +3,8 @@ id: ADR-0020
 type: adr
 topic: careerhub
 subjects: [openapi, grpc, protobuf]
-status: proposed
-accepted_at:
+status: accepted
+accepted_at: 2026-08-01T15:22:29+09:00
 references: [ADR-0014, ADR-0018]
 superseded_by:
 ---
@@ -38,7 +38,7 @@ drift를 감지하는 장치가 없고, 사본 관리의 알려진 최악 실패
 **단일 provider가 존재하는 모든 계약에서 — 프로토콜을 불문하고 — 계약 명세의 원천을 그 계약의 provider 저장소에 둔다.**
 
 consumer는 원천의 사본을 두지 않는다.
-consumer가 결합하는 것은 원천(가변 브랜치의 파일)이 아니라 **공표물** — provider가 발행하는 불변 버전 좌표(태그) — 이며, 어느 공표 버전에 언제 올라탈지는 consumer가 자기 저장소의 핀으로 선택한다.
+consumer가 결합하는 것은 원천(가변 브랜치의 파일)이 아니라 **공표물** — provider가 발행하는 불변 버전 좌표 — 이며, 어느 공표 버전에 언제 올라탈지는 consumer가 자기 저장소의 핀으로 선택한다.
 공표물은 언어 중립 명세를 담는다 — 특정 언어용 생성물을 함께 발행하는 것은 편의의 파생물이지 공표의 본체가 아니다.
 
 발견성·게이트 표준화·카탈로그 같은 중앙 편익이 필요해지면 원천에서 파생되는 계층으로 얹는다 — 원천을 옮기지 않는다.

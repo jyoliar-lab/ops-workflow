@@ -22,8 +22,8 @@
 | ADR-0016 | proposed | ops-workflow | github-issues, github-projects | [ADR-0016 — 리프 티켓은 수정 대상 저장소와 참조 저장소를 명시한다](../../ops-workflow/adr/adr-0016-leaf-ticket-declares-repo-context.md) |
 | ADR-0017 | proposed | ops-workflow | github-issues, ticket-engineer | [ADR-0017 — 리프 티켓은 선행 의존을 명시하고, 열린 선행 위에는 착수하지 않는다](../../ops-workflow/adr/adr-0017-leaf-ticket-declares-dependencies.md) |
 | ADR-0018 | accepted | careerhub | openapi, api-composer | [ADR-0018 — REST 계약의 원천을 코드에서 독립한 명세에 두고, 서버를 생성 인터페이스로 구속한다](../../careerhub/adr/adr-0018-spec-first-rest-contract-source.md) |
-| ADR-0019 | proposed | careerhub | openapi, grpc, protobuf | [ADR-0019 — 계약 합의는 구현 완료 전에 공표한다: 공표 지점은 원천의 머지다](../../careerhub/adr/adr-0019-publish-contract-agreement-before-implementation.md) |
-| ADR-0020 | proposed | careerhub | openapi, grpc, protobuf | [ADR-0020 — 계약 원천은 그 계약의 provider 저장소에 두고, 소비자는 공표물에 결합한다](../../careerhub/adr/adr-0020-contract-source-in-provider-repo.md) |
+| ADR-0019 | accepted | careerhub | openapi, grpc, protobuf | [ADR-0019 — 계약 합의는 구현 완료 전에 공표한다: 공표 지점은 원천의 머지다](../../careerhub/adr/adr-0019-publish-contract-agreement-before-implementation.md) |
+| ADR-0020 | accepted | careerhub | openapi, grpc, protobuf | [ADR-0020 — 계약 원천은 그 계약의 provider 저장소에 두고, 소비자는 공표물에 결합한다](../../careerhub/adr/adr-0020-contract-source-in-provider-repo.md) |
 | ADR-0021 | proposed | careerhub | openapi, grpc, protobuf | [ADR-0021 — 계약은 호환 확장으로만 진화한다: 소비자를 깨뜨리는 배포를 금지한다](../../careerhub/adr/adr-0021-contract-evolves-by-compatible-extension.md) |
 | ADR-0022 | proposed | ops-workflow | discussion, adr | [ADR-0022 — discussion은 최소한의 메타데이터를 갖는다](../../ops-workflow/adr/adr-0022-discussion-minimal-metadata.md) |
 | ADR-0023 | proposed | ops-workflow | discussion, adr | [ADR-0023 — 사고의 발산은 discussion 문서로 남긴다](../../ops-workflow/adr/adr-0023-record-divergence-as-discussion.md) |

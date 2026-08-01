@@ -3,8 +3,8 @@ id: ADR-0019
 type: adr
 topic: careerhub
 subjects: [openapi, grpc, protobuf]
-status: proposed
-accepted_at:
+status: accepted
+accepted_at: 2026-08-01T15:22:29+09:00
 references: [ADR-0018]
 superseded_by:
 ---
@@ -35,6 +35,8 @@ careerhub의 계약 공표물은 소비자의 빌드(타입 생성·컴파일)�
 ## Decision
 
 **계약 변경의 합의는 명세 원천의 머지로 공표된다 — 구현 완료가 아니라.**
+
+소비 좌표(불변 버전 좌표)의 발행은 이 공표의 기계적 파생이지 별도의 공표 사건이 아니다 — 합의는 머지에서 성립하고, 좌표는 그 합의에 소비 가능한 주소를 줄 뿐이다.
 
 공표 시점부터 provider의 구현과 소비자의 개발은 병렬로 진행된다.
 합의됐으나 아직 구현되지 않은 연산이 명시적 미구현 신호로 서빙되는 것은 오류 상태가 아니라 이 결정이 만드는 정상 상태다.
