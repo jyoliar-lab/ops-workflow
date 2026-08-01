@@ -2,9 +2,12 @@
 type: discussion
 topic: careerhub
 subjects: [grpc, protobuf, api-composer, posting-service, review-service, userinfo-service]
-status: active
+status: done
+ref-adrs: [ADR-0018, ADR-0019, ADR-0020, ADR-0021]
 ---
 
+
+> **결말(2026-08-01)** — 패턴의 프로토콜 횡단 일반화가 ADR-0019·0020(accept)과 ADR-0021(보류)로 갈렸고, gRPC 이행은 Feature #29와 그 아래 Task 8건으로 넘어갔다. 공표 좌표 규약(태그 prefix = 계약 디렉터리)과 계약별 모듈 입도는 Epic #28 코멘트에 확정 기록됐다.
 # 계약 선합의 패턴의 gRPC 경계 일반화 — proto의 원천은 어디인가
 
 ## 계기와 아픔

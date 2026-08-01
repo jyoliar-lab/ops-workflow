@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / careerhub (11)
+# by-topic / careerhub (12)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -15,3 +15,4 @@
 | — | discussion | active | openapi, api-composer, careerhub-web | [백엔드 스펙 변경을 프론트에 전파하는 방법 — 푸시인가 구독인가](../../careerhub/discussion/260730_1524_spec-change-propagation-to-frontend.md) |
 | — | discussion | active | grpc, protobuf, api-composer, posting-service, review-service, userinfo-service | [계약 선합의 패턴의 gRPC 경계 일반화 — proto의 원천은 어디인가](../../careerhub/discussion/260730_1620_contract-pattern-to-grpc-boundaries.md) |
 | — | discussion | active | openapi, grpc, protobuf, careerhub-web | [비호환 변경의 분류와 deprecated의 수명 — ADR-0021의 미결정 지대](../../careerhub/discussion/260730_2045_breaking-taxonomy-and-deprecation-lifecycle.md) |
+| — | discussion | active | openapi, grpc, protobuf, api-composer, posting-service, review-service, userinfo-service | [런타임 계약 어긋남 — provider와 consumer가 다른 계약으로 동작하는 것을 무엇이 막는가](../../careerhub/discussion/260801_1806_runtime-contract-skew-prevention.md) |

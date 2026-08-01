@@ -2,9 +2,12 @@
 type: discussion
 topic: careerhub
 subjects: [openapi, api-composer, careerhub-web]
-status: active
+status: done
+ref-adrs: [ADR-0014, ADR-0018, ADR-0019, ADR-0020]
 ---
 
+
+> **결말(2026-08-01)** — ADR-0019(합의 선행 공표)·ADR-0020(provider 원천·공표물 결합)으로 파생·accept됐고, 이행은 Epic #28과 Task #30(REST 축)으로 넘어갔다. 여기서 벌린 옵션(O0~O3·축 A~C·합의 시점 P1)의 결론은 그 ADR과 티켓에 산다.
 # 백엔드 스펙 변경을 프론트에 전파하는 방법 — 푸시인가 구독인가
 
 ## 아픔 — 무엇이 문제인가
