@@ -3,9 +3,15 @@
      근거 ADR 절도 손으로 적지 않는다 — 직접 이행하는 accepted 결정이 있으면 --adr(선택)로.
      Goal 절이 없다 — Expected Behavior 가 그 질문(무엇이어야 하는가)에 답한다. -->
 
+## Summary
+
+<!-- 무엇이 잘못됐는지 1~3줄. 보드·알림·검색 결과에서 **본문을 열지 않고** 판별하는 자리다.
+     아래 절들의 축약이 아니다 — 사본은 낡는다. 재현은 Steps to Reproduce, 증상 대조는
+     Expected/Actual, 완료 판정은 Acceptance Criteria의 것이다. 여기서 되풀이하지 않는다. -->
+
 ## Context
 
-<!-- 어디에서 어떤 문제가 발생하는지 요약한다. -->
+<!-- 어디에서 어떤 상황에 문제가 발생하는지 — 영향 범위·발견 경위 등 파악에 필요한 맥락. -->
 
 ## Steps to Reproduce
 

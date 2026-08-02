@@ -27,7 +27,7 @@
   (컨테이너의 근거 = 존재의 전제 · 리프의 근거 = 이행 추적. 리프 목록은 비완전한 힌트다.)
 
 ★ 본문은 templates/ 의 타입별 템플릿에서 시작한다 (epic.md — Feature 도 이것 · task.md · bug.md).
-  공통 절(Context·Goal·Acceptance Criteria·References)은 이름까지 한 벌이다.
+  공통 절(Summary·Context·Goal·Acceptance Criteria·References)은 이름까지 한 벌이다.
   ADR 링크·'저장소' 절은 템플릿에 없다 — 이 스크립트가 박는다.
 
 `gh issue create` 에는 --type 플래그가 없다 → Issue Type 은 GraphQL 로만 지정된다.
