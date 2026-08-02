@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (24)
+# by-type / discussion (25)
 
 | status | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|
@@ -11,12 +11,13 @@
 | active | careerhub-front | svelte | — | ["문서화된 컨벤션이 지켜지지 않았다"는 거짓이었다 — 코드로 반증](../../careerhub-front/discussion/260722_1510_documented-convention-premise-refuted.md) |
 | active | careerhub-front | auth-service, api-composer, nextjs | — | [토큰 저장 — 서버가 생긴 뒤에 다시 여는 축 D](../../careerhub-front/discussion/260722_1617_token-storage-after-server-exists.md) |
 | active | careerhub-front | nextjs, auth-service, api-composer | — | [회귀를 무엇이 잡나 — 그리고 그물이 무언가를 실제로 막나](../../careerhub-front/discussion/260722_1618_regression-net-and-merge-gate.md) |
+| done | careerhub-front | openapi, careerhub-web, api-composer | ADR-0014, ADR-0019, ADR-0020 | [프론트가 공표 태그에서 TS 타입을 만드는 방법 — 소비자가 당긴다](../../careerhub-front/discussion/260802_1607_frontend-pulls-published-spec-tag.md) |
 | active | careerhub | adsense, posting-provider, review-crawler, posting-skillscanner | — | [careerhub 는 무엇으로 돈을 버나 — 그리고 그게 성립하나](../../careerhub/discussion/260717_1853_revenue-model-and-viability.md) |
 | done | careerhub | openapi, api-composer | — | [api-composer OpenAPI 스펙의 원천 — code-first vs spec-first](../../careerhub/discussion/260726_1653_openapi-spec-source-of-truth.md) |
-| active | careerhub | openapi, api-composer, careerhub-web | — | [백엔드 스펙 변경을 프론트에 전파하는 방법 — 푸시인가 구독인가](../../careerhub/discussion/260730_1524_spec-change-propagation-to-frontend.md) |
-| active | careerhub | grpc, protobuf, api-composer, posting-service, review-service, userinfo-service | — | [계약 선합의 패턴의 gRPC 경계 일반화 — proto의 원천은 어디인가](../../careerhub/discussion/260730_1620_contract-pattern-to-grpc-boundaries.md) |
+| done | careerhub | openapi, api-composer, careerhub-web | ADR-0014, ADR-0018, ADR-0019, ADR-0020 | [백엔드 스펙 변경을 프론트에 전파하는 방법 — 푸시인가 구독인가](../../careerhub/discussion/260730_1524_spec-change-propagation-to-frontend.md) |
+| done | careerhub | grpc, protobuf, api-composer, posting-service, review-service, userinfo-service | ADR-0018, ADR-0019, ADR-0020, ADR-0021 | [계약 선합의 패턴의 gRPC 경계 일반화 — proto의 원천은 어디인가](../../careerhub/discussion/260730_1620_contract-pattern-to-grpc-boundaries.md) |
 | active | careerhub | openapi, grpc, protobuf, careerhub-web | ADR-0021, ADR-0025, ADR-0026 | [비호환 변경의 분류와 deprecated의 수명 — ADR-0021의 미결정 지대](../../careerhub/discussion/260730_2045_breaking-taxonomy-and-deprecation-lifecycle.md) |
-| active | careerhub | openapi, grpc, protobuf, api-composer, posting-service, review-service, userinfo-service | ADR-0019, ADR-0020, ADR-0021, ADR-0026 | [런타임 계약 어긋남 — provider와 consumer가 다른 계약으로 동작하는 것을 무엇이 막는가](../../careerhub/discussion/260801_1806_runtime-contract-skew-prevention.md) |
+| done | careerhub | openapi, grpc, protobuf, api-composer, posting-service, review-service, userinfo-service | ADR-0019, ADR-0020, ADR-0021, ADR-0026 | [런타임 계약 어긋남 — provider와 consumer가 다른 계약으로 동작하는 것을 무엇이 막는가](../../careerhub/discussion/260801_1806_runtime-contract-skew-prevention.md) |
 | active | homelab | prometheus, alertmanager, kubelet, longhorn, kube-prometheus-stack | — | [Prometheus TSDB 만석과 이중 감시 실패 — 2026-07-30 장애 기록](../../homelab/discussion/260730_2245_prometheus-tsdb-full-double-monitoring-failure.md) |
 | active | homelab | prometheus, grafana, kube-prometheus-stack | — | [룰이 참조하는 메트릭의 부재 감지 — 공식 기능·공식 가이드·대안 도구 조사](../../homelab/discussion/260731_1233_rule-metric-absence-detection-options.md) |
 | active | ops-workflow | claude-code-skills | — | [skill 초판 마찰 로그](../../ops-workflow/discussion/260712_1731_skill-friction-log.md) |
