@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (25)
+# by-type / discussion (26)
 
 | status | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|
@@ -12,6 +12,7 @@
 | active | careerhub-front | auth-service, api-composer, nextjs | — | [토큰 저장 — 서버가 생긴 뒤에 다시 여는 축 D](../../careerhub-front/discussion/260722_1617_token-storage-after-server-exists.md) |
 | active | careerhub-front | nextjs, auth-service, api-composer | — | [회귀를 무엇이 잡나 — 그리고 그물이 무언가를 실제로 막나](../../careerhub-front/discussion/260722_1618_regression-net-and-merge-gate.md) |
 | done | careerhub-front | openapi, careerhub-web, api-composer | ADR-0014, ADR-0019, ADR-0020 | [프론트가 공표 태그에서 TS 타입을 만드는 방법 — 소비자가 당긴다](../../careerhub-front/discussion/260802_1607_frontend-pulls-published-spec-tag.md) |
+| done | careerhub-front | careerhub-web, careerhub-front | ADR-0011, ADR-0015 | [e2e 명세 산출물은 어디에 사나 — 그리고 기존 앱용 배선을 남기나](../../careerhub-front/discussion/260803_1329_e2e-spec-artifact-placement.md) |
 | active | careerhub | adsense, posting-provider, review-crawler, posting-skillscanner | — | [careerhub 는 무엇으로 돈을 버나 — 그리고 그게 성립하나](../../careerhub/discussion/260717_1853_revenue-model-and-viability.md) |
 | done | careerhub | openapi, api-composer | — | [api-composer OpenAPI 스펙의 원천 — code-first vs spec-first](../../careerhub/discussion/260726_1653_openapi-spec-source-of-truth.md) |
 | done | careerhub | openapi, api-composer, careerhub-web | ADR-0014, ADR-0018, ADR-0019, ADR-0020 | [백엔드 스펙 변경을 프론트에 전파하는 방법 — 푸시인가 구독인가](../../careerhub/discussion/260730_1524_spec-change-propagation-to-frontend.md) |

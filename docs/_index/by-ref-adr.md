@@ -12,10 +12,18 @@
 
 - [ADR은 다른 ADR을 어디까지, 어떻게 참조하는가](../ops-workflow/discussion/260715_1551_cross-adr-references.md) — `active`
 
+## ADR-0011 — careerhub-front를 재작성한다 (점진 개선하지 않는다)
+
+- [e2e 명세 산출물은 어디에 사나 — 그리고 기존 앱용 배선을 남기나](../careerhub-front/discussion/260803_1329_e2e-spec-artifact-placement.md) — `done`
+
 ## ADR-0014 — 프론트가 쓰는 REST 타입을 백엔드 스펙에서 생성한다 (손으로 선언하지 않는다)
 
 - [프론트가 공표 태그에서 TS 타입을 만드는 방법 — 소비자가 당긴다](../careerhub-front/discussion/260802_1607_frontend-pulls-published-spec-tag.md) — `done`
 - [백엔드 스펙 변경을 프론트에 전파하는 방법 — 푸시인가 구독인가](../careerhub/discussion/260730_1524_spec-change-propagation-to-frontend.md) — `done`
+
+## ADR-0015 — 스타일 토큰을 Tailwind로 강제한다 (정의에 그치지 않는다)
+
+- [e2e 명세 산출물은 어디에 사나 — 그리고 기존 앱용 배선을 남기나](../careerhub-front/discussion/260803_1329_e2e-spec-artifact-placement.md) — `done`
 
 ## ADR-0018 — REST 계약의 원천을 코드에서 독립한 명세에 두고, 서버를 생성 인터페이스로 구속한다
 
