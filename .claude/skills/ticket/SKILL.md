@@ -19,7 +19,7 @@ description: GitHub Issue를 발행하고 계층을 연결한다 (Issue Type 지
 
 - **Feature는 "epic이 방대해서" 만들지 않는다.** Task가 20개여도 결정이 하나면 Feature는 없다. 독립적으로 뒤집힐 수 있는 하위 축의 결정(sub-ADR)이 생겼을 때만 만든다.
 - **조사에는 티켓이 없다**(§5). *계획된* 조사를 백로그에 올릴 때만 `Task`(완료 조건 = discussion 문서 커밋).
-- `story`·`spike`는 **없다**. 스크립트가 거부한다.
+- `story`·`spike`는 **없다**.
 
 ## 2. 발행한다 — `create.py`
 
@@ -104,12 +104,10 @@ set-deps.py --issue <N> --blocked-by <M>... | --no-deps
 
 - **ADR-0016 이전에 발행된 리프**(저장소 절이 없는 티켓)에는 절을 소급 기입한다 — docs-tickets가 기존 티켓에 저장소를 연결할 때 이것을 쓴다.
 - 구식 산문 절도 YAML 블록으로 교체된다 — 이 스크립트 한 번이 곧 마이그레이션이다.
-- 컨테이너(Epic·Feature)와 Project 미등록 이슈는 거부한다.
 
 `set-deps.py`:
 
 - `--blocked-by` 나열이 **선행의 전부**가 된다 — 나열 밖 기존 관계는 제거된다. `--no-deps`는 전부 제거(무의존).
-- 컨테이너와 닫힌 이슈는 거부한다. 순환은 GitHub이 거부한다 — 우회하지 않는다.
 
 ## 3. 계층을 잇는다
 
@@ -117,7 +115,7 @@ set-deps.py --issue <N> --blocked-by <M>... | --no-deps
 link-sub.py --parent <N> --child <M>
 ```
 
-GraphQL `addSubIssue`. 계층은 **3층에서 멈춘다**(§5) — GitHub의 제약이지 ADR 깊이의 함수가 아니다. 스크립트가 검사한다: 리프(Task·Bug)는 부모가 될 수 없고, Feature 밑에는 Feature가 오지 않는다.
+GraphQL `addSubIssue`. 계층은 **3층에서 멈춘다**(§5) — GitHub의 제약이지 ADR 깊이의 함수가 아니다.
 
 ```
 근거 ADR ★accepted★ ──→ Epic
