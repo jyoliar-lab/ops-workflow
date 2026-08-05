@@ -2,8 +2,8 @@
 type: discussion
 topic: careerhub
 subjects: [auth-service, userinfo-service, api-composer, postgresql, mongodb, jwt]
-status: active
-ref-adrs: []
+status: done
+ref-adrs: [ADR-0027]
 ---
 
 > **수렴(2026-08-05)** — 패턴(다른 서비스가 로컬 user_id로 인덱싱)은 옳다. 논점은 식별자의 격이었고,

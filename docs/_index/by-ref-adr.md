@@ -59,3 +59,22 @@
 - [비호환 변경의 분류와 deprecated의 수명 — ADR-0021의 미결정 지대](../careerhub/discussion/260730_2045_breaking-taxonomy-and-deprecation-lifecycle.md) — `active`
 - [런타임 계약 어긋남 — provider와 consumer가 다른 계약으로 동작하는 것을 무엇이 막는가](../careerhub/discussion/260801_1806_runtime-contract-skew-prevention.md) — `done`
 
+## ADR-0027 — 시스템 전역 사용자 정체성은 저장소 독립적으로 발급된 불변 식별자로 한다
+
+- [auth-service의 user_id가 다른 서비스의 인덱스로 쓰이는 것은 적절한가](../careerhub/discussion/260805_1308_storage-independent-user-identifier.md) — `done`
+
+## ADR-0028 — 인증은 외부 IdP 제품이 소유하고, 인가·도메인 상태는 앱이 소유한다
+
+- [auth-service가 굳이 필요한가 — Keycloak이 원장까지 갖는 프레임의 재검토](../careerhub/discussion/260805_1635_auth-service-elimination-via-keycloak.md) — `done`
+- [Zitadel 도입은 auth-service의 요구사항을 얼마나 해소하는가 — 항목별 판정과 잔여 목록](../careerhub/discussion/260805_1801_zitadel-coverage-of-auth-requirements.md) — `active`
+
+## ADR-0029 — 토큰의 신뢰는 데이터 경로의 로컬 검증으로만 얻는다
+
+- [auth-service가 굳이 필요한가 — Keycloak이 원장까지 갖는 프레임의 재검토](../careerhub/discussion/260805_1635_auth-service-elimination-via-keycloak.md) — `done`
+- [Zitadel 도입은 auth-service의 요구사항을 얼마나 해소하는가 — 항목별 판정과 잔여 목록](../careerhub/discussion/260805_1801_zitadel-coverage-of-auth-requirements.md) — `active`
+
+## ADR-0030 — IdP 제품으로 Zitadel을 채택한다
+
+- [auth-service가 굳이 필요한가 — Keycloak이 원장까지 갖는 프레임의 재검토](../careerhub/discussion/260805_1635_auth-service-elimination-via-keycloak.md) — `done`
+- [Zitadel 도입은 auth-service의 요구사항을 얼마나 해소하는가 — 항목별 판정과 잔여 목록](../careerhub/discussion/260805_1801_zitadel-coverage-of-auth-requirements.md) — `active`
+
