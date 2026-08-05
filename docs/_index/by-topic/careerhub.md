@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / careerhub (26)
+# by-topic / careerhub (27)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -30,3 +30,4 @@
 | — | discussion | done | auth-service, keycloak, api-composer, userinfo-service, postgresql, google-oauth, naver | [auth-service가 굳이 필요한가 — Keycloak이 원장까지 갖는 프레임의 재검토](../../careerhub/discussion/260805_1635_auth-service-elimination-via-keycloak.md) |
 | — | discussion | active | auth-service, zitadel, api-composer, careerhub-front, userinfo-service, jwt, oidc, google-oauth, naver, postgresql | [Zitadel 도입은 auth-service의 요구사항을 얼마나 해소하는가 — 항목별 판정과 잔여 목록](../../careerhub/discussion/260805_1801_zitadel-coverage-of-auth-requirements.md) |
 | — | discussion | done | zitadel, auth-service, careerhub-front, oidc | [Zitadel 전환 시 테스트 전용 로그인 경로는 어떻게 되는가 — 티켓 #7 재판정](../../careerhub/discussion/260805_2044_test-login-path-under-zitadel.md) |
+| — | discussion | active | auth-service, zitadel, keycloak, jwt, auth0, okta, cognito, azure-ad-b2c, firebase-auth | [외부 IdP 환경의 동의(consent) 구현 — 업계 사례 조사](../../careerhub/discussion/260805_2103_consent-implementation-idp-industry-survey.md) |
