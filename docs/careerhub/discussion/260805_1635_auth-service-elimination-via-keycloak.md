@@ -204,9 +204,9 @@ P2의 권한 출처는 auth-service의 조회 API가 자연스럽다(제품이 �
 
 결제 기반 SaaS의 표준형(Stripe 문서·실무 가이드가 수렴하는 모양):
 
-1. **엔타이틀먼트의 진실은 앱 DB(또는 빌링 시스템)다.** 결제 이벤트(webhook)가 앱 DB에 *"user X는 feature Y를 시각 Z까지"* 행을 쓴다.
+1. **이용 권한(entitlement)의 진실은 앱 DB(또는 빌링 시스템)다.** 결제 이벤트(webhook)가 앱 DB에 *"user X는 feature Y를 시각 Z까지"* 행을 쓴다.
    Stripe 자신의 지침이 *"앱 DB가 access의 source of truth, webhook 확인된 구독 상태로 접근을 부여, 만료 시각을 앱 DB에 저장"* 이다.
-2. **IdP는 인증만 갖는다.** 엔타이틀먼트·만료는 IdP에 넣지 않는다.
+2. **IdP는 인증만 갖는다.** 이용 권한·만료는 IdP에 넣지 않는다.
 3. 토큰에 싣고 싶으면 **발급 훅으로 주입**한다(Auth0 Actions·Zitadel actions·Keycloak mapper) — **= P2.** 아니면 체크타임 조회(P1).
 
 **IdP 제품에 롤 만료가 없는 것 자체가 시장의 답이다.** Keycloak에서 시간 기반 롤/그룹 멤버십은 미지원 feature request로 남아 있고,
@@ -218,7 +218,7 @@ P2의 권한 출처는 auth-service의 조회 API가 자연스럽다(제품이 �
 | 상용 표준형 | careerhub 현재 |
 |---|---|
 | 결제 이벤트(webhook) → 권한 부여 트리거 | **티켓 사용**(`UseTicket`) |
-| entitlement 테이블 `(user, feature, expires_at)` | **`user_authority(user_id, authority_id, expiry_date)`** — 그 자체 |
+| 이용 권한 테이블 `(user, feature, expires_at)` | **`user_authority(user_id, authority_id, expiry_date)`** — 그 자체 |
 | 발급 훅이 앱 DB를 읽어 토큰에 주입 | **P2가 하려는 바로 그것** |
 
 **즉 "티켓 + 시간 만료 권한 때문에 외부 인증 솔루션 도입이 어렵다"는 전제가 뒤집힌다.**
