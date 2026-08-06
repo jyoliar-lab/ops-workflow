@@ -11,7 +11,8 @@
   3. **철회**(--clear · Epic 외 전용) — 잘못 단 명시를 거둔다. 절 제거 + 필드 비움.
 
 게이트는 발행과 같다:
-  - 명시된 ADR 은 전부 accepted·공표여야 한다 (adr-gate.py — 답하면 참이어야 한다).
+  - 명시된 ADR 은 전부 공표·비superseded·비rejected 여야 한다 (adr-gate.py — 답하면
+    참이어야 한다. accepted 요구는 착수의 문 — 집행 도구의 착수 게이트가 검사한다).
   - **Epic 은 --clear 가 거부된다** — Epic 의 근거는 존재의 전제다. 없앨 수 있는 문은 없다.
   - --adr 과 --clear 는 XOR — 침묵도, 양다리도 답이 아니다.
   - **Project 미등록 이슈 거부** — 등록은 발행(create.py)의 일이다. 여기서 슬쩍 등록하지 않는다.
@@ -54,7 +55,7 @@ if args.clear and type_name in ADR_REQUIRED_TYPES:
     die("거부: #%d 는 %s 다 — 근거는 존재의 전제라 철회할 수 없다." % (args.issue, type_name),
         "  근거가 틀렸다면 --adr 로 올바른 전체 목록을 다시 낸다.")
 
-# ── 게이트 — 발행과 같은 문. 명시된 근거는 전부 accepted·공표여야 한다 ────────
+# ── 게이트 — 발행과 같은 문. 명시된 근거는 전부 공표·비superseded·비rejected 여야 한다 ──
 adr_entries = []                            # [(id, title, path, sha)]
 for adr_id in dict.fromkeys(args.adr):      # 중복 제거 · 순서 보존
     gate = subprocess.run([sys.executable, os.path.join(HERE, "adr-gate.py"),

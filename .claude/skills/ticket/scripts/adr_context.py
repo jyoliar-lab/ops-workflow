@@ -14,7 +14,9 @@ ADR마다 링크가 둘인 이유 — 서로 다른 질문에 답한다:
   permalink → "이 티켓은 어느 시점의 문서를 근거로 발행됐나" (불변)
 주 링크는 HEAD 다. SHA 만 걸면 supersede 된 결정이 accepted 인 채로 영원히 보인다.
 
-★ 집행·감사 도구가 이 절을 기계로 읽게 되면 repo_context 처럼 쌍둥이 파서를 두고 함께 바꾼다.
+★ 집행 도구(ticket-engineer 착수 게이트)가 이 절을 기계로 읽는다 — 쌍둥이 파서는
+  ticket-engineer `_lib/adrs.py`. 표기가 바뀌면 함께 바꾼다(repo_context 와 같은 규약).
+  그 정합은 steward 의 conformance 감사 대상이다.
 """
 import os
 import re
@@ -34,6 +36,44 @@ _SEC_RE = re.compile(
     r"(?:[ \t]*\n)*(?:- \*\*ADR-\d{4}.*(?:\n|\Z))*",
     re.M | re.S)
 
+# YAML 블록만 (파서용) — 링크 불릿은 사람의 자리라 기계가 읽지 않는다
+_SEC_YAML_RE = re.compile(
+    r"^### 근거 ADR[ \t]*\n(?:[ \t]*\n)*```yaml\n(.*?)\n```", re.M | re.S)
+
+
+def parse_section(body):
+    """본문 → [(adr_id, path, sha), ...]. 절이 없으면 None. 형식 이탈은 ValueError.
+
+    ★ ticket-engineer `_lib/adrs.py` 의 parse_section 과 쌍둥이 — 표기가 바뀌면 함께 바뀐다.
+    블록은 도구만 쓴다(이 모듈이 emit 하고 쌍둥이가 읽는다) — 그래서 파서는 엄격하다.
+    관대한 파서는 손편집을 조용히 받아들여 본문과 보드 필드를 가른다.
+    """
+    if SECTION_HEADER not in body:
+        return None
+    m = _SEC_YAML_RE.search(body)
+    if m is None:
+        raise ValueError("'근거 ADR' 절은 있는데 YAML 블록이 아니다 — 손상된 표기. "
+                         "set-adr.py 로 다시 기입한다.")
+    lines = [ln for ln in m.group(1).splitlines() if ln.strip()]
+    if not lines or lines[0].strip() != "adrs:":
+        raise ValueError("YAML 블록은 'adrs:' 로 시작해야 한다 (첫 줄: %r)"
+                         % (lines[0] if lines else ""))
+    entries, cur = [], None
+    for line in lines[1:]:
+        if line.startswith("  - id: "):
+            cur = {"id": line[len("  - id: "):].strip()}
+            entries.append(cur)
+        elif line.startswith("    ") and cur is not None:
+            key, sep, val = line.strip().partition(": ")
+            if not sep or key not in ("path", "sha") or key in cur:
+                raise ValueError("모르는·중복된 줄: %r" % line)
+            cur[key] = val.strip()
+        else:
+            raise ValueError("받을 수 없는 줄: %r" % line)
+    if not entries or any(set(e) != {"id", "path", "sha"} for e in entries):
+        raise ValueError("항목마다 id·path·sha 세 키가 다 있어야 한다")
+    return [(e["id"], e["path"], e["sha"]) for e in entries]
+
 
 def render_section(entries, repo):
     """entries: [(adr_id, title, path, sha), ...] — 1개 이상. title 은 빈 값일 수 있다."""
@@ -49,7 +89,11 @@ def render_section(entries, repo):
         label = "%s — %s" % (adr_id, title) if title else adr_id
         lines.append("- **%s** · [`HEAD`](%s) 지금도 유효한가 · [`%s`](%s) 발행 시점 스냅샷"
                      % (label, head, sha[:7], pin))
-    return "\n".join(lines) + "\n"
+    section = "\n".join(lines) + "\n"
+    # 왕복 자가검증 — emit 한 것을 쌍둥이 규약의 파서로 되읽는다 (repo_context 와 같은 보험)
+    if parse_section(section) != [(i, p, s) for i, _t, p, s in entries]:
+        raise AssertionError("render/parse 왕복 불일치 — 표기와 파서가 갈라졌다")
+    return section
 
 
 def upsert_section(body, section):

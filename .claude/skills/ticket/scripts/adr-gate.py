@@ -3,14 +3,19 @@
 
   adr-gate.py --adr ADR-0001 --type epic|feature|task|bug
 
-Epic 티켓은 **accepted ADR을 전제한다.** 굳지 않은 결정으로 일하지 않는다.
-Feature·리프(task·bug)는 근거를 전제하지 않는다 — 그러나 **명시했다면 같은 검사를 지난다**:
-답하지 않아도 되지만, 답하면 참이어야 한다(accepted·공표).
+발행의 문이다 — 검사는 **존재·공표**와 **"죽지 않았는가"**(superseded·rejected 거부)다.
+proposed 는 통과한다: 발행은 계획을 펴는 행위라, 결정이 굳기 전에도 계획을 펴며
+결정을 검증할 수 있다. **accepted 요구는 착수의 문이다** — 집행 도구(ticket-engineer)의
+착수 게이트가 계층 전체의 근거에 대해 검사한다. "accepted 전제" 하나가
+"존재·공표 전제(발행) + accepted(착수)" 둘로 갈라진 것이다.
+Epic 은 근거가 **필수**(존재의 전제)고, Feature·리프(task·bug)는 선택이다 —
+그러나 **명시했다면 같은 검사를 지난다**: 답하지 않아도 되지만, 답하면 참이어야 한다.
   exit 0 = 통과 · exit 1 = 거부
 
 ★ **워킹 트리가 아니라 공표된 사본(origin/main)을 읽는다.**
 내 디스크에만 있는 결정은 아무도 볼 수 없다 — 그것을 근거로 티켓을 만들면 티켓의 문서 링크가
-**죽은 링크**로 태어난다. "굳었다"는 것은 accept 했다는 뜻만이 아니라 **공표됐다**는 뜻이다.
+**죽은 링크**로 태어난다. 공표 요구는 status 와 독립이다 — **참조 대상의 존재** 문제라
+proposed 여도 공표는 돼 있어야 한다.
 
 커밋·푸시는 사람의 행위다(§6). 이 스크립트는 사람에게 커밋을 시키지 않는다 —
 **공표되기 전에는 그 결정으로 일을 시작하지 않을 뿐이다.**
@@ -40,8 +45,11 @@ if ticket_type not in ("epic", "feature", "task", "bug"):
 adr_required = ticket_type == "epic"
 # 검사 내용은 같다 — 다른 것은 전제의 강도다:
 #   Epic: 근거가 필수다(전제).  Feature·리프: 선택이지만, 답했으면 참이어야 한다.
-premise = "Epic 티켓은 accepted ADR을 전제한다" if adr_required \
-    else ("%s 의 근거는 선택이지만, 명시한 근거는 accepted·공표여야 한다" % ticket_type)
+premise = "Epic 티켓은 공표된 근거 ADR을 전제한다" if adr_required \
+    else ("%s 의 근거는 선택이지만, 명시한 근거는 공표·비superseded·비rejected 여야 한다"
+          % ticket_type)
+
+DEAD = ("superseded", "rejected")   # 죽은 결정 — 발행이 거부하는 status 는 이 둘뿐이다
 
 root = repo_root()
 
@@ -78,13 +86,14 @@ for line in published.splitlines():
             title = title[len(prefix):].strip()
         break
 
-if status != "accepted":
-    die("거부: %s 의 status 가 '%s' 다 — accepted 가 아니다." % (adr_id, status or "없음"),
+if status in DEAD:
+    die("거부: %s 의 status 가 '%s' 다 — 죽은 결정이다." % (adr_id, status),
         "  %s:%s" % (vcs.PUBLISHED, path),
         "",
-        "  %s (CLAUDE.md §5). 굳지 않은 결정으로 일하지 않는다." % premise,
-        "  ADR을 먼저 accept 하거나, " + ("--adr 없이 Feature/리프로 발행한다."
-                                    if adr_required else "--adr 없이 발행한다."))
+        "  %s (CLAUDE.md §5). 죽은 결정으로 계획을 펴지 않는다." % premise,
+        "  superseded 면 대체 결정(superseded_by)을 근거로 한다."
+        if status == "superseded" else
+        "  rejected 결정이 딛던 계획이면 상류(discussion)로 돌아간다.")
 
 # 워킹 트리가 공표된 사본보다 앞서 있으면 알린다 — 티켓은 **공표된 것**을 근거로 삼는다.
 local_path = os.path.join(root, path)
@@ -101,7 +110,11 @@ if os.path.isfile(local_path):
 #  그룹화 컨테이너가 되면서, "하위 축의 결정을 전제한다"는 독트린 자체가 내려갔다.)
 
 sha = vcs.ref_sha(root)
-print("통과: %s accepted — 공표됨 (%s:%s)" % (adr_id, vcs.PUBLISHED, path), file=sys.stderr)
+print("통과: %s %s — 공표됨 (%s:%s)" % (adr_id, status or "status 없음", vcs.PUBLISHED, path),
+      file=sys.stderr)
+if status != "accepted":
+    print("  (미accept — 발행은 되지만 **착수는 집행 도구의 게이트가 accepted 를 요구**한다)",
+          file=sys.stderr)
 print("path=%s" % path)
 print("sha=%s" % sha)
 print("title=%s" % title)

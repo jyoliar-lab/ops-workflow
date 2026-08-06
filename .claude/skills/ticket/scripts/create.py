@@ -59,7 +59,12 @@ TYPE_NAMES = {"epic": "Epic", "feature": "Feature", "task": "Task", "bug": "Bug"
 CONTAINERS = ("epic", "feature")
 
 PROJECT_NUMBER = int(os.environ.get("OPS_PROJECT", "1"))
-INITIAL_STATUS = "Backlog"     # 도구는 초기값만 넣는다. 이후 전이는 사람의 것이다 (§5)
+# 타입별 초기 Status (ADR-0033 의 로스터 — 초기값 자체는 도구의 관할).
+#   Epic·Feature·Task = Draft: "진행되어도 양호한가"의 확신 전 — 해제(→ Todo)는 사람이 한다.
+#   Bug = Todo: 즉각 대처가 우선이라 "계획중"이 성립하지 않는다. In Progress 로 두지 않는
+#   이유: 착수 게이트는 착수 전이 직전에 서므로, 초기값이 In Progress 면 게이트를 건너뛴다.
+# 도구는 초기값만 넣는다. 이후 전이는 사람의 것이다 (§5).
+INITIAL_STATUS = {"epic": "Draft", "feature": "Draft", "task": "Draft", "bug": "Todo"}
 
 parser = argparse.ArgumentParser(add_help=True)
 parser.add_argument("--type", required=True, choices=sorted(TYPE_NAMES))
@@ -100,13 +105,14 @@ else:
 #   Feature: 근거 선택 — 근거 결정 없이도 리프를 묶을 수 있다(CLAUDE.md §5).
 #   리프: 근거 선택 — 리프가 **직접 이행하는** 결정이 있을 때만 명시한다.
 #         부모 컨테이너의 근거를 되풀이하지 않는다(사본은 낡는다).
-#   명시된 근거는 타입 불문 전부 게이트를 지난다: 하나라도 미accept·미공표면 발행 거부.
+#   명시된 근거는 타입 불문 전부 게이트를 지난다: 하나라도 미공표·superseded·rejected 면
+#   발행 거부. accepted 요구는 발행이 아니라 **착수의 문**(집행 도구의 착수 게이트)이다.
 #   — 답하지 않아도 되지만, 답하면 참이어야 한다.
 adr_entries = []                    # [(id, title, path, sha)] — 게이트를 통과한 사본들
 if args.type == "epic" and not args.adr:
     die("거부: --adr 없이 Epic 을 만들 수 없다.",
-        "  Epic 티켓은 accepted ADR을 전제한다 (CLAUDE.md §5). 결정을 먼저 굳힌다.",
-        "  결정이 아직 없다면 → Feature/리프 티켓이거나, discussion 문서에서 시작한다.")
+        "  Epic 티켓은 공표된 근거 ADR을 전제한다 (CLAUDE.md §5) — 존재의 전제다.",
+        "  결정 문서가 아직 없다면 → Feature/리프 티켓이거나, discussion 문서에서 시작한다.")
 for adr_id in dict.fromkeys(args.adr or []):    # 중복 제거 · 순서 보존
     gate = subprocess.run([sys.executable, os.path.join(HERE, "adr-gate.py"),
                            "--adr", adr_id, "--type", args.type],
@@ -168,8 +174,9 @@ item_id = gh.add_to_project(proj["id"], issue_id)
 
 status = proj["fields"].get("Status")
 if status:
-    gh.set_select_field(proj["id"], item_id, status["id"], gh.option_id(status, INITIAL_STATUS))
-    print("Project #%d 등록 · Status: %s" % (PROJECT_NUMBER, INITIAL_STATUS))
+    initial = INITIAL_STATUS[args.type]
+    gh.set_select_field(proj["id"], item_id, status["id"], gh.option_id(status, initial))
+    print("Project #%d 등록 · Status: %s" % (PROJECT_NUMBER, initial))
 
 if adr_entries:   # 텍스트 필드 — 필터는 부분 일치라 다수여도 걸린다
     adr_value = adr_context.set_field(proj, item_id, [e[0] for e in adr_entries], PROJECT_NUMBER)
