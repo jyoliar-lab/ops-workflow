@@ -62,6 +62,7 @@
 ## ADR-0027 — 시스템 전역 사용자 정체성은 저장소 독립적으로 발급된 불변 식별자로 한다
 
 - [auth-service의 user_id가 다른 서비스의 인덱스로 쓰이는 것은 적절한가](../careerhub/discussion/260805_1308_storage-independent-user-identifier.md) — `done`
+- [Zitadel 위임 Epic의 일 쪼갬 — 왜 이렇게 갈랐고, 무엇을 버렸나](../careerhub/discussion/260807_0158_zitadel-epic-work-breakdown.md) — `done`
 
 ## ADR-0028 — 인증은 외부 IdP 제품이 소유하고, 인가·도메인 상태는 앱이 소유한다
 
@@ -70,6 +71,7 @@
 - [Zitadel 전환 시 테스트 전용 로그인 경로는 어떻게 되는가 — 티켓 #7 재판정](../careerhub/discussion/260805_2044_test-login-path-under-zitadel.md) — `done`
 - [외부 IdP 환경의 동의(consent) 구현 — 업계 사례 조사](../careerhub/discussion/260805_2103_consent-implementation-idp-industry-survey.md) — `active`
 - [Zitadel의 비-JWT 인증 경로와 권한 변경의 즉시 발효](../careerhub/discussion/260806_1931_zitadel-non-jwt-auth-and-immediacy.md) — `done`
+- [Zitadel 위임 Epic의 일 쪼갬 — 왜 이렇게 갈랐고, 무엇을 버렸나](../careerhub/discussion/260807_0158_zitadel-epic-work-breakdown.md) — `done`
 
 ## ADR-0029 — 토큰의 신뢰는 데이터 경로의 로컬 검증으로만 얻는다
 
@@ -77,6 +79,7 @@
 - [Zitadel 도입은 auth-service의 요구사항을 얼마나 해소하는가 — 항목별 판정과 잔여 목록](../careerhub/discussion/260805_1801_zitadel-coverage-of-auth-requirements.md) — `active`
 - [Zitadel의 비-JWT 인증 경로와 권한 변경의 즉시 발효](../careerhub/discussion/260806_1931_zitadel-non-jwt-auth-and-immediacy.md) — `done`
 - [게이트웨이 엣지 JWT 검증 패턴 — 해부와 careerhub 대입](../careerhub/discussion/260806_2054_gateway-edge-jwt-verification-pattern.md) — `done`
+- [Zitadel 위임 Epic의 일 쪼갬 — 왜 이렇게 갈랐고, 무엇을 버렸나](../careerhub/discussion/260807_0158_zitadel-epic-work-breakdown.md) — `done`
 
 ## ADR-0030 — IdP 제품으로 Zitadel을 채택한다
 
@@ -85,8 +88,10 @@
 - [Zitadel 전환 시 테스트 전용 로그인 경로는 어떻게 되는가 — 티켓 #7 재판정](../careerhub/discussion/260805_2044_test-login-path-under-zitadel.md) — `done`
 - [외부 IdP 환경의 동의(consent) 구현 — 업계 사례 조사](../careerhub/discussion/260805_2103_consent-implementation-idp-industry-survey.md) — `active`
 - [Zitadel의 비-JWT 인증 경로와 권한 변경의 즉시 발효](../careerhub/discussion/260806_1931_zitadel-non-jwt-auth-and-immediacy.md) — `done`
+- [Zitadel 위임 Epic의 일 쪼갬 — 왜 이렇게 갈랐고, 무엇을 버렸나](../careerhub/discussion/260807_0158_zitadel-epic-work-breakdown.md) — `done`
 
 ## ADR-0031 — 인가 전파는 발급 시점 클레임 주입으로 한다
 
 - [Zitadel의 비-JWT 인증 경로와 권한 변경의 즉시 발효](../careerhub/discussion/260806_1931_zitadel-non-jwt-auth-and-immediacy.md) — `done`
+- [Zitadel 위임 Epic의 일 쪼갬 — 왜 이렇게 갈랐고, 무엇을 버렸나](../careerhub/discussion/260807_0158_zitadel-epic-work-breakdown.md) — `done`
 

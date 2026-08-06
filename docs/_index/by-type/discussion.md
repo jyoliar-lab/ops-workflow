@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (41)
+# by-type / discussion (42)
 
 | status | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|
@@ -32,6 +32,7 @@
 | active | careerhub | auth-service, zitadel, keycloak, jwt, auth0, okta, cognito, azure-ad-b2c, firebase-auth | ADR-0028, ADR-0030 | [외부 IdP 환경의 동의(consent) 구현 — 업계 사례 조사](../../careerhub/discussion/260805_2103_consent-implementation-idp-industry-survey.md) |
 | done | careerhub | zitadel, jwt, oidc, auth-service, api-composer | ADR-0028, ADR-0029, ADR-0030, ADR-0031 | [Zitadel의 비-JWT 인증 경로와 권한 변경의 즉시 발효](../../careerhub/discussion/260806_1931_zitadel-non-jwt-auth-and-immediacy.md) |
 | done | careerhub | api-composer, auth-service, jwt, nginx-gateway-fabric | ADR-0029 | [게이트웨이 엣지 JWT 검증 패턴 — 해부와 careerhub 대입](../../careerhub/discussion/260806_2054_gateway-edge-jwt-verification-pattern.md) |
+| done | careerhub | zitadel, auth-service, careerhub-api-composer, careerhub-web, careerhub-userinfo-service, jyoliar-k8s, jyoliar-platform-terraform, jwt, oidc, postgresql, mongodb | ADR-0027, ADR-0028, ADR-0029, ADR-0030, ADR-0031 | [Zitadel 위임 Epic의 일 쪼갬 — 왜 이렇게 갈랐고, 무엇을 버렸나](../../careerhub/discussion/260807_0158_zitadel-epic-work-breakdown.md) |
 | active | homelab | prometheus, alertmanager, kubelet, longhorn, kube-prometheus-stack | — | [Prometheus TSDB 만석과 이중 감시 실패 — 2026-07-30 장애 기록](../../homelab/discussion/260730_2245_prometheus-tsdb-full-double-monitoring-failure.md) |
 | active | homelab | prometheus, grafana, kube-prometheus-stack | — | [룰이 참조하는 메트릭의 부재 감지 — 공식 기능·공식 가이드·대안 도구 조사](../../homelab/discussion/260731_1233_rule-metric-absence-detection-options.md) |
 | active | ops-workflow | claude-code-skills | — | [skill 초판 마찰 로그](../../ops-workflow/discussion/260712_1731_skill-friction-log.md) |

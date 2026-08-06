@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / oidc (8)
+# by-subject / oidc (9)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -14,3 +14,4 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | careerhub | active | [Zitadel 도입은 auth-service의 요구사항을 얼마나 해소하는가 — 항목별 판정과 잔여 목록](../../careerhub/discussion/260805_1801_zitadel-coverage-of-auth-requirements.md) |
 | — | discussion | careerhub | done | [Zitadel 전환 시 테스트 전용 로그인 경로는 어떻게 되는가 — 티켓 #7 재판정](../../careerhub/discussion/260805_2044_test-login-path-under-zitadel.md) |
 | — | discussion | careerhub | done | [Zitadel의 비-JWT 인증 경로와 권한 변경의 즉시 발효](../../careerhub/discussion/260806_1931_zitadel-non-jwt-auth-and-immediacy.md) |
+| — | discussion | careerhub | done | [Zitadel 위임 Epic의 일 쪼갬 — 왜 이렇게 갈랐고, 무엇을 버렸나](../../careerhub/discussion/260807_0158_zitadel-epic-work-breakdown.md) |
