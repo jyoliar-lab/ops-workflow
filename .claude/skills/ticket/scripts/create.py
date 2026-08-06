@@ -22,9 +22,10 @@
   컨테이너(epic·feature)는 의존을 담지 않는다.
 
 ★ 근거 ADR 은 목록이다(--adr 반복 가능) — 게이트는 명시된 전부에 걸린다.
-  컨테이너: 필수(전제). 리프: 선택 — **직접 이행하는** 결정이 있을 때만 명시하고,
+  Epic: 필수(전제). Feature: 선택 — 근거 결정 없이도 리프를 묶을 수 있다(Epic 없이도).
+  리프: 선택 — **직접 이행하는** 결정이 있을 때만 명시하고,
   부모 컨테이너의 근거를 되풀이하지 않는다. 이행할 일이 낱개 하나면 리프로 충분하다.
-  (컨테이너의 근거 = 존재의 전제 · 리프의 근거 = 이행 추적. 리프 목록은 비완전한 힌트다.)
+  (Epic 의 근거 = 존재의 전제 · 리프의 근거 = 이행 추적. 리프 목록은 비완전한 힌트다.)
 
 ★ 본문은 templates/ 의 타입별 템플릿에서 시작한다 (epic.md — Feature 도 이것 · task.md · bug.md).
   공통 절(Summary·Context·Goal·Acceptance Criteria·References)은 이름까지 한 벌이다.
@@ -65,7 +66,7 @@ parser.add_argument("--type", required=True, choices=sorted(TYPE_NAMES))
 parser.add_argument("--title", required=True)
 parser.add_argument("--body-file", required=True)
 parser.add_argument("--adr", action="append",
-                    help="근거 ADR. 반복 가능. 컨테이너는 필수 · 리프는 선택(직접 이행하는 결정만)")
+                    help="근거 ADR. 반복 가능. Epic 은 필수 · Feature·리프는 선택")
 parser.add_argument("--repo", default=os.environ.get("OPS_REPO", "jyoliar-lab/ops-workflow"))
 repo_context.add_args(parser)   # --target-repo / --no-target-repo / --ref-repo
 dep_context.add_args(parser)    # --blocked-by / --no-deps
@@ -95,16 +96,17 @@ else:
     dep_entries = dep_context.gate(args.repo, args.blocked_by)
 
 # ★ 게이트 — 근거 ADR 은 **목록**이다(1개 이상). 티켓 하나가 여러 결정에서 비롯될 수 있다.
-#   컨테이너: 근거 필수(전제 — CLAUDE.md §5). 침묵은 거부다.
+#   Epic: 근거 필수(전제 — CLAUDE.md §5). 침묵은 거부다.
+#   Feature: 근거 선택 — 근거 결정 없이도 리프를 묶을 수 있다(CLAUDE.md §5).
 #   리프: 근거 선택 — 리프가 **직접 이행하는** 결정이 있을 때만 명시한다.
 #         부모 컨테이너의 근거를 되풀이하지 않는다(사본은 낡는다).
 #   명시된 근거는 타입 불문 전부 게이트를 지난다: 하나라도 미accept·미공표면 발행 거부.
-#   — 답하지 않아도 되(리프)지만, 답하면 참이어야 한다.
+#   — 답하지 않아도 되지만, 답하면 참이어야 한다.
 adr_entries = []                    # [(id, title, path, sha)] — 게이트를 통과한 사본들
-if args.type in CONTAINERS and not args.adr:
-    die("거부: --adr 없이 %s 을 만들 수 없다." % TYPE_NAMES[args.type],
-        "  컨테이너 티켓은 accepted ADR을 전제한다 (CLAUDE.md §5). 결정을 먼저 굳힌다.",
-        "  결정이 아직 없다면 → 리프 티켓(task·bug)이거나, discussion 문서에서 시작한다.")
+if args.type == "epic" and not args.adr:
+    die("거부: --adr 없이 Epic 을 만들 수 없다.",
+        "  Epic 티켓은 accepted ADR을 전제한다 (CLAUDE.md §5). 결정을 먼저 굳힌다.",
+        "  결정이 아직 없다면 → Feature/리프 티켓이거나, discussion 문서에서 시작한다.")
 for adr_id in dict.fromkeys(args.adr or []):    # 중복 제거 · 순서 보존
     gate = subprocess.run([sys.executable, os.path.join(HERE, "adr-gate.py"),
                            "--adr", adr_id, "--type", args.type],

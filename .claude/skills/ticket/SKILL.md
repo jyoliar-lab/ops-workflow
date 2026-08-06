@@ -1,6 +1,6 @@
 ---
 name: ticket
-description: GitHub Issue를 발행하고 계층을 연결한다 (Issue Type 지정 · sub-issue 링크 · 컨테이너 티켓의 ADR 게이트). "티켓을 만든다", "epic/feature/task/bug를 발행한다", "하위 이슈로 붙인다" 일 때 사용한다. 규약은 CLAUDE.md §5.
+description: GitHub Issue를 발행하고 계층을 연결한다 (Issue Type 지정 · sub-issue 링크 · Epic 티켓의 ADR 게이트). "티켓을 만든다", "epic/feature/task/bug를 발행한다", "하위 이슈로 붙인다" 일 때 사용한다. 규약은 CLAUDE.md §5.
 ---
 
 # 티켓 발행
@@ -14,10 +14,10 @@ description: GitHub Issue를 발행하고 계층을 연결한다 (Issue Type 지
 | 타입 | 성격 | 전제 |
 |---|---|---|
 | **Epic** | 컨테이너 | **accepted 근거 ADR** |
-| **Feature** | 컨테이너 (**선택적**) | **accepted ADR** — Epic 근거 ADR의 하위 축 |
+| **Feature** | 컨테이너 (**선택적**) | 없음. ADR은 선택 — 명시하면 accepted여야 한다 |
 | **Task** / **Bug** | 리프 | 없음. ADR은 선택(직접 이행 시) — 명시하면 accepted여야 한다 |
 
-- **Feature는 "epic이 방대해서" 만들지 않는다.** Task가 20개여도 결정이 하나면 Feature는 없다. 독립적으로 뒤집힐 수 있는 하위 축의 결정(sub-ADR)이 생겼을 때만 만든다.
+- **Feature는 리프를 묶는 그룹화 컨테이너다.** Epic 밑에서도, Epic 없이 최상위에서도 쓸 수 있다. 근거 ADR을 전제하지 않는다 — 굳은 결정 없이도 여러 Task를 하나의 흐름으로 묶을 수 있다. 명시한 ADR은 게이트를 지난다(답하면 참이어야 한다).
 - **조사에는 티켓이 없다**(§5). *계획된* 조사를 백로그에 올릴 때만 `Task`(완료 조건 = discussion 문서 커밋).
 - `story`·`spike`는 **없다**.
 
@@ -28,7 +28,7 @@ create.py \
   --type epic|feature|task|bug \
   --title "..." \
   --body-file <path> \
-  [--adr ADR-0001]... \              # 반복 가능. 컨테이너 필수 · 리프 선택(직접 이행하는 결정만)
+  [--adr ADR-0001]... \              # 반복 가능. Epic 필수 · Feature·리프 선택
   [--target-repo owner/name]... \    # task·bug 는 이것 또는 --no-target-repo 가 필수
   [--no-target-repo] \               # 수정 대상 부재의 명시적 선언 (신규 저장소 생성 등)
   [--ref-repo owner/name]... \       # 참조 저장소 (선택 · 비완전 목록)
@@ -52,8 +52,9 @@ create.py \
 
 ### 근거 ADR — `--adr`
 
-- **컨테이너는 accepted·공표된 근거 ADR이 필수다**(§5). `--adr` 없이 epic·feature를 만들려 하거나 그 ADR이 `accepted`가 아니면 스크립트가 거부한다(exit 1). **우회하지 않는다** — 굳지 않은 결정으로 일하지 않는다.
+- **Epic은 accepted·공표된 근거 ADR이 필수다**(§5). `--adr` 없이 epic을 만들려 하거나 그 ADR이 `accepted`가 아니면 스크립트가 거부한다(exit 1). **우회하지 않는다** — 굳지 않은 결정으로 일하지 않는다.
 - **근거가 여럿이면 `--adr`을 반복한다.** 게이트는 전부에 걸린다 — 하나라도 미accept면 거부.
+- **Feature의 근거는 선택이다** — 근거 결정 없이도 리프를 묶을 수 있다(§5).
 - **리프의 근거는 선택이다 — 이행 추적의 자리다.** 하위 축 결정을 **직접 이행**할 때만 명시한다(#11이 ADR-0015의 린트를 배선하는 것처럼). 부모 컨테이너의 근거를 되풀이하지 않는다 — 사본은 낡는다. 명시하면 타입 불문 같은 게이트를 지난다: 답하지 않아도 되지만, 답하면 참이어야 한다.
 - accepted 결정을 이행하는 일이 낱개 하나면 그냥 리프로 발행하고 명시한다. Epic은 묶을 낱개가 여럿일 때 세운다 — 빈 컨테이너는 냄새다.
 - **스크립트가 두 곳에 박는다**(§1 브리지):
@@ -98,7 +99,7 @@ set-deps.py --issue <N> --blocked-by <M>... | --no-deps
 
 `set-adr.py`:
 
-- `--clear`는 **리프 전용** — 컨테이너의 근거는 존재의 전제라 철회할 수 없다. 근거가 틀렸다면 올바른 전체 목록을 `--adr`로 다시 낸다.
+- `--clear`는 **Epic 외 전용** — Epic의 근거는 존재의 전제라 철회할 수 없다. 근거가 틀렸다면 올바른 전체 목록을 `--adr`로 다시 낸다.
 
 `set-repos.py`:
 
@@ -120,8 +121,12 @@ GraphQL `addSubIssue`. 계층은 **3층에서 멈춘다**(§5) — GitHub의 제
 ```
 근거 ADR ★accepted★ ──→ Epic
                           ├─ Task            ← 평시: 바로 연결
- 하위 축 ADR ★accepted★ ─→ └─ Feature         ← 독립 하위 축의 결정이 생겼을 때만
+                          └─ Feature         ← 리프를 더 묶을 때 (ADR 선택)
                                 └─ Task
+
+Feature                                      ← Epic 없이 최상위에서도 가능 (ADR 선택)
+  ├─ Task
+  └─ Task
 ```
 
 ## 4. 하지 않는 것

@@ -8,11 +8,11 @@
   1. **소급 기입** — '근거 ADR' 절 없이 발행된 티켓에 절·필드를 단다.
   2. **갱신** — 근거 목록이 달라졌을 때(supersede 반영, 이행 결정 추가 등).
      부분 수정이 아니라 **전체 답을 다시 낸다** — 절은 통째로 교체된다. 절은 언제나 하나다.
-  3. **철회**(--clear · 리프 전용) — 잘못 단 이행 명시를 거둔다. 절 제거 + 필드 비움.
+  3. **철회**(--clear · Epic 외 전용) — 잘못 단 명시를 거둔다. 절 제거 + 필드 비움.
 
 게이트는 발행과 같다:
   - 명시된 ADR 은 전부 accepted·공표여야 한다 (adr-gate.py — 답하면 참이어야 한다).
-  - **컨테이너는 --clear 가 거부된다** — 근거는 존재의 전제다. 근거를 없앨 수 있는 문은 없다.
+  - **Epic 은 --clear 가 거부된다** — Epic 의 근거는 존재의 전제다. 없앨 수 있는 문은 없다.
   - --adr 과 --clear 는 XOR — 침묵도, 양다리도 답이 아니다.
   - **Project 미등록 이슈 거부** — 등록은 발행(create.py)의 일이다. 여기서 슬쩍 등록하지 않는다.
 
@@ -29,7 +29,7 @@ import gh  # noqa: E402
 import adr_context  # noqa: E402  (같은 디렉터리 — '근거 ADR' 절 공용 로직)
 from opsdoc import die  # noqa: E402
 
-CONTAINER_TYPES = ("Epic", "Feature")
+ADR_REQUIRED_TYPES = ("Epic",)   # 근거가 존재의 전제인 타입 — --clear 불가 (CLAUDE.md §5)
 PROJECT_NUMBER = int(os.environ.get("OPS_PROJECT", "1"))
 
 parser = argparse.ArgumentParser(add_help=True)
@@ -38,7 +38,7 @@ parser.add_argument("--repo", default=os.environ.get("OPS_REPO", "jyoliar-lab/op
 parser.add_argument("--adr", action="append", default=[], metavar="ADR-NNNN",
                     help="근거 ADR(반복 가능). 절·필드가 이 목록으로 통째 교체된다")
 parser.add_argument("--clear", action="store_true",
-                    help="근거 명시를 철회한다(리프 전용) — 절 제거 + 필드 비움")
+                    help="근거 명시를 철회한다(Epic 외 전용) — 절 제거 + 필드 비움")
 args = parser.parse_args()
 
 if bool(args.adr) == args.clear:
@@ -50,8 +50,8 @@ issue_id, type_name, body = gh.issue_view(args.repo, args.issue)
 if not type_name:
     die("거부: #%d 에 Issue Type 이 없다 — 컨테이너/리프를 판정할 수 없다." % args.issue,
         "  먼저 타입을 지정한다.")
-if args.clear and type_name in CONTAINER_TYPES:
-    die("거부: #%d 는 컨테이너(%s)다 — 근거는 존재의 전제라 철회할 수 없다." % (args.issue, type_name),
+if args.clear and type_name in ADR_REQUIRED_TYPES:
+    die("거부: #%d 는 %s 다 — 근거는 존재의 전제라 철회할 수 없다." % (args.issue, type_name),
         "  근거가 틀렸다면 --adr 로 올바른 전체 목록을 다시 낸다.")
 
 # ── 게이트 — 발행과 같은 문. 명시된 근거는 전부 accepted·공표여야 한다 ────────

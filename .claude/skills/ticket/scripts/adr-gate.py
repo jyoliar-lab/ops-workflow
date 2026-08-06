@@ -3,8 +3,8 @@
 
   adr-gate.py --adr ADR-0001 --type epic|feature|task|bug
 
-컨테이너 티켓(epic·feature)은 **accepted ADR을 전제한다.** 굳지 않은 결정으로 일하지 않는다.
-리프(task·bug)는 근거를 전제하지 않는다 — 그러나 **명시했다면 같은 검사를 지난다**:
+Epic 티켓은 **accepted ADR을 전제한다.** 굳지 않은 결정으로 일하지 않는다.
+Feature·리프(task·bug)는 근거를 전제하지 않는다 — 그러나 **명시했다면 같은 검사를 지난다**:
 답하지 않아도 되지만, 답하면 참이어야 한다(accepted·공표).
   exit 0 = 통과 · exit 1 = 거부
 
@@ -37,11 +37,11 @@ if ticket_type not in ("epic", "feature", "task", "bug"):
     print("거부: 모르는 티켓 타입이다 — %s" % ticket_type, file=sys.stderr)
     sys.exit(2)
 
-is_container = ticket_type in ("epic", "feature")
+adr_required = ticket_type == "epic"
 # 검사 내용은 같다 — 다른 것은 전제의 강도다:
-#   컨테이너: 근거가 필수다(전제).  리프: 선택이지만, 답했으면 참이어야 한다.
-premise = ("컨테이너 티켓(%s)은 accepted ADR을 전제한다" % ticket_type) if is_container \
-    else ("리프(%s)의 근거는 선택이지만, 명시한 근거는 accepted·공표여야 한다" % ticket_type)
+#   Epic: 근거가 필수다(전제).  Feature·리프: 선택이지만, 답했으면 참이어야 한다.
+premise = "Epic 티켓은 accepted ADR을 전제한다" if adr_required \
+    else ("%s 의 근거는 선택이지만, 명시한 근거는 accepted·공표여야 한다" % ticket_type)
 
 root = repo_root()
 
@@ -83,8 +83,8 @@ if status != "accepted":
         "  %s:%s" % (vcs.PUBLISHED, path),
         "",
         "  %s (CLAUDE.md §5). 굳지 않은 결정으로 일하지 않는다." % premise,
-        "  ADR을 먼저 accept 하거나, " + ("리프 티켓(task·bug)으로 발행한다."
-                                    if is_container else "--adr 없이 발행한다."))
+        "  ADR을 먼저 accept 하거나, " + ("--adr 없이 Feature/리프로 발행한다."
+                                    if adr_required else "--adr 없이 발행한다."))
 
 # 워킹 트리가 공표된 사본보다 앞서 있으면 알린다 — 티켓은 **공표된 것**을 근거로 삼는다.
 local_path = os.path.join(root, path)
@@ -95,17 +95,10 @@ if os.path.isfile(local_path):
               % status, file=sys.stderr)
 
 # "founding / sub" 는 **절대적 구분이 아니다** — parent 에 깊이 제한이 없으므로(§4③),
-# 어떤 ADR 이든 다른 ADR 의 하위 축일 수 있다. 그래서 Epic 의 근거 ADR 이 parent 를
-# 갖는 것은 **정상**이다. 그것을 이상하다고 경고하지 않는다.
-#
-# 남는 검사는 하나다: Feature 는 **하위 축의 결정**을 전제하므로 parent 가 있어야 한다.
-# 경고까지만 한다 — Feature 의 근거 ADR 이 *그 Epic 의 근거 ADR* 의 하위 축인지까지는
-# 아직 확인하지 않는다(티켓 ADR 에서 정한다).
-parent = fm.get("parent", "")
-if ticket_type == "feature" and not parent:
-    print("경고: Feature 의 근거 ADR 에 parent 가 없다 — 하위 축이 아니다.", file=sys.stderr)
-    print("      Feature 는 독립 하위 축의 결정을 전제한다. 정말 Feature 인가, Task 면 충분한가?",
-          file=sys.stderr)
+# 어떤 ADR 이든 다른 ADR 의 하위 축일 수 있다. 그래서 근거 ADR 이 parent 를
+# 갖는 것도 안 갖는 것도 **정상**이다. 그것을 이상하다고 경고하지 않는다.
+# (Feature 의 "하위 축 ADR" 경고는 제거됐다 — Feature 는 근거 없이도 리프를 묶는
+#  그룹화 컨테이너가 되면서, "하위 축의 결정을 전제한다"는 독트린 자체가 내려갔다.)
 
 sha = vcs.ref_sha(root)
 print("통과: %s accepted — 공표됨 (%s:%s)" % (adr_id, vcs.PUBLISHED, path), file=sys.stderr)
