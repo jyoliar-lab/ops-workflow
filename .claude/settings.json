@@ -44,7 +44,19 @@
       "Bash(set-repos.py:*)",
       "WebSearch",
       "WebFetch",
-      "Fetch"
+      "Fetch",
+
+      "Bash(gh issue view:*)",
+      "Bash(gh issue comment:*)",
+      "Bash(gh issue list:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh run view:*)",
+      "Bash(gh run list:*)",
+      "Bash(gh run watch:*)",
+      "Bash(gh release view:*)",
+      "Bash(gh release list:*)",
+      "Bash(gh repo list:*)"
     ]
   },
   "hooks": {
