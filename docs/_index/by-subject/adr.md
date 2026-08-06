@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / adr (12)
+# by-subject / adr (14)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -18,3 +18,5 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | ops-workflow | active | [ADR 선행 사례 조사 — 무엇이 표준이고, 무엇이 우리 발명이고, 무엇이 실패하는가](../../ops-workflow/discussion/260714_1417_adr-prior-art-survey.md) |
 | — | discussion | ops-workflow | active | [ADR 문서를 무슨 포맷으로 적을 것인가](../../ops-workflow/discussion/260715_1401_adr-document-format.md) |
 | — | discussion | ops-workflow | active | [ADR은 다른 ADR을 어디까지, 어떻게 참조하는가](../../ops-workflow/discussion/260715_1551_cross-adr-references.md) |
+| — | discussion | ops-workflow | active | [티켓 Draft 상태와 착수 게이트 — 게이트를 발행에서 착수로 옮긴다](../../ops-workflow/discussion/260806_2235_ticket-draft-status-and-start-gate.md) |
+| — | discussion | ops-workflow | active | [정책 ADR은 proposed로 오래 산다 — 의도된 운영 방식의 기록](../../ops-workflow/discussion/260806_2317_policy-adr-stays-proposed.md) |
