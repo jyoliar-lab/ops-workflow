@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / adr (31)
+# by-type / adr (32)
 
 | id | status | topic | subjects | 문서 |
 |---|---|---|---|---|
@@ -35,3 +35,4 @@
 | ADR-0029 | proposed | careerhub | auth-service, api-composer, jwt, oidc | [ADR-0029 — 토큰의 신뢰는 데이터 경로의 로컬 검증으로만 얻는다](../../careerhub/adr/adr-0029-data-path-local-token-verification.md) |
 | ADR-0030 | proposed | careerhub | zitadel, keycloak, postgresql, auth-service | [ADR-0030 — IdP 제품으로 Zitadel을 채택한다](../../careerhub/adr/adr-0030-adopt-zitadel-as-idp.md) |
 | ADR-0031 | proposed | careerhub | auth-service, api-composer, jwt, oidc | [ADR-0031 — 인가 전파는 발급 시점 클레임 주입으로 한다](../../careerhub/adr/adr-0031-issuance-time-claim-injection.md) |
+| ADR-0032 | proposed | ops-workflow | adr | [ADR-0032 — 정책 ADR은 proposed로 운영한다: 검증은 하네스가, accept는 미룬다](../../ops-workflow/adr/adr-0032-policy-adr-defers-accept.md) |
