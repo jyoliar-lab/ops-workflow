@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / github-issues (9)
+# by-subject / github-issues (10)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -11,6 +11,7 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | ADR-0010 | adr | ops-workflow | proposed | [ADR-0010 — 이슈 타입은 묶는 것과 수행하는 것으로 갈린다](../../ops-workflow/adr/adr-0010-container-and-leaf-types.md) |
 | ADR-0016 | adr | ops-workflow | proposed | [ADR-0016 — 리프 티켓은 수정 대상 저장소와 참조 저장소를 명시한다](../../ops-workflow/adr/adr-0016-leaf-ticket-declares-repo-context.md) |
 | ADR-0017 | adr | ops-workflow | proposed | [ADR-0017 — 리프 티켓은 선행 의존을 명시하고, 열린 선행 위에는 착수하지 않는다](../../ops-workflow/adr/adr-0017-leaf-ticket-declares-dependencies.md) |
+| ADR-0033 | adr | ops-workflow | proposed | [ADR-0033 — 티켓 Status는 여섯이다: 진행 단계와 확신만 표현한다](../../ops-workflow/adr/adr-0033-ticket-status-roster-and-meaning.md) |
 | — | discussion | ops-workflow | active | [티켓(컨트롤 플레인) 결정을 ADR로 승격하기 — 후보 분해와 논점](../../ops-workflow/discussion/260716_1348_ticket-decisions-adr-candidates.md) |
 | — | discussion | ops-workflow | active | [티켓 본문 구성 — 공통 계약과 타입별 절의 층화 제안](../../ops-workflow/discussion/260723_2039_ticket-body-structure.md) |
 | — | discussion | ops-workflow | done | [PR 머지와 티켓 종료 — close는 판단인가 의례인가](../../ops-workflow/discussion/260727_1608_pr-merge-auto-close.md) |
