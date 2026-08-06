@@ -6,7 +6,7 @@ subjects: [zitadel, keycloak, postgresql, auth-service]
 status: proposed
 accepted_at:       # 비운다. accept.py 가 채운다
 parent: ADR-0028
-references:
+references: [ADR-0031]
 superseded_by:
 ---
 
