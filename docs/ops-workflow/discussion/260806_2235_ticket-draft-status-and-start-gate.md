@@ -68,10 +68,11 @@ ticket-engineer의 착수 스크립트(/ticket-run)가 착수 시점에 검사�
 | 발행 거부 기준 | superseded·rejected 참조만 거부 |
 | Epic의 `--adr` 존재 | 유지 — 약화는 상태 조건뿐 |
 | 리프의 target·deps 답변 | 발행 시 여전히 필수 |
-| Status 로스터 | 5개: Draft·Todo·In Progress·In Review·Done — Backlog·Bug 사다리 제거 |
-| 초기 Status | Epic·Feature·Task = Draft · Bug = Todo |
-| Draft/Todo의 경계 | "진행되어도 양호한가"의 확신 — 보류는 상태가 아니라 Todo에서 집지 않는 것 |
-| Draft 해제 | 사람 |
+| Status 로스터 | **6개**: Draft·Todo·In Progress·In Review·Done·**Cancelled** — Backlog·Bug 사다리 제거. 폐기는 삭제·트래커 종료 기능이 아니라 상태(Cancelled)로 — 상태 축은 로스터만으로 자족한다 (**ADR-0033으로 저작**) |
+| 초기 Status | **규정하지 않는다** — 값이라 도구의 관할 (ADR-0033에서 배제. "Epic·Feature·Task = Draft · Bug = Todo" 구상은 도구 설계의 입력으로만 남는다) |
+| Draft/Todo의 경계 | "진행되어도 양호한가"의 확신 — 보류는 상태가 아니라 Todo에서 집지 않는 것 (ADR-0033) |
+| In Review의 의미 | 작업은 완료, 결과물 검토 중 — 자잘한 수정은 In Review에서 (ADR-0033) |
+| Draft 해제 | 사람 (전이는 ADR-0033 밖 — 하네스·게이트 ADR의 몫) |
 | 착수 게이트 검사 범위 | ADR(자신+부모 계층) 전부 accepted **그리고** 자신·부모 전부 Todo/In Progress |
 | 부모가 Todo인 채 리프 착수 | 도구가 부모를 In Progress로 전환 — 사람의 리프 착수 지시의 파생 전이 |
 | 부모가 In Review·Done | 착수 거부 — 사람의 전이 실수 신호. 사람이 부모를 되돌린다(도구는 되돌리지 않는다) |
@@ -93,3 +94,5 @@ ticket-engineer의 착수 스크립트(/ticket-run)가 착수 시점에 검사�
 ## 다음
 
 열린 논점이 수렴하면 ADR로 굳힌다 — 아마 두 축이다: **게이트 시점의 이동**(발행 → 착수)과 **Draft 상태의 신설**. 각각 독립적으로 뒤집힐 수 있는지(공동무효 판정)는 그때 본다. 파일럿으로 하네스에 선투입하면 steward의 `pilots.md`에 기록한다.
+
+→ 상태 축은 **ADR-0033**으로 저작됐다(로스터 6개 — Cancelled 추가, 초기값·전이는 배제). 남은 축은 **착수 게이트**다 — 정책 ADR의 proposed 장기 유지(ADR-0032)와의 교차를 함께 다룬다.
