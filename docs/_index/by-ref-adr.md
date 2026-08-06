@@ -76,6 +76,7 @@
 - [auth-service가 굳이 필요한가 — Keycloak이 원장까지 갖는 프레임의 재검토](../careerhub/discussion/260805_1635_auth-service-elimination-via-keycloak.md) — `done`
 - [Zitadel 도입은 auth-service의 요구사항을 얼마나 해소하는가 — 항목별 판정과 잔여 목록](../careerhub/discussion/260805_1801_zitadel-coverage-of-auth-requirements.md) — `active`
 - [Zitadel의 비-JWT 인증 경로와 권한 변경의 즉시 발효](../careerhub/discussion/260806_1931_zitadel-non-jwt-auth-and-immediacy.md) — `active`
+- [게이트웨이 엣지 JWT 검증 패턴 — 해부와 careerhub 대입](../careerhub/discussion/260806_2054_gateway-edge-jwt-verification-pattern.md) — `done`
 
 ## ADR-0030 — IdP 제품으로 Zitadel을 채택한다
 
