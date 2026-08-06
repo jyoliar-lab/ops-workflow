@@ -2,7 +2,7 @@
 type: discussion
 topic: careerhub
 subjects: [zitadel, jwt, oidc, auth-service, api-composer]
-status: active
+status: done
 ref-adrs: [ADR-0028, ADR-0029, ADR-0030, ADR-0031]
 ---
 
@@ -60,6 +60,8 @@ Actions v2의 function 트리거는 `preaccesstoken` · `preuserinfo`(+`presamlr
 
 **4. 취소의 "기록 + 트리거"는 제품에 실재한다.** 취소·종료·비활성화는 이벤트소싱 저장소에 이벤트로 영구 기록되고 — 소스 확인: [`oidc_session.access_token.revoked` · `oidc_session.refresh_token.revoked`](https://github.com/zitadel/zitadel/blob/main/internal/repository/oidcsession/oidc_session.go), [`session.terminated`](https://github.com/zitadel/zitadel/blob/main/internal/repository/session/session.go), [`user.deactivated`/`locked`/`removed`](https://github.com/zitadel/zitadel/blob/main/internal/repository/user/user.go) — Actions v2 execution은 function 외에 **event 조건**(개별 이벤트 / 이벤트 그룹 / 전체)으로 외부 endpoint를 async 호출할 수 있다([usage](https://zitadel.com/docs/guides/integrate/actions/usage)). 즉 **"취소 이벤트 → 서비스의 로컬 deny-list" 배선의 재료가 제품 쪽에 전부 있다.** 사실 1은 "로컬 검증 혼자서는 기록을 못 본다"이지 "기록·훅이 없다"가 아니다. 단 event target의 async 호출은 상태코드·응답을 다루지 않는다고 문서가 명시 — 전달 보장·재시도 세부는 **미확인**이므로, 훅을 쓰더라도 토큰 수명(TTL)이 전달 실패의 백스톱이어야 한다(ADR-0029 Consequence의 "주기 조정이 전달 실패의 백스톱" 그대로).
 
+이벤트가 밖으로 나가는 채널은 이 둘뿐이다 — **push는 event execution(webhook), pull은 [Event API `ListEvents`](https://zitadel.com/docs/guides/integrate/zitadel-apis/event-api)(폴링, eventTypes 필터 가능, IAM_OWNER 급 관리자 롤 필요)**. SSE·스트리밍 구독 모델은 없다(문서 부재 + proto에 서버 스트리밍 RPC 0건). 검증자 서비스가 폴링 구독하려면 IdP 관리자 권한을 쥐어야 하므로 최소권한상 나쁘다 — 구독은 webhook 수신(수동 endpoint)으로 한다. 또한 push의 대상이 아닌 것 둘: 수동적 **만료**(수명 도달)는 상태 변경이 아니라 이벤트가 없을 공산이 크고(**미확인**) 각 검증자의 `exp` 로컬 판정 관할이며, **공개키 회전**은 JWKS 캐시 + 미지의 `kid` 조우 시 재조회라는 pull 표준이 이미 견고하다(ADR-0029의 "캐시되는 제어 경로" 그대로).
+
 부가 실측:
 
 - 액세스 토큰 수명 **기본 12h**, 설정은 인스턴스 단위(Default Settings / Admin API — [defaults.yaml](https://github.com/zitadel/zitadel/blob/main/cmd/defaults.yaml)). 앱 단위 수명 설정은 **미확인**. 발효 지연의 상한이 이 값이므로 수치는 코드·설정 관할이되, 기본값이 이 용도에 길다는 사실은 인지가 필요하다.
@@ -85,8 +87,9 @@ O3의 업계 패턴들 (좁힐수록 상태·인프라 의존이 는다):
 - **jti/사용자 deny-list** — [OWASP JWT Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_Cheat_Sheet.html) 권고 패턴. 취소분만 담아 작고 자연 만료. 캐시 장애 시 fail-open/closed 선택 문제. **deny-list를 채우는 이벤트 원천이 양쪽에 실재한다**:
   - **IdP발 (탈퇴·정지·강제 로그아웃·refresh 재사용 감지)**: Actions v2 event 훅(③-4)이 민다. event 조건은 Zitadel **내부** 이벤트에만 발화한다("any event **in ZITADEL**") — 외부 이벤트 인바운드 구독(SSF receiver 류)은 **미확인**이며, 아래 어느 배선에서도 필요하지 않다.
   - **앱발 (권한·동의 변경)**: 원천이 원장 소유자(auth-service) 자신이다. 공통 골격 — 어떤 배선이든 구 토큰이 401을 받으면 클라이언트가 refresh하고, **새 클레임 재주입은 이미 있는 발급 경로(`preaccesstoken`)가 한다**. refresh token 존치가 요건이다(재로그인 없는 재발급). 참고로 앱은 access token 원문을 갖고 있지 않아 RFC 7009 revoke를 대신 부를 수 없고, 부를 수 있는 취소 수단(세션 종료·refresh 취소)은 로그아웃·재로그인을 강제해 권한 *부여*의 UX로 과하다 — "취소"는 Zitadel에서가 아니라 서비스들의 판정에서 죽이면 충분하다.
+- **401 + claims challenge (이벤트 구동 취소)** — [Microsoft CAE](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-continuous-access-evaluation)가 산업 절충점: 토큰 수명을 오히려 늘리고(28h) "시간이 아니라 이벤트가 취소를 구동". 클라이언트·서버·IdP 3자 프로토콜 합의 필요.
 
-### 앱발 전파의 두 배선 — A(직행) vs B(Zitadel 허브)
+### 앱발 전파의 세 배선 — A(직행) · B(Zitadel 허브) · C(릴레이)
 
 설계 요구 하나가 배선을 가른다: **타 서비스(api-composer 등)의 외부 의존 상대를 가급적 Zitadel 하나로 한정하고 싶다.**
 
@@ -101,8 +104,19 @@ O3의 업계 패턴들 (좁힐수록 상태·인프라 의존이 는다):
 
 - A의 결합 비용은 보기보다 작다: 수신 webhook은 수동 endpoint라 **가용성 결합이 ~0**이고, auth-service는 이미 발급 경로의 클레임 공급자라 간접 의존이 존재한다. A가 사는 것 = 신호 경로 단순·전달 소유. B가 사는 것 = **토폴로지 단순**(서비스 쪽 인바운드 통합·인증 대상이 Zitadel 하나).
 - **B의 채택 선행 조건**: event execution의 전달 semantics(재시도·순서·유실률) 실측 + `user.metadata.set`을 개별 구독할 수 있는지 확인.
-- 이 배선 선택("인가 신호가 IdP를 경유하는가")은 ADR-0028의 경계를 건드리므로, 요구가 현실화되어 채택하는 시점에 **ADR 후보**다 — 지금은 두 배선을 나란히 남긴다.
-- **401 + claims challenge (이벤트 구동 취소)** — [Microsoft CAE](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-continuous-access-evaluation)가 산업 절충점: 토큰 수명을 오히려 늘리고(28h) "시간이 아니라 이벤트가 취소를 구동". 클라이언트·서버·IdP 3자 프로토콜 합의 필요.
+
+**C. 릴레이(자작 이벤트 버스, 전송은 SSE).** Zitadel의 SSE 허브 부재를 직접 만든 서비스로 메운다: Zitadel(event execution webhook)과 auth-service(직접 publish)가 릴레이로 수렴하고, 구독자(api-composer 등)는 SSE로 **아웃바운드** 연결한다.
+
+| C가 사는 것 | C가 내는 것 |
+|---|---|
+| **인바운드 표면 제거** — 서비스가 수신 endpoint를 열지 않는다 (webhook 수신인 A·B에는 없는 이점) | **운영물 +1** — 상시 구동 + replay 버퍼(상태). 조립을 줄이려 제품을 들였는데(ADR-0030의 Kratos 기각 논거) 제품 공백을 조립으로 메우는 방향 |
+| **두 원천의 수렴점** — IdP발·앱발 배선 분기가 구조적으로 소멸 | **전달 보장 자작** — SSE는 연결 중 at-most-once가 기본, 끊김 회복(`Last-Event-ID` replay 버퍼)은 릴레이 구현 책임. B의 "미확인 semantics"가 "자작·자기검증 semantics"로 바뀌는 것 |
+| SSE 재접속 규약(`Last-Event-ID`)이 표준 내장 | **제약의 치환** — "의존을 Zitadel로 한정"이 "릴레이로 한정"이 된다. 제약의 의도가 "도메인 서비스 간 결합 금지"라면 릴레이는 중립 인프라로서 충족, 문자 그대로 "Zitadel 하나"라면 위반 — 의도 재진술이 필요하다 |
+| 구독자·이벤트 종류 증가에 열린 구조 | **규모 대비 무게** — 현 구독자 실질 둘. 버스는 구독자가 늘 때 이기는 구조다 |
+
+- 실패 시 TTL 백스톱으로 퇴화하는 fail-safe 성질은 A·B·C 동일하다.
+- 한 줄 요약: **A = 지금 규모의 최적(도메인 결합 하나 수용) · B = 토폴로지 청결, 미확인 채널 의존 + ADR-0028 스침 · C = 가장 깨끗한 최종형이되 지금 사기엔 이른 운영물.** A → C 진화 경로가 열려 있다(웹훅 수신부를 릴레이 구독으로 바꾸는 국소 변경).
+- 이 배선 선택("인가 신호가 IdP를 경유하는가 · 전파 인프라를 신설하는가")은 ADR-0028의 경계와 운영물 증설을 건드리므로, 요구가 현실화되어 채택하는 시점에 **ADR 후보**다 — 지금은 세 배선을 나란히 남긴다.
 
 ## 판정 — 초안이 흔들리는가
 
@@ -116,9 +130,18 @@ O3의 업계 패턴들 (좁힐수록 상태·인프라 의존이 는다):
 
 - JWT는 Zitadel의 기본값이 아니다 — ADR-0029의 결정이 앱 설정(Token Type = JWT)을 함의한다. 설정 자체는 코드 관할.
 - 즉시 발효가 언젠가 요구가 되면, 경로는 O1(결정 개정 — ADR-0029 무효화 조건 그대로)이 아니라 **O3가 먼저다**: 재료가 양쪽에 다 있다 — 권한·동의 변경은 앱이 원천이고(③-3), 탈퇴·정지·취소는 Actions v2 event 훅이 밀어준다(③-4). ADR-0029를 개정하지 않고 갈 수 있고, 이 순서는 ADR-0029 Consequence에 이미 예약되어 있다.
-- **이 검토의 위치**: 현 초안(O0) 유지를 전제로, 권한 변경의 준즉시 발효가 **예상 요구**라는 판단 아래 O3의 배선을 미리 정찰한 것이다. O3 안에서의 배선 선택(A 직행 vs B Zitadel 허브)은 열어 둔다 — 채택 시점에 ADR 후보이며, B는 전달 semantics 실측이 선행 조건이다.
+- **이 검토의 위치**: 현 초안(O0) 유지를 전제로, 권한 변경의 준즉시 발효가 **예상 요구**라는 판단 아래 O3의 배선을 미리 정찰한 것이다. O3 안에서의 배선 선택(A 직행 · B Zitadel 허브 · C 릴레이)은 열어 둔다 — 채택 시점에 ADR 후보이며, B는 전달 semantics 실측이, C는 규모(구독자 증가)의 도래가 각각의 선행 조건이다.
 
 **미확인 잔여** (필요해지는 시점에 재조사): 앱 단위 토큰 수명 설정 · Actions v2 문서의 introspection 반영 재명시 · event execution의 전달 보장(재시도·순서)과 구독 가능한 이벤트의 노출 범위 · 관리자가 특정 사용자의 access token을 지정 취소하는 API의 존재 여부 · SSF/CAEP 지원(송신·수신 양방향) · 로그아웃 후 refresh token의 최신 동작.
+
+## 부록 — 서비스군별로 다른 인증 방식의 공존
+
+새 서비스(예: 내부 관리 서비스)를 opaque + introspection 으로 갈 수 있는가 — **된다. 인스턴스 분리 없이.**
+
+- **토큰 타입은 앱(application) 단위 설정이다** ([Token Settings](https://zitadel.com/docs/guides/manage/console/applications-overview): Bearer(opaque) ↔ JWT). 계층은 Instance → Org → Project → App — 프로젝트를 가르면 롤·`aud`도 서비스군별로 분리되고, 운영자 정체성은 하나로 SSO 된다.
+- **인스턴스 공유의 주의점 둘**: ① 토큰 수명은 인스턴스 단위라 공유된다(앱 단위 미확인 — 단 opaque 쪽은 introspection이 취소를 즉시 반영하므로 TTL 민감도가 낮다). ② **function execution(`preuserinfo`/`preaccesstoken`)은 앱·프로젝트로 스코프할 수 없고 인스턴스 전역으로 발화한다**(request/response 조건과 달리 레벨이 없음 — [usage](https://zitadel.com/docs/guides/integrate/actions/usage)). payload의 `projectID`로 target(auth-service)이 분기해 타 프로젝트는 no-op하면 되지만, InterruptOnError 설정이면 auth-service 장애가 타 서비스군의 로그인까지 번진다 — 훅의 실패 정책이 서비스군들의 운명을 묶는 지점(설정 관할, 채택 시 명시 필요).
+- **별도 인스턴스는 기각** — 백업·masterkey·업그레이드 ×2(ADR-0028이 수용한 "운영물 +1"의 배가), 운영자 정체성 분리로 SSO 상실, 그리고 인스턴스 분리로만 풀리는 문제가 없다.
+- **정합성**: ADR-0029가 기각한 것은 "**전 경로**의 introspection"이지 introspection 자체가 아니다("위험한 조작이 특정 서비스에 몰려 있는 구조에서 전 경로가 그 비용을 낼 이유가 없다"). 위험 조작이 몰려 있고 트래픽이 낮으며 즉시 회수 가치가 큰 내부 관리 서비스는 같은 축의 반대쪽 점을 고르는 정당한 사례다. 단 ADR-0029의 범위는 careerhub 데이터 경로이므로, 새 서비스의 검증 방식은 그 ADR 밖의 새 판단이다(임계선을 넘으면 그때 ADR).
 
 ## 버린 것
 
