@@ -10,7 +10,8 @@ Write/Edit/MultiEdit:
   거부 — docs/_index/**               (생성물 — 도구만 쓴다. §7. 재생성은 hook 자동)
   거부 — workspace/**                 (참조 저장소 로컬 클론 — agent 는 **읽고
          인용할 뿐** 고치지 않는다(§6). 코드 변경은 그 저장소의 PR 로, 사람이 한다)
-  거부 — 그 외 전부(이 저장소 밖).
+  거부 — 그 외 전부(이 저장소 밖). OS 임시 디렉터리도 밖이다 — 티켓 본문 등
+         일회용 초안은 temp-tickets/ (gitignored)에 쓴다.
 
 Bash:
   거부 — `gh issue close`             (close 는 언제나 사람 — §5)
@@ -23,6 +24,7 @@ import os
 import re
 import sys
 import json
+import tempfile
 
 
 def out_decision(decision, reason):
@@ -105,6 +107,13 @@ def main():
 
     if under(fp, proj):
         allow()
+
+    tmp_roots = {tempfile.gettempdir(), "/tmp", "/private/tmp", "/var/folders"}
+    if any(under(fp, t) for t in tmp_roots):
+        out_deny(
+            "OS 임시 디렉터리에 쓰지 않는다: %s — 티켓 본문 등 일회용 초안은 저장소의 "
+            "temp-tickets/ 에 쓴다(gitignored). 사람이 초안을 볼 수 있는 자리다." % fp
+        )
 
     out_deny(
         "쓰기 경계 위반: %s — 이 하네스는 $CLAUDE_PROJECT_DIR(%s) 안에만 쓴다. "
