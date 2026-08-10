@@ -90,6 +90,7 @@
 - [Zitadel의 비-JWT 인증 경로와 권한 변경의 즉시 발효](../careerhub/discussion/260806_1931_zitadel-non-jwt-auth-and-immediacy.md) — `done`
 - [Zitadel 위임 Epic의 일 쪼갬 — 왜 이렇게 갈랐고, 무엇을 버렸나](../careerhub/discussion/260807_0158_zitadel-epic-work-breakdown.md) — `done`
 - [careerhub 라우팅 — 경로 기반에서 호스트 기반으로, 그리고 공개면 판정](../careerhub/discussion/260810_1801_path-to-host-based-routing.md) — `active`
+- [Zitadel masterkey — 운영 중 변경(회전)은 어떻게 되는가](../careerhub/discussion/260810_1910_zitadel-masterkey-rotation-paths.md) — `active`
 
 ## ADR-0031 — 인가 전파는 발급 시점 클레임 주입으로 한다
 

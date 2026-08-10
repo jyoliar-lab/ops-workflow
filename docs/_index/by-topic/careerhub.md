@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / careerhub (32)
+# by-topic / careerhub (33)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -36,3 +36,4 @@
 | — | discussion | done | api-composer, auth-service, jwt, nginx-gateway-fabric | [게이트웨이 엣지 JWT 검증 패턴 — 해부와 careerhub 대입](../../careerhub/discussion/260806_2054_gateway-edge-jwt-verification-pattern.md) |
 | — | discussion | done | zitadel, auth-service, careerhub-api-composer, careerhub-web, careerhub-userinfo-service, jyoliar-k8s, jyoliar-platform-terraform, jwt, oidc, postgresql, mongodb | [Zitadel 위임 Epic의 일 쪼갬 — 왜 이렇게 갈랐고, 무엇을 버렸나](../../careerhub/discussion/260807_0158_zitadel-epic-work-breakdown.md) |
 | — | discussion | active | nginx-gateway-fabric, auth-service, careerhub-front, careerhub-api-composer, careerhub-web, zitadel, cert-manager | [careerhub 라우팅 — 경로 기반에서 호스트 기반으로, 그리고 공개면 판정](../../careerhub/discussion/260810_1801_path-to-host-based-routing.md) |
+| — | discussion | active | zitadel, masterkey, ssm-parameter-store, external-secrets | [Zitadel masterkey — 운영 중 변경(회전)은 어떻게 되는가](../../careerhub/discussion/260810_1910_zitadel-masterkey-rotation-paths.md) |
