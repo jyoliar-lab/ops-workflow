@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / careerhub-front (9)
+# by-subject / careerhub-front (10)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -15,3 +15,4 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | careerhub | active | [결정 후보 — 무엇을 정하고, 무엇이 닫히고, 어느 티켓이 그때까지 못 나가나](../../careerhub/discussion/260805_1550_auth-decision-candidates-and-ticket-conflicts.md) |
 | — | discussion | careerhub | active | [Zitadel 도입은 auth-service의 요구사항을 얼마나 해소하는가 — 항목별 판정과 잔여 목록](../../careerhub/discussion/260805_1801_zitadel-coverage-of-auth-requirements.md) |
 | — | discussion | careerhub | done | [Zitadel 전환 시 테스트 전용 로그인 경로는 어떻게 되는가 — 티켓 #7 재판정](../../careerhub/discussion/260805_2044_test-login-path-under-zitadel.md) |
+| — | discussion | careerhub | active | [careerhub 라우팅 — 경로 기반에서 호스트 기반으로, 그리고 공개면 판정](../../careerhub/discussion/260810_1801_path-to-host-based-routing.md) |
