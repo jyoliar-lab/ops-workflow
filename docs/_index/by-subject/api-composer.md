@@ -8,9 +8,9 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 |---|---|---|---|---|
 | ADR-0014 | adr | careerhub-front | accepted | [ADR-0014 — 프론트가 쓰는 REST 타입을 백엔드 스펙에서 생성한다 (손으로 선언하지 않는다)](../../careerhub-front/adr/adr-0014-derive-rest-types-from-backend-spec.md) |
 | ADR-0018 | adr | careerhub | accepted | [ADR-0018 — REST 계약의 원천을 코드에서 독립한 명세에 두고, 서버를 생성 인터페이스로 구속한다](../../careerhub/adr/adr-0018-spec-first-rest-contract-source.md) |
-| ADR-0028 | adr | careerhub | proposed | [ADR-0028 — 인증은 외부 IdP 제품이 소유하고, 인가·도메인 상태는 앱이 소유한다](../../careerhub/adr/adr-0028-delegate-authentication-to-external-idp.md) |
-| ADR-0029 | adr | careerhub | proposed | [ADR-0029 — 토큰의 신뢰는 데이터 경로의 로컬 검증으로만 얻는다](../../careerhub/adr/adr-0029-data-path-local-token-verification.md) |
-| ADR-0031 | adr | careerhub | proposed | [ADR-0031 — 인가 전파는 발급 시점 클레임 주입으로 한다](../../careerhub/adr/adr-0031-issuance-time-claim-injection.md) |
+| ADR-0028 | adr | careerhub | accepted | [ADR-0028 — 인증은 외부 IdP 제품이 소유하고, 인가·도메인 상태는 앱이 소유한다](../../careerhub/adr/adr-0028-delegate-authentication-to-external-idp.md) |
+| ADR-0029 | adr | careerhub | accepted | [ADR-0029 — 토큰의 신뢰는 데이터 경로의 로컬 검증으로만 얻는다](../../careerhub/adr/adr-0029-data-path-local-token-verification.md) |
+| ADR-0031 | adr | careerhub | accepted | [ADR-0031 — 인가 전파는 발급 시점 클레임 주입으로 한다](../../careerhub/adr/adr-0031-issuance-time-claim-injection.md) |
 | — | discussion | careerhub-front | done | [careerhub-front 리뉴얼 — 결정 축 벌리기](../../careerhub-front/discussion/260717_1456_frontend-renewal-decision-axes.md) |
 | — | discussion | careerhub-front | rejected | [계측 — 무엇을 신뢰할 수 있고, 어디서 보내나 (축 H)](../../careerhub-front/discussion/260717_1617_measurement-trust-and-transport.md) |
 | — | discussion | careerhub-front | active | [아픔을 무엇이 "할 수 없게" 만드나 — 린트·토큰·테스트, 그리고 빠져 있던 둘](../../careerhub-front/discussion/260717_2041_what-enforces-frontend-quality.md) |

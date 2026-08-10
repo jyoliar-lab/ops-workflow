@@ -6,7 +6,7 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 
 | id | type | topic | status | 문서 |
 |---|---|---|---|---|
-| ADR-0028 | adr | careerhub | proposed | [ADR-0028 — 인증은 외부 IdP 제품이 소유하고, 인가·도메인 상태는 앱이 소유한다](../../careerhub/adr/adr-0028-delegate-authentication-to-external-idp.md) |
+| ADR-0028 | adr | careerhub | accepted | [ADR-0028 — 인증은 외부 IdP 제품이 소유하고, 인가·도메인 상태는 앱이 소유한다](../../careerhub/adr/adr-0028-delegate-authentication-to-external-idp.md) |
 | — | discussion | careerhub-front | done | [e2e 명세 산출물은 어디에 사나 — 그리고 기존 앱용 배선을 남기나](../../careerhub-front/discussion/260803_1329_e2e-spec-artifact-placement.md) |
 | — | discussion | careerhub | active | [auth-service의 구조적 결함 — 공개 전환 전에 무엇을 정하고 무엇을 지금 닫나](../../careerhub/discussion/260804_1735_auth-service-structural-defects.md) |
 | — | discussion | careerhub | active | [비밀번호 없이 소셜 로그인만 제공해도 되는가 — 의무와, 대신 지는 대가](../../careerhub/discussion/260805_1245_password-free-social-only-obligations.md) |

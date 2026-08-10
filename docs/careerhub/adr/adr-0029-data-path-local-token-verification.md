@@ -3,8 +3,8 @@ id: ADR-0029
 type: adr
 topic: careerhub
 subjects: [auth-service, api-composer, jwt, oidc]
-status: proposed
-accepted_at:       # 비운다. accept.py 가 채운다
+status: accepted
+accepted_at: 2026-08-10T18:43:00+09:00
 parent: ADR-0028
 references:
 superseded_by:
@@ -34,6 +34,7 @@ superseded_by:
 
 - **introspection (요청마다 원격 확인).** 즉시 발효를 얻는 대신 발급자가 전 요청 경로의 단일 장애점이 된다. 위험한 조작이 특정 서비스(auth-service)에 몰려 있는 구조에서, 전 경로가 그 비용을 낼 이유가 없다.
 - **게이트웨이 집중 검증(엣지 인증).** 검증을 네트워크 경계 한 곳으로 모으고 뒤의 서비스는 신뢰된 신원 전달을 받는 실무 패턴이다. 파는 가치는 검증 코드의 단일화인데, 검증자가 둘(auth-service·api-composer)뿐이고 같은 언어라 공용 모듈로 같은 것을 얻는다 — 이득이 ~0이다. 반면 현행 게이트웨이에는 JWT 검증 기능이 없어 지원 게이트웨이의 조사·도입이 선행 비용이 되고, 내부 홉에서 검증이 소멸하는 구조는 홉마다 검증하는 제로트러스트 흐름에 역행한다.
+
 ## Consequences
 
 - **회수의 지연을 산다.** 탈퇴·정지된 사용자의 액세스 토큰이 수명까지 유효하다. 발급자 측에서 갱신(refresh)은 즉시 끊기므로 노출 창의 상한은 액세스 토큰 수명이다.

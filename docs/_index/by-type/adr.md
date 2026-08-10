@@ -30,10 +30,10 @@
 | ADR-0024 | proposed | ops-workflow | discussion | [ADR-0024 — discussion은 보관도 동결도 약속하지 않는다](../../ops-workflow/adr/adr-0024-discussion-no-retention-no-freeze.md) |
 | ADR-0025 | proposed | careerhub | openapi, grpc, protobuf | [ADR-0025 — 호환의 정의는 계약이 소유한다: 생성 코드 층위까지, 쌍방 의무로](../../careerhub/adr/adr-0025-contract-owns-compatibility-definition.md) |
 | ADR-0026 | proposed | careerhub | openapi, grpc, protobuf, careerhub-web | [ADR-0026 — 구형의 제거는 이행 증명이 게이트다: 표시가 아니라 티켓이 제거를 보증한다](../../careerhub/adr/adr-0026-removal-gated-by-proven-migration.md) |
-| ADR-0027 | proposed | careerhub | auth-service, userinfo-service, postgresql, mongodb | [ADR-0027 — 시스템 전역 사용자 정체성은 저장소 독립적으로 발급된 불변 식별자로 한다](../../careerhub/adr/adr-0027-storage-independent-user-identifier.md) |
-| ADR-0028 | proposed | careerhub | auth-service, api-composer, careerhub-front, oidc, jwt, google-oauth, naver | [ADR-0028 — 인증은 외부 IdP 제품이 소유하고, 인가·도메인 상태는 앱이 소유한다](../../careerhub/adr/adr-0028-delegate-authentication-to-external-idp.md) |
-| ADR-0029 | proposed | careerhub | auth-service, api-composer, jwt, oidc | [ADR-0029 — 토큰의 신뢰는 데이터 경로의 로컬 검증으로만 얻는다](../../careerhub/adr/adr-0029-data-path-local-token-verification.md) |
-| ADR-0030 | proposed | careerhub | zitadel, keycloak, postgresql, auth-service | [ADR-0030 — IdP 제품으로 Zitadel을 채택한다](../../careerhub/adr/adr-0030-adopt-zitadel-as-idp.md) |
-| ADR-0031 | proposed | careerhub | auth-service, api-composer, jwt, oidc | [ADR-0031 — 인가 전파는 발급 시점 클레임 주입으로 한다](../../careerhub/adr/adr-0031-issuance-time-claim-injection.md) |
+| ADR-0027 | accepted | careerhub | auth-service, userinfo-service, postgresql, mongodb | [ADR-0027 — 시스템 전역 사용자 정체성은 저장소 독립적으로 발급된 불변 식별자로 한다](../../careerhub/adr/adr-0027-storage-independent-user-identifier.md) |
+| ADR-0028 | accepted | careerhub | auth-service, api-composer, careerhub-front, oidc, jwt, google-oauth, naver | [ADR-0028 — 인증은 외부 IdP 제품이 소유하고, 인가·도메인 상태는 앱이 소유한다](../../careerhub/adr/adr-0028-delegate-authentication-to-external-idp.md) |
+| ADR-0029 | accepted | careerhub | auth-service, api-composer, jwt, oidc | [ADR-0029 — 토큰의 신뢰는 데이터 경로의 로컬 검증으로만 얻는다](../../careerhub/adr/adr-0029-data-path-local-token-verification.md) |
+| ADR-0030 | accepted | careerhub | zitadel, keycloak, postgresql, auth-service | [ADR-0030 — IdP 제품으로 Zitadel을 채택한다](../../careerhub/adr/adr-0030-adopt-zitadel-as-idp.md) |
+| ADR-0031 | accepted | careerhub | auth-service, api-composer, jwt, oidc | [ADR-0031 — 인가 전파는 발급 시점 클레임 주입으로 한다](../../careerhub/adr/adr-0031-issuance-time-claim-injection.md) |
 | ADR-0032 | proposed | ops-workflow | adr | [ADR-0032 — 정책 ADR은 proposed로 운영한다: 검증은 하네스가, accept는 미룬다](../../ops-workflow/adr/adr-0032-policy-adr-defers-accept.md) |
 | ADR-0033 | proposed | ops-workflow | github-issues, github-projects | [ADR-0033 — 티켓 Status는 여섯이다: 진행 단계와 확신만 표현한다](../../ops-workflow/adr/adr-0033-ticket-status-roster-and-meaning.md) |

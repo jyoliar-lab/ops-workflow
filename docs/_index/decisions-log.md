@@ -14,3 +14,8 @@
 | ADR-0018 | 2026-07-26T18:26:11+09:00 | careerhub | openapi, api-composer | — | [ADR-0018 — REST 계약의 원천을 코드에서 독립한 명세에 두고, 서버를 생성 인터페이스로 구속한다](../careerhub/adr/adr-0018-spec-first-rest-contract-source.md) |
 | ADR-0019 | 2026-08-01T15:22:29+09:00 | careerhub | openapi, grpc, protobuf | — | [ADR-0019 — 계약 합의는 구현 완료 전에 공표한다: 공표 지점은 원천의 머지다](../careerhub/adr/adr-0019-publish-contract-agreement-before-implementation.md) |
 | ADR-0020 | 2026-08-01T15:22:29+09:00 | careerhub | openapi, grpc, protobuf | — | [ADR-0020 — 계약 원천은 그 계약의 provider 저장소에 두고, 소비자는 공표물에 결합한다](../careerhub/adr/adr-0020-contract-source-in-provider-repo.md) |
+| ADR-0027 | 2026-08-10T18:43:00+09:00 | careerhub | auth-service, userinfo-service, postgresql, mongodb | — | [ADR-0027 — 시스템 전역 사용자 정체성은 저장소 독립적으로 발급된 불변 식별자로 한다](../careerhub/adr/adr-0027-storage-independent-user-identifier.md) |
+| ADR-0028 | 2026-08-10T18:43:00+09:00 | careerhub | auth-service, api-composer, careerhub-front, oidc, jwt, google-oauth, naver | — | [ADR-0028 — 인증은 외부 IdP 제품이 소유하고, 인가·도메인 상태는 앱이 소유한다](../careerhub/adr/adr-0028-delegate-authentication-to-external-idp.md) |
+| ADR-0029 | 2026-08-10T18:43:00+09:00 | careerhub | auth-service, api-composer, jwt, oidc | ADR-0028 | [ADR-0029 — 토큰의 신뢰는 데이터 경로의 로컬 검증으로만 얻는다](../careerhub/adr/adr-0029-data-path-local-token-verification.md) |
+| ADR-0030 | 2026-08-10T18:43:00+09:00 | careerhub | zitadel, keycloak, postgresql, auth-service | ADR-0028 | [ADR-0030 — IdP 제품으로 Zitadel을 채택한다](../careerhub/adr/adr-0030-adopt-zitadel-as-idp.md) |
+| ADR-0031 | 2026-08-10T18:43:00+09:00 | careerhub | auth-service, api-composer, jwt, oidc | ADR-0028 | [ADR-0031 — 인가 전파는 발급 시점 클레임 주입으로 한다](../careerhub/adr/adr-0031-issuance-time-claim-injection.md) |

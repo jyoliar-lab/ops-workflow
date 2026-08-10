@@ -3,8 +3,8 @@ id: ADR-0031
 type: adr
 topic: careerhub
 subjects: [auth-service, api-composer, jwt, oidc]
-status: proposed
-accepted_at: # 비운다. accept.py 가 채운다
+status: accepted
+accepted_at: 2026-08-10T18:43:00+09:00
 parent: ADR-0028
 references: [ADR-0029]
 superseded_by:
