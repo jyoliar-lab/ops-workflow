@@ -28,6 +28,31 @@ masterkey(정확히 32바이트)는 DB의 `system.encryption_keys` 테이블에 
 실제 secrets(서명 키·TOTP 시드·IdP client secret·SMTP 자격증명 등)는 그 안쪽 키들이 암호화한다.
 근거: `internal/crypto/database/database.go` — `ReadKeys()`가 masterkey로 `system.encryption_keys` 전 행을 복호화해 기동한다.
 
+**①-a masterkey를 받는 코드 경로는 그 하나뿐이다 (2026-08-11 추가 실측).**
+`NewKeyStorage(client, masterKey)`의 호출자는 `cmd/start/start.go` · `cmd/setup/setup.go` · `cmd/mirror/projections.go` · `cmd/key/key.go` 넷이고, 전부 `system.encryption_keys`의 `key` 컬럼을 감싸고 푸는 데만 쓴다.
+masterkey로 직접 암호화되는 업무 데이터는 없다.
+
+**①-b 안쪽 키는 11종이다.**
+`cmd/encryption/encryption_keys.go`의 `defaultKeyIDs` — 기동 시 없으면 생성해 masterkey로 감싸 넣는다.
+
+| 키 | 무엇을 암호화하나 |
+|---|---|
+| `oidcKey` | OIDC/OAuth 토큰·인가 코드, **그리고 서명 키페어의 private key** (`internal/command/command.go` — `keyAlgorithm = oidcEncryption`) |
+| `samlKey` | SAML CA·인증서 private key (`certificateAlgorithm = samlEncryption`) |
+| `idpConfigKey` | 외부 IdP client secret — 복호화해서 써야 하므로 해시가 아니라 암호화 |
+| `otpKey` | TOTP 시드·OTP 코드 |
+| `smtpKey` · `smsKey` | SMTP 비밀번호 · SMS 공급자 토큰 |
+| `userKey` | 사용자 일회성 코드(초기화·인증·비밀번호 재설정) |
+| `domainVerificationKey` | 도메인 검증 토큰 |
+| `targetKey` | Actions v2 target 서명 키 |
+| `csrfCookieKey` · `userAgentCookieKey` | 로그인 UI 쿠키 암호화 |
+
+**①-c masterkey 계통 밖에 있는 것 — 피해 크기 산정의 경계.**
+사용자 비밀번호는 해시(passwap)다.
+**Zitadel 자신의 앱 client secret(OIDC/API 앱)도 해시다** — `internal/command/project_application_oidc.go`의 `newHashedSecret`.
+즉 careerhub 백엔드가 쓰는 client secret은 masterkey가 지키는 대상이 아니다(대신 유출 시 재발급이 유일한 대응이다).
+masterkey가 실질적으로 지키는 것은 **① 토큰·서명 키 ② 외부 IdP client secret ③ 일회성 코드** 셋이다.
+
 **② 회전 기능이 없다.**
 masterkey를 바꾸는 명령·절차가 Zitadel에 존재하지 않는다.
 회전 지원은 open feature request다 — [zitadel/zitadel#6768](https://github.com/zitadel/zitadel/issues/6768), milestone v5, 미착수.
@@ -74,6 +99,7 @@ masterkey를 "회전 대상 시크릿"이 아니라 백업 복구의 필수 재�
 | 유출 대응력 | 시나리오 없으면 0 | 즉시 대응 가능 | 지원 전까지 0 |
 
 우리 규모의 감쇠 요인: 사용자 1명, TOTP 미사용, secrets는 사실상 IdP client secret과 서명 키뿐이다.
+이 축소는 ①-b·①-c의 실측과 일치한다 — TOTP·SMTP·SMS·SAML 미사용이면 11종 중 실제로 값이 든 것은 `oidcKey`·`idpConfigKey` 계열뿐이고, 앱 client secret은 애초에 해시라 masterkey 유출의 사정거리 밖이다.
 유출 시 IdP client secret은 콘솔에서 재발급하면 되고 서명 키는 재생성된다 — **최악의 경우에도 "새 masterkey로 재구축 + secrets 재입력"이 감당 가능한 크기**다.
 이 감쇠는 사용자·연동이 늘면 사라진다.
 
