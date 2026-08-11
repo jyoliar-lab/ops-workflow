@@ -96,6 +96,7 @@
 - [Zitadel masterkey — 운영 중 변경(회전)은 어떻게 되는가](../careerhub/discussion/260810_1910_zitadel-masterkey-rotation-paths.md) — `active`
 - [리뉴얼은 prod에 바로 — 병행 스택·컷오버·스키마 동결의 정제](../careerhub/discussion/260810_2252_renewal-parallel-stack-prod-cutover.md) — `active`
 - [Zitadel 배치 실측 — 서브패스 가부와 소셜 sub 보존 조건 판정](../careerhub/discussion/260811_1452_zitadel-placement-social-sub-verdict.md) — `active`
+- [Keycloak operator·plugin으로 클레임 훅 타겟의 GitOps 주입이 가능한가](../careerhub/discussion/260811_2134_keycloak-operator-claim-hook-feasibility.md) — `rejected`
 
 ## ADR-0031 — 인가 전파는 발급 시점 클레임 주입으로 한다
 
