@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (46)
+# by-type / discussion (47)
 
 | status | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|
@@ -36,6 +36,7 @@
 | active | careerhub | nginx-gateway-fabric, auth-service, careerhub-front, careerhub-api-composer, careerhub-web, zitadel, cert-manager | ADR-0030 | [careerhub 라우팅 — 경로 기반에서 호스트 기반으로, 그리고 공개면 판정](../../careerhub/discussion/260810_1801_path-to-host-based-routing.md) |
 | active | careerhub | zitadel, masterkey, ssm-parameter-store, external-secrets | ADR-0030 | [Zitadel masterkey — 운영 중 변경(회전)은 어떻게 되는가](../../careerhub/discussion/260810_1910_zitadel-masterkey-rotation-paths.md) |
 | active | careerhub | careerhub-web, auth-service, careerhub-api-composer, zitadel, nginx-gateway-fabric | ADR-0027, ADR-0028, ADR-0030 | [리뉴얼은 prod에 바로 — 병행 스택·컷오버·스키마 동결의 정제](../../careerhub/discussion/260810_2252_renewal-parallel-stack-prod-cutover.md) |
+| active | careerhub | zitadel, auth-service, google, naver, cert-manager | ADR-0030, ADR-0027 | [Zitadel 배치 실측 — 서브패스 가부와 소셜 sub 보존 조건 판정](../../careerhub/discussion/260811_1452_zitadel-placement-social-sub-verdict.md) |
 | active | homelab | prometheus, alertmanager, kubelet, longhorn, kube-prometheus-stack | — | [Prometheus TSDB 만석과 이중 감시 실패 — 2026-07-30 장애 기록](../../homelab/discussion/260730_2245_prometheus-tsdb-full-double-monitoring-failure.md) |
 | active | homelab | prometheus, grafana, kube-prometheus-stack | — | [룰이 참조하는 메트릭의 부재 감지 — 공식 기능·공식 가이드·대안 도구 조사](../../homelab/discussion/260731_1233_rule-metric-absence-detection-options.md) |
 | done | homelab | aws-ec2, jyoliar-k8s, onpremise-k8s, baremetal | — | [은퇴한 환경(aws-ec2) 코드의 보존 방식](../../homelab/discussion/260807_2002_retired-env-code-archiving.md) |

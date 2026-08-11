@@ -64,6 +64,7 @@
 - [auth-service의 user_id가 다른 서비스의 인덱스로 쓰이는 것은 적절한가](../careerhub/discussion/260805_1308_storage-independent-user-identifier.md) — `done`
 - [Zitadel 위임 Epic의 일 쪼갬 — 왜 이렇게 갈랐고, 무엇을 버렸나](../careerhub/discussion/260807_0158_zitadel-epic-work-breakdown.md) — `done`
 - [리뉴얼은 prod에 바로 — 병행 스택·컷오버·스키마 동결의 정제](../careerhub/discussion/260810_2252_renewal-parallel-stack-prod-cutover.md) — `active`
+- [Zitadel 배치 실측 — 서브패스 가부와 소셜 sub 보존 조건 판정](../careerhub/discussion/260811_1452_zitadel-placement-social-sub-verdict.md) — `active`
 
 ## ADR-0028 — 인증은 외부 IdP 제품이 소유하고, 인가·도메인 상태는 앱이 소유한다
 
@@ -94,6 +95,7 @@
 - [careerhub 라우팅 — 경로 기반에서 호스트 기반으로, 그리고 공개면 판정](../careerhub/discussion/260810_1801_path-to-host-based-routing.md) — `active`
 - [Zitadel masterkey — 운영 중 변경(회전)은 어떻게 되는가](../careerhub/discussion/260810_1910_zitadel-masterkey-rotation-paths.md) — `active`
 - [리뉴얼은 prod에 바로 — 병행 스택·컷오버·스키마 동결의 정제](../careerhub/discussion/260810_2252_renewal-parallel-stack-prod-cutover.md) — `active`
+- [Zitadel 배치 실측 — 서브패스 가부와 소셜 sub 보존 조건 판정](../careerhub/discussion/260811_1452_zitadel-placement-social-sub-verdict.md) — `active`
 
 ## ADR-0031 — 인가 전파는 발급 시점 클레임 주입으로 한다
 

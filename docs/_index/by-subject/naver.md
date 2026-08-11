@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / naver (6)
+# by-subject / naver (7)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -12,3 +12,4 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | careerhub | active | [제품을 안 들이고 auth-service만 고친다면 — 규격이 실제로 요구하는 것과, 줄 고치기로는 안 닫히는 것](../../careerhub/discussion/260805_1323_asvs-conformance-gaps-auth-service.md) |
 | — | discussion | careerhub | done | [auth-service가 굳이 필요한가 — Keycloak이 원장까지 갖는 프레임의 재검토](../../careerhub/discussion/260805_1635_auth-service-elimination-via-keycloak.md) |
 | — | discussion | careerhub | active | [Zitadel 도입은 auth-service의 요구사항을 얼마나 해소하는가 — 항목별 판정과 잔여 목록](../../careerhub/discussion/260805_1801_zitadel-coverage-of-auth-requirements.md) |
+| — | discussion | careerhub | active | [Zitadel 배치 실측 — 서브패스 가부와 소셜 sub 보존 조건 판정](../../careerhub/discussion/260811_1452_zitadel-placement-social-sub-verdict.md) |
