@@ -101,4 +101,9 @@
 
 - [Zitadel의 비-JWT 인증 경로와 권한 변경의 즉시 발효](../careerhub/discussion/260806_1931_zitadel-non-jwt-auth-and-immediacy.md) — `done`
 - [Zitadel 위임 Epic의 일 쪼갬 — 왜 이렇게 갈랐고, 무엇을 버렸나](../careerhub/discussion/260807_0158_zitadel-epic-work-breakdown.md) — `done`
+- [Zitadel 발급 훅 target/execution 등록 — GitOps 경로 조사](../careerhub/discussion/260811_2031_zitadel-actions-target-gitops-registration.md) — `done`
+
+## ADR-0034 — terraform은 GitOps가 생성한 인프라에 의존하지 않는다
+
+- [Zitadel 발급 훅 target/execution 등록 — GitOps 경로 조사](../careerhub/discussion/260811_2031_zitadel-actions-target-gitops-registration.md) — `done`
 
