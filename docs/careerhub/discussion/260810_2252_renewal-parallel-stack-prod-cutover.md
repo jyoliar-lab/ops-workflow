@@ -3,12 +3,14 @@ type: discussion
 topic: careerhub
 subjects:
   - careerhub-web
+  - careerhub-front
   - auth-service
   - careerhub-api-composer
   - zitadel
   - nginx-gateway-fabric
 status: active
 ref-adrs:
+  - ADR-0011
   - ADR-0027
   - ADR-0028
   - ADR-0030
@@ -171,3 +173,42 @@ auth 원장의 sub 치환·userinfo `userId` 백필·레거시 컬럼 정리까�
 - **티켓 조정의 승인** — 검증 전환의 이중 수용 요구 제거 · 대칭키 제거의 만료 대기 제거 · 컷오버 절차의 티켓화 여부.
 
 정제 ②(expand/contract)와 반론 ①·정제 ①(호스트 이름)은 반전으로 무효가 되었으나 본문에 남긴다 — 가용성을 다시 지켜야 하는 날(실사용자가 생기는 날)이 오면 그대로 되살아나는 논리다.
+
+---
+
+## 재개봉(260813) — front 선개조 검토와 폐기
+
+반전의 순서를 다시 여는 제안이 있었다: careerhub-web 도입을 마지막으로 미루고, Zitadel·전역 식별자·비대칭키를 careerhub-front(레거시)에 임시 수정으로 선반영하자.
+동기는 web이 long pole이라는 것 — 진행 중인 인증 위임 국면을 web 일정에 볼모 잡히지 않게 먼저 완결·검증하고, 한 번에 하나씩 확인하고 싶다는 것이었다.
+전환 방식은 일괄 컷오버 유지가 전제였으므로, 반전이 녹인 이득(이중 검증 불필요·expand/contract 불필요)은 어느 안에서도 살아 있었다.
+
+### 실측이 판을 바꿨다
+
+careerhub-front의 인증 표면을 실측했다:
+
+- **front는 OAuth를 모른다** — authorization URL 생성·콜백 수신·code 교환 전부 auth-service에 있고, redirect URI도 auth-service 도메인이다.
+- JWT 파싱 0건 · 클레임 의존 0건 · userId 의존은 관리자 화면 pass-through 2곳뿐 — serial→sub 전환에 front 수정이 필요 없다.
+- 토큰 발급 체제에 묶인 표면은 로그인 4개 + refresh 1개 엔드포인트뿐이고, 코어는 약 290줄(`httputils.js`·`cookie.js`·`view/login/`)에 격리돼 있다.
+
+"front를 수정해야 한다"는 전제가 약해졌고, 옵션이 셋으로 벌어졌다:
+
+- **B. auth-service 어댑터** — 팝업+postMessage+`/sign-in` 응답 계약을 유지한 채 발급만 Zitadel로.
+  front 거의 무변경이고, 버릴 코드가 어차피 철거될 auth-service 인증 경로 안에 갇힌다.
+  대가: 인증 경로 철거가 web 컷오버 뒤로 밀린다.
+  함정 셋을 확인했다: refresh 회전(레거시는 accessToken만 저장) · 로그아웃이 쿠키 삭제뿐이라 Zitadel 세션 잔존 · 동의 게이트의 계약 매핑.
+- **C. front 직접 OIDC** — web에 계획된 표준 리다이렉트 흐름을 Svelte+해시 라우터에 선구현.
+  버릴 코드 최대치이고, HttpOnly 선택지는 서버 없는 SPA인 front에서 구조적으로 닫혀 있어 축 D(`careerhub-front/260722_1617`)를 닫지 못한다.
+- **A. 안 한다** — 반전 유지.
+
+### 폐기 — A로 복귀
+
+사람이 C를 골랐다가 폐기했다.
+이유: careerhub-front에 버리는 코드가 너무 많다 — 재작성 결정(ADR-0011)이 예견한 "버릴 코드에 손대는" 비용을, 급한 수정이 아닌 계획된 투자로 치르는 것이 정당화되지 않았다.
+대신 반전의 절차로 돌아간다: **레거시 구조 변경 없이 careerhub-web에 선행 가능한 것을 최대한 해두고, 레거시 구조로 운영할 수 없는 것들을 마지막 컷오버 창에 몰아넣고, careerhub-web으로 새로 서비스를 시작한다.**
+long pole 불안은 순서 반전이 아니라 web 로그인 구현(토큰 모듈 격리 → OIDC 배선)을 지금 착수하는 것으로 흡수한다 — web의 "완성"이 아니라 "로그인 실물"이 먼저 온다.
+
+### 되살아나는 조건
+
+B(어댑터)는 값이 남는 폐기다.
+컷오버 전에 실사용자가 생겨 며칠 중단을 감수할 수 없게 되면, front 무변경으로 전환기를 버티는 가장 싼 경로가 B다 — 위의 표면 실측이 그 값을 보증한다.
+말미 단서(가용성 논리의 부활)와 같은 트리거를 공유한다.

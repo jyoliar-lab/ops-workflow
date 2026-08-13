@@ -15,6 +15,7 @@
 ## ADR-0011 — careerhub-front를 재작성한다 (점진 개선하지 않는다)
 
 - [e2e 명세 산출물은 어디에 사나 — 그리고 기존 앱용 배선을 남기나](../careerhub-front/discussion/260803_1329_e2e-spec-artifact-placement.md) — `done`
+- [리뉴얼은 prod에 바로 — 병행 스택·컷오버·스키마 동결의 정제](../careerhub/discussion/260810_2252_renewal-parallel-stack-prod-cutover.md) — `active`
 
 ## ADR-0014 — 프론트가 쓰는 REST 타입을 백엔드 스펙에서 생성한다 (손으로 선언하지 않는다)
 
@@ -68,6 +69,7 @@
 
 ## ADR-0028 — 인증은 외부 IdP 제품이 소유하고, 인가·도메인 상태는 앱이 소유한다
 
+- [토큰 저장 — 서버가 생긴 뒤에 다시 여는 축 D](../careerhub-front/discussion/260722_1617_token-storage-after-server-exists.md) — `active`
 - [auth-service가 굳이 필요한가 — Keycloak이 원장까지 갖는 프레임의 재검토](../careerhub/discussion/260805_1635_auth-service-elimination-via-keycloak.md) — `done`
 - [Zitadel 도입은 auth-service의 요구사항을 얼마나 해소하는가 — 항목별 판정과 잔여 목록](../careerhub/discussion/260805_1801_zitadel-coverage-of-auth-requirements.md) — `active`
 - [Zitadel 전환 시 테스트 전용 로그인 경로는 어떻게 되는가 — 티켓 #7 재판정](../careerhub/discussion/260805_2044_test-login-path-under-zitadel.md) — `done`
@@ -78,6 +80,7 @@
 
 ## ADR-0029 — 토큰의 신뢰는 데이터 경로의 로컬 검증으로만 얻는다
 
+- [토큰 저장 — 서버가 생긴 뒤에 다시 여는 축 D](../careerhub-front/discussion/260722_1617_token-storage-after-server-exists.md) — `active`
 - [auth-service가 굳이 필요한가 — Keycloak이 원장까지 갖는 프레임의 재검토](../careerhub/discussion/260805_1635_auth-service-elimination-via-keycloak.md) — `done`
 - [Zitadel 도입은 auth-service의 요구사항을 얼마나 해소하는가 — 항목별 판정과 잔여 목록](../careerhub/discussion/260805_1801_zitadel-coverage-of-auth-requirements.md) — `active`
 - [Zitadel의 비-JWT 인증 경로와 권한 변경의 즉시 발효](../careerhub/discussion/260806_1931_zitadel-non-jwt-auth-and-immediacy.md) — `done`
@@ -86,6 +89,7 @@
 
 ## ADR-0030 — IdP 제품으로 Zitadel을 채택한다
 
+- [토큰 저장 — 서버가 생긴 뒤에 다시 여는 축 D](../careerhub-front/discussion/260722_1617_token-storage-after-server-exists.md) — `active`
 - [auth-service가 굳이 필요한가 — Keycloak이 원장까지 갖는 프레임의 재검토](../careerhub/discussion/260805_1635_auth-service-elimination-via-keycloak.md) — `done`
 - [Zitadel 도입은 auth-service의 요구사항을 얼마나 해소하는가 — 항목별 판정과 잔여 목록](../careerhub/discussion/260805_1801_zitadel-coverage-of-auth-requirements.md) — `active`
 - [Zitadel 전환 시 테스트 전용 로그인 경로는 어떻게 되는가 — 티켓 #7 재판정](../careerhub/discussion/260805_2044_test-login-path-under-zitadel.md) — `done`
@@ -100,6 +104,7 @@
 
 ## ADR-0031 — 인가 전파는 발급 시점 클레임 주입으로 한다
 
+- [토큰 저장 — 서버가 생긴 뒤에 다시 여는 축 D](../careerhub-front/discussion/260722_1617_token-storage-after-server-exists.md) — `active`
 - [Zitadel의 비-JWT 인증 경로와 권한 변경의 즉시 발효](../careerhub/discussion/260806_1931_zitadel-non-jwt-auth-and-immediacy.md) — `done`
 - [Zitadel 위임 Epic의 일 쪼갬 — 왜 이렇게 갈랐고, 무엇을 버렸나](../careerhub/discussion/260807_0158_zitadel-epic-work-breakdown.md) — `done`
 - [Zitadel 발급 훅 target/execution 등록 — GitOps 경로 조사](../careerhub/discussion/260811_2031_zitadel-actions-target-gitops-registration.md) — `done`
