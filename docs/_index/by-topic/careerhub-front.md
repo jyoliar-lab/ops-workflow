@@ -14,7 +14,7 @@
 | — | discussion | rejected | api-composer, userinfo-service | [계측 — 무엇을 신뢰할 수 있고, 어디서 보내나 (축 H)](../../careerhub-front/discussion/260717_1617_measurement-trust-and-transport.md) |
 | — | discussion | active | api-composer | [아픔을 무엇이 "할 수 없게" 만드나 — 린트·토큰·테스트, 그리고 빠져 있던 둘](../../careerhub-front/discussion/260717_2041_what-enforces-frontend-quality.md) |
 | — | discussion | active | svelte | ["문서화된 컨벤션이 지켜지지 않았다"는 거짓이었다 — 코드로 반증](../../careerhub-front/discussion/260722_1510_documented-convention-premise-refuted.md) |
-| — | discussion | active | auth-service, api-composer, nextjs, zitadel | [토큰 저장 — 서버가 생긴 뒤에 다시 여는 축 D](../../careerhub-front/discussion/260722_1617_token-storage-after-server-exists.md) |
+| — | discussion | done | auth-service, api-composer, nextjs, zitadel | [토큰 저장 — 서버가 생긴 뒤에 다시 여는 축 D](../../careerhub-front/discussion/260722_1617_token-storage-after-server-exists.md) |
 | — | discussion | active | nextjs, auth-service, api-composer | [회귀를 무엇이 잡나 — 그리고 그물이 무언가를 실제로 막나](../../careerhub-front/discussion/260722_1618_regression-net-and-merge-gate.md) |
 | — | discussion | done | openapi, careerhub-web, api-composer | [프론트가 공표 태그에서 TS 타입을 만드는 방법 — 소비자가 당긴다](../../careerhub-front/discussion/260802_1607_frontend-pulls-published-spec-tag.md) |
 | — | discussion | done | careerhub-web, careerhub-front | [e2e 명세 산출물은 어디에 사나 — 그리고 기존 앱용 배선을 남기나](../../careerhub-front/discussion/260803_1329_e2e-spec-artifact-placement.md) |
