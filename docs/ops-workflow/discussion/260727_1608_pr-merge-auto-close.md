@@ -259,3 +259,31 @@ Development 가시성과 자동 close 없음을 모두 얻는다. §8의 결정(
 
 정책 문구 델타는 없다 — §8의 결론(자동 close 기각 · CLAUDE.md §5 유지)이 그대로이고,
 linked branch(§8 채택)는 이 설정 아래에서 자동 close 없이 산다. 이 문서는 닫는다.
+
+## 12. 후기 (260814) — 후속 PR의 Development 연결: 키워드 검사를 "부재"에서 "티켓 연결만"으로 반전
+
+운영에서 새 요구가 나왔다: **같은 티켓의 두 번째 이후 PR**(squash 머지 후 후속 작업)은
+Development 절에 자동 연결되지 않는다 — linked branch 의 자동 연결은 첫 PR 에서
+소진되고, 사람이 이슈 UI gear 로 일일이 연결해 왔다.
+
+조사 결과, **기존 PR 을 Development 에 연결하는 공식 API 는 여전히 없다**(GraphQL 은
+`createLinkedBranch`/`deleteLinkedBranch` 뿐 — community discussion #155339, 2026-06
+기준 미해결). 유일한 자동화 경로는 **close 키워드**(`Closes jyoliar-lab/ops-workflow#N`,
+기본 브랜치 대상 PR)다. §10의 저장소 설정(수동 불변식)이 자동 close 를 막으므로,
+키워드는 이제 "닫는 장치"가 아니라 "연결 장치"다 — 수동 gear 연결과 같은 노출이고,
+제어점은 동일하게 저장소 설정 하나다.
+
+**채택 델타** (ticket-engineer — §11 방어 한 겹의 의도적 해제):
+
+- PR 생성 관문(`ticket-pr.py` — 260814 신설)이 본문에 `Closes jyoliar-lab/ops-workflow#N`
+  을 덧붙인다(멘션 참조의 승격 — 브리지 + Development 연결).
+- preflight ③을 반전: 키워드 **부재** 검사 → **티켓 연결만 허용**. 티켓 밖 이슈를 겨눈
+  키워드는 계속 거부한다 — 설정 보호는 ops-workflow 한 곳뿐이고, 다른 저장소의 이슈는
+  머지 시 정말 닫힌다.
+- §8의 결정 실질(자동 close 기각 · close 는 사람)은 그대로다 — 바뀐 것은 하네스의
+  방어선 구성이지 정책이 아니다.
+
+**실측으로 확인할 것**(다음 PR 1건): 설정 해제 상태에서 키워드가 close 없이
+**Development 연결을 만드는지** — 설정의 문서화된 효과는 "닫지 않음"이고 연결 생성은
+남는 것으로 읽히나, 명시 문서가 없다. 연결이 안 생기면 이 델타는 무효(수동 gear 로
+복귀)다.
