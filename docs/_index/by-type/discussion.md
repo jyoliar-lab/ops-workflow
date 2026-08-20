@@ -1,9 +1,12 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (49)
+# by-type / discussion (55)
 
 | status | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|
+| active | ai-agent | claude-code | — | [대량 로그 검색 시 컨텍스트 오염 최소화 — 직접 검색하되 과정은 잊는 방법](../../ai-agent/discussion/260817_1450_claude-code-context-pollution-log-search.md) |
+| active | ai-agent | claude-code, claude-agent-sdk, langchain, strands-agents | — | [구독제 Claude의 프로그래머블 이용 — SDK·프레임워크별 인증 가능 범위](../../ai-agent/discussion/260817_1512_subscription-auth-programmatic-claude-access.md) |
+| active | ai-agent | codex, antigravity, gemini-cli, github-copilot, cursor | — | [타사 LLM 구독제의 프로그래머블 이용 — Codex · Antigravity · Copilot · Cursor](../../ai-agent/discussion/260817_1522_other-vendor-subscription-programmatic-access.md) |
 | done | careerhub-front | svelte, svelte-spa-router, rollup, api-composer, auth-service | — | [careerhub-front 리뉴얼 — 결정 축 벌리기](../../careerhub-front/discussion/260717_1456_frontend-renewal-decision-axes.md) |
 | active | careerhub-front | nextjs | — | [렌더링 전략 — 화면별로 어디서, 언제 그리나 (축 B)](../../careerhub-front/discussion/260717_1550_rendering-strategy-per-route.md) |
 | rejected | careerhub-front | api-composer, userinfo-service | — | [계측 — 무엇을 신뢰할 수 있고, 어디서 보내나 (축 H)](../../careerhub-front/discussion/260717_1617_measurement-trust-and-transport.md) |
@@ -13,6 +16,7 @@
 | active | careerhub-front | nextjs, auth-service, api-composer | — | [회귀를 무엇이 잡나 — 그리고 그물이 무언가를 실제로 막나](../../careerhub-front/discussion/260722_1618_regression-net-and-merge-gate.md) |
 | done | careerhub-front | openapi, careerhub-web, api-composer | ADR-0014, ADR-0019, ADR-0020 | [프론트가 공표 태그에서 TS 타입을 만드는 방법 — 소비자가 당긴다](../../careerhub-front/discussion/260802_1607_frontend-pulls-published-spec-tag.md) |
 | done | careerhub-front | careerhub-web, careerhub-front | ADR-0011, ADR-0015 | [e2e 명세 산출물은 어디에 사나 — 그리고 기존 앱용 배선을 남기나](../../careerhub-front/discussion/260803_1329_e2e-spec-artifact-placement.md) |
+| done | careerhub-front | careerhub-web, tailwind | ADR-0015 | [공통 UI 요소와 외부 디자인 프레임워크](../../careerhub-front/discussion/260818_1852_shared-ui-and-design-framework.md) |
 | active | careerhub | adsense, posting-provider, review-crawler, posting-skillscanner | — | [careerhub 는 무엇으로 돈을 버나 — 그리고 그게 성립하나](../../careerhub/discussion/260717_1853_revenue-model-and-viability.md) |
 | done | careerhub | openapi, api-composer | — | [api-composer OpenAPI 스펙의 원천 — code-first vs spec-first](../../careerhub/discussion/260726_1653_openapi-spec-source-of-truth.md) |
 | done | careerhub | openapi, api-composer, careerhub-web | ADR-0014, ADR-0018, ADR-0019, ADR-0020 | [백엔드 스펙 변경을 프론트에 전파하는 방법 — 푸시인가 구독인가](../../careerhub/discussion/260730_1524_spec-change-propagation-to-frontend.md) |
@@ -39,6 +43,8 @@
 | active | careerhub | zitadel, auth-service, google, naver, cert-manager | ADR-0030, ADR-0027 | [Zitadel 배치 실측 — 서브패스 가부와 소셜 sub 보존 조건 판정](../../careerhub/discussion/260811_1452_zitadel-placement-social-sub-verdict.md) |
 | done | careerhub | zitadel, auth-service, argocd, jyoliar-k8s | ADR-0031, ADR-0034 | [Zitadel 발급 훅 target/execution 등록 — GitOps 경로 조사](../../careerhub/discussion/260811_2031_zitadel-actions-target-gitops-registration.md) |
 | rejected | careerhub | keycloak, zitadel, auth-service | ADR-0030 | [Keycloak operator·plugin으로 클레임 훅 타겟의 GitOps 주입이 가능한가](../../careerhub/discussion/260811_2134_keycloak-operator-claim-hook-feasibility.md) |
+| active | careerhub | zitadel, jwt, auth-service, careerhub-api-composer, careerhub-web, openapi | ADR-0031, ADR-0018, ADR-0020, ADR-0014, ADR-0029 | [JWT 클레임 스키마 계약 — 원천을 어디에 어떤 포맷으로 두나](../../careerhub/discussion/260817_1640_jwt-claim-schema-contract-source.md) |
+| active | careerhub | zitadel, google-oauth, careerhub-web, playwright | ADR-0028, ADR-0030 | [실제 Google 연합 로그인 여정의 검증 — 스모크와 회귀 그물의 이원화](../../careerhub/discussion/260820_2216_real-google-federation-journey-verification.md) |
 | active | homelab | prometheus, alertmanager, kubelet, longhorn, kube-prometheus-stack | — | [Prometheus TSDB 만석과 이중 감시 실패 — 2026-07-30 장애 기록](../../homelab/discussion/260730_2245_prometheus-tsdb-full-double-monitoring-failure.md) |
 | active | homelab | prometheus, grafana, kube-prometheus-stack | — | [룰이 참조하는 메트릭의 부재 감지 — 공식 기능·공식 가이드·대안 도구 조사](../../homelab/discussion/260731_1233_rule-metric-absence-detection-options.md) |
 | done | homelab | aws-ec2, jyoliar-k8s, onpremise-k8s, baremetal | — | [은퇴한 환경(aws-ec2) 코드의 보존 방식](../../homelab/discussion/260807_2002_retired-env-code-archiving.md) |

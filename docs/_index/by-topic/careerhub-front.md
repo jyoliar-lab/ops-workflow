@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / careerhub-front (14)
+# by-topic / careerhub-front (15)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -18,3 +18,4 @@
 | — | discussion | active | nextjs, auth-service, api-composer | [회귀를 무엇이 잡나 — 그리고 그물이 무언가를 실제로 막나](../../careerhub-front/discussion/260722_1618_regression-net-and-merge-gate.md) |
 | — | discussion | done | openapi, careerhub-web, api-composer | [프론트가 공표 태그에서 TS 타입을 만드는 방법 — 소비자가 당긴다](../../careerhub-front/discussion/260802_1607_frontend-pulls-published-spec-tag.md) |
 | — | discussion | done | careerhub-web, careerhub-front | [e2e 명세 산출물은 어디에 사나 — 그리고 기존 앱용 배선을 남기나](../../careerhub-front/discussion/260803_1329_e2e-spec-artifact-placement.md) |
+| — | discussion | done | careerhub-web, tailwind | [공통 UI 요소와 외부 디자인 프레임워크](../../careerhub-front/discussion/260818_1852_shared-ui-and-design-framework.md) |

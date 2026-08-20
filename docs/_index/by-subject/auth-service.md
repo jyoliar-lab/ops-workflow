@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / auth-service (27)
+# by-subject / auth-service (28)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -33,3 +33,4 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | careerhub | active | [Zitadel 배치 실측 — 서브패스 가부와 소셜 sub 보존 조건 판정](../../careerhub/discussion/260811_1452_zitadel-placement-social-sub-verdict.md) |
 | — | discussion | careerhub | done | [Zitadel 발급 훅 target/execution 등록 — GitOps 경로 조사](../../careerhub/discussion/260811_2031_zitadel-actions-target-gitops-registration.md) |
 | — | discussion | careerhub | rejected | [Keycloak operator·plugin으로 클레임 훅 타겟의 GitOps 주입이 가능한가](../../careerhub/discussion/260811_2134_keycloak-operator-claim-hook-feasibility.md) |
+| — | discussion | careerhub | active | [JWT 클레임 스키마 계약 — 원천을 어디에 어떤 포맷으로 두나](../../careerhub/discussion/260817_1640_jwt-claim-schema-contract-source.md) |

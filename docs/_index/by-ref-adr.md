@@ -21,15 +21,18 @@
 
 - [프론트가 공표 태그에서 TS 타입을 만드는 방법 — 소비자가 당긴다](../careerhub-front/discussion/260802_1607_frontend-pulls-published-spec-tag.md) — `done`
 - [백엔드 스펙 변경을 프론트에 전파하는 방법 — 푸시인가 구독인가](../careerhub/discussion/260730_1524_spec-change-propagation-to-frontend.md) — `done`
+- [JWT 클레임 스키마 계약 — 원천을 어디에 어떤 포맷으로 두나](../careerhub/discussion/260817_1640_jwt-claim-schema-contract-source.md) — `active`
 
 ## ADR-0015 — 스타일 토큰을 Tailwind로 강제한다 (정의에 그치지 않는다)
 
 - [e2e 명세 산출물은 어디에 사나 — 그리고 기존 앱용 배선을 남기나](../careerhub-front/discussion/260803_1329_e2e-spec-artifact-placement.md) — `done`
+- [공통 UI 요소와 외부 디자인 프레임워크](../careerhub-front/discussion/260818_1852_shared-ui-and-design-framework.md) — `done`
 
 ## ADR-0018 — REST 계약의 원천을 코드에서 독립한 명세에 두고, 서버를 생성 인터페이스로 구속한다
 
 - [백엔드 스펙 변경을 프론트에 전파하는 방법 — 푸시인가 구독인가](../careerhub/discussion/260730_1524_spec-change-propagation-to-frontend.md) — `done`
 - [계약 선합의 패턴의 gRPC 경계 일반화 — proto의 원천은 어디인가](../careerhub/discussion/260730_1620_contract-pattern-to-grpc-boundaries.md) — `done`
+- [JWT 클레임 스키마 계약 — 원천을 어디에 어떤 포맷으로 두나](../careerhub/discussion/260817_1640_jwt-claim-schema-contract-source.md) — `active`
 
 ## ADR-0019 — 계약 합의는 구현 완료 전에 공표한다: 공표 지점은 원천의 머지다
 
@@ -44,6 +47,7 @@
 - [백엔드 스펙 변경을 프론트에 전파하는 방법 — 푸시인가 구독인가](../careerhub/discussion/260730_1524_spec-change-propagation-to-frontend.md) — `done`
 - [계약 선합의 패턴의 gRPC 경계 일반화 — proto의 원천은 어디인가](../careerhub/discussion/260730_1620_contract-pattern-to-grpc-boundaries.md) — `done`
 - [런타임 계약 어긋남 — provider와 consumer가 다른 계약으로 동작하는 것을 무엇이 막는가](../careerhub/discussion/260801_1806_runtime-contract-skew-prevention.md) — `done`
+- [JWT 클레임 스키마 계약 — 원천을 어디에 어떤 포맷으로 두나](../careerhub/discussion/260817_1640_jwt-claim-schema-contract-source.md) — `active`
 
 ## ADR-0021 — 계약은 호환 확장으로만 진화한다: 소비자를 깨뜨리는 배포를 금지한다
 
@@ -77,6 +81,7 @@
 - [Zitadel의 비-JWT 인증 경로와 권한 변경의 즉시 발효](../careerhub/discussion/260806_1931_zitadel-non-jwt-auth-and-immediacy.md) — `done`
 - [Zitadel 위임 Epic의 일 쪼갬 — 왜 이렇게 갈랐고, 무엇을 버렸나](../careerhub/discussion/260807_0158_zitadel-epic-work-breakdown.md) — `done`
 - [리뉴얼은 prod에 바로 — 병행 스택·컷오버·스키마 동결의 정제](../careerhub/discussion/260810_2252_renewal-parallel-stack-prod-cutover.md) — `active`
+- [실제 Google 연합 로그인 여정의 검증 — 스모크와 회귀 그물의 이원화](../careerhub/discussion/260820_2216_real-google-federation-journey-verification.md) — `active`
 
 ## ADR-0029 — 토큰의 신뢰는 데이터 경로의 로컬 검증으로만 얻는다
 
@@ -86,6 +91,7 @@
 - [Zitadel의 비-JWT 인증 경로와 권한 변경의 즉시 발효](../careerhub/discussion/260806_1931_zitadel-non-jwt-auth-and-immediacy.md) — `done`
 - [게이트웨이 엣지 JWT 검증 패턴 — 해부와 careerhub 대입](../careerhub/discussion/260806_2054_gateway-edge-jwt-verification-pattern.md) — `done`
 - [Zitadel 위임 Epic의 일 쪼갬 — 왜 이렇게 갈랐고, 무엇을 버렸나](../careerhub/discussion/260807_0158_zitadel-epic-work-breakdown.md) — `done`
+- [JWT 클레임 스키마 계약 — 원천을 어디에 어떤 포맷으로 두나](../careerhub/discussion/260817_1640_jwt-claim-schema-contract-source.md) — `active`
 
 ## ADR-0030 — IdP 제품으로 Zitadel을 채택한다
 
@@ -101,6 +107,7 @@
 - [리뉴얼은 prod에 바로 — 병행 스택·컷오버·스키마 동결의 정제](../careerhub/discussion/260810_2252_renewal-parallel-stack-prod-cutover.md) — `active`
 - [Zitadel 배치 실측 — 서브패스 가부와 소셜 sub 보존 조건 판정](../careerhub/discussion/260811_1452_zitadel-placement-social-sub-verdict.md) — `active`
 - [Keycloak operator·plugin으로 클레임 훅 타겟의 GitOps 주입이 가능한가](../careerhub/discussion/260811_2134_keycloak-operator-claim-hook-feasibility.md) — `rejected`
+- [실제 Google 연합 로그인 여정의 검증 — 스모크와 회귀 그물의 이원화](../careerhub/discussion/260820_2216_real-google-federation-journey-verification.md) — `active`
 
 ## ADR-0031 — 인가 전파는 발급 시점 클레임 주입으로 한다
 
@@ -108,6 +115,7 @@
 - [Zitadel의 비-JWT 인증 경로와 권한 변경의 즉시 발효](../careerhub/discussion/260806_1931_zitadel-non-jwt-auth-and-immediacy.md) — `done`
 - [Zitadel 위임 Epic의 일 쪼갬 — 왜 이렇게 갈랐고, 무엇을 버렸나](../careerhub/discussion/260807_0158_zitadel-epic-work-breakdown.md) — `done`
 - [Zitadel 발급 훅 target/execution 등록 — GitOps 경로 조사](../careerhub/discussion/260811_2031_zitadel-actions-target-gitops-registration.md) — `done`
+- [JWT 클레임 스키마 계약 — 원천을 어디에 어떤 포맷으로 두나](../careerhub/discussion/260817_1640_jwt-claim-schema-contract-source.md) — `active`
 
 ## ADR-0034 — terraform은 GitOps가 생성한 인프라에 의존하지 않는다
 

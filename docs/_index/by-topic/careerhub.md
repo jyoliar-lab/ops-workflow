@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / careerhub (37)
+# by-topic / careerhub (39)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -41,3 +41,5 @@
 | — | discussion | active | zitadel, auth-service, google, naver, cert-manager | [Zitadel 배치 실측 — 서브패스 가부와 소셜 sub 보존 조건 판정](../../careerhub/discussion/260811_1452_zitadel-placement-social-sub-verdict.md) |
 | — | discussion | done | zitadel, auth-service, argocd, jyoliar-k8s | [Zitadel 발급 훅 target/execution 등록 — GitOps 경로 조사](../../careerhub/discussion/260811_2031_zitadel-actions-target-gitops-registration.md) |
 | — | discussion | rejected | keycloak, zitadel, auth-service | [Keycloak operator·plugin으로 클레임 훅 타겟의 GitOps 주입이 가능한가](../../careerhub/discussion/260811_2134_keycloak-operator-claim-hook-feasibility.md) |
+| — | discussion | active | zitadel, jwt, auth-service, careerhub-api-composer, careerhub-web, openapi | [JWT 클레임 스키마 계약 — 원천을 어디에 어떤 포맷으로 두나](../../careerhub/discussion/260817_1640_jwt-claim-schema-contract-source.md) |
+| — | discussion | active | zitadel, google-oauth, careerhub-web, playwright | [실제 Google 연합 로그인 여정의 검증 — 스모크와 회귀 그물의 이원화](../../careerhub/discussion/260820_2216_real-google-federation-journey-verification.md) |
