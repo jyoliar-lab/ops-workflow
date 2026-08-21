@@ -46,7 +46,7 @@ create.py \
 
 `epic.md`(Feature도 이것 — 컨테이너 공통) · `task.md` · `bug.md`.
 
-**초안은 `temp-tickets/<슬러그>.md` 에 쓴다**(gitignored).
+**초안은 `tmp/github-issues/<슬러그>.md` 에 쓴다**(gitignored).
 
 - **공통 절(Summary · Context · Goal · Acceptance Criteria · References)은 이름까지 한 벌이다.** 같은 질문은 같은 자리·같은 이름에서 답한다. 닫는 사람과 집행자가 그 이름을 찾는다. (Bug에는 Goal이 없다 — Expected Behavior가 그 질문에 답한다.)
 - **선택 절(Requirements · Technical Notes · Environment · Evidence)은 지우지 않고 부재를 "없음"으로 명시한다.** 빈 절은 누락인지 비해당인지 말하지 못한다.

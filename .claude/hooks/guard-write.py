@@ -6,12 +6,12 @@ CLAUDE.md 의 산문 규칙 중 구조로 옮길 수 있는 것을 여기서 강
 
 Write/Edit/MultiEdit:
   허용 — $CLAUDE_PROJECT_DIR/**       (이 저장소: docs/ · .claude/ · CLAUDE.md
-                                       · staging/ — 하네스 마찰 로그 인박스. §6)
+                                       · tmp/ — 초안 인박스(마찰 로그·이슈 초안). §6)
   거부 — docs/_index/**               (생성물 — 도구만 쓴다. §7. 재생성은 hook 자동)
   거부 — workspace/**                 (참조 저장소 로컬 클론 — agent 는 **읽고
          인용할 뿐** 고치지 않는다(§6). 코드 변경은 그 저장소의 PR 로, 사람이 한다)
-  거부 — 그 외 전부(이 저장소 밖). OS 임시 디렉터리도 밖이다 — 티켓 본문 등
-         일회용 초안은 temp-tickets/ (gitignored)에 쓴다.
+  거부 — 그 외 전부(이 저장소 밖). OS 임시 디렉터리도 밖이다 — 이슈 본문·코멘트 등
+         일회용 초안은 tmp/github-issues/ (gitignored)에 쓴다.
 
 Bash:
   거부 — `gh issue close`             (close 는 언제나 사람 — §5)
@@ -111,8 +111,8 @@ def main():
     tmp_roots = {tempfile.gettempdir(), "/tmp", "/private/tmp", "/var/folders"}
     if any(under(fp, t) for t in tmp_roots):
         out_deny(
-            "OS 임시 디렉터리에 쓰지 않는다: %s — 티켓 본문 등 일회용 초안은 저장소의 "
-            "temp-tickets/ 에 쓴다(gitignored). 사람이 초안을 볼 수 있는 자리다." % fp
+            "OS 임시 디렉터리에 쓰지 않는다: %s — 이슈 본문·코멘트 등 일회용 초안은 저장소의 "
+            "tmp/github-issues/ 에 쓴다(gitignored). 사람이 초안을 볼 수 있는 자리다." % fp
         )
 
     out_deny(
