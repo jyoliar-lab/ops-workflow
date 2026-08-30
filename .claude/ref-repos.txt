@@ -24,3 +24,6 @@ https://github.com/jae2274/goutils.git
 https://github.com/jyoliar-careerhub/onpremise-k8s.git
 https://github.com/jae2274/jyoliar-k8s.git
 https://github.com/jyoliar-careerhub/jyoliar-platform-terraform.git
+
+# 하네스 (agent 정의)
+https://github.com/jyoliar-lab/ticket-engineer.git

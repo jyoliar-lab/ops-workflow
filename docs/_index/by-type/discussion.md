@@ -1,12 +1,13 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (55)
+# by-type / discussion (58)
 
 | status | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|
 | active | ai-agent | claude-code | — | [대량 로그 검색 시 컨텍스트 오염 최소화 — 직접 검색하되 과정은 잊는 방법](../../ai-agent/discussion/260817_1450_claude-code-context-pollution-log-search.md) |
 | active | ai-agent | claude-code, claude-agent-sdk, langchain, strands-agents | — | [구독제 Claude의 프로그래머블 이용 — SDK·프레임워크별 인증 가능 범위](../../ai-agent/discussion/260817_1512_subscription-auth-programmatic-claude-access.md) |
 | active | ai-agent | codex, antigravity, gemini-cli, github-copilot, cursor | — | [타사 LLM 구독제의 프로그래머블 이용 — Codex · Antigravity · Copilot · Cursor](../../ai-agent/discussion/260817_1522_other-vendor-subscription-programmatic-access.md) |
+| active | ai-agent | claude-code, mcp-grafana, ops-workflow-agent, ticket-engineer-agent, prometheus, loki | — | [mcp-grafana 를 두 하네스에 붙일 때의 컨텍스트 부하와 최소화 방안](../../ai-agent/discussion/260829_2022_mcp-grafana-context-load-minimization.md) |
 | done | careerhub-front | svelte, svelte-spa-router, rollup, api-composer, auth-service | — | [careerhub-front 리뉴얼 — 결정 축 벌리기](../../careerhub-front/discussion/260717_1456_frontend-renewal-decision-axes.md) |
 | active | careerhub-front | nextjs | — | [렌더링 전략 — 화면별로 어디서, 언제 그리나 (축 B)](../../careerhub-front/discussion/260717_1550_rendering-strategy-per-route.md) |
 | rejected | careerhub-front | api-composer, userinfo-service | — | [계측 — 무엇을 신뢰할 수 있고, 어디서 보내나 (축 H)](../../careerhub-front/discussion/260717_1617_measurement-trust-and-transport.md) |
@@ -48,6 +49,8 @@
 | active | homelab | prometheus, alertmanager, kubelet, longhorn, kube-prometheus-stack | — | [Prometheus TSDB 만석과 이중 감시 실패 — 2026-07-30 장애 기록](../../homelab/discussion/260730_2245_prometheus-tsdb-full-double-monitoring-failure.md) |
 | active | homelab | prometheus, grafana, kube-prometheus-stack | — | [룰이 참조하는 메트릭의 부재 감지 — 공식 기능·공식 가이드·대안 도구 조사](../../homelab/discussion/260731_1233_rule-metric-absence-detection-options.md) |
 | done | homelab | aws-ec2, jyoliar-k8s, onpremise-k8s, baremetal | — | [은퇴한 환경(aws-ec2) 코드의 보존 방식](../../homelab/discussion/260807_2002_retired-env-code-archiving.md) |
+| done | homelab | prometheus, loki, tempo, grafana, kube-prometheus-stack, mcp-grafana, kagent, ops-workflow-agent, ticket-engineer-agent | — | [agent 의 Prometheus·Loki·Tempo 읽기 접근 — 경로 옵션](../../homelab/discussion/260829_1912_agent-observability-read-access-options.md) |
+| done | homelab | prometheus, loki, tempo, nginx-gateway-fabric, ops-workflow-agent, ticket-engineer-agent | — | [네이티브 관측 API 를 직접 부르면서 read-only 를 구조로 거는 방안](../../homelab/discussion/260829_2038_raw-observability-api-read-only-enforcement.md) |
 | active | ops-workflow | claude-code-skills | — | [skill 초판 마찰 로그](../../ops-workflow/discussion/260712_1731_skill-friction-log.md) |
 | active | ops-workflow | adr | — | [ADR 선행 사례 조사 — 무엇이 표준이고, 무엇이 우리 발명이고, 무엇이 실패하는가](../../ops-workflow/discussion/260714_1417_adr-prior-art-survey.md) |
 | active | ops-workflow | adr | — | [ADR 문서를 무슨 포맷으로 적을 것인가](../../ops-workflow/discussion/260715_1401_adr-document-format.md) |
