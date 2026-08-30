@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (58)
+# by-type / discussion (61)
 
 | status | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|
@@ -8,6 +8,9 @@
 | active | ai-agent | claude-code, claude-agent-sdk, langchain, strands-agents | — | [구독제 Claude의 프로그래머블 이용 — SDK·프레임워크별 인증 가능 범위](../../ai-agent/discussion/260817_1512_subscription-auth-programmatic-claude-access.md) |
 | active | ai-agent | codex, antigravity, gemini-cli, github-copilot, cursor | — | [타사 LLM 구독제의 프로그래머블 이용 — Codex · Antigravity · Copilot · Cursor](../../ai-agent/discussion/260817_1522_other-vendor-subscription-programmatic-access.md) |
 | active | ai-agent | claude-code, mcp-grafana, ops-workflow-agent, ticket-engineer-agent, prometheus, loki | — | [mcp-grafana 를 두 하네스에 붙일 때의 컨텍스트 부하와 최소화 방안](../../ai-agent/discussion/260829_2022_mcp-grafana-context-load-minimization.md) |
+| active | ai-agent | claude-code, claude-code-skills, ops-workflow-agent, ticket-engineer-agent | — | [두 하네스가 같은 코드를 갖는다 — 공유 방안](../../ai-agent/discussion/260830_1642_shared-harness-code-across-repos.md) |
+| active | ai-agent | claude-code, claude-code-skills, kagent, strands-agents, prometheus, loki, tempo, ops-workflow-agent, ticket-engineer-agent | — | [관측 분석 기능을 범용 공통 모듈로 — 구조와 구현 제안](../../ai-agent/discussion/260830_1657_shared-observability-analysis-plugin.md) |
+| active | ai-agent | claude-code, claude-code-skills, kagent, strands-agents, claude-agent-sdk | — | [컨텍스트 분리를 코어가 소유할 수 있는가 — 범용 규약 조사](../../ai-agent/discussion/260830_1725_portable-context-isolation-conventions.md) |
 | done | careerhub-front | svelte, svelte-spa-router, rollup, api-composer, auth-service | — | [careerhub-front 리뉴얼 — 결정 축 벌리기](../../careerhub-front/discussion/260717_1456_frontend-renewal-decision-axes.md) |
 | active | careerhub-front | nextjs | — | [렌더링 전략 — 화면별로 어디서, 언제 그리나 (축 B)](../../careerhub-front/discussion/260717_1550_rendering-strategy-per-route.md) |
 | rejected | careerhub-front | api-composer, userinfo-service | — | [계측 — 무엇을 신뢰할 수 있고, 어디서 보내나 (축 H)](../../careerhub-front/discussion/260717_1617_measurement-trust-and-transport.md) |
