@@ -5,3 +5,5 @@ workspace/
 staging/*
 .claude/tmp/*
 temp-tickets/*
+# 초안 인박스(CLAUDE.md §6) — 마찰 로그·이슈 초안·obs-query 조회 원본. 커밋하지 않는다.
+tmp/*

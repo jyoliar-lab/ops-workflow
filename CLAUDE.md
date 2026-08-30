@@ -91,6 +91,8 @@
 
 **홈랩 Kubernetes(actual)는 자기 자격증명으로 읽는다.** 클러스터 접근은 `KUBECONFIG` env var로 주입된다(같은 `settings.local.json`) — `kubectl`을 그대로 쓰면 전용 ServiceAccount(`system:serviceaccount:agents:ops-workflow-agent`)로 동작한다. 권한은 **클러스터 전역 읽기 전용**이고, Secret 값 읽기와 모든 쓰기는 클러스터 RBAC가 거부한다 — read only가 hook이 아니라 서버 쪽 구조로 강제되는 경우다(§8).
 
+**관측 스택(actual)은 `obs-query` 스킬로 읽는다.** 메트릭·로그·트레이스(§2의 actual)는 `kubectl`이 아니라 Grafana 데이터소스 프록시(`obs.mg`)에 PromQL·LogQL·TraceQL을 직접 던지는 스크립트(`promql.py`·`logql.py`·`traceql.py`)로 읽는다. 인증은 Grafana SA 토큰 — `OBS_GRAFANA_TOKEN` env(같은 `settings.local.json`)로만 주입되고 어디에도 적지 않는다. 읽기 전용은 게이트웨이(GET만 통과)와 Grafana(Prom·Loki 메서드 거부)가 구조로 건다. 원본 출력은 스크립트가 걸러 파일로 떨어뜨린다 — 넓은 탐색은 subagent에 맡긴다.
+
 **왜 — 자기오염 차단.** agent의 미검증 가설이 지식 코퍼스에 들어가면, 다음 장애에서 agent가 **자기가 쓴 추정을 근거로 인용**한다. 오진이 자기강화된다.
 
 → **agent의 관찰은 티켓 코멘트에 쌓이고, 사람이 증류해 postmortem으로 옮길 때만 지식이 된다.**
