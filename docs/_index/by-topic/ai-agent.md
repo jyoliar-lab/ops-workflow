@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / ai-agent (7)
+# by-topic / ai-agent (8)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -11,3 +11,4 @@
 | — | discussion | active | claude-code, claude-code-skills, ops-workflow-agent, ticket-engineer-agent | [두 하네스가 같은 코드를 갖는다 — 공유 방안](../../ai-agent/discussion/260830_1642_shared-harness-code-across-repos.md) |
 | — | discussion | active | claude-code, claude-code-skills, kagent, strands-agents, prometheus, loki, tempo, ops-workflow-agent, ticket-engineer-agent | [관측 분석 기능을 범용 공통 모듈로 — 구조와 구현 제안](../../ai-agent/discussion/260830_1657_shared-observability-analysis-plugin.md) |
 | — | discussion | active | claude-code, claude-code-skills, kagent, strands-agents, claude-agent-sdk | [컨텍스트 분리를 코어가 소유할 수 있는가 — 범용 규약 조사](../../ai-agent/discussion/260830_1725_portable-context-isolation-conventions.md) |
+| — | discussion | active | claude-code, ticket-engineer-agent, ticket-report, ticket-pr, obs-toolkit, github-issues, pytest | [agent 코드 생산량과 사람의 이해 병목 — 외부 조사와 이 하네스에의 대입](../../ai-agent/discussion/260910_1817_agent-code-comprehension-bottleneck.md) |

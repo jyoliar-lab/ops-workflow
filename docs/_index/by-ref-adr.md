@@ -28,6 +28,15 @@
 - [e2e 명세 산출물은 어디에 사나 — 그리고 기존 앱용 배선을 남기나](../careerhub-front/discussion/260803_1329_e2e-spec-artifact-placement.md) — `done`
 - [공통 UI 요소와 외부 디자인 프레임워크](../careerhub-front/discussion/260818_1852_shared-ui-and-design-framework.md) — `done`
 
+## ADR-0016 — 리프 티켓은 수정 대상 저장소와 참조 저장소를 명시한다
+
+- [약속 게이트의 저장소별 적용 — 테스트가 없는 곳에서 약속은 무엇에 담기나](../ops-workflow/discussion/260910_1900_promise-gate-per-repository-class.md) — `active`
+
+## ADR-0017 — 리프 티켓은 선행 의존을 명시하고, 열린 선행 위에는 착수하지 않는다
+
+- [agent 코드 생산량과 사람의 이해 병목 — 외부 조사와 이 하네스에의 대입](../ai-agent/discussion/260910_1817_agent-code-comprehension-bottleneck.md) — `active`
+- [약속 게이트의 저장소별 적용 — 테스트가 없는 곳에서 약속은 무엇에 담기나](../ops-workflow/discussion/260910_1900_promise-gate-per-repository-class.md) — `active`
+
 ## ADR-0018 — REST 계약의 원천을 코드에서 독립한 명세에 두고, 서버를 생성 인터페이스로 구속한다
 
 - [백엔드 스펙 변경을 프론트에 전파하는 방법 — 푸시인가 구독인가](../careerhub/discussion/260730_1524_spec-change-propagation-to-frontend.md) — `done`
