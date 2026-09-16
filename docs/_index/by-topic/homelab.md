@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / homelab (6)
+# by-topic / homelab (7)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -10,3 +10,4 @@
 | — | discussion | done | aws-ec2, jyoliar-k8s, onpremise-k8s, baremetal | [은퇴한 환경(aws-ec2) 코드의 보존 방식](../../homelab/discussion/260807_2002_retired-env-code-archiving.md) |
 | — | discussion | done | prometheus, loki, tempo, grafana, kube-prometheus-stack, mcp-grafana, kagent, ops-workflow-agent, ticket-engineer-agent | [agent 의 Prometheus·Loki·Tempo 읽기 접근 — 경로 옵션](../../homelab/discussion/260829_1912_agent-observability-read-access-options.md) |
 | — | discussion | done | prometheus, loki, tempo, nginx-gateway-fabric, ops-workflow-agent, ticket-engineer-agent | [네이티브 관측 API 를 직접 부르면서 read-only 를 구조로 거는 방안](../../homelab/discussion/260829_2038_raw-observability-api-read-only-enforcement.md) |
+| — | discussion | done | alloy, tempo, prometheus, spanmetrics, opentelemetry, careerhub-prod, obs-toolkit | [careerhub 서비스의 RED 는 어디서 나오나 — Alloy spanmetrics 를 고른 이유](../../homelab/discussion/260916_1635_red-metrics-source-alloy-spanmetrics.md) |

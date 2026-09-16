@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (63)
+# by-type / discussion (64)
 
 | status | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|
@@ -55,6 +55,7 @@
 | done | homelab | aws-ec2, jyoliar-k8s, onpremise-k8s, baremetal | — | [은퇴한 환경(aws-ec2) 코드의 보존 방식](../../homelab/discussion/260807_2002_retired-env-code-archiving.md) |
 | done | homelab | prometheus, loki, tempo, grafana, kube-prometheus-stack, mcp-grafana, kagent, ops-workflow-agent, ticket-engineer-agent | — | [agent 의 Prometheus·Loki·Tempo 읽기 접근 — 경로 옵션](../../homelab/discussion/260829_1912_agent-observability-read-access-options.md) |
 | done | homelab | prometheus, loki, tempo, nginx-gateway-fabric, ops-workflow-agent, ticket-engineer-agent | — | [네이티브 관측 API 를 직접 부르면서 read-only 를 구조로 거는 방안](../../homelab/discussion/260829_2038_raw-observability-api-read-only-enforcement.md) |
+| done | homelab | alloy, tempo, prometheus, spanmetrics, opentelemetry, careerhub-prod, obs-toolkit | — | [careerhub 서비스의 RED 는 어디서 나오나 — Alloy spanmetrics 를 고른 이유](../../homelab/discussion/260916_1635_red-metrics-source-alloy-spanmetrics.md) |
 | active | ops-workflow | claude-code-skills | — | [skill 초판 마찰 로그](../../ops-workflow/discussion/260712_1731_skill-friction-log.md) |
 | active | ops-workflow | adr | — | [ADR 선행 사례 조사 — 무엇이 표준이고, 무엇이 우리 발명이고, 무엇이 실패하는가](../../ops-workflow/discussion/260714_1417_adr-prior-art-survey.md) |
 | active | ops-workflow | adr | — | [ADR 문서를 무슨 포맷으로 적을 것인가](../../ops-workflow/discussion/260715_1401_adr-document-format.md) |
