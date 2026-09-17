@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (64)
+# by-type / discussion (66)
 
 | status | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|
@@ -12,6 +12,8 @@
 | active | ai-agent | claude-code, claude-code-skills, kagent, strands-agents, prometheus, loki, tempo, ops-workflow-agent, ticket-engineer-agent | — | [관측 분석 기능을 범용 공통 모듈로 — 구조와 구현 제안](../../ai-agent/discussion/260830_1657_shared-observability-analysis-plugin.md) |
 | active | ai-agent | claude-code, claude-code-skills, kagent, strands-agents, claude-agent-sdk | — | [컨텍스트 분리를 코어가 소유할 수 있는가 — 범용 규약 조사](../../ai-agent/discussion/260830_1725_portable-context-isolation-conventions.md) |
 | active | ai-agent | claude-code, ticket-engineer-agent, ticket-report, ticket-pr, obs-toolkit, github-issues, pytest | ADR-0017 | [agent 코드 생산량과 사람의 이해 병목 — 외부 조사와 이 하네스에의 대입](../../ai-agent/discussion/260910_1817_agent-code-comprehension-bottleneck.md) |
+| active | ai-agent | obs-toolkit, prometheus, promql, claude-code-plugins, python-stdlib, loki | — | [obs-toolkit — 직접 짜는가, 빌리는가: 계산의 자리와 의존성 경계](../../ai-agent/discussion/260917_1726_obs-toolkit-build-vs-borrow.md) |
+| active | ai-agent | obs-toolkit, prometheus, promql, loki, logql, tempo, traceql, alloy, python-stdlib | — | [환원 연산 12개 — 코드 없이 되는 것과 안 되는 것 (#94 · #95 · #96)](../../ai-agent/discussion/260917_1742_reduction-ops-without-code.md) |
 | done | careerhub-front | svelte, svelte-spa-router, rollup, api-composer, auth-service | — | [careerhub-front 리뉴얼 — 결정 축 벌리기](../../careerhub-front/discussion/260717_1456_frontend-renewal-decision-axes.md) |
 | active | careerhub-front | nextjs | — | [렌더링 전략 — 화면별로 어디서, 언제 그리나 (축 B)](../../careerhub-front/discussion/260717_1550_rendering-strategy-per-route.md) |
 | rejected | careerhub-front | api-composer, userinfo-service | — | [계측 — 무엇을 신뢰할 수 있고, 어디서 보내나 (축 H)](../../careerhub-front/discussion/260717_1617_measurement-trust-and-transport.md) |
