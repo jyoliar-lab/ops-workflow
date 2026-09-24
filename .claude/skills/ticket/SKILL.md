@@ -120,7 +120,7 @@ set-deps.py --issue <N> --blocked-by <M>... | --no-deps
 link-sub.py --parent <N> --child <M>
 ```
 
-GraphQL `addSubIssue`. 계층은 **3층에서 멈춘다**(§5) — GitHub의 제약이지 ADR 깊이의 함수가 아니다.
+GraphQL `addSubIssue`. 스크립트가 거부하는 것은 둘뿐이다(ADR-0010) — **리프는 부모가 될 수 없다 · Epic은 하위가 될 수 없다.** 깊이 상한은 없다(§5) — Feature 밑에 Feature도 온다. **3층을 권장한다** — 얕음은 규칙이 아니라 결과다.
 
 ```
 근거 ADR ★공표★ ──→ Epic          ← accepted 요구는 착수의 문(집행 도구)
@@ -130,7 +130,8 @@ GraphQL `addSubIssue`. 계층은 **3층에서 멈춘다**(§5) — GitHub의 제
 
 Feature                                      ← Epic 없이 최상위에서도 가능 (ADR 선택)
   ├─ Task
-  └─ Task
+  └─ Feature                                 ← 더 묶을 수 있다 — 필요할 때만. 권장은 3층
+        └─ Task
 ```
 
 ## 4. 하지 않는 것

@@ -45,7 +45,7 @@ accept 전에 넷을 **반증하려 시도한다** — 하나라도 서면 아�
 
 ## 3. 발행 — design-partner와 공유하는 부산물
 
-발행은 컨트롤 플레인 write라 둘 다 한다(§6은 자율 agent에게도 준다). 게이트(`create.py`의 accepted+공표 ADR 전제, `link-sub.py`의 3층 제약)는 **스크립트가** 걸지 어느 agent가 도느냐로 걸지 않는다. **네가 ADR을 accept한 직후 founding Epic을 바로 내는 것**이 자연스러운 자리다.
+발행은 컨트롤 플레인 write라 둘 다 한다(§6은 자율 agent에게도 준다). 게이트(`create.py`의 accepted+공표 ADR 전제, `link-sub.py`의 계층 링크 규칙)는 **스크립트가** 걸지 어느 agent가 도느냐로 걸지 않는다. **네가 ADR을 accept한 직후 founding Epic을 바로 내는 것**이 자연스러운 자리다.
 
 **타입 판정** — 컨테이너(Epic·Feature)인가 리프(Task·Bug)인가. **Feature는 "epic이 방대해서" 만들지 않는다** — 독립적으로 뒤집힐 수 있는 하위 축의 결정(sub-ADR)이 있을 때만. 애매하면 리프로 낸다(retype는 싸다).
 
