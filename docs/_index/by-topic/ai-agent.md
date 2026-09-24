@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / ai-agent (10)
+# by-topic / ai-agent (11)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -14,3 +14,4 @@
 | — | discussion | active | claude-code, ticket-engineer-agent, ticket-report, ticket-pr, obs-toolkit, github-issues, pytest | [agent 코드 생산량과 사람의 이해 병목 — 외부 조사와 이 하네스에의 대입](../../ai-agent/discussion/260910_1817_agent-code-comprehension-bottleneck.md) |
 | — | discussion | active | obs-toolkit, prometheus, promql, claude-code-plugins, python-stdlib, loki | [obs-toolkit — 직접 짜는가, 빌리는가: 계산의 자리와 의존성 경계](../../ai-agent/discussion/260917_1726_obs-toolkit-build-vs-borrow.md) |
 | — | discussion | active | obs-toolkit, prometheus, promql, loki, logql, tempo, traceql, alloy, python-stdlib | [환원 연산 12개 — 코드 없이 되는 것과 안 되는 것 (#94 · #95 · #96)](../../ai-agent/discussion/260917_1742_reduction-ops-without-code.md) |
+| — | discussion | active | obs-toolkit, pytest, pyright | [obs-toolkit 테스트 스위트 — 무엇을 향해 재편하고, 무엇이 그 뒤를 지키나](../../ai-agent/discussion/260923_2005_obs-toolkit-test-suite-refactor.md) |
