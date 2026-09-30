@@ -33,6 +33,7 @@
 - [약속 게이트의 저장소별 적용 — 테스트가 없는 곳에서 약속은 무엇에 담기나](../ops-workflow/discussion/260910_1900_promise-gate-per-repository-class.md) — `active`
 - [TDD 집행 흐름 — ticket-engineer 하네스에 red·green 을 어떻게 세우나](../ops-workflow/discussion/260930_1356_tdd-flow-in-ticket-engineer.md) — `active`
 - [TDD 집행 흐름 — 결론](../ops-workflow/discussion/260930_1524_tdd-flow-decisions.md) — `active`
+- [인프라 AC 의 세 종류 — 약속이 상태일 때 무엇이 증거인가](../ops-workflow/discussion/260930_1828_infra-ac-kinds.md) — `active`
 
 ## ADR-0017 — 리프 티켓은 선행 의존을 명시하고, 열린 선행 위에는 착수하지 않는다
 
@@ -40,6 +41,7 @@
 - [약속 게이트의 저장소별 적용 — 테스트가 없는 곳에서 약속은 무엇에 담기나](../ops-workflow/discussion/260910_1900_promise-gate-per-repository-class.md) — `active`
 - [TDD 집행 흐름 — ticket-engineer 하네스에 red·green 을 어떻게 세우나](../ops-workflow/discussion/260930_1356_tdd-flow-in-ticket-engineer.md) — `active`
 - [TDD 집행 흐름 — 결론](../ops-workflow/discussion/260930_1524_tdd-flow-decisions.md) — `active`
+- [인프라 AC 의 세 종류 — 약속이 상태일 때 무엇이 증거인가](../ops-workflow/discussion/260930_1828_infra-ac-kinds.md) — `active`
 
 ## ADR-0018 — REST 계약의 원천을 코드에서 독립한 명세에 두고, 서버를 생성 인터페이스로 구속한다
 

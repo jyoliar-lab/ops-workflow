@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (69)
+# by-type / discussion (70)
 
 | status | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|
@@ -72,4 +72,5 @@
 | active | ops-workflow | ticket-engineer, github-issues, jyoliar-k8s, kustomize, ansible, terraform, pytest, playwright | ADR-0016, ADR-0017 | [약속 게이트의 저장소별 적용 — 테스트가 없는 곳에서 약속은 무엇에 담기나](../../ops-workflow/discussion/260910_1900_promise-gate-per-repository-class.md) |
 | active | ops-workflow | ticket-engineer, ticket-start, ticket-report, pytest, playwright, obs-toolkit, github-issues, claude-code | ADR-0016, ADR-0017 | [TDD 집행 흐름 — ticket-engineer 하네스에 red·green 을 어떻게 세우나](../../ops-workflow/discussion/260930_1356_tdd-flow-in-ticket-engineer.md) |
 | active | ops-workflow | ticket-engineer, ticket-start, ticket-report, pytest, playwright, obs-toolkit, github-issues, claude-code | ADR-0016, ADR-0017 | [TDD 집행 흐름 — 결론](../../ops-workflow/discussion/260930_1524_tdd-flow-decisions.md) |
+| active | ops-workflow | ticket-engineer, ticket-start, ticket-report, github-issues, jyoliar-k8s, kustomize, ansible, terraform, argocd, prometheus, pytest | ADR-0016, ADR-0017 | [인프라 AC 의 세 종류 — 약속이 상태일 때 무엇이 증거인가](../../ops-workflow/discussion/260930_1828_infra-ac-kinds.md) |
 | rejected | palworld | palworld-server | — | [팰월드 1.0 서버를 홈랩 쿠버네티스에](../../palworld/discussion/260726_0149_palworld-server-on-homelab-k8s.md) |
