@@ -99,6 +99,7 @@ red 승인은 PR diff 에서 한다(테스트 본문) — 시나리오 승인은
 - 언제 e2e 인가 — careerhub-web #9 가 선례
 - 사람이 읽는 것은 어느 티어인가
 - 저장소에 남는 것만 약속 인공물로 인정하나
+- 테스트 파일 · 디렉터리는 **층**(계산 · 변환 · 조립 · 경계)으로 나뉘나 **주제**("CLI" · "회원가입")로 나뉘나 — obs-toolkit `tests/contracts/test_cli.py` 가 다섯 층을, posting-provider `test/app/findnew_test.go` 가 조립 + 실 외부 호출을 한 파일에 섞는다. 시나리오가 층에 붙는 규약(tdd-loop `scenarios.md` §1.5)은 정했고, 파일이 층을 따르는지는 ADR 의 것
 
 증거는 시나리오 표의 **티어 · 의존성 처리** 열이 티켓마다 남긴다. ADR 을 쓸 때 읽을 것은 그 코멘트들이다.
 
