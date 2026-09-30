@@ -6,4 +6,4 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 
 | id | type | topic | status | 문서 |
 |---|---|---|---|---|
-| — | discussion | ai-agent | active | [obs-toolkit 테스트 스위트 — 무엇을 향해 재편하고, 무엇이 그 뒤를 지키나](../../ai-agent/discussion/260923_2005_obs-toolkit-test-suite-refactor.md) |
+| — | discussion | ai-agent | done | [obs-toolkit 테스트 스위트 — 무엇을 향해 재편하고, 무엇이 그 뒤를 지키나](../../ai-agent/discussion/260923_2005_obs-toolkit-test-suite-refactor.md) |

@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (67)
+# by-type / discussion (69)
 
 | status | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|
@@ -14,7 +14,7 @@
 | active | ai-agent | claude-code, ticket-engineer-agent, ticket-report, ticket-pr, obs-toolkit, github-issues, pytest | ADR-0017 | [agent 코드 생산량과 사람의 이해 병목 — 외부 조사와 이 하네스에의 대입](../../ai-agent/discussion/260910_1817_agent-code-comprehension-bottleneck.md) |
 | active | ai-agent | obs-toolkit, prometheus, promql, claude-code-plugins, python-stdlib, loki | — | [obs-toolkit — 직접 짜는가, 빌리는가: 계산의 자리와 의존성 경계](../../ai-agent/discussion/260917_1726_obs-toolkit-build-vs-borrow.md) |
 | active | ai-agent | obs-toolkit, prometheus, promql, loki, logql, tempo, traceql, alloy, python-stdlib | — | [환원 연산 12개 — 코드 없이 되는 것과 안 되는 것 (#94 · #95 · #96)](../../ai-agent/discussion/260917_1742_reduction-ops-without-code.md) |
-| active | ai-agent | obs-toolkit, pytest, pyright | — | [obs-toolkit 테스트 스위트 — 무엇을 향해 재편하고, 무엇이 그 뒤를 지키나](../../ai-agent/discussion/260923_2005_obs-toolkit-test-suite-refactor.md) |
+| done | ai-agent | obs-toolkit, pytest, pyright | — | [obs-toolkit 테스트 스위트 — 무엇을 향해 재편하고, 무엇이 그 뒤를 지키나](../../ai-agent/discussion/260923_2005_obs-toolkit-test-suite-refactor.md) |
 | done | careerhub-front | svelte, svelte-spa-router, rollup, api-composer, auth-service | — | [careerhub-front 리뉴얼 — 결정 축 벌리기](../../careerhub-front/discussion/260717_1456_frontend-renewal-decision-axes.md) |
 | active | careerhub-front | nextjs | — | [렌더링 전략 — 화면별로 어디서, 언제 그리나 (축 B)](../../careerhub-front/discussion/260717_1550_rendering-strategy-per-route.md) |
 | rejected | careerhub-front | api-composer, userinfo-service | — | [계측 — 무엇을 신뢰할 수 있고, 어디서 보내나 (축 H)](../../careerhub-front/discussion/260717_1617_measurement-trust-and-transport.md) |
@@ -70,4 +70,6 @@
 | active | ops-workflow | github-issues, github-projects, adr, ticket-engineer | — | [티켓 Draft 상태와 착수 게이트 — 게이트를 발행에서 착수로 옮긴다](../../ops-workflow/discussion/260806_2235_ticket-draft-status-and-start-gate.md) |
 | active | ops-workflow | adr | — | [정책 ADR은 proposed로 오래 산다 — 의도된 운영 방식의 기록](../../ops-workflow/discussion/260806_2317_policy-adr-stays-proposed.md) |
 | active | ops-workflow | ticket-engineer, github-issues, jyoliar-k8s, kustomize, ansible, terraform, pytest, playwright | ADR-0016, ADR-0017 | [약속 게이트의 저장소별 적용 — 테스트가 없는 곳에서 약속은 무엇에 담기나](../../ops-workflow/discussion/260910_1900_promise-gate-per-repository-class.md) |
+| active | ops-workflow | ticket-engineer, ticket-start, ticket-report, pytest, playwright, obs-toolkit, github-issues, claude-code | ADR-0016, ADR-0017 | [TDD 집행 흐름 — ticket-engineer 하네스에 red·green 을 어떻게 세우나](../../ops-workflow/discussion/260930_1356_tdd-flow-in-ticket-engineer.md) |
+| active | ops-workflow | ticket-engineer, ticket-start, ticket-report, pytest, playwright, obs-toolkit, github-issues, claude-code | ADR-0016, ADR-0017 | [TDD 집행 흐름 — 결론](../../ops-workflow/discussion/260930_1524_tdd-flow-decisions.md) |
 | rejected | palworld | palworld-server | — | [팰월드 1.0 서버를 홈랩 쿠버네티스에](../../palworld/discussion/260726_0149_palworld-server-on-homelab-k8s.md) |
