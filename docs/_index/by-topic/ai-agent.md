@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / ai-agent (11)
+# by-topic / ai-agent (13)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -15,3 +15,5 @@
 | — | discussion | active | obs-toolkit, prometheus, promql, claude-code-plugins, python-stdlib, loki | [obs-toolkit — 직접 짜는가, 빌리는가: 계산의 자리와 의존성 경계](../../ai-agent/discussion/260917_1726_obs-toolkit-build-vs-borrow.md) |
 | — | discussion | active | obs-toolkit, prometheus, promql, loki, logql, tempo, traceql, alloy, python-stdlib | [환원 연산 12개 — 코드 없이 되는 것과 안 되는 것 (#94 · #95 · #96)](../../ai-agent/discussion/260917_1742_reduction-ops-without-code.md) |
 | — | discussion | done | obs-toolkit, pytest, pyright | [obs-toolkit 테스트 스위트 — 무엇을 향해 재편하고, 무엇이 그 뒤를 지키나](../../ai-agent/discussion/260923_2005_obs-toolkit-test-suite-refactor.md) |
+| — | discussion | active | obs-toolkit, claude-code, prometheus, loki, tempo, careerhub-dev | [obs-toolkit 으로 agent 가 트러블슈팅을 얼마나 잘 하나 — 무엇을 재고, 어디서 문제를 내고, 무엇으로 돌리나](../../ai-agent/discussion/261003_1949_obs-toolkit-troubleshooting-eval.md) |
+| — | discussion | active | obs-toolkit, claude-code, careerhub-prod, argocd, prometheus, loki, tempo | [obs-toolkit 측정 설계 — 장애 종류 · 주입 · 비교군 · 하네스](../../ai-agent/discussion/261003_2013_obs-toolkit-eval-design-faults-arms-harness.md) |
