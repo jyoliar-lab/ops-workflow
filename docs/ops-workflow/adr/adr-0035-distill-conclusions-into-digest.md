@@ -6,7 +6,7 @@ subjects: [digest, discussion, adr]
 status: proposed
 accepted_at:
 parent: ADR-0023
-references: [ADR-0024, ADR-0022]
+references: [ADR-0024, ADR-0022, ADR-0032]
 superseded_by:
 ---
 
@@ -47,11 +47,13 @@ digest의 값은 **수렴 직후부터 ADR·티켓이 생기기 전까지** 가�
 행선지가 생기면 digest는 그곳을 가리키는 지도로 물러나고, 값은 줄어든다.
 그래서 digest는 보관할 기록이 아니라 **다리**다.
 
-### 단위 — 수렴 시점
+### 단위 — 틀
 
-digest 한 건은 **한 수렴 시점**의 결론이다.
-그 시점까지의 논의가 여러 discussion에 걸쳐 있으면 한 digest가 그 전부를 덮는다.
-결론을 낳지 않은 발산에는 digest가 없다.
+digest 한 건은 **틀 하나**를 담는다.
+틀이란 그 논의가 정하려던 것들의 목록이다 — 결론 표의 행이 틀이다.
+틀은 논의가 수렴할 때 생기지만, digest가 담는 것은 그 시점의 결론이 아니라 지금의 결론이다.
+한 틀에 이르는 논의가 여러 discussion에 걸쳐 있으면 한 digest가 그 전부를 덮는다.
+결론을 낳지 않은 발산에는 틀이 없고, digest도 없다.
 
 ### 보관도 동결도 약속하지 않는다 — 결론이 바뀌면 고쳐 쓴다
 
