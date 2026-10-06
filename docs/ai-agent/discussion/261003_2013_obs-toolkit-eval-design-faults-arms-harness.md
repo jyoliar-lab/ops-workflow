@@ -32,7 +32,7 @@ related: [261003_1949_obs-toolkit-troubleshooting-eval.md, 260817_1512_subscript
 | 질의 | 결과 |
 |---|---|
 | `group by (job) (up)` | careerhub 앱 job 이 **없다** — 앱은 Prometheus 에 직접 스크레이프되지 않는다 |
-| `count by (__name__) ({service_name=~"posting-service\|api-composer\|…"})` | `traces_span_metrics_calls_total` · `traces_span_metrics_duration_seconds` 140 시리즈 — **RED 는 spanmetrics 로만** 있다(이름은 `traces_span_metrics_*`, SKILL 예시의 `traces_spanmetrics_*` 가 아니다) |
+| `count by (__name__) ({service_name=~"posting-service\|api-composer\|…"})` | `traces_span_metrics_calls_total` · `traces_span_metrics_duration_seconds` 140 시리즈 — **RED 는 spanmetrics 로만** 있다. 이름은 `traces_span_metrics_*` — Alloy 설정의 connector 이름에서 짐작한 `traces_spanmetrics_*` 로는 안 잡힌다. toolkit 은 아직 이 이름을 어디에도 적지 않았고, #102 `red` 가 처음 박게 된다 |
 | `traceql.py search --since 72h` | 트레이스는 **10-01 19:19–19:39 에만** — posting-service `ProviderGrpc` · `ScannerGrpc`, review-service `crawler_grpc` |
 | `kubectl get cronjob -n careerhub-prod` | `posting-provider-jumpit` · `posting-provider-wanted`(19:09) · `posting-skillscanner` · `review-crawler`(19:39) — 하루 한 번 |
 | 로그 24h | `careerhub-mongodb-svc` 외에는 사실상 0 |
@@ -104,7 +104,7 @@ controller 가 없으면 되돌릴 주체가 없다 — ApplicationSet 이 syncP
 | **F1 crash** | posting-service 가 뜨자마자 죽는다 | M1 — 잘못된 `MONGO_URI` 키 이름 또는 `RUN_MODE` 오타 | restarts↑ / 기동 오류 템플릿 / 없음 / CrashLoopBackOff | 로그·k8s 교차. **배포 모양** |
 | **F2 dependency** | posting-service → mongo 끊김 | M2 — posting-service 파드 netns 에서 mongo 포트 DROP(§3 "끊김") | calls 유지 · error↑ / 연결 오류 템플릿 첫 발생 / 오류 span / deploy 는 안 바뀜 — ephemeral container 만 파드 spec 에 남는다 | 시각 · 서비스 · 파드 일치. **보이지 않는 주입**(흔적은 §3 참조) |
 | **F3 latency** | posting-service 느려짐, 오류 없음 | M1 — CPU limit 을 50m 로 | duration p95↑ · throttling↑ / 없음 / 임계경로가 posting-service self time / 변경 generation | 트레이스 축. "오류율은 그대로" 를 말하는지 |
-| **F4 far cause** | mongo 가 느리고 증상은 posting-service | M2 — mongo 에 `fsyncLock` 또는 인덱스 드롭(컬렉션 하나) | posting-service duration↑ / posting 쪽은 조용, mongo 로그에 slow query / 임계경로가 **mongo span** / 흔적 없음 | 원인-증상 분리. #96 `critical_path` 의 존재 이유 |
+| **F4 far cause** | mongo 가 느리고 증상은 posting-service | M2 — mongo 에 `fsyncLock` | posting-service duration↑ / posting 쪽은 조용, mongo 로그에 slow query / 임계경로가 **mongo span** / 흔적 없음 | 원인-증상 분리. #96 `critical_path` 의 존재 이유 |
 | **F5 absence** | 트레이스 수집이 멎음 | M1 — Alloy 를 0 으로 (또는 OTLP endpoint env 오타) | spanmetrics 끊김(0 이 아니라 **없음**) / 앱 로그 정상 / 검색 결과 0 / alloy 파드 수 0 | 없음 vs 0 · "판정 불가" |
 | **F6 deploy regression** | 잘못된 이미지 태그로 배포 | M1 — `POSTING_SERVICE` 이미지 태그를 존재하지 않는 것으로 | 없음 / 없음 / 없음 / ImagePullBackOff · ReplicasMismatch | `kubectl` 만으로 풀린다 — 층 기여 의 **하한** 측정용 |
 
@@ -121,7 +121,7 @@ HTTP 경로(api-composer · auth · zitadel · frontend)는 부하 생성기가 
 | 기제 | 무엇 | Argo | 흔적 | 되돌리기 |
 |---|---|---|---|---|
 | **M1 git** | `jyoliar-k8s` prod overlay 에 커밋 → Argo sync | 통과 | deploy generation · 이벤트 · git log — **배포 모양** | `git revert` → sync. 분 단위 |
-| **M2 Argo 가 모르는 층** | 파드 netns(`kubectl debug --profile=netadmin` + `iptables` · `tc`) · DB 클라이언트(`mongosh` · `psql`)로 DB 안 조작 · cron 을 `kubectl create job --from=cronjob/…` 로 손 실행 | 안 본다(DB 안 · netns 는 Argo 밖) | deploy 안 바뀜. ephemeral container 는 파드 spec · 이벤트에 보인다 | 규칙 삭제(`iptables -D` · `tc qdisc del`) · `fsyncUnlock` · 인덱스 재생성 |
+| **M2 Argo 가 모르는 층** | 파드 netns(`kubectl debug --profile=netadmin` + `iptables` · `tc`) · DB 클라이언트(`mongosh` · `psql`)로 DB 안 조작 · cron 을 `kubectl create job --from=cronjob/…` 로 손 실행 | 안 본다(DB 안 · netns 는 Argo 밖) | deploy 안 바뀜. ephemeral container 는 파드 spec · 이벤트에 보인다 | 규칙 삭제(`iptables -D` · `tc qdisc del`) · `fsyncUnlock` |
 | **M3 controller 0 + patch** | `kubectl scale sts argocd-application-controller -n argocd --replicas=0` → `kubectl patch`(limit · env · image) → 창 끝에 되돌리고 replica 복구 | 멈춰 있다 — 되돌릴 주체가 없다 | deploy generation · 이벤트 — M1 과 같은 **배포 모양**. 더해서 argocd 파드 수 0 이 kube-state 에 보인다 | 역 patch → controller 복구. **복구를 잊으면 클러스터 전체가 drift 한다** — 스크립트의 `off` 가 둘 다 한다 |
 
 ### 끊김 — NetworkPolicy 없이
@@ -148,25 +148,33 @@ ephemeral container 는 대상 파드의 network namespace 를 공유하므로 �
 다만 "손 kubectl" 이 아니라 **스크립트**로 한다 — `on`/`off` 두 동작, 실행하면 truth 가 떨어진다.
 
 ```
-evals/inject/F3-latency.sh on   → kubectl/git 조작 + evals/cases/F3/truth.yaml 에 {target, kind, since} 기록
-evals/inject/F3-latency.sh off  → 되돌리고 until 기록
+inject/F3-latency.sh on   → kubectl/git 조작 + cases/F3/truth.yaml 에 {target, kind, since} 기록
+inject/F3-latency.sh off  → 되돌리고 until 기록
 ```
 
 truth 는 주입한 손이 쓴다 — 사람이 따로 적으면 시각이 어긋난다.
 
 ### 부하 — 트래픽이 없으면 장애도 없다(§1-1)
 
-| 경로 | 부하 수단 | 비용 |
-|---|---|---|
-| **배치**(posting/review → DB) | 주입 뒤 `kubectl create job --from=cronjob/posting-provider-wanted eval-<id>` — cron 을 손으로 당긴다 | 0. 외부 사이트(wanted · jumpit)를 실제로 긁는다 — **그 사이트 입장에서 하루 두 번이 되는 것**을 받아들이나(§8) |
-| **HTTP** | 없음. `curl` 루프 또는 k6 Job 을 새로 둔다 | 만들어야 한다 — 둘째 라운드 |
+처음엔 cron(`posting-provider-*`)을 `kubectl create job --from=cronjob/…` 로 당기려 했다.
+사람이 물었다(10-04) — "간단한 호출은 curl 로 만들어도 되지 않나".
+확인했다: 게이트웨이(`careerhub.jyo-liar.com`)의 인증 없는 GET `/api/categories` 한 번이 **gateway → api-composer → posting-service gRPC(`RestApiGrpc/Categories`)** 로 이어지는 트레이스를 남긴다(span 4 · 20ms).
+장애를 심는 층(posting-service → mongo)에 닿는다.
+
+| 수단 | 판정 |
+|---|---|
+| **`curl` 루프**(택) | 외부 사이트에 요청이 안 간다 · rps 와 길이를 정한다 · 장애마다 같은 모양. `inject/load.sh --rps N --minutes M` 가 인증 없는 GET 셋(`/api/categories` · `/api/job_postings` · `/api/job_postings/count`)을 섞어 던진다 |
+| cron 손 실행 | wanted · jumpit 에 실제 요청이 간다. 버린다 |
+| k6 | `curl` 로 충분한 동안은 아니다 |
+
+이로써 §1-1 의 "HTTP 경로는 요청 0" 은 제약이 아니라 **통제 변수**가 된다 — 평소 0 이라 부하는 전부 하네스가 만든 것이고, 모양이 같다.
 
 ### 창 규약 — 주입과 실행을 분리한다
 
 1. **기준선 확보** — 주입 하루 전 같은 시각이 깨끗해야 한다(`compare` 기본 `1d`). 같은 시각에 이틀 연속 주입하지 않는다.
 2. `on` → 부하 → **20분 유지** → `off`. truth 에 `since` · `until`.
 3. 실행은 그 뒤 **72시간 안**(Tempo retention) 언제든 — 프롬프트에 창(`since`–`until`)을 **절대 시각으로** 준다.
-4. 같은 장애의 arm 4 × runs 3 = 12 세션이 **같은 데이터**를 본다 — 라이브 분산이 사라진다.
+4. 같은 장애의 arm 4 × 시도 3 = 12 세션이 **같은 데이터**를 본다 — 라이브 분산이 사라진다.
 
 창을 절대 시각으로 주는 것은 "지금 이상하다" 보다 쉬운 문제다.
 그래도 이렇게 가는 이유는 **재현성**이다 — 12 세션이 다른 데이터를 보면 arm 비교가 아니라 시각 비교가 된다.
@@ -174,7 +182,7 @@ truth 는 주입한 손이 쓴다 — 사람이 따로 적으면 시각이 어�
 
 ### 알럿
 
-주입 창마다 Alertmanager silence 를 건다 — Discord 에 가짜 장애가 쌓이는 것을 막고, **agent 가 알럿 채널을 못 보게** 한다(알럿 이름이 답을 말한다).
+주입 창마다 Alertmanager silence 를 건다 — Discord 에 가짜 장애가 쌓이는 것을 막는다. Alertmanager 의 접근 경로는 arm 쪽 어디에도 적지 않는다.
 
 ## 4. ③ 비교군
 
@@ -191,16 +199,23 @@ A0 에 게이트웨이 접근을 주는 것이 핵심이다.
 안 주면 base 층의 층 기여는 "데이터를 볼 수 있나" 의 차이가 되고, 그건 도구의 가치가 아니라 **권한의 가치**다.
 A0 의 `curl` 은 GET 만 통과하는 게이트웨이를 그대로 치므로 쓰기 위험은 없다.
 
-### 층을 어떻게 가르나 — 셋, 전부 필요하다
+### 층을 어떻게 가르나 — 빌드로, 권한으로가 아니라
 
-| 수단 | 하는 일 | 왜 하나로는 안 되나 |
+처음엔 권한(`permissions.deny`) + SKILL 변형 + help 일치 셋으로 가르려 했다.
+사람이 바로잡았다(10-04) — **하위 층 arm 은 상위 층의 기능을 아예 몰라야 한다.**
+권한으로 가리면 "있는데 못 쓰는" 상태다: agent 가 `--help` 에서 보고 시도하면 그 턴과 토큰은 도구의 비용이 아니고, 거부 메시지가 상위 층의 존재를 알린다.
+그러므로 arm 플러그인은 **상위 층의 코드 · 서브커맨드 · SKILL 줄이 물리적으로 없는 빌드**이고, `permissions.deny` 에는 toolkit 명령이 들어가지 않는다(공통 금지 — WebFetch · WebSearch · git — 만).
+
+코드를 읽으면 경계는 얇다 — `promql_main` 이 `argv[0] in METRICS_SUBCOMMANDS` 면 `metrics_main` 으로 넘기고, 응용 층은 `obs/metrics.py` · `obs/logs.py` 와 `cli.py` 안의 `metrics_main` · `logs_main` 이다.
+그러나 `cli.py` 가 `obs.metrics` · `obs.logs` 를 모듈 수준에서 import 하므로 **파일 삭제만으로는 base-only 가 안 나온다.**
+
+| 길 | 어떻게 | 문제 |
 |---|---|---|
-| **권한** — arm 별 `--settings` 의 `permissions.deny` | A1 에서 `Bash(promql.py summarize:*)` 등 응용 서브커맨드 거부 | 거부돼도 agent 는 **시도**한다 — 턴과 토큰이 늘고 그것은 도구의 비용이 아니다 |
-| **SKILL.md 변형** — arm 별 플러그인 디렉터리 | A1 의 SKILL 에는 환원 연산 표가 없다 | 설명만으로는 `--help` 가 서브커맨드를 드러낸다 — 권한이 뒤를 받친다 |
-| **`--help` 일치** | 거부된 서브커맨드가 help 에도 안 보이게 — 코어에 `OBS_LAYER` 같은 env 게이트 | 코드 변경 = 티켓. 처음엔 권한 + SKILL 둘로 가고, 시도 횟수가 측정을 흐리면 이것을 낸다 |
+| **과거 sha** | A1 = `0bd2737`(#4 metrics 이전 — base 만 있던 시점) | base 도 그 뒤 바뀌었다(spill 형식 · raw list · OBS_CONFIG · 404). A2 와의 차에 base 의 변화가 섞인다 — 교란. **스파이크의 조립 확인에만** 쓴다 |
+| **toolkit 쪽 층별 패키징**(택) | base 가 응용을 import 하지 않게 모듈을 가르고(`cli.py` 는 base, 응용은 별도 모듈), 응용은 "있으면 등록". arm 빌드는 **파일 삭제만**으로 변형을 낸다 | obs-toolkit 리팩토링 — #92 밑 새 리프. 그 전엔 라운드의 A1 이 없다. #115 의 선행 |
 
-arm 플러그인 디렉터리는 손으로 만들지 않는다 — `evals/arms/build.sh` 가 toolkit 에서 **생성**한다(SKILL 표에서 줄을 지우는 것뿐).
-`Bash(promql.py summarize:*)` 꼴의 prefix 매칭이 서브커맨드 위치에서 동작하는지는 **미확인** — 스파이크의 첫 항목.
+arm 플러그인 디렉터리는 손으로 만들지 않는다 — `arms/build.sh` 가 pin 한 sha 에서 **지워서** 만든다(파일 + SKILL 표의 줄).
+지울 목록은 toolkit 의 층 경계(모듈 · 매니페스트)에서 도출한다 — 손으로 나열하면 #96 · #102 가 들어올 때 낡는다.
 
 ### arm 사이에서 **같아야** 하는 것
 
@@ -210,8 +225,8 @@ arm 플러그인 디렉터리는 손으로 만들지 않는다 — `evals/arms/b
 | 프롬프트 | 같은 문장 — 네임스페이스 · 창(절대 시각) · "원인 컴포넌트 · 시각 · 근거를 아래 스키마로" |
 | 출력 계약 | `--json-schema` 로 같은 Finding 스키마(§6) |
 | `kubectl` · `Agent` 도구 · `Read`/`Grep`(작업 디렉터리 안) | 전부 허용 — 호스트의 것이지 도구의 것이 아니다 |
-| `--max-turns` · `--max-budget-usd` · timeout | 같다. 상한에 걸린 run 은 "미완" 으로 따로 센다 |
-| 금지 | WebFetch · WebSearch · git · `jyoliar-k8s` 저장소 · 다른 run 의 `tmp/obs` · evals 디렉터리 자체 |
+| `--max-turns` · `--max-budget-usd` · timeout | 같다. 상한에 걸린 시도는 "미완" 으로 따로 센다 |
+| 금지 | WebFetch · WebSearch · git · `jyoliar-k8s` 저장소 · 다른 시도의 `tmp/obs` · evals 디렉터리 자체 |
 
 **Finding 규칙(`prompts/finding.md`)은 어느 arm 의 것인가** — 미결.
 스키마는 채점을 위해 공통이어야 한다.
@@ -227,30 +242,52 @@ A0 에 주면 도구의 가치 일부를 대조군에 넘기는 것이고, 안 �
 이 중 어느 것도 obs-toolkit 이 아니다.
 **평가 세션은 빈 디렉터리에서, 빈 설정으로, 플러그인 하나만 얹고 돈다.**
 
+### 저장소 — `jyoliar-lab/obs-bench`
+
+평가 하네스는 obs-toolkit 안의 `evals/` 가 아니라 **별도 저장소**다(사람의 답 · 10-04 생성).
+이유는 둘이다 — obs-toolkit 은 피평가물이라 평가 코드가 섞이면 arm 을 만들 때 자기 자신을 잘라내야 하고, 주입 스크립트 · 결과 디렉터리는 플러그인의 것이 아니다.
+아래 경로는 전부 obs-bench 루트 기준이다.
+
+| 디렉터리 | 무엇 |
+|---|---|
+| `arms/` | `build.sh`(obs-toolkit 을 pin 해 arm 플러그인 생성) · arm 별 `settings.json` · 생성된 `plugin/` |
+| `control/inject/` | 장애별 `on/off` 스크립트 — Argo controller 0/복구 · netns 규칙 · `fsyncLock` · `load.sh`(curl 부하) · silence |
+| `control/cases/` | 장애별 `truth.yaml`(주입이 쓴다) · 프롬프트 |
+| `frame.md` · `finding.schema.json` | 공통 과제 틀 · Finding 스키마 |
+| `run.sh` · `grade.py` | 러너 · 채점 |
+| `control/` | 제어 트리 — `inject/` · `cases/`(truth). arm 세션은 여기를 모른다 |
+
+**작업 트리는 저장소 밖, 형제 디렉터리다**(사람의 결정 · 10-04) — `../obs-bench-runs/<case>/<arm>/<n>/work`, arm 플러그인은 `../obs-bench-arms/<arm>/`.
+세션의 cwd · 플러그인 · settings · frame 어디에도 제어 트리를 가리키는 경로 · 이름("모의" · "평가" · "truth" · "주입" · Alertmanager 경로)이 없다.
+권한으로 막지 않는다 — 그 구현은 지나치게 복잡하고(컨테이너 · 샌드박스 · egress), 우연한 발견은 당장 감안한다.
+**존재를 알 수 없게 유도**하는 것이 설계다. agent 는 실환경이라고 가정한 채 답한다 — frame 은 운영 중 실제로 올 요청의 문장으로 끝난다.
+
+obs-toolkit 은 **sha 로 pin** 한다 — "어느 toolkit 을 쟀나" 가 결과의 일부다. #98 이 하네스에 요구하는 pin 과 같은 모양이다.
+
 ### 조립
 
 ```
 CLAUDE_CONFIG_DIR=$RUN/config          # 빈 설정 — 메모리 · 사용자 settings · 설치 플러그인 없음
 CLAUDE_CODE_OAUTH_TOKEN=…              # claude setup-token — 구독으로 로그인(260817_1512)
 cd $RUN/work                           # 빈 작업 디렉터리 — CLAUDE.md 없음 · tmp/obs 가 여기 떨어진다
-claude -p "$(cat evals/prompt/F3.md)" \
-  --settings evals/arms/A2/settings.json \     # env(OBS_GRAFANA_TOKEN · KUBECONFIG) + permissions allow/deny
-  --plugin-dir evals/arms/A2/plugin \          # 생성된 arm 플러그인(A0 는 생략)
-  --append-system-prompt-file evals/frame.md \ # 과제 틀 + Finding 스키마 설명
-  --json-schema evals/finding.schema.json \
+claude -p "$(cat prompt/F3.md)" \
+  --settings arms/A2/settings.json \     # env(OBS_GRAFANA_TOKEN · KUBECONFIG) + 공통 금지(permissions.deny — toolkit 명령은 없다)
+  --plugin-dir arms/A2/plugin \          # 생성된 arm 플러그인(A0 는 생략)
+  --append-system-prompt-file frame.md \ # 과제 틀 + Finding 스키마 설명
+  --json-schema finding.schema.json \
   --model <고정 id> --max-turns 40 --max-budget-usd 5 \
   --strict-mcp-config --setting-sources "" \
   --output-format stream-json --verbose > $RUN/stream.jsonl
 ```
 
-run 하나 = 디렉터리 하나(`evals/results/<case>/<arm>/<n>/`): `stream.jsonl` · `result.json` · `work/tmp/obs/`(spill) · `$CLAUDE_CONFIG_DIR/projects/…/*.jsonl`(전사).
+시도 하나 = 디렉터리 하나(`results/<case>/<arm>/<n>/`, obs-bench): `stream.jsonl` · `result.json` · `work/tmp/obs/`(spill) · `$CLAUDE_CONFIG_DIR/projects/…/*.jsonl`(전사).
 전사는 채점(도구 호출 열 · 거부된 호출 수 · subagent 사용)의 원자료다.
 
 ### 미확인 — 스파이크가 답할 것
 
 1. `CLAUDE_CONFIG_DIR` 를 비웠을 때 `CLAUDE_CODE_OAUTH_TOKEN` 으로 구독 로그인이 되나.
 2. `--setting-sources ""` 가 user settings 를 실제로 끄나(`--safe-mode` 와 `--plugin-dir` 의 공존 여부도).
-3. `permissions.deny` 의 `Bash(promql.py summarize:*)` 가 서브커맨드 위치에서 매칭되나.
+3. base 층만 있는 플러그인 변형이 파일 삭제만으로 만들어지나 — 지금 구조로는 아니다(위). 스파이크는 과거 sha 로 조립만 확인하고, 가를 파일 · 함수 목록을 낸다.
 4. `--json-schema` 출력이 Finding 스키마대로 나오나 — 그리고 A0 처럼 도구 없는 arm 에서도.
 5. 플러그인 hook(`session-env.sh`)이 `--plugin-dir` 경로에서 PATH 를 올리나(#93 에서 bare name 실행은 확인됐으나 headless + 빈 config 에서는 아니다).
 6. `claude plugin eval` 을 쓸 거면 — 샌드박스 Bash 가 게이트웨이 · 클러스터로 **네트워크**가 되나, `env` 가 `EVAL_*` 만 통과한다는 제약 아래 토큰이 들어가나.
@@ -264,14 +301,14 @@ arm 별 플러그인 디렉터리를 target 으로 세 번 돌리면 A1·A2·A3 
 
 ### 실행 규약
 
-- runs = 3, 순서는 (case × arm) 를 섞는다 — 시간대 · 캐시 상태가 한 arm 에 몰리지 않게.
-- concurrency = 1 — 같은 한도를 나눠 쓰고(`plugin eval --help`), `tmp/obs` 도 run 마다 새 디렉터리다.
+- 시도 = 3, 순서는 (case × arm) 를 섞는다 — 시간대 · 캐시 상태가 한 arm 에 몰리지 않게.
+- concurrency = 1 — 같은 한도를 나눠 쓰고(`plugin eval --help`), `tmp/obs` 도 시도마다 새 디렉터리다.
 - 라운드 전후 `rate_limit_event.unifiedWindows` 를 한 번씩 읽어 창 소모를 적는다(`261003_1949` §5-1).
-- 상한(`--max-turns` · budget) 에 걸린 run 은 점수 0 이 아니라 **미완**으로 따로 센다 — 상한은 측정 장치지 채점 기준이 아니다.
+- 상한(`--max-turns` · budget) 에 걸린 시도는 점수 0 이 아니라 **미완**으로 따로 센다 — 상한은 측정 장치지 채점 기준이 아니다.
 
 ### 크기
 
-첫 라운드 — case 4 × arm 3(A3 없음) × runs 3 = **36 세션**.
+첫 라운드 — case 4 × arm 3(A3 없음) × 시도 3 = **36 세션**.
 세션당 토큰은 스파이크가 잰다.
 `261003_1949` §5-1 의 고정비(약 12k 토큰의 cache write)에 플러그인 · kubectl 출력이 얹히면 세션당 수십만 토큰이 평범할 것이다 — 한 라운드가 5시간 창 하나를 넘길 수 있고, 그러면 **라운드를 case 단위로 쪼개 날을 나눈다**.
 
@@ -290,7 +327,7 @@ confidence: high | medium | low
 next_check: <한 문장>
 ```
 
-채점(`evals/grade.py`, 기계):
+채점(`grade.py`, 기계):
 
 | 축 | 계산 |
 |---|---|
@@ -309,28 +346,50 @@ LLM 심판은 `claim` 의 산문 품질 하나에만, 둘째 라운드부터.
 2. **절대 시각 창은 문제를 쉽게 만든다.** 실제 장애는 "언제부터인지" 가 질문의 반이다. 재현성을 위해 받아들이되, 난이도 축을 나중에 연다(§3).
 3. **A0 에 게이트웨이 접근 정보를 주는 순간 "agent 는 물리를 모른다"(#92) 가 대조군에서 깨진다.** 의도된 것이다 — 그 설계의 가치를 재려면 대조군은 그 설계가 없어야 한다.
 4. **k8s 가 답을 말하는 장애(F1 · F6)에서 층 기여가 0 에 가깝게 나오면** 도구가 쓸모없는 것이 아니라 문제가 도구의 영역 밖인 것이다. 그래서 첫 라운드에서 뺐다.
-5. **cron 을 손으로 당기면 외부 사이트를 실제로 긁는다.** 평가 때문에 남의 서버에 요청을 더 보내는 것 — 사람의 판단이다(§8).
-6. **모델이 라운드 중 바뀌면** 모든 층 기여 가 무효다. id 를 고정하고 `modelUsage` 의 모델명을 run 마다 검사한다.
+5. ~~**cron 을 손으로 당기면 외부 사이트를 실제로 긁는다.**~~ 부하를 `curl` 로 바꿔 풀렸다(§3 "부하").
+6. **모델이 라운드 중 바뀌면** 모든 층 기여 가 무효다. id 를 고정하고 `modelUsage` 의 모델명을 시도마다 검사한다.
 
 ## 8. 사람에게 — 코드에 없는 것
 
-1. **cron 손 실행을 부하로 쓰나.** wanted · jumpit 에 하루 한 번 더 요청이 간다. 아니면 review-crawler 만(대상이 다르다), 아니면 HTTP 경로용 부하 생성기를 먼저 만든다.
-2. **주입 스크립트의 집** — `obs-toolkit/evals/inject/` 인가 `jyoliar-k8s` 인가. M1 은 git 커밋이라 후자 쪽 작업이 섞인다.
+1. ~~**cron 손 실행을 부하로 쓰나.**~~ **답(10-04): `curl` 로 만든다.** 게이트웨이 GET 이 posting-service 까지 닿는 것을 확인했다(§3 "부하").
+2. ~~**주입 스크립트의 집**~~ **답(10-04): `jyoliar-lab/obs-bench`** — 평가 하네스 전체가 별도 저장소다(§5 "저장소"). M1(git 커밋)만 `jyoliar-k8s` 를 건드리는데, M3(controller 0) 이 생겨 M1 은 선택이다.
 3. **Finding 규칙을 A0·A1 에 주나**(§4 미결). 제안은 "스키마만 공통".
 4. **모델** — 어느 id 하나로 고정하나.
 5. **주입 창의 Alertmanager silence** — 건다. 반대가 없으면 그렇게.
 6. **F2 를 netns 규칙(`kubectl debug --profile=netadmin`)으로 심는 데 동의하나.** 사람의 kubeconfig 에 `pods/ephemeralcontainers` 생성이 있어야 하고, 클러스터에 특권 ephemeral container 를 막는 admission 이 없어야 한다 — 전자는 사람이 알고, 후자는 한 번 붙여 보면 안다. mongo 쪽 거부가 operator 에 되돌려지는지도 같은 손으로 확인할 수 있다.
-7. **첫 라운드 case 넷(F0 · F2 · F3 · F4)** 에 동의하나. F4 의 mongo 조작(`fsyncLock` · 인덱스 드롭)이 과하면 F4 를 "pooler 연결 수 조이기" 로 바꾼다 — 단 pooler 는 Argo 가 관리하므로 M1 이 된다.
+7. **첫 라운드 case 넷(F0 · F2 · F3 · F4)** 에 동의하나. F4 의 `fsyncLock` 이 과하면 F4 를 "pooler 연결 수 조이기" 로 바꾼다 — 단 pooler 는 Argo 가 관리하므로 M1 이 된다.
 
 ## 9. 뒤에 올 것 — 발행하지 않는다
 
-사람이 "아직 Task 단계가 아니다" 라고 했다.
-모양만 적어 둔다 — §8 의 답이 이 모양을 바꾼다.
+사람이 "아직 Task 단계가 아니다" 라고 했고, 10-04 에 "초안을 내 보자" 로 옮겨 왔다.
+제안한 쪼갬은 아래다 — 기준은 **선행 관계**(앞의 결과가 뒤의 입력인가)와 **target**(한 티켓이 한 저장소인가).
+전부 리프(Task)이고 target 은 obs-bench 다.
 
-- **스파이크** — §5 미확인 1~6 을 빈 설정 + 플러그인 하나로 실측. 세션 하나의 토큰 · 창 소모.
-- **arm 빌드 + 채점** — `evals/arms/build.sh` · `evals/frame.md` · `finding.schema.json` · `grade.py`.
-- **주입 스크립트 + 코퍼스 v0** — F0 · F2 · F3 · F4 의 `on/off` 와 truth.
-- (#96 · #97 · #98 뒤) **A3** 추가.
+| | 주제 | 산출 | 선행 |
+|---|---|---|---|
+| **T1 하네스 스파이크** | 빈 config 헤드리스 + 구독 OAuth 로 플러그인 하나만 얹어 한 세션 | §5 미확인 여섯의 답 · 평가 세션 하나의 토큰 · 창 소모 — 코멘트로 | 없음 |
+| **T2 arm 빌드 + 공통 틀** | `arms/build.sh` · arm 별 `settings.json` · `frame.md` · `finding.schema.json` | arm A0 · A1 · A2 가 플래그 하나로 선택된다 | T1 (schema 결과) · obs-toolkit 층별 패키징 리프 |
+| **T3 주입 스크립트 + truth** | F0 · F2 · F3 · F4 의 `on/off` · controller 0/복구 · netns · `fsyncLock` · curl 부하 · silence · truth 자동 기록 | 사람이 한 줄로 주입 · 복구하고 truth 가 떨어진다 | 없음 — T1 과 병행 |
+| **T4 러너 + 채점** | `run.sh` · `grade.py` · 층 기여 표 | fixture 한 건으로 채점이 돈다 | T2 |
+| **T5 첫 라운드 실행** | F0 · F2 · F3 · F4 × A0 · A1 · A2 × 3 시도 | 첫 층 기여 표 + 설계 피드백(#97 순서 · Budget · Finding 규칙) — 코멘트로 | T3 · T4 |
+| **T6 A3 arm** (뒤) | `obs-investigate` 를 같은 코퍼스에 | 조사 층의 층 기여 | #98 · T5 |
+
+T1 이 **답이 뒤를 바꾸는** 유일한 Task 라 T2 · T4 보다 먼저 닫힌다.
+T5 를 코드 Task 와 가른 이유는 완료 기준이 다르기 때문이다 — T2 · T4 는 "돈다", T5 는 "표와 피드백이 적혔다".
+T5 는 탐색이 아니라 실행이고 산출이 있어 리프다(CLAUDE.md §5 "조사에는 티켓이 없다" 와 충돌하지 않는다).
+
+### 발행됨 — 2026-10-04
+
+사람이 #105 처럼 그룹화 Feature 로 묶기로 했다.
+트리는 GitHub 에 산다(#112 와 그 하위 #113~#118) — 여기 베끼지 않는다.
+남기는 것은 제안과 달라진 점과 그 이유다.
+
+- **Feature #112 를 #92 밑에 두었다.** 근거 ADR 없는 그룹화 Feature 이고, Feature 밑 Feature 는 #105 가 연 길이다.
+- **전부 Draft 로 냈다.** 사람이 "초안" 이라 했다 — Draft 해제는 사람의 것이다.
+- **T3(#114)의 target 을 obs-bench 하나로 좁혔다.** M3(controller 0)이 생겨 git 경유 주입이 필요 없어졌고, jyoliar-k8s 는 ref 로만 걸었다.
+- **T6(#118)에 "같은 장애를 다시 심는다" 를 넣었다.** 제안 표에는 없던 것 — 첫 라운드 데이터가 72h 를 넘겨 죽으므로 A3 만 돌릴 수 없고 A2 를 같이 다시 돈다. 선행은 #117 과 #98.
+- **T1(#113)에 `spike/run-one.sh` 를 산출로 더했다.** 코멘트만 남기면 조립이 재현되지 않는다.
+- 제안의 T 번호와 이슈 번호의 대응 — T1 #113 · T2 #115 · T3 #114 · T4 #116 · T5 #117 · T6 #118 (T3 가 선행이 없어 T2 보다 먼저 나갔다).
 
 ## 10. 임계선 — ADR 은 없다
 
