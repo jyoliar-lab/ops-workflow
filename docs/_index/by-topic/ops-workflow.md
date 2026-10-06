@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / ops-workflow (31)
+# by-topic / ops-workflow (33)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -21,6 +21,7 @@
 | ADR-0024 | adr | proposed | discussion | [ADR-0024 — discussion은 보관도 동결도 약속하지 않는다](../../ops-workflow/adr/adr-0024-discussion-no-retention-no-freeze.md) |
 | ADR-0032 | adr | proposed | adr | [ADR-0032 — 정책 ADR은 proposed로 운영한다: 검증은 하네스가, accept는 미룬다](../../ops-workflow/adr/adr-0032-policy-adr-defers-accept.md) |
 | ADR-0033 | adr | proposed | github-issues, github-projects | [ADR-0033 — 티켓 Status는 여섯이다: 진행 단계와 확신만 표현한다](../../ops-workflow/adr/adr-0033-ticket-status-roster-and-meaning.md) |
+| ADR-0035 | adr | proposed | digest, discussion, adr | [ADR-0035 — 수렴한 논의의 결론은 digest 문서로 증류한다](../../ops-workflow/adr/adr-0035-distill-conclusions-into-digest.md) |
 | — | discussion | active | claude-code-skills | [skill 초판 마찰 로그](../../ops-workflow/discussion/260712_1731_skill-friction-log.md) |
 | — | discussion | active | adr | [ADR 선행 사례 조사 — 무엇이 표준이고, 무엇이 우리 발명이고, 무엇이 실패하는가](../../ops-workflow/discussion/260714_1417_adr-prior-art-survey.md) |
 | — | discussion | active | adr | [ADR 문서를 무슨 포맷으로 적을 것인가](../../ops-workflow/discussion/260715_1401_adr-document-format.md) |
@@ -35,3 +36,4 @@
 | — | discussion | active | ticket-engineer, ticket-start, ticket-report, pytest, playwright, obs-toolkit, github-issues, claude-code | [TDD 집행 흐름 — ticket-engineer 하네스에 red·green 을 어떻게 세우나](../../ops-workflow/discussion/260930_1356_tdd-flow-in-ticket-engineer.md) |
 | — | discussion | active | ticket-engineer, ticket-start, ticket-report, pytest, playwright, obs-toolkit, github-issues, claude-code | [TDD 집행 흐름 — 결론](../../ops-workflow/discussion/260930_1524_tdd-flow-decisions.md) |
 | — | discussion | active | ticket-engineer, ticket-start, ticket-report, github-issues, jyoliar-k8s, kustomize, ansible, terraform, argocd, prometheus, pytest | [인프라 AC 의 세 종류 — 약속이 상태일 때 무엇이 증거인가](../../ops-workflow/discussion/260930_1828_infra-ac-kinds.md) |
+| — | discussion | done | discussion, digest, adr, claude-code-skills | [discussion 위에 결론 층을 둔다 — 읽을 수 없는 로그와 얼어붙는 영수증 사이](../../ops-workflow/discussion/261006_1549_digest-layer-over-discussion.md) |

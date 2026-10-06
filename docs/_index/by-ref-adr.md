@@ -70,6 +70,18 @@
 - [비호환 변경의 분류와 deprecated의 수명 — ADR-0021의 미결정 지대](../careerhub/discussion/260730_2045_breaking-taxonomy-and-deprecation-lifecycle.md) — `active`
 - [런타임 계약 어긋남 — provider와 consumer가 다른 계약으로 동작하는 것을 무엇이 막는가](../careerhub/discussion/260801_1806_runtime-contract-skew-prevention.md) — `done`
 
+## ADR-0022 — discussion은 최소한의 메타데이터를 갖는다
+
+- [discussion 위에 결론 층을 둔다 — 읽을 수 없는 로그와 얼어붙는 영수증 사이](../ops-workflow/discussion/261006_1549_digest-layer-over-discussion.md) — `done`
+
+## ADR-0023 — 사고의 발산은 discussion 문서로 남긴다
+
+- [discussion 위에 결론 층을 둔다 — 읽을 수 없는 로그와 얼어붙는 영수증 사이](../ops-workflow/discussion/261006_1549_digest-layer-over-discussion.md) — `done`
+
+## ADR-0024 — discussion은 보관도 동결도 약속하지 않는다
+
+- [discussion 위에 결론 층을 둔다 — 읽을 수 없는 로그와 얼어붙는 영수증 사이](../ops-workflow/discussion/261006_1549_digest-layer-over-discussion.md) — `done`
+
 ## ADR-0025 — 호환의 정의는 계약이 소유한다: 생성 코드 층위까지, 쌍방 의무로
 
 - [비호환 변경의 분류와 deprecated의 수명 — ADR-0021의 미결정 지대](../careerhub/discussion/260730_2045_breaking-taxonomy-and-deprecation-lifecycle.md) — `active`
@@ -135,4 +147,8 @@
 ## ADR-0034 — terraform은 GitOps가 생성한 인프라에 의존하지 않는다
 
 - [Zitadel 발급 훅 target/execution 등록 — GitOps 경로 조사](../careerhub/discussion/260811_2031_zitadel-actions-target-gitops-registration.md) — `done`
+
+## ADR-0035 — 수렴한 논의의 결론은 digest 문서로 증류한다
+
+- [discussion 위에 결론 층을 둔다 — 읽을 수 없는 로그와 얼어붙는 영수증 사이](../ops-workflow/discussion/261006_1549_digest-layer-over-discussion.md) — `done`
 

@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (72)
+# by-type / discussion (73)
 
 | status | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|
@@ -75,4 +75,5 @@
 | active | ops-workflow | ticket-engineer, ticket-start, ticket-report, pytest, playwright, obs-toolkit, github-issues, claude-code | ADR-0016, ADR-0017 | [TDD 집행 흐름 — ticket-engineer 하네스에 red·green 을 어떻게 세우나](../../ops-workflow/discussion/260930_1356_tdd-flow-in-ticket-engineer.md) |
 | active | ops-workflow | ticket-engineer, ticket-start, ticket-report, pytest, playwright, obs-toolkit, github-issues, claude-code | ADR-0016, ADR-0017 | [TDD 집행 흐름 — 결론](../../ops-workflow/discussion/260930_1524_tdd-flow-decisions.md) |
 | active | ops-workflow | ticket-engineer, ticket-start, ticket-report, github-issues, jyoliar-k8s, kustomize, ansible, terraform, argocd, prometheus, pytest | ADR-0016, ADR-0017 | [인프라 AC 의 세 종류 — 약속이 상태일 때 무엇이 증거인가](../../ops-workflow/discussion/260930_1828_infra-ac-kinds.md) |
+| done | ops-workflow | discussion, digest, adr, claude-code-skills | ADR-0022, ADR-0023, ADR-0024, ADR-0035 | [discussion 위에 결론 층을 둔다 — 읽을 수 없는 로그와 얼어붙는 영수증 사이](../../ops-workflow/discussion/261006_1549_digest-layer-over-discussion.md) |
 | rejected | palworld | palworld-server | — | [팰월드 1.0 서버를 홈랩 쿠버네티스에](../../palworld/discussion/260726_0149_palworld-server-on-homelab-k8s.md) |
