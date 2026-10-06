@@ -73,10 +73,12 @@
 ## ADR-0022 — discussion은 최소한의 메타데이터를 갖는다
 
 - [discussion 위에 결론 층을 둔다 — 읽을 수 없는 로그와 얼어붙는 영수증 사이](../ops-workflow/discussion/261006_1549_digest-layer-over-discussion.md) — `done`
+- [discussion 작성 스킬 — 질문은 인터뷰로, 문서에는 지형과 판정만](../ops-workflow/discussion/261006_2122_discussion-skill-interview-first.md) — `active`
 
 ## ADR-0023 — 사고의 발산은 discussion 문서로 남긴다
 
 - [discussion 위에 결론 층을 둔다 — 읽을 수 없는 로그와 얼어붙는 영수증 사이](../ops-workflow/discussion/261006_1549_digest-layer-over-discussion.md) — `done`
+- [discussion 작성 스킬 — 질문은 인터뷰로, 문서에는 지형과 판정만](../ops-workflow/discussion/261006_2122_discussion-skill-interview-first.md) — `active`
 
 ## ADR-0024 — discussion은 보관도 동결도 약속하지 않는다
 
@@ -151,4 +153,5 @@
 ## ADR-0035 — 수렴한 논의의 결론은 digest 문서로 증류한다
 
 - [discussion 위에 결론 층을 둔다 — 읽을 수 없는 로그와 얼어붙는 영수증 사이](../ops-workflow/discussion/261006_1549_digest-layer-over-discussion.md) — `done`
+- [discussion 작성 스킬 — 질문은 인터뷰로, 문서에는 지형과 판정만](../ops-workflow/discussion/261006_2122_discussion-skill-interview-first.md) — `active`
 
