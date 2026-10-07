@@ -24,7 +24,7 @@ superseded_by:
 | 골격 | 결론 표(축·결론·어디에 사는가, 화면 하나 상한) · **문제와 계기**(필수) · 버린 대안 · 기댄 사실 · 외부 조사 · 미결. 표 밖은 길이 자유, 시간순 누적 금지 | `digest` 스킬 |
 | 자족성 | discussion이 제거돼도 결론 표와 문제·계기만으로 맥락이 선다. 본문은 discussion을 가리키지 않는다 — 경로는 `sources`에만 | `digest` 스킬 |
 | 보관 관계 | digest와 discussion의 제거 순서·전제는 정하지 않는다 — 둘 다 ADR-0024 지위, 관리 판단 | 아직 없음 — 의도적 |
-| 저작 | design-partner. **사람이 수동 호출**. 티켓 발행과 무관 | `digest` 스킬(`disable-model-invocation`) · design-partner |
+| 저작 | design-partner. **사용자가 지시하되 agent가 수렴 여부를 판정하고, 부족하면 거부하며 부족한 점을 알린다**. 티켓 발행과 무관 | `digest` 스킬(model-invocable) · design-partner |
 | 독자 | 사람 · context-scout 2순위 · design-partner(새 논의 전). ticket-engineer 변경 없음 | context-scout SKILL.md |
 | discussion 저작 | 인터뷰 먼저 · 선택지는 검토 가능한 형태로 · 질문–답은 채팅 · 문서는 옵션·축·버린 이유 | `discussion` 스킬 |
 | 기존 문서 | 45건 `active` 그대로. 차례로 digest로 증류 | 아직 없음 — 별도 작업 |
