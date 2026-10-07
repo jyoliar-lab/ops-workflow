@@ -80,11 +80,13 @@
 - [discussion 위에 결론 층을 둔다 — 읽을 수 없는 로그와 얼어붙는 영수증 사이](../ops-workflow/discussion/261006_1549_digest-layer-over-discussion.md) — `done`
 - [discussion 작성 스킬 — 질문은 인터뷰로, 문서에는 지형과 판정만](../ops-workflow/discussion/261006_2122_discussion-skill-interview-first.md) — `done`
 - [digest 작성 스킬 — 수렴을 판정하고 거부할 수 있는 증류](../ops-workflow/discussion/261007_1623_digest-skill-refuse-and-review.md) — `done`
+- [digest를 청사진으로 — 결정의 요약이 아니라 결정된 설계의 서술](../ops-workflow/discussion/261007_1947_digest-as-blueprint.md) — `done`
 
 ## ADR-0024 — discussion은 보관도 동결도 약속하지 않는다
 
 - [discussion 위에 결론 층을 둔다 — 읽을 수 없는 로그와 얼어붙는 영수증 사이](../ops-workflow/discussion/261006_1549_digest-layer-over-discussion.md) — `done`
 - [digest 작성 스킬 — 수렴을 판정하고 거부할 수 있는 증류](../ops-workflow/discussion/261007_1623_digest-skill-refuse-and-review.md) — `done`
+- [digest를 청사진으로 — 결정의 요약이 아니라 결정된 설계의 서술](../ops-workflow/discussion/261007_1947_digest-as-blueprint.md) — `done`
 
 ## ADR-0025 — 호환의 정의는 계약이 소유한다: 생성 코드 층위까지, 쌍방 의무로
 
@@ -157,4 +159,5 @@
 - [discussion 위에 결론 층을 둔다 — 읽을 수 없는 로그와 얼어붙는 영수증 사이](../ops-workflow/discussion/261006_1549_digest-layer-over-discussion.md) — `done`
 - [discussion 작성 스킬 — 질문은 인터뷰로, 문서에는 지형과 판정만](../ops-workflow/discussion/261006_2122_discussion-skill-interview-first.md) — `done`
 - [digest 작성 스킬 — 수렴을 판정하고 거부할 수 있는 증류](../ops-workflow/discussion/261007_1623_digest-skill-refuse-and-review.md) — `done`
+- [digest를 청사진으로 — 결정의 요약이 아니라 결정된 설계의 서술](../ops-workflow/discussion/261007_1947_digest-as-blueprint.md) — `done`
 

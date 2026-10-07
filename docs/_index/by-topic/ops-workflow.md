@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / ops-workflow (35)
+# by-topic / ops-workflow (36)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -39,3 +39,4 @@
 | — | discussion | done | discussion, digest, adr, claude-code-skills | [discussion 위에 결론 층을 둔다 — 읽을 수 없는 로그와 얼어붙는 영수증 사이](../../ops-workflow/discussion/261006_1549_digest-layer-over-discussion.md) |
 | — | discussion | done | discussion, claude-code-skills, digest | [discussion 작성 스킬 — 질문은 인터뷰로, 문서에는 지형과 판정만](../../ops-workflow/discussion/261006_2122_discussion-skill-interview-first.md) |
 | — | discussion | done | digest, discussion, claude-code-skills | [digest 작성 스킬 — 수렴을 판정하고 거부할 수 있는 증류](../../ops-workflow/discussion/261007_1623_digest-skill-refuse-and-review.md) |
+| — | discussion | done | digest, discussion, adr, claude-code-skills | [digest를 청사진으로 — 결정의 요약이 아니라 결정된 설계의 서술](../../ops-workflow/discussion/261007_1947_digest-as-blueprint.md) |

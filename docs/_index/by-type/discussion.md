@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (75)
+# by-type / discussion (76)
 
 | status | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|
@@ -78,4 +78,5 @@
 | done | ops-workflow | discussion, digest, adr, claude-code-skills | ADR-0022, ADR-0023, ADR-0024, ADR-0035 | [discussion 위에 결론 층을 둔다 — 읽을 수 없는 로그와 얼어붙는 영수증 사이](../../ops-workflow/discussion/261006_1549_digest-layer-over-discussion.md) |
 | done | ops-workflow | discussion, claude-code-skills, digest | ADR-0022, ADR-0023, ADR-0035 | [discussion 작성 스킬 — 질문은 인터뷰로, 문서에는 지형과 판정만](../../ops-workflow/discussion/261006_2122_discussion-skill-interview-first.md) |
 | done | ops-workflow | digest, discussion, claude-code-skills | ADR-0035, ADR-0023, ADR-0024 | [digest 작성 스킬 — 수렴을 판정하고 거부할 수 있는 증류](../../ops-workflow/discussion/261007_1623_digest-skill-refuse-and-review.md) |
+| done | ops-workflow | digest, discussion, adr, claude-code-skills | ADR-0035, ADR-0023, ADR-0024 | [digest를 청사진으로 — 결정의 요약이 아니라 결정된 설계의 서술](../../ops-workflow/discussion/261007_1947_digest-as-blueprint.md) |
 | rejected | palworld | palworld-server | — | [팰월드 1.0 서버를 홈랩 쿠버네티스에](../../palworld/discussion/260726_0149_palworld-server-on-homelab-k8s.md) |
