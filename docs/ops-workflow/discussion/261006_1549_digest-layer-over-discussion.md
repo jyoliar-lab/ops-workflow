@@ -1,5 +1,6 @@
 ---
 type: discussion
+goal: discussion-readability
 topic: ops-workflow
 subjects: [discussion, digest, adr, claude-code-skills]
 status: done
