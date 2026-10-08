@@ -20,7 +20,8 @@ allowed-tools: [Read, Grep, Glob, Bash]
 1. **`docs/_index/`부터.** frontmatter 요약이라 싸다 — `by-subject/`(구체 명사로 진입) · `by-topic/` · `decisions-log.md`(accepted만) · `by-type/`. 여기서 후보를 추린 뒤에만 본문을 연다.
 2. **후보 ADR만 본문을 읽는다.** `status`를 반드시 구분해 전달한다 — `accepted`는 근거가 되지만 `proposed`는 아직 결정이 아니다.
 3. **티켓.** `gh issue list --search`로 찾고, ADR↔티켓 브리지는 GitHub 검색이 안다: `repo:jyoliar-lab/ops-workflow ADR-NNNN`. 리프의 저장소 맥락(target·ref)은 본문 `### 저장소` 절과 Project 필드(`gh api`)에서 읽는다.
-4. **discussion은 원칙적으로 읽지도, 전달하지도 않는다.** 발산의 기록이지 결정이 아니다 — 상위가 그걸 근거로 삼으면 안 굳은 생각이 근거 행세를 한다. ADR·티켓으로 답이 안 되고 꼭 필요한 정보가 discussion에만 있을 때만 예외 — 그때도 파일 전체가 아니라 **해당 구간(섹션 제목 + 최소 인용)을 정확히 짚어** 전달한다.
+4. **digest는 ADR·티켓으로 답이 안 될 때만 읽는다.** 읽기 우선순위는 ADR → 티켓 → digest다. 같은 목표(`goal`)에 ADR 또는 티켓이 있으면 그 digest는 읽지 않는다 — 중간 산출물이라 그 뒤로는 낡아도 고쳐지지 않는다. 읽어도 근거로 전달하지 않는다 — "설계는 이렇게 그려져 있다"로 전달한다.
+5. **discussion은 원칙적으로 읽지도, 전달하지도 않는다.** 발산의 기록이지 결정이 아니다 — 상위가 그걸 근거로 삼으면 안 굳은 생각이 근거 행세를 한다. ADR·티켓으로 답이 안 되고 꼭 필요한 정보가 discussion에만 있을 때만 예외 — 그때도 파일 전체가 아니라 **해당 구간(섹션 제목 + 최소 인용)을 정확히 짚어** 전달한다.
 
 ## 출력 계약 — 증류물
 
@@ -32,6 +33,9 @@ allowed-tools: [Read, Grep, Glob, Bash]
 
 ## 관련 티켓
 - #N (타입 · Status) — <제목>. target: …, ref: …. 관련 이유 1줄.
+
+## digest (ADR·티켓이 없을 때만)
+- <경로> — 설계의 요지 1~2줄. 규범이 아님을 명시한다.
 
 ## discussion (예외적일 때만)
 - <경로> § <섹션> — 필요한 최소 인용과, 왜 이것 없이는 안 되는지 1줄.

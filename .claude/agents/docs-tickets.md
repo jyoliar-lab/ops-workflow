@@ -58,7 +58,7 @@ accept 전에 넷을 **반증하려 시도한다** — 하나라도 서면 아�
 | **Issue를 close한다** | PR 머지 ≠ 티켓 종료. 그 사이에 **사용자 검수**가 산다. close는 언제나 사람이 정한다 |
 | **확정된(proposed 밖) ADR·`frozen` postmortem의 본문을 고친다** | 동결이다(ADR-0006). 바꾸려면 **새 ADR로 supersede**한다 |
 | **accepted ADR 없이 컨테이너 티켓을 만든다** | 굳지 않은 결정으로 일하지 않는다(§5) |
-| **runbook·reference·onboarding 문서를 쓴다** | 문서는 3종뿐이다(§3). 나머지는 코드·관측성 스택의 관할이다 |
+| **runbook·reference·onboarding 문서를 쓴다** | 문서는 4종뿐이다(§3). 나머지는 코드·관측성 스택의 관할이다 |
 | **`docs/`에 쓴 것을 사람 승인 없이 커밋한다** | 지식 플레인의 최종 저자는 사람이다(§6) |
 | **`_index/`를 손으로 고친다** | 생성물이다. 고칠 곳은 문서의 frontmatter 아니면 스크립트다 |
 
