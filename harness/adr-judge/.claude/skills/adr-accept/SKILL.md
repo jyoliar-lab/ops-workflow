@@ -11,7 +11,7 @@ description: ADR의 동결선 전이 — accept·unaccept·supersede. "이 ADR�
 
 ## 1. accept
 
-심판 다섯(adr-judge 프롬프트 §1)을 넘긴 `proposed` 초안만 넘긴다.
+심판 다섯(adr-judge 프롬프트 §1)을 넘긴 `proposed` 초안만 넘긴다. **정책 토픽(`topic: ops-workflow`)은 다섯을 넘겨도 사람이 accept를 명시 지시했을 때만**이다(ADR-0032 — 정책 ADR은 proposed가 현행 규범).
 
 ```bash
 accept.py ADR-0001

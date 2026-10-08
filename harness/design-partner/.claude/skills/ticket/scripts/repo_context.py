@@ -16,7 +16,7 @@
 담는 자리는 둘이다: 이슈 본문 '### 저장소' 절(사람·집행 도구) + Project 'Target Repos' 필드(보드 질의).
 
 ★ 쌍둥이 파서: ticket-engineer `.claude/skills/_lib/repos.py` — 표기를 바꾸면 **함께** 바꾼다.
-  그 정합은 steward 의 conformance 감사 대상이다 (파일럿 원장: steward pilots.md).
+  그 정합은 steward 의 conformance 감사 대상이다 (롤백 원장: steward pilots.md).
 """
 import os
 import re
