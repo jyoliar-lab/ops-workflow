@@ -4,33 +4,38 @@
 
 아래 경로는 전부 **저장소 루트 기준**이다.
 
-## 하네스 — 역할별 작업 디렉터리
+## 하네스 — 역할별 프롬프트와 스킬
 
-agent는 **`harness/<역할>/`에서 세션을 연다.** Claude Code는 cwd와 그 상위의 `CLAUDE.md`를 전부 읽고, `.claude/skills/`·`.claude/agents/`·`.claude/rules/`는 cwd에서 저장소 루트까지 올라가며 읽는다. 반면 `.claude/settings.json`은 **cwd의 것만** 읽고, `.claude/settings.local.json`은 **git 루트의 것**을 읽는다 (2026-10-08 실측).
+agent 세션은 **항상 저장소 루트에서** 연다. 역할은 `--add-dir`로 덧붙인다 — 그래서 사람과 agent가 말하는 경로는 전부 루트 기준이고, `$CLAUDE_PROJECT_DIR`도 루트다.
+
+```bash
+cd ~/IdeaProjects/ops-workflow
+claude --add-dir harness/design-partner     # 발산·초안·쪼갬·티켓 발행
+claude --add-dir harness/adr-judge          # accept 심판·supersede·ADR 간 정합
+claude                                      # 역할 없이: 하네스 유지보수 · /docs-index
+```
+
+Claude Code는 cwd의 `CLAUDE.md`·`.claude/*`에 더해, `--add-dir`로 덧붙인 디렉터리의 `.claude/skills/`·`.claude/agents/`를 읽는다. 그 디렉터리의 `CLAUDE.md`는 `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1`일 때 읽는데, 이 플래그는 루트 `.claude/settings.json`의 `env`에 들어 있다 (2026-10-08 실측: 역할 CLAUDE.md와 전용 스킬이 로드되고, 다른 역할의 것은 보이지 않는다).
 
 ```
 ops-workflow/
-├── CLAUDE.md                       규약 — 모든 하네스가 읽는다
+├── CLAUDE.md                       규약 — 모든 세션이 읽는다
 ├── .claude/
-│   ├── rules/                      규약의 일부 (모든 하네스)
+│   ├── rules/                      규약의 일부
 │   ├── skills/                     공통 스킬: adr(저작) · context-scout · _lib
 │   ├── agents/                     공통 서브에이전트: context-scout-runner
-│   ├── hooks/                      hook 본체 — 여기 한 곳에만 둔다
-│   ├── scripts/ · commands/        build-index.py · /docs-index (루트 세션용)
-│   ├── settings.json               루트 세션(유지보수)용 hook 등록·권한
-│   └── settings.local.json         PC별 env(KUBECONFIG 등)·권한 승인 — 모든 하네스가 읽는다
-├── docs/ · tmp/ · workspace/       루트에 하나. 하네스 밑에 만들지 않는다
+│   ├── hooks/                      hook 본체
+│   ├── scripts/ · commands/        build-index.py · /docs-index
+│   ├── settings.json               hook 등록 · 권한 · env 플래그 — 모든 세션 공통
+│   └── settings.local.json         PC별 env(KUBECONFIG 등) · 권한 승인
+├── docs/ · tmp/ · workspace/
 └── harness/
     ├── design-partner/
     │   ├── CLAUDE.md               역할 프롬프트 — 규약 다음에 붙는다
-    │   └── .claude/
-    │       ├── settings.json       hook 등록 4종 · 티켓 스크립트 권한 · obs-toolkit 플러그인
-    │       └── skills/             ticket · discussion · digest
+    │   └── .claude/skills/         ticket · discussion · digest
     └── adr-judge/
         ├── CLAUDE.md
-        └── .claude/
-            ├── settings.json       hook 등록 3종(refresh-refs 제외) · accept/supersede 권한
-            └── skills/             adr-accept
+        └── .claude/skills/         adr-accept (accept · unaccept · supersede)
 ```
 
 | 하네스 | 하는 일 | 전용 스킬 | 티켓 |
@@ -38,28 +43,21 @@ ops-workflow/
 | **design-partner** | 발산 · `proposed` ADR 초안 · 쪼갬 · 티켓 발행. 코드를 읽는다(`workspace/ref`) | ticket · discussion · digest | write |
 | **adr-judge** | accept 심판 · supersede · ADR 간 충돌·정합 · `subjects` 어휘 | adr-accept | read only |
 
-### 세션 열기
+`/context`로 로드된 `CLAUDE.md` 둘(루트 + 역할)과 스킬 목록을 확인할 수 있다. adr-judge에서는 `ticket`·`digest`가 보이지 않아야 정상이다.
 
-```bash
-cd harness/design-partner && claude     # 발산·초안·티켓
-cd harness/adr-judge && claude          # 심판·supersede
-claude                                  # 루트: 하네스 유지보수 · /docs-index
-```
+### 경계와 PATH
 
-`/context`로 로드된 `CLAUDE.md` 둘(루트 + 하네스)과 스킬 목록을 확인할 수 있다. adr-judge에서는 `ticket`·`digest`가 보이지 않아야 정상이다.
-
-### 경로와 경계
-
-- `$CLAUDE_PROJECT_DIR`은 **세션을 연 디렉터리**(하네스 cwd)다 — 저장소 루트가 아니다. hook과 스크립트는 `git rev-parse --show-toplevel`로 루트를 역산한다(`.claude/hooks/*`, 각 `scripts/_bootstrap.py`).
+- hook·권한은 루트 `.claude/settings.json` 하나다. 역할별 차이는 프롬프트와 스킬 가시성으로 낸다 — `refresh-refs`는 어느 역할에서도 돈다(ff-pull, 수 초).
 - 쓰기 경계(`guard-write.py`)는 git 루트다. `docs/_index/`·`workspace/`·저장소 밖은 거부, `gh issue close`는 거부, `git commit`·`push`는 사람에게 묻는다.
-- 스킬 스크립트는 `session-path.sh`가 PATH에 올린다 — 루트 `.claude/skills/**/scripts` + 해당 하네스의 `.claude/skills/**/scripts` + `.claude/scripts` + `.claude/hooks`.
+- 스킬 스크립트는 `session-path.sh`가 PATH에 올린다 — 루트와 **모든** 하네스의 `.claude/skills/**/scripts` + `.claude/scripts` + `.claude/hooks`. hook은 어느 역할이 덧붙었는지 모르므로 전부 올린다. PATH는 경계가 아니다.
+- hook·스크립트는 그래도 `git rev-parse --show-toplevel`로 루트를 역산한다 — 하위 디렉터리에서 열어도 깨지지 않게.
 
 ### 역할 추가
 
 1. `harness/<역할>/CLAUDE.md`에 역할 프롬프트를 쓴다.
-2. `harness/<역할>/.claude/settings.json`을 만든다 — 기존 하네스의 hook 등록 블록을 복사하고 권한을 역할에 맞게 고른다.
-3. 전용 스킬은 `harness/<역할>/.claude/skills/`에, 공통으로 쓸 것은 루트 `.claude/skills/`로 올린다.
-4. 스크립트가 `_lib`를 쓰면 `scripts/_bootstrap.py`를 복사하고 `import _bootstrap`으로 시작한다.
+2. 전용 스킬은 `harness/<역할>/.claude/skills/`에, 공통으로 쓸 것은 루트 `.claude/skills/`로 올린다. 스크립트가 `_lib`를 쓰면 `scripts/_bootstrap.py`를 복사하고 `import _bootstrap`으로 시작한다.
+3. 새 스크립트가 있으면 루트 `.claude/settings.json`의 권한에 더한다.
+4. `claude --add-dir harness/<역할>`로 연다.
 
 ## 구조로 강제하는 것들
 

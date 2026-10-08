@@ -35,7 +35,7 @@ list-subjects.py     # 기존 subjects 어휘 + 인덱스 드리프트 경고
 next-id.py           # 전역 순차 ADR 번호 (충돌 감지)
 ```
 
-(스킬 스크립트는 SessionStart hook가 PATH에 올린다 — bare name으로 실행한다. 공통 스킬은 루트 `.claude/skills/<skill>/scripts/`, 하네스 전용 스킬은 `harness/<역할>/.claude/skills/<skill>/scripts/`.)
+(스킬 스크립트는 SessionStart hook가 PATH에 올린다 — bare name으로 실행한다.)
 
 **`subjects`는 구체 명사만** — 판별 기준은 CLAUDE.md §7.
 

@@ -1,4 +1,7 @@
 {
+  "env": {
+    "CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD": "1"
+  },
   "permissions": {
     "allow": [
       "Bash(git log:*)",
@@ -35,6 +38,17 @@
       "Bash(next-id.py:*)",
       "Bash(doc-path.py:*)",
       "Bash(freeze-check.py:*)",
+      "Bash(accept.py:*)",
+      "Bash(unaccept.py:*)",
+      "Bash(supersede.py:*)",
+      "Bash(create.py:*)",
+      "Bash(adr-gate.py:*)",
+      "Bash(link-sub.py:*)",
+      "Bash(set-adr.py:*)",
+      "Bash(set-repos.py:*)",
+      "Bash(set-deps.py:*)",
+      "Bash(refresh-refs.py:*)",
+      "Bash(gh issue comment:*)",
       "WebSearch",
       "WebFetch",
       "Fetch",

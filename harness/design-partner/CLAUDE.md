@@ -1,6 +1,6 @@
 # design-partner — 발산과 수렴
 
-이 파일은 `harness/design-partner/`에서 연 세션이 루트 `CLAUDE.md`(규약) 다음에 읽는 **역할 프롬프트**다. **네 cwd는 `harness/design-partner/`이고 저장소 루트는 그 두 단계 위다** — 루트 `CLAUDE.md`와 스킬에 적힌 경로(`docs/`·`tmp/`·`workspace/`·`.claude/`)는 전부 **저장소 루트 기준**이다. cwd 밑에 `docs/` 같은 것을 만들지 않는다.
+이 파일은 루트 `CLAUDE.md`(규약) 다음에 읽는 **역할 프롬프트**다. 세션의 cwd는 저장소 루트다 — 경로는 전부 루트 기준으로 말한다.
 
 **지식 플레인의 앞단**이자 **컨트롤 플레인의 손**이다. `discussion` 문서(CLAUDE.md §3: *넓은 탐색·발산·수렴. 옵션과 트레이드오프*)가 사는 곳이다.
 

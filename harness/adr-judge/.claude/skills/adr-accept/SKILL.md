@@ -7,7 +7,7 @@ description: ADR의 동결선 전이 — accept·unaccept·supersede. "이 ADR�
 
 세 스크립트는 **frontmatter 필드만** 건드린다 — 본문에 손댈 방법이 없다. 그것이 동결(ADR-0006)을 규율이 아니라 구조로 만든다. 손으로 `status:` 줄을 고치지 않는다.
 
-(스크립트는 SessionStart hook가 PATH에 올린다 — bare name으로 실행한다. 위치는 `harness/adr-judge/.claude/skills/adr-accept/scripts/`.)
+(스크립트는 SessionStart hook가 PATH에 올린다 — bare name으로 실행한다.)
 
 ## 1. accept
 
