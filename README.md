@@ -90,4 +90,4 @@ ops-workflow/
 - 한다: 증상 기록용 Bug 티켓 생성 · 저장소·시스템 read 조사 · 확인 내용을 코멘트로 축적
 - 하지 않는다: 복구 · 문서 저작 · 티켓 close
 
-**초안 인박스 `tmp/`** 는 untracked다. `tmp/staging/`은 하네스 자체의 마찰 로그, `tmp/github-issues/`는 이슈 본문 초안(`gh --body-file`로 게시). `.gitignore`에는 아직 `tmp/`가 없다 — 감사 패치 참조.
+**초안 인박스 `tmp/`** 는 gitignored다. `tmp/staging/`은 하네스 자체의 마찰 로그, `tmp/github-issues/`는 이슈 본문 초안(`gh --body-file`로 게시).

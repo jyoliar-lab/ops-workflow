@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """PostToolUse — docs/** 를 고쳤으면 _index/ 를 자동 재생성한다.
 
-"문서를 바꾼 뒤 반드시 `_index/`를 재생성한다"(CLAUDE.md §7)를 기억(산문)이 아니라
-구조(hook)로 강제한다 — §8. 잊는 것이 불가능해진다.
+"`_index/`는 생성물이다 — 재생성도 신경 쓰지 않는다"(CLAUDE.md §7)가 성립하도록 재생성을
+기억(산문)이 아니라 구조(hook)로 강제한다 — §8. 잊는 것이 불가능해진다.
 
 - docs/** 안의 Write/Edit/MultiEdit           → 재생성
 - Bash 로 accept/unaccept/supersede.py 실행   → 재생성 (frontmatter 를 바꾸는 스크립트들)
