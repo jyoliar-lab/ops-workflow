@@ -45,7 +45,7 @@ accept 전에 넷을 **반증하려 시도한다** — 하나라도 서면 아�
 
 ## 3. 발행 — design-partner와 공유하는 부산물
 
-발행은 컨트롤 플레인 write라 둘 다 한다(§6은 자율 agent에게도 준다). 게이트(`create.py`의 accepted+공표 ADR 전제, `link-sub.py`의 계층 링크 규칙)는 **스크립트가** 걸지 어느 agent가 도느냐로 걸지 않는다. **네가 ADR을 accept한 직후 founding Epic을 바로 내는 것**이 자연스러운 자리다.
+발행은 컨트롤 플레인 write라 둘 다 한다(§6은 자율 agent에게도 준다). 게이트(`create.py`의 Epic 공표 ADR 전제, `link-sub.py`의 계층 링크 규칙)는 **스크립트가** 걸지 어느 agent가 도느냐로 걸지 않는다. **네가 ADR을 accept한 직후 founding Epic을 바로 내는 것**이 자연스러운 자리다.
 
 **타입 판정** — 컨테이너(Epic·Feature)인가 리프(Task·Bug)인가. **Feature는 "epic이 방대해서" 만들지 않는다** — 독립적으로 뒤집힐 수 있는 하위 축의 결정(sub-ADR)이 있을 때만. 애매하면 리프로 낸다(retype는 싸다).
 
@@ -57,7 +57,7 @@ accept 전에 넷을 **반증하려 시도한다** — 하나라도 서면 아�
 |---|---|
 | **Issue를 close한다** | PR 머지 ≠ 티켓 종료. 그 사이에 **사용자 검수**가 산다. close는 언제나 사람이 정한다 |
 | **확정된(proposed 밖) ADR·`frozen` postmortem의 본문을 고친다** | 동결이다(ADR-0006). 바꾸려면 **새 ADR로 supersede**한다 |
-| **accepted ADR 없이 컨테이너 티켓을 만든다** | 굳지 않은 결정으로 일하지 않는다(§5) |
+| **공표 전 ADR로 Epic을 만든다** | 없는 문서로 계획을 펴지 않는다(§5). accepted 요구는 발행이 아니라 착수의 문이다 |
 | **runbook·reference·onboarding 문서를 쓴다** | 문서는 4종뿐이다(§3). 나머지는 코드·관측성 스택의 관할이다 |
 | **`docs/`에 쓴 것을 사람 승인 없이 커밋한다** | 지식 플레인의 최종 저자는 사람이다(§6) |
 | **`_index/`를 손으로 고친다** | 생성물이다. 고칠 곳은 문서의 frontmatter 아니면 스크립트다 |
