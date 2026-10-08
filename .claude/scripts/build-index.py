@@ -60,9 +60,9 @@ for dirpath, dirnames, filenames in os.walk(docs):
         if not subjects:
             warnings.append("subjects 가 비었다 — 정밀 검색에서 사라진다: %s" % rel)
 
-        # ref-adrs 는 discussion 전용이다 (ADR-0022) — 이 논의가 다루거나 낳은 ADR 의 id 목록.
-        # ADR 은 자족성 때문에 discussion 을 가리키지 않으므로, 이 관계는 여기서만 나온다.
-        ref_adrs = as_list(fm.get("ref-adrs")) if doc_type == "discussion" else []
+        # ref-adrs 는 discussion(ADR-0022)·digest(ADR-0035) 의 것이다 — 다루거나 낳은 ADR 의 id 목록.
+        # ADR 은 자족성 때문에 이쪽을 가리키지 않으므로, 이 관계는 여기서만 나온다.
+        ref_adrs = as_list(fm.get("ref-adrs")) if doc_type in ("discussion", "digest") else []
         for rid in ref_adrs:
             if not re.fullmatch(r"ADR-\d{4}", str(rid)):
                 warnings.append("ref-adrs 값이 ADR id 꼴이 아니다 (%r): %s" % (rid, rel))
@@ -99,6 +99,7 @@ for dirpath, dirnames, filenames in os.walk(docs):
             "parent": fm.get("parent", ""),
             "accepted_at": accepted_at,
             "ref-adrs": ref_adrs,
+            "goal": fm.get("goal", ""),          # 같은 목표의 discussion·digest 를 묶는 자유 필드
             "title": title_of(path, name),
         })
 
@@ -144,8 +145,8 @@ for t in TYPES:
     rows = sorted([e for e in entries if e["type"] == t], key=sort_key)
     if not rows:
         continue                            # 없는 타입의 빈 인덱스는 만들지 않는다 (lazy, §7)
-    # discussion 은 id 가 없고 ref-adrs 를 가진다 (ADR-0022) — 열을 타입에 맞춘다
-    cols = (("status", "topic", "subjects", "ref-adrs") if t == "discussion"
+    # discussion·digest 는 id 가 없고 goal·ref-adrs 를 가진다 (ADR-0022 · ADR-0035) — 열을 타입에 맞춘다
+    cols = (("status", "goal", "topic", "subjects", "ref-adrs") if t in ("discussion", "digest")
             else ("id", "status", "topic", "subjects"))
     d = os.path.join(index_dir, "by-type")
     write(os.path.join(d, t + ".md"),
@@ -182,16 +183,16 @@ refmap = {}
 for e in entries:
     for rid in e["ref-adrs"]:
         refmap.setdefault(rid, []).append(e)
-lines = ["# by-ref-adr — 결정과 얽힌 논의 (discussion `ref-adrs` 에서 파생)", "",
-         "*ADR 은 discussion 을 가리키지 않는다(자족성) — 역방향 조회는 이 뷰가 답한다. "
-         "discussion 은 보관을 약속하지 않으므로 이 목록은 편의이지 근거가 아니다.*", ""]
+lines = ["# by-ref-adr — 결정과 얽힌 논의·digest (`ref-adrs` 에서 파생)", "",
+         "*ADR 은 discussion·digest 를 가리키지 않는다(자족성) — 역방향 조회는 이 뷰가 답한다. "
+         "둘 다 보관을 약속하지 않으므로 이 목록은 편의이지 근거가 아니다.*", ""]
 if refmap:
     for rid in sorted(refmap):
         t = adr_by_id.get(rid)
         lines.append("## " + (t["title"] if t else rid + " *(코퍼스에 없음)*"))
         lines.append("")
         for e in sorted(refmap[rid], key=lambda x: x["rel"]):
-            lines.append("- [%s](%s) — `%s`" % (e["title"], os.path.relpath(e["path"], index_dir), e["status"]))
+            lines.append("- [%s](%s) — `%s` · `%s`" % (e["title"], os.path.relpath(e["path"], index_dir), e["type"], e["status"]))
         lines.append("")
 else:
     lines.append("*(없음)*")

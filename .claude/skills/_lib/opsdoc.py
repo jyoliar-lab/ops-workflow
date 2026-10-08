@@ -11,8 +11,9 @@ import sys
 
 # 본문이 얼어붙는 상태 (ADR-0006): adr = accepted|rejected|superseded · postmortem = frozen
 # proposed 만 가변. proposed 를 벗어나면 본문(결정의 의미)이 언다.
+# discussion·digest 는 얼지 않는다 (ADR-0024 · ADR-0035) — digest 의 superseded 는 교체됐다는 표식이지 동결이 아니다.
 FROZEN = {"accepted", "rejected", "superseded", "frozen"}
-TYPES = ["adr", "discussion", "postmortem"]
+TYPES = ["adr", "discussion", "digest", "postmortem"]
 
 # 파일명 규약 (CLAUDE.md §7): adr-0012-<slug>.md
 #   id 가 파일명 **선두**에 온다 — 인용키로 바로 찾기 위해서다.

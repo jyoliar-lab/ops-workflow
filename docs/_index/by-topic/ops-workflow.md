@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / ops-workflow (36)
+# by-topic / ops-workflow (37)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -22,6 +22,7 @@
 | ADR-0032 | adr | proposed | adr | [ADR-0032 — 정책 ADR은 proposed로 운영한다: 검증은 하네스가, accept는 미룬다](../../ops-workflow/adr/adr-0032-policy-adr-defers-accept.md) |
 | ADR-0033 | adr | proposed | github-issues, github-projects | [ADR-0033 — 티켓 Status는 여섯이다: 진행 단계와 확신만 표현한다](../../ops-workflow/adr/adr-0033-ticket-status-roster-and-meaning.md) |
 | ADR-0035 | adr | proposed | digest, discussion, adr | [ADR-0035 — 수렴한 논의의 결론은 digest 문서로 증류한다](../../ops-workflow/adr/adr-0035-distill-conclusions-into-digest.md) |
+| — | digest | current | discussion, digest, adr, claude-code-skills | [논의에서 설계까지 — discussion과 digest가 돌아가는 모양 (2026-10-07 시점)](../../ops-workflow/digest/261006_1640_digest-layer-decisions.md) |
 | — | discussion | active | claude-code-skills | [skill 초판 마찰 로그](../../ops-workflow/discussion/260712_1731_skill-friction-log.md) |
 | — | discussion | active | adr | [ADR 선행 사례 조사 — 무엇이 표준이고, 무엇이 우리 발명이고, 무엇이 실패하는가](../../ops-workflow/discussion/260714_1417_adr-prior-art-survey.md) |
 | — | discussion | active | adr | [ADR 문서를 무슨 포맷으로 적을 것인가](../../ops-workflow/discussion/260715_1401_adr-document-format.md) |
