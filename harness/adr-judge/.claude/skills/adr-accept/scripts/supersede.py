@@ -15,7 +15,7 @@ import os
 import re
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "_lib"))
+import _bootstrap  # noqa: F401 — git 루트의 .claude/skills/_lib 를 sys.path 에 올린다
 from opsdoc import die, find_adr, read_frontmatter, repo_root  # noqa: E402
 
 args = sys.argv[1:]

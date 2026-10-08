@@ -5,3 +5,4 @@ workspace/
 staging/*
 .claude/tmp/*
 temp-tickets/*
+tmp/

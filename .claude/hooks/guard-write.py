@@ -5,7 +5,7 @@ CLAUDE.md 의 산문 규칙 중 구조로 옮길 수 있는 것을 여기서 강
 §8("규율이 아니라 구조")대로.
 
 Write/Edit/MultiEdit:
-  허용 — $CLAUDE_PROJECT_DIR/**       (이 저장소: docs/ · .claude/ · CLAUDE.md
+  허용 — <git 루트>/**                (이 저장소: docs/ · .claude/ · harness/ · CLAUDE.md
                                        · tmp/ — 초안 인박스(마찰 로그·이슈 초안). §6)
   거부 — docs/_index/**               (생성물 — 도구만 쓴다. §7. 재생성은 hook 자동)
   거부 — workspace/**                 (참조 저장소 로컬 클론 — agent 는 **읽고
@@ -17,13 +17,15 @@ Bash:
   거부 — `gh issue close`             (close 는 언제나 사람 — §5)
   확인 — `git commit` · `git push`    (무인 write 금지 — §6. 사람 승인을 묻는다)
 
-경계는 $CLAUDE_PROJECT_DIR 로 동적이다(하드코딩 없음) — Claude Code 권한 패턴이
-env 확장을 못 하므로 이 hook 가 대신 강제한다.
+경계는 git 루트로 동적이다(하드코딩 없음) — 세션은 harness/<역할>/ 에서 열리므로
+$CLAUDE_PROJECT_DIR(=cwd) 이 아니라 `git rev-parse --show-toplevel` 을 쓴다. Claude Code
+권한 패턴이 env 확장을 못 하므로 이 hook 가 대신 강제한다.
 """
 import os
 import re
 import sys
 import json
+import subprocess
 import tempfile
 
 
@@ -46,6 +48,20 @@ def out_ask(reason):
 
 def allow():
     sys.exit(0)
+
+
+def project_root():
+    """쓰기 경계 = git 저장소 루트. CLAUDE_PROJECT_DIR 은 세션을 연 디렉터리(하네스 cwd)라
+    harness/<역할>/ 에서 열면 저장소 루트가 아니다 — 경계는 어디서 열어도 같아야 한다."""
+    base = os.environ.get("CLAUDE_PROJECT_DIR") or os.getcwd()
+    try:
+        r = subprocess.run(["git", "-C", base, "rev-parse", "--show-toplevel"],
+                           capture_output=True, text=True)
+        if r.returncode == 0 and r.stdout.strip():
+            return r.stdout.strip()
+    except Exception:
+        pass
+    return os.environ.get("CLAUDE_PROJECT_DIR")
 
 
 def norm(p):
@@ -89,7 +105,7 @@ def main():
     if not fp:
         allow()
 
-    proj = os.environ.get("CLAUDE_PROJECT_DIR")
+    proj = project_root()
     if not proj:
         allow()  # 경계를 모르면 가드 불가. hook 부재와 같은 상태로 둔다.
 
@@ -116,7 +132,7 @@ def main():
         )
 
     out_deny(
-        "쓰기 경계 위반: %s — 이 하네스는 $CLAUDE_PROJECT_DIR(%s) 안에만 쓴다. "
+        "쓰기 경계 위반: %s — 이 하네스는 저장소 루트(%s) 안에만 쓴다. "
         "바깥 저장소는 읽기 전용이다." % (fp, proj)
     )
 

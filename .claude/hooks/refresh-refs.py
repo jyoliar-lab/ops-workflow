@@ -45,9 +45,13 @@ def project_root():
     이 스크립트는 <프로젝트>/.claude/hooks/ 에 산다 — cwd 와 무관하게 루트를 찾는다.
     둘 다 실패하면 무음 no-op 이 아니라 경고를 낸다(수동 실행의 무음 실패 방지).
     """
-    proj = os.environ.get("CLAUDE_PROJECT_DIR")
-    if proj:
-        return proj
+    base = os.environ.get("CLAUDE_PROJECT_DIR")
+    if base:
+        # CLAUDE_PROJECT_DIR 은 세션을 연 디렉터리(harness/<역할>/)라 루트가 아닐 수 있다 — git 으로 역산
+        r = subprocess.run(["git", "-C", base, "rev-parse", "--show-toplevel"],
+                           capture_output=True, text=True)
+        if r.returncode == 0 and r.stdout.strip():
+            return r.stdout.strip()
     guess = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     if os.path.isfile(os.path.join(guess, LIST_REL)):
         return guess

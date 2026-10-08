@@ -28,7 +28,7 @@ proposed 여도 공표는 돼 있어야 한다.
 import os
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "_lib"))
+import _bootstrap  # noqa: F401 — git 루트의 .claude/skills/_lib 를 sys.path 에 올린다
 import vcs  # noqa: E402
 from opsdoc import die, iter_docs, parse_frontmatter, repo_root  # noqa: E402
 

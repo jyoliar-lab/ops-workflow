@@ -1,8 +1,8 @@
 # 참조 저장소 목록 — SessionStart hook(refresh-refs.py)가 읽는다.
 # 한 줄에 clone URL 하나. `#` 로 시작하는 줄은 주석.
 # clone 위치는 workspace/ref/<repo명>(URL 끝 이름 · gitignored · 읽기 전용).
-# 새 저장소가 필요하면 여기 추가하고 hook 를 다시 돌린다:
-#   python3 .claude/hooks/refresh-refs.py
+# 새 저장소가 필요하면 여기 추가하고 hook 를 다시 돌린다 (SessionStart hook 가 PATH 에 올린다):
+#   refresh-refs.py
 
 # careerhub 서비스
 https://github.com/jyoliar-careerhub/auth-service.git
@@ -27,3 +27,9 @@ https://github.com/jyoliar-careerhub/jyoliar-platform-terraform.git
 
 # 하네스 (agent 정의)
 https://github.com/jyoliar-lab/ticket-engineer.git
+
+# 관측 도구 (agent 가 쓰는 obs 질의 툴킷)
+https://github.com/jyoliar-lab/obs-toolkit.git
+
+# 평가 하네스 (obs-toolkit 비교 실험 — arm · 주입 · 채점)
+https://github.com/jyoliar-lab/obs-bench.git

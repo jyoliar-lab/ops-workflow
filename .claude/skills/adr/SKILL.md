@@ -1,6 +1,6 @@
 ---
 name: adr
-description: ADR 문서를 저작·accept·supersede한다. "ADR을 쓴다", "결정을 기록한다", "ADR-00NN을 supersede한다", ADR 번호 발급, 동결 검사가 필요할 때 사용한다. 규약은 CLAUDE.md §3·§4·§7.
+description: ADR 문서를 저작한다 — 판정·인자 수집·템플릿·동결 검사(freeze-check). "ADR을 쓴다", "결정을 기록한다", ADR 번호 발급, 동결 검사가 필요할 때 사용한다. accept·supersede는 adr-judge 하네스의 adr-accept 스킬. 규약은 CLAUDE.md §3·§4·§7.
 ---
 
 # ADR 저작
@@ -27,7 +27,7 @@ description: ADR 문서를 저작·accept·supersede한다. "ADR을 쓴다", "�
 | `references` | **묻는다.** parent가 아니나 이 결정을 온전히 이해하는 데 필요한 다른 결정들의 id — 그 제목이 통째로 유관할 것. 여럿 가능, 없으면 비운다. 저작 시점 스냅샷으로 동결된다(ADR-0004) |
 | 슬러그 | **묻는다.** 파일명이 된다 — 소문자 kebab-case, 3~6 단어 |
 | `id` | **자동** — `next-id.py` (순수 기계) |
-| `accepted_at` | **자동** — accept 할 때 `accept.py` 가 채운다. **손으로 적지 않는다** |
+| `accepted_at` | **자동** — adr-judge 가 accept 할 때 `accept.py`(adr-accept 스킬)가 채운다. **손으로 적지 않는다** |
 | "무효화 조건" | **묻는다. 못 채우면 비운 채로 둔다** — 억지로 지어내지 않는다. 채택 여부는 실측으로 판정한다 |
 
 ```bash
@@ -35,7 +35,7 @@ list-subjects.py     # 기존 subjects 어휘 + 인덱스 드리프트 경고
 next-id.py           # 전역 순차 ADR 번호 (충돌 감지)
 ```
 
-(스킬 스크립트는 SessionStart hook가 PATH에 올린다 — bare name으로 실행한다. 위치는 `.claude/skills/<skill>/scripts/`.)
+(스킬 스크립트는 SessionStart hook가 PATH에 올린다 — bare name으로 실행한다. 공통 스킬은 루트 `.claude/skills/<skill>/scripts/`, 하네스 전용 스킬은 `harness/<역할>/.claude/skills/<skill>/scripts/`.)
 
 **`subjects`는 구체 명사만** — 판별 기준은 CLAUDE.md §7.
 
@@ -114,21 +114,11 @@ superseded_by:
 - **양성 서술이 문을 닫게 둔다.** Decision이 또렷하면 배제는 저절로 추론된다. 명시는 그걸로 안 닫힐 때만.
 - 기계가 읽는 공동무효 경계는 `parent`·`references`에 산다. 산문 배제는 **사람이 걸려 넘어질 지점**에만 둔다.
 
-## 3. accept — 동결선을 넘는다
+## 3. accept·supersede — 이 스킬의 것이 아니다
 
-`proposed` → 셀프 리뷰 → **스크립트가 넘긴다.** 손으로 `status:` 줄을 고치지 않는다.
+동결선을 넘기는 전이(accept·unaccept·supersede)는 **adr-judge 하네스**가 `adr-accept` 스킬로 한다. 저작자는 `status: proposed`에서 멈추고 `accepted_at`을 비운다. 어느 하네스에서든 손으로 `status:` 줄을 고치지 않는다.
 
-```bash
-accept.py ADR-0001
-```
-
-이 스크립트가 하는 일:
-
-- `status`와 `accepted_at`을 함께 기록한다. **`accepted_at`은 권위 있다** — *검토가 언제 끝났는가*에 문서가 스스로 답한다. 손으로 적지 않는다: 틀리면 문서가 거짓말을 하고, 대조할 바깥이 없다.
-
-**여기서부터 본문(결정의 의미)이 동결된다**(ADR-0006). 유예 기간은 없다. 무엇이 얼고 안 어는지는 §4.
-
-> **`accepted_at`은 동결 시각이 아니다.** *검토가 끝난 것*(문서의 사실, 시각)과 *되돌릴 수 없게 된 것*(공표, 저장소의 사실, 상태)은 다른 사실이다. **accept 한 날과 커밋한 날이 어긋나는 것은 정상이다** — 도구는 둘을 대조하지 않는다.
+**accept 되면 본문(결정의 의미)이 동결된다**(ADR-0006). 유예 기간은 없다. 무엇이 얼고 안 어는지는 §4.
 
 ## 4. 동결된 문서를 건드리려 할 때
 
@@ -141,18 +131,7 @@ freeze-check.py <path>   # 공표된 status 가 동결(proposed 밖)이면 exit 
 - **어는 것**: 본문(결정의 의미)과 `id`·`type`·`parent`·`references` — 이것들을 고쳐 결정을 바꿀 수 없다.
 - **얼지 않는 것**(ADR-0004): 경로·포맷(파일을 옮기거나 이름을 바꿔도 참조는 id로 걸려 산다) · 분류(`topic`·`subjects`) · 생명주기 필드. 문서 관리는 계속 개선한다.
 
-**exit 1은 우회하지 않는다.** 결정을 바꾸려면 **새 ADR로 supersede**한다 — 옛 ADR을 고치지 않는다.
-
-**부분 supersede는 없다.** 옛 ADR 전체가 `superseded`가 되고, 여전히 유효한 부분은 **새 ADR에 재진술**한다.
-
-```bash
-supersede.py --old ADR-0001 --by ADR-0007
-```
-
-이 스크립트는 **frontmatter의 두 필드(`status`·`superseded_by`)만** 건드린다 — 본문에 손댈 방법이 없다. 그것이 동결을 규율이 아니라 구조로 만든다.
-
-- **`superseded_by`는 여럿 가능하다**(뭉친 결정을 쪼개며 폐기). `status: superseded`와 짝이다 — 한쪽만 있으면 깨진 상태다.
-- 역방향(`supersedes`)은 두지 않는다: 파생 가능하고, 전체 폐기 선언이 흩어지면 부분 폐기와 구분되지 않는다.
+**exit 1은 우회하지 않는다.** 결정을 바꾸려면 **새 ADR로 supersede**한다 — 옛 ADR을 고치지 않는다. 새 ADR을 `proposed`로 쓰고 adr-judge에게 넘기면, accept와 함께 옛 ADR의 supersede가 따라온다(`adr-accept` 스킬). **부분 supersede는 없다** — 옛 ADR 전체가 `superseded`가 되고, 여전히 유효한 부분은 **새 ADR에 재진술**한다.
 
 ## 5. 쓴 다음
 

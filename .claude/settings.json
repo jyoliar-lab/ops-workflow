@@ -18,6 +18,7 @@
       "Bash(wc:*)",
       "Bash(which:*)",
       "Bash(echo:*)",
+      "Bash(find:*)",
       "Bash(pwd)",
       "Bash(env)",
       "Bash(pbcopy)",
@@ -33,15 +34,7 @@
       "Bash(list-subjects.py:*)",
       "Bash(next-id.py:*)",
       "Bash(doc-path.py:*)",
-      "Bash(accept.py:*)",
-      "Bash(unaccept.py:*)",
-      "Bash(supersede.py:*)",
       "Bash(freeze-check.py:*)",
-      "Bash(create.py:*)",
-      "Bash(adr-gate.py:*)",
-      "Bash(link-sub.py:*)",
-      "Bash(set-adr.py:*)",
-      "Bash(set-repos.py:*)",
       "WebSearch",
       "WebFetch",
       "Fetch",
@@ -96,5 +89,11 @@
         ]
       }
     ]
-  }
+  },
+  "extraKnownMarketplaces": {
+    "obs-toolkit": {
+      "source": { "source": "github", "repo": "jyoliar-lab/obs-toolkit", "sha": "bee7059bd493cc43c239fc5923473d30730f4b7a" }
+    }
+  },
+  "enabledPlugins": { "obs-toolkit@obs-toolkit": true }
 }

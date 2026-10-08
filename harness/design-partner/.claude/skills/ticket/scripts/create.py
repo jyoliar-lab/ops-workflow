@@ -47,7 +47,7 @@ import sys
 import tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(HERE, "..", "..", "_lib"))
+import _bootstrap  # noqa: F401 — git 루트의 .claude/skills/_lib 를 sys.path 에 올린다
 import gh  # noqa: E402
 import repo_context  # noqa: E402  (같은 디렉터리 — ADR-0016 저장소 맥락 공용 로직)
 import adr_context  # noqa: E402  (같은 디렉터리 — '근거 ADR' 절 공용 로직)

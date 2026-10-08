@@ -10,8 +10,8 @@
 - build-index.py 실패                         → 세션을 막지 않는다(비차단). stderr 한 줄만
                                                 남긴다. 수동 재생성은 사람의 /docs-index 커맨드.
 
-★ build-index.py 의 repo_root() 는 cwd 에서 .git 을 찾는다 — 반드시
-  cwd=$CLAUDE_PROJECT_DIR 로 실행한다.
+★ build-index.py 의 repo_root() 는 cwd 에서 .git 을 찾는다 — cwd=git 루트로 실행한다.
+  (CLAUDE_PROJECT_DIR 은 하네스 cwd 라 루트가 아닐 수 있다 — project_root() 가 역산한다.)
 """
 import json
 import os
@@ -30,6 +30,20 @@ def under(path, root):
     return path == root or path.startswith(root + os.sep)
 
 
+def project_root():
+    """docs/ 와 build-index.py 는 git 저장소 루트에 있다. CLAUDE_PROJECT_DIR 은 세션을 연 디렉터리(하네스 cwd)라
+    harness/<역할>/ 에서 열면 저장소 루트가 아니다 — 경계는 어디서 열어도 같아야 한다."""
+    base = os.environ.get("CLAUDE_PROJECT_DIR") or os.getcwd()
+    try:
+        r = subprocess.run(["git", "-C", base, "rev-parse", "--show-toplevel"],
+                           capture_output=True, text=True)
+        if r.returncode == 0 and r.stdout.strip():
+            return r.stdout.strip()
+    except Exception:
+        pass
+    return os.environ.get("CLAUDE_PROJECT_DIR")
+
+
 def main():
     try:
         data = json.load(sys.stdin)
@@ -38,7 +52,7 @@ def main():
 
     tool = data.get("tool_name", "")
     tool_input = data.get("tool_input") or {}
-    proj = os.environ.get("CLAUDE_PROJECT_DIR")
+    proj = project_root()
     if not proj:
         sys.exit(0)
 
