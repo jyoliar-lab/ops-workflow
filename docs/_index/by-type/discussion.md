@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (76)
+# by-type / discussion (77)
 
 | status | goal | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|---|
@@ -72,11 +72,12 @@
 | active | — | ops-workflow | github-issues, github-projects, adr, ticket-engineer | — | [티켓 Draft 상태와 착수 게이트 — 게이트를 발행에서 착수로 옮긴다](../../ops-workflow/discussion/260806_2235_ticket-draft-status-and-start-gate.md) |
 | active | — | ops-workflow | adr | — | [정책 ADR은 proposed로 오래 산다 — 의도된 운영 방식의 기록](../../ops-workflow/discussion/260806_2317_policy-adr-stays-proposed.md) |
 | active | — | ops-workflow | ticket-engineer, github-issues, jyoliar-k8s, kustomize, ansible, terraform, pytest, playwright | ADR-0016, ADR-0017 | [약속 게이트의 저장소별 적용 — 테스트가 없는 곳에서 약속은 무엇에 담기나](../../ops-workflow/discussion/260910_1900_promise-gate-per-repository-class.md) |
-| active | — | ops-workflow | ticket-engineer, ticket-start, ticket-report, pytest, playwright, obs-toolkit, github-issues, claude-code | ADR-0016, ADR-0017 | [TDD 집행 흐름 — ticket-engineer 하네스에 red·green 을 어떻게 세우나](../../ops-workflow/discussion/260930_1356_tdd-flow-in-ticket-engineer.md) |
-| active | — | ops-workflow | ticket-engineer, ticket-start, ticket-report, pytest, playwright, obs-toolkit, github-issues, claude-code | ADR-0016, ADR-0017 | [TDD 집행 흐름 — 결론](../../ops-workflow/discussion/260930_1524_tdd-flow-decisions.md) |
+| done | tdd-execution-flow | ops-workflow | ticket-engineer, ticket-start, ticket-report, pytest, playwright, obs-toolkit, github-issues, claude-code | ADR-0016, ADR-0017 | [TDD 집행 흐름 — ticket-engineer 하네스에 red·green 을 어떻게 세우나](../../ops-workflow/discussion/260930_1356_tdd-flow-in-ticket-engineer.md) |
+| done | tdd-execution-flow | ops-workflow | ticket-engineer, ticket-start, ticket-report, pytest, playwright, obs-toolkit, github-issues, claude-code | ADR-0016, ADR-0017 | [TDD 집행 흐름 — 결론](../../ops-workflow/discussion/260930_1524_tdd-flow-decisions.md) |
 | active | — | ops-workflow | ticket-engineer, ticket-start, ticket-report, github-issues, jyoliar-k8s, kustomize, ansible, terraform, argocd, prometheus, pytest | ADR-0016, ADR-0017 | [인프라 AC 의 세 종류 — 약속이 상태일 때 무엇이 증거인가](../../ops-workflow/discussion/260930_1828_infra-ac-kinds.md) |
 | done | discussion-readability | ops-workflow | discussion, digest, adr, claude-code-skills | ADR-0022, ADR-0023, ADR-0024, ADR-0035 | [discussion 위에 결론 층을 둔다 — 읽을 수 없는 로그와 얼어붙는 영수증 사이](../../ops-workflow/discussion/261006_1549_digest-layer-over-discussion.md) |
 | done | discussion-readability | ops-workflow | discussion, claude-code-skills, digest | ADR-0022, ADR-0023, ADR-0035 | [discussion 작성 스킬 — 질문은 인터뷰로, 문서에는 지형과 판정만](../../ops-workflow/discussion/261006_2122_discussion-skill-interview-first.md) |
 | done | discussion-readability | ops-workflow | digest, discussion, claude-code-skills | ADR-0035, ADR-0023, ADR-0024 | [digest 작성 스킬 — 수렴을 판정하고 거부할 수 있는 증류](../../ops-workflow/discussion/261007_1623_digest-skill-refuse-and-review.md) |
 | done | discussion-readability | ops-workflow | digest, discussion, adr, claude-code-skills | ADR-0035, ADR-0023, ADR-0024 | [digest를 청사진으로 — 결정의 요약이 아니라 결정된 설계의 서술](../../ops-workflow/discussion/261007_1947_digest-as-blueprint.md) |
+| done | tdd-execution-flow | ops-workflow | ticket-engineer, tdd-loop, ac-verifier, tdd-green, obs-toolkit, claude-code | — | [red 승인을 subagent에게 — 테스트 검토·보강 subagent와 ac-verifier의 역할 분리](../../ops-workflow/discussion/261011_1705_red-review-subagent.md) |
 | rejected | — | palworld | palworld-server | — | [팰월드 1.0 서버를 홈랩 쿠버네티스에](../../palworld/discussion/260726_0149_palworld-server-on-homelab-k8s.md) |

@@ -1,8 +1,9 @@
 ---
 type: discussion
+goal: tdd-execution-flow
 topic: ops-workflow
 subjects: [ticket-engineer, ticket-start, ticket-report, pytest, playwright, obs-toolkit, github-issues, claude-code]
-status: active
+status: done
 ref-adrs: [ADR-0016, ADR-0017]
 ticket:
 related: [260930_1524_tdd-flow-decisions.md, 260910_1900_promise-gate-per-repository-class.md, ../../ai-agent/discussion/260910_1817_agent-code-comprehension-bottleneck.md, ../../ai-agent/discussion/260923_2005_obs-toolkit-test-suite-refactor.md]
