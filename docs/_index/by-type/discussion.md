@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (77)
+# by-type / discussion (78)
 
 | status | goal | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|---|
@@ -80,4 +80,5 @@
 | done | discussion-readability | ops-workflow | digest, discussion, claude-code-skills | ADR-0035, ADR-0023, ADR-0024 | [digest 작성 스킬 — 수렴을 판정하고 거부할 수 있는 증류](../../ops-workflow/discussion/261007_1623_digest-skill-refuse-and-review.md) |
 | done | discussion-readability | ops-workflow | digest, discussion, adr, claude-code-skills | ADR-0035, ADR-0023, ADR-0024 | [digest를 청사진으로 — 결정의 요약이 아니라 결정된 설계의 서술](../../ops-workflow/discussion/261007_1947_digest-as-blueprint.md) |
 | done | tdd-execution-flow | ops-workflow | ticket-engineer, tdd-loop, ac-verifier, tdd-green, obs-toolkit, claude-code | — | [red 승인을 subagent에게 — 테스트 검토·보강 subagent와 ac-verifier의 역할 분리](../../ops-workflow/discussion/261011_1705_red-review-subagent.md) |
+| done | tdd-execution-flow | ops-workflow | ticket-engineer, tdd-loop, github-issues, obs-toolkit, claude-code | — | [시나리오 코멘트의 갱신 — 제자리 수정과 변경의 가시화](../../ops-workflow/discussion/261014_1530_scenario-comment-in-place-diff.md) |
 | rejected | — | palworld | palworld-server | — | [팰월드 1.0 서버를 홈랩 쿠버네티스에](../../palworld/discussion/260726_0149_palworld-server-on-homelab-k8s.md) |
