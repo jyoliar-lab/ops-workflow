@@ -17,9 +17,18 @@
 - [e2e 명세 산출물은 어디에 사나 — 그리고 기존 앱용 배선을 남기나](../careerhub-front/discussion/260803_1329_e2e-spec-artifact-placement.md) — `discussion` · `done`
 - [리뉴얼은 prod에 바로 — 병행 스택·컷오버·스키마 동결의 정제](../careerhub/discussion/260810_2252_renewal-parallel-stack-prod-cutover.md) — `discussion` · `active`
 
+## ADR-0012 — careerhub-front의 스택으로 Next.js(React)를 채택한다
+
+- [careerhub-web의 테스트 층 — TDD 루프가 도는 층과 회귀 그물로 남는 층](../careerhub-front/discussion/261017_2030_careerhub-web-tdd-loop-layers.md) — `discussion` · `active`
+
+## ADR-0013 — careerhub-front를 TypeScript로 짓는다 (순수 JavaScript로 짓지 않는다)
+
+- [careerhub-web의 테스트 층 — TDD 루프가 도는 층과 회귀 그물로 남는 층](../careerhub-front/discussion/261017_2030_careerhub-web-tdd-loop-layers.md) — `discussion` · `active`
+
 ## ADR-0014 — 프론트가 쓰는 REST 타입을 백엔드 스펙에서 생성한다 (손으로 선언하지 않는다)
 
 - [프론트가 공표 태그에서 TS 타입을 만드는 방법 — 소비자가 당긴다](../careerhub-front/discussion/260802_1607_frontend-pulls-published-spec-tag.md) — `discussion` · `done`
+- [careerhub-web의 테스트 층 — TDD 루프가 도는 층과 회귀 그물로 남는 층](../careerhub-front/discussion/261017_2030_careerhub-web-tdd-loop-layers.md) — `discussion` · `active`
 - [백엔드 스펙 변경을 프론트에 전파하는 방법 — 푸시인가 구독인가](../careerhub/discussion/260730_1524_spec-change-propagation-to-frontend.md) — `discussion` · `done`
 - [JWT 클레임 스키마 계약 — 원천을 어디에 어떤 포맷으로 두나](../careerhub/discussion/260817_1640_jwt-claim-schema-contract-source.md) — `discussion` · `active`
 
@@ -61,6 +70,7 @@
 ## ADR-0020 — 계약 원천은 그 계약의 provider 저장소에 두고, 소비자는 공표물에 결합한다
 
 - [프론트가 공표 태그에서 TS 타입을 만드는 방법 — 소비자가 당긴다](../careerhub-front/discussion/260802_1607_frontend-pulls-published-spec-tag.md) — `discussion` · `done`
+- [careerhub-web의 테스트 층 — TDD 루프가 도는 층과 회귀 그물로 남는 층](../careerhub-front/discussion/261017_2030_careerhub-web-tdd-loop-layers.md) — `discussion` · `active`
 - [백엔드 스펙 변경을 프론트에 전파하는 방법 — 푸시인가 구독인가](../careerhub/discussion/260730_1524_spec-change-propagation-to-frontend.md) — `discussion` · `done`
 - [계약 선합의 패턴의 gRPC 경계 일반화 — proto의 원천은 어디인가](../careerhub/discussion/260730_1620_contract-pattern-to-grpc-boundaries.md) — `discussion` · `done`
 - [런타임 계약 어긋남 — provider와 consumer가 다른 계약으로 동작하는 것을 무엇이 막는가](../careerhub/discussion/260801_1806_runtime-contract-skew-prevention.md) — `discussion` · `done`

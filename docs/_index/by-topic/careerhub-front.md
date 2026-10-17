@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / careerhub-front (15)
+# by-topic / careerhub-front (17)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -19,3 +19,5 @@
 | — | discussion | done | openapi, careerhub-web, api-composer | [프론트가 공표 태그에서 TS 타입을 만드는 방법 — 소비자가 당긴다](../../careerhub-front/discussion/260802_1607_frontend-pulls-published-spec-tag.md) |
 | — | discussion | done | careerhub-web, careerhub-front | [e2e 명세 산출물은 어디에 사나 — 그리고 기존 앱용 배선을 남기나](../../careerhub-front/discussion/260803_1329_e2e-spec-artifact-placement.md) |
 | — | discussion | done | careerhub-web, tailwind | [공통 UI 요소와 외부 디자인 프레임워크](../../careerhub-front/discussion/260818_1852_shared-ui-and-design-framework.md) |
+| — | discussion | done | careerhub-web, next.js, vitest, jest, jsdom, happy-dom, undici, msw, openapi-fetch, playwright, node.js | [Next.js 16 앱의 네트워크 없는 테스트 층 — 도구 조사 (2026-10-17)](../../careerhub-front/discussion/261017_2025_nextjs-unit-test-tooling-survey.md) |
+| — | discussion | active | careerhub-web, playwright, vitest, jest, undici, msw, github-actions, ticket-engineer, tdd-loop | [careerhub-web의 테스트 층 — TDD 루프가 도는 층과 회귀 그물로 남는 층](../../careerhub-front/discussion/261017_2030_careerhub-web-tdd-loop-layers.md) |

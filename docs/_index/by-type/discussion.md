@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (78)
+# by-type / discussion (80)
 
 | status | goal | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|---|
@@ -27,6 +27,8 @@
 | done | — | careerhub-front | openapi, careerhub-web, api-composer | ADR-0014, ADR-0019, ADR-0020 | [프론트가 공표 태그에서 TS 타입을 만드는 방법 — 소비자가 당긴다](../../careerhub-front/discussion/260802_1607_frontend-pulls-published-spec-tag.md) |
 | done | — | careerhub-front | careerhub-web, careerhub-front | ADR-0011, ADR-0015 | [e2e 명세 산출물은 어디에 사나 — 그리고 기존 앱용 배선을 남기나](../../careerhub-front/discussion/260803_1329_e2e-spec-artifact-placement.md) |
 | done | — | careerhub-front | careerhub-web, tailwind | ADR-0015 | [공통 UI 요소와 외부 디자인 프레임워크](../../careerhub-front/discussion/260818_1852_shared-ui-and-design-framework.md) |
+| done | careerhub-web-test-layers | careerhub-front | careerhub-web, next.js, vitest, jest, jsdom, happy-dom, undici, msw, openapi-fetch, playwright, node.js | — | [Next.js 16 앱의 네트워크 없는 테스트 층 — 도구 조사 (2026-10-17)](../../careerhub-front/discussion/261017_2025_nextjs-unit-test-tooling-survey.md) |
+| active | careerhub-web-test-layers | careerhub-front | careerhub-web, playwright, vitest, jest, undici, msw, github-actions, ticket-engineer, tdd-loop | ADR-0012, ADR-0013, ADR-0014, ADR-0020 | [careerhub-web의 테스트 층 — TDD 루프가 도는 층과 회귀 그물로 남는 층](../../careerhub-front/discussion/261017_2030_careerhub-web-tdd-loop-layers.md) |
 | active | — | careerhub | adsense, posting-provider, review-crawler, posting-skillscanner | — | [careerhub 는 무엇으로 돈을 버나 — 그리고 그게 성립하나](../../careerhub/discussion/260717_1853_revenue-model-and-viability.md) |
 | done | — | careerhub | openapi, api-composer | — | [api-composer OpenAPI 스펙의 원천 — code-first vs spec-first](../../careerhub/discussion/260726_1653_openapi-spec-source-of-truth.md) |
 | done | — | careerhub | openapi, api-composer, careerhub-web | ADR-0014, ADR-0018, ADR-0019, ADR-0020 | [백엔드 스펙 변경을 프론트에 전파하는 방법 — 푸시인가 구독인가](../../careerhub/discussion/260730_1524_spec-change-propagation-to-frontend.md) |
