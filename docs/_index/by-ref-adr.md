@@ -4,13 +4,34 @@
 
 *ADR 은 discussion·digest 를 가리키지 않는다(자족성) — 역방향 조회는 이 뷰가 답한다. 둘 다 보관을 약속하지 않으므로 이 목록은 편의이지 근거가 아니다.*
 
+## ADR-0001 — 작업 추적과 결정 기록을 두 개의 플레인으로 가른다
+
+- [정책 ADR 첫 accept 시도 — 무엇이 고쳐졌고, 왜 얼리지 않았나](../ops-workflow/discussion/261018_1908_policy-adr-accept-attempt-record.md) — `discussion` · `done`
+
+## ADR-0002 — 결정의 근거를 ADR로 남긴다
+
+- [정책 ADR 첫 accept 시도 — 무엇이 고쳐졌고, 왜 얼리지 않았나](../ops-workflow/discussion/261018_1908_policy-adr-accept-attempt-record.md) — `discussion` · `done`
+
 ## ADR-0004 — ADR은 본문을 읽지 않고 답할 메타데이터를 갖는다
 
 - [ADR은 다른 ADR을 어디까지, 어떻게 참조하는가](../ops-workflow/discussion/260715_1551_cross-adr-references.md) — `discussion` · `active`
+- [정책 ADR 첫 accept 시도 — 무엇이 고쳐졌고, 왜 얼리지 않았나](../ops-workflow/discussion/261018_1908_policy-adr-accept-attempt-record.md) — `discussion` · `done`
 
 ## ADR-0005 — ADR 본문은 Markdown(GFM)으로 적는다
 
 - [ADR은 다른 ADR을 어디까지, 어떻게 참조하는가](../ops-workflow/discussion/260715_1551_cross-adr-references.md) — `discussion` · `active`
+
+## ADR-0006 — ADR 본문은 proposed를 벗어나면 통째로 얼어붙는다
+
+- [정책 ADR 첫 accept 시도 — 무엇이 고쳐졌고, 왜 얼리지 않았나](../ops-workflow/discussion/261018_1908_policy-adr-accept-attempt-record.md) — `discussion` · `done`
+
+## ADR-0009 — 작업 이슈는 정확히 하나의 타입을 갖는다
+
+- [정책 ADR 첫 accept 시도 — 무엇이 고쳐졌고, 왜 얼리지 않았나](../ops-workflow/discussion/261018_1908_policy-adr-accept-attempt-record.md) — `discussion` · `done`
+
+## ADR-0010 — 이슈 타입은 묶는 것과 수행하는 것으로 갈린다
+
+- [정책 ADR 첫 accept 시도 — 무엇이 고쳐졌고, 왜 얼리지 않았나](../ops-workflow/discussion/261018_1908_policy-adr-accept-attempt-record.md) — `discussion` · `done`
 
 ## ADR-0011 — careerhub-front를 재작성한다 (점진 개선하지 않는다)
 
@@ -165,6 +186,14 @@
 - [Zitadel 발급 훅 target/execution 등록 — GitOps 경로 조사](../careerhub/discussion/260811_2031_zitadel-actions-target-gitops-registration.md) — `discussion` · `done`
 - [JWT 클레임 스키마 계약 — 원천을 어디에 어떤 포맷으로 두나](../careerhub/discussion/260817_1640_jwt-claim-schema-contract-source.md) — `discussion` · `active`
 
+## ADR-0032 — 정책 ADR은 proposed로 운영한다: 검증은 하네스가, accept는 미룬다
+
+- [정책 ADR 첫 accept 시도 — 무엇이 고쳐졌고, 왜 얼리지 않았나](../ops-workflow/discussion/261018_1908_policy-adr-accept-attempt-record.md) — `discussion` · `done`
+
+## ADR-0033 — 티켓 Status는 여섯이다: 진행 단계와 확신만 표현한다
+
+- [정책 ADR 첫 accept 시도 — 무엇이 고쳐졌고, 왜 얼리지 않았나](../ops-workflow/discussion/261018_1908_policy-adr-accept-attempt-record.md) — `discussion` · `done`
+
 ## ADR-0034 — terraform은 GitOps가 생성한 인프라에 의존하지 않는다
 
 - [Zitadel 발급 훅 target/execution 등록 — GitOps 경로 조사](../careerhub/discussion/260811_2031_zitadel-actions-target-gitops-registration.md) — `discussion` · `done`
@@ -176,4 +205,8 @@
 - [discussion 작성 스킬 — 질문은 인터뷰로, 문서에는 지형과 판정만](../ops-workflow/discussion/261006_2122_discussion-skill-interview-first.md) — `discussion` · `done`
 - [digest 작성 스킬 — 수렴을 판정하고 거부할 수 있는 증류](../ops-workflow/discussion/261007_1623_digest-skill-refuse-and-review.md) — `discussion` · `done`
 - [digest를 청사진으로 — 결정의 요약이 아니라 결정된 설계의 서술](../ops-workflow/discussion/261007_1947_digest-as-blueprint.md) — `discussion` · `done`
+
+## ADR-0036 — ADR의 생명주기는 네 상태로 돌고, 결정은 supersede로만 바뀐다
+
+- [정책 ADR 첫 accept 시도 — 무엇이 고쳐졌고, 왜 얼리지 않았나](../ops-workflow/discussion/261018_1908_policy-adr-accept-attempt-record.md) — `discussion` · `done`
 
