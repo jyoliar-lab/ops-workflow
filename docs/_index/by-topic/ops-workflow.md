@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / ops-workflow (40)
+# by-topic / ops-workflow (41)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -22,6 +22,7 @@
 | ADR-0032 | adr | proposed | adr | [ADR-0032 — 정책 ADR은 proposed로 운영한다: 검증은 하네스가, accept는 미룬다](../../ops-workflow/adr/adr-0032-policy-adr-defers-accept.md) |
 | ADR-0033 | adr | proposed | github-issues, github-projects | [ADR-0033 — 티켓 Status는 여섯이다: 진행 단계와 확신만 표현한다](../../ops-workflow/adr/adr-0033-ticket-status-roster-and-meaning.md) |
 | ADR-0035 | adr | proposed | digest, discussion, adr | [ADR-0035 — 수렴한 논의의 결론은 digest 문서로 증류한다](../../ops-workflow/adr/adr-0035-distill-conclusions-into-digest.md) |
+| ADR-0036 | adr | proposed | adr | [ADR-0036 — ADR의 생명주기는 네 상태로 돌고, 결정은 supersede로만 바뀐다](../../ops-workflow/adr/adr-0036-adr-lifecycle-states-and-transitions.md) |
 | — | digest | current | discussion, digest, adr, claude-code-skills | [논의에서 설계까지 — discussion과 digest가 돌아가는 모양 (2026-10-07 시점)](../../ops-workflow/digest/261006_1640_digest-layer-decisions.md) |
 | — | digest | current | ticket-engineer, tdd-loop, tdd-green, ac-verifier, obs-toolkit, github-issues, claude-code | [TDD 집행 흐름 — ticket-engineer가 티켓 하나를 테스트부터 끝까지 집행하는 모양 (2026-10-11 시점)](../../ops-workflow/digest/261011_1740_tdd-execution-flow.md) |
 | — | discussion | active | claude-code-skills | [skill 초판 마찰 로그](../../ops-workflow/discussion/260712_1731_skill-friction-log.md) |

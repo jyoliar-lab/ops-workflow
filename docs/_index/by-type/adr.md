@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / adr (35)
+# by-type / adr (36)
 
 | id | status | topic | subjects | 문서 |
 |---|---|---|---|---|
@@ -39,3 +39,4 @@
 | ADR-0033 | proposed | ops-workflow | github-issues, github-projects | [ADR-0033 — 티켓 Status는 여섯이다: 진행 단계와 확신만 표현한다](../../ops-workflow/adr/adr-0033-ticket-status-roster-and-meaning.md) |
 | ADR-0034 | proposed | homelab | jyoliar-platform-terraform, jyoliar-k8s, argocd | [ADR-0034 — terraform은 GitOps가 생성한 인프라에 의존하지 않는다](../../homelab/adr/adr-0034-terraform-gitops-dependency-direction.md) |
 | ADR-0035 | proposed | ops-workflow | digest, discussion, adr | [ADR-0035 — 수렴한 논의의 결론은 digest 문서로 증류한다](../../ops-workflow/adr/adr-0035-distill-conclusions-into-digest.md) |
+| ADR-0036 | proposed | ops-workflow | adr | [ADR-0036 — ADR의 생명주기는 네 상태로 돌고, 결정은 supersede로만 바뀐다](../../ops-workflow/adr/adr-0036-adr-lifecycle-states-and-transitions.md) |

@@ -6,7 +6,7 @@ subjects: [adr]
 status: proposed
 accepted_at:
 parent: ADR-0006
-references: [ADR-0002]
+references: [ADR-0036]
 superseded_by:
 ---
 

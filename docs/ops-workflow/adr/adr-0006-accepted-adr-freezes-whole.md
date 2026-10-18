@@ -5,7 +5,7 @@ topic: ops-workflow
 subjects: [adr]
 status: proposed
 accepted_at:
-parent: ADR-0002
+parent: ADR-0036
 references:
 superseded_by:
 ---
@@ -14,7 +14,7 @@ superseded_by:
 
 ## Context
 
-결정을 ADR로 남기고, 그 생명주기 상태(`proposed`·`accepted`·`rejected`·`superseded`)도 정했다(ADR-0002). 그러나 문서가 **`proposed`를 벗어난 뒤** 그 본문에 무엇을 할 수 있는지는 정하지 않았다.
+결정을 ADR로 남기고, 그 생명주기 상태(`proposed`·`accepted`·`rejected`·`superseded`)도 정했다. 그러나 문서가 **`proposed`를 벗어난 뒤** 그 본문에 무엇을 할 수 있는지는 정하지 않았다.
 
 두 갈래로 갈린다. **고칠 수 있게 두면** 결정 기록이 설계 문서처럼 낡는다 — 고쳐 쓴 문서는 *지금의 결론*만 보여주고, 그때 무엇을 알았고 무엇을 버렸는지를 지운다. 그런데 결정 기록의 값어치는 정확히 거기 있다. **못 고치게 두면** 무엇을 담았는지가 곧 부채가 된다 — 잘못 담긴 것이 영원히 남는다.
 
@@ -24,7 +24,7 @@ superseded_by:
 
 **ADR의 본문은 `proposed`에서만 가변이다. `proposed`를 벗어나면 본문이 통째로 얼어붙는다** — 통째로 유효하거나 통째로 폐기되며, 그 중간은 없다.
 
-`proposed`만이 아직 굳지 않은 초안이다. 그 밖의 상태 — 유효한 결정(`accepted`), 물린 제안(`rejected`), 대체된 결정(`superseded`) — 은 모두 **되돌아보는 기록**이므로 본문이 고정된다. 어느 상태가 무엇인지는 **부모 ADR-0002**가 정의한다. 이 결정은 그 위에 *"`proposed` 밖에서는 본문이 언다"* 만 얹는다 — 상태의 정의를 여기서 되풀이하지 않는다.
+`proposed`만이 아직 굳지 않은 초안이다. 그 밖의 상태 — 유효한 결정(`accepted`), 물린 제안(`rejected`), 대체된 결정(`superseded`) — 은 모두 **되돌아보는 기록**이므로 본문이 고정된다. 어느 상태가 무엇인지는 **부모 ADR-0036**이 정의한다. 이 결정은 그 위에 *"`proposed` 밖에서는 본문이 언다"* 만 얹는다 — 상태의 정의를 여기서 되풀이하지 않는다.
 
 ### 무엇이 어는가 — 결정의 의미다
 
