@@ -60,7 +60,7 @@
 
 ## ADR-0016 — 리프 티켓은 수정 대상 저장소와 참조 저장소를 명시한다
 
-- [TDD 집행 흐름 — ticket-engineer가 티켓 하나를 테스트부터 끝까지 집행하는 모양 (2026-10-11 시점)](../ops-workflow/digest/261011_1740_tdd-execution-flow.md) — `digest` · `current`
+- [TDD 집행 흐름 — ticket-engineer가 티켓 하나를 테스트부터 끝까지 집행하는 모양 (2026-10-19 시점)](../ops-workflow/digest/261011_1740_tdd-execution-flow.md) — `digest` · `current`
 - [약속 게이트의 저장소별 적용 — 테스트가 없는 곳에서 약속은 무엇에 담기나](../ops-workflow/discussion/260910_1900_promise-gate-per-repository-class.md) — `discussion` · `active`
 - [TDD 집행 흐름 — ticket-engineer 하네스에 red·green 을 어떻게 세우나](../ops-workflow/discussion/260930_1356_tdd-flow-in-ticket-engineer.md) — `discussion` · `done`
 - [TDD 집행 흐름 — 결론](../ops-workflow/discussion/260930_1524_tdd-flow-decisions.md) — `discussion` · `done`
@@ -69,7 +69,7 @@
 ## ADR-0017 — 리프 티켓은 선행 의존을 명시하고, 열린 선행 위에는 착수하지 않는다
 
 - [agent 코드 생산량과 사람의 이해 병목 — 외부 조사와 이 하네스에의 대입](../ai-agent/discussion/260910_1817_agent-code-comprehension-bottleneck.md) — `discussion` · `active`
-- [TDD 집행 흐름 — ticket-engineer가 티켓 하나를 테스트부터 끝까지 집행하는 모양 (2026-10-11 시점)](../ops-workflow/digest/261011_1740_tdd-execution-flow.md) — `digest` · `current`
+- [TDD 집행 흐름 — ticket-engineer가 티켓 하나를 테스트부터 끝까지 집행하는 모양 (2026-10-19 시점)](../ops-workflow/digest/261011_1740_tdd-execution-flow.md) — `digest` · `current`
 - [약속 게이트의 저장소별 적용 — 테스트가 없는 곳에서 약속은 무엇에 담기나](../ops-workflow/discussion/260910_1900_promise-gate-per-repository-class.md) — `discussion` · `active`
 - [TDD 집행 흐름 — ticket-engineer 하네스에 red·green 을 어떻게 세우나](../ops-workflow/discussion/260930_1356_tdd-flow-in-ticket-engineer.md) — `discussion` · `done`
 - [TDD 집행 흐름 — 결론](../ops-workflow/discussion/260930_1524_tdd-flow-decisions.md) — `discussion` · `done`

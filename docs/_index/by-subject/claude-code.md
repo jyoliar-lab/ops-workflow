@@ -15,7 +15,7 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | ai-agent | active | [agent 코드 생산량과 사람의 이해 병목 — 외부 조사와 이 하네스에의 대입](../../ai-agent/discussion/260910_1817_agent-code-comprehension-bottleneck.md) |
 | — | discussion | ai-agent | active | [obs-toolkit 으로 agent 가 트러블슈팅을 얼마나 잘 하나 — 무엇을 재고, 어디서 문제를 내고, 무엇으로 돌리나](../../ai-agent/discussion/261003_1949_obs-toolkit-troubleshooting-eval.md) |
 | — | discussion | ai-agent | active | [obs-toolkit 측정 설계 — 장애 종류 · 주입 · 비교군 · 하네스](../../ai-agent/discussion/261003_2013_obs-toolkit-eval-design-faults-arms-harness.md) |
-| — | digest | ops-workflow | current | [TDD 집행 흐름 — ticket-engineer가 티켓 하나를 테스트부터 끝까지 집행하는 모양 (2026-10-11 시점)](../../ops-workflow/digest/261011_1740_tdd-execution-flow.md) |
+| — | digest | ops-workflow | current | [TDD 집행 흐름 — ticket-engineer가 티켓 하나를 테스트부터 끝까지 집행하는 모양 (2026-10-19 시점)](../../ops-workflow/digest/261011_1740_tdd-execution-flow.md) |
 | — | discussion | ops-workflow | done | [TDD 집행 흐름 — ticket-engineer 하네스에 red·green 을 어떻게 세우나](../../ops-workflow/discussion/260930_1356_tdd-flow-in-ticket-engineer.md) |
 | — | discussion | ops-workflow | done | [TDD 집행 흐름 — 결론](../../ops-workflow/discussion/260930_1524_tdd-flow-decisions.md) |
 | — | discussion | ops-workflow | done | [red 승인을 subagent에게 — 테스트 검토·보강 subagent와 ac-verifier의 역할 분리](../../ops-workflow/discussion/261011_1705_red-review-subagent.md) |

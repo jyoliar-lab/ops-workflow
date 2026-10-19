@@ -15,7 +15,7 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | ai-agent | active | [obs-toolkit 테스트 품질 — 무엇이 낮추고 있고, 티켓은 어떤 모양인가](../../ai-agent/discussion/261019_1623_obs-toolkit-test-quality.md) |
 | — | discussion | ai-agent | done | [mutation testing — 무엇이고 도구는 무엇이 있나 — 조사 (2026-10-19)](../../ai-agent/discussion/261019_1640_mutation-testing-tools-survey.md) |
 | — | discussion | homelab | done | [careerhub 서비스의 RED 는 어디서 나오나 — Alloy spanmetrics 를 고른 이유](../../homelab/discussion/260916_1635_red-metrics-source-alloy-spanmetrics.md) |
-| — | digest | ops-workflow | current | [TDD 집행 흐름 — ticket-engineer가 티켓 하나를 테스트부터 끝까지 집행하는 모양 (2026-10-11 시점)](../../ops-workflow/digest/261011_1740_tdd-execution-flow.md) |
+| — | digest | ops-workflow | current | [TDD 집행 흐름 — ticket-engineer가 티켓 하나를 테스트부터 끝까지 집행하는 모양 (2026-10-19 시점)](../../ops-workflow/digest/261011_1740_tdd-execution-flow.md) |
 | — | discussion | ops-workflow | done | [TDD 집행 흐름 — ticket-engineer 하네스에 red·green 을 어떻게 세우나](../../ops-workflow/discussion/260930_1356_tdd-flow-in-ticket-engineer.md) |
 | — | discussion | ops-workflow | done | [TDD 집행 흐름 — 결론](../../ops-workflow/discussion/260930_1524_tdd-flow-decisions.md) |
 | — | discussion | ops-workflow | done | [red 승인을 subagent에게 — 테스트 검토·보강 subagent와 ac-verifier의 역할 분리](../../ops-workflow/discussion/261011_1705_red-review-subagent.md) |

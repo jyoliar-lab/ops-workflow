@@ -24,7 +24,7 @@
 | ADR-0035 | adr | proposed | digest, discussion, adr | [ADR-0035 — 수렴한 논의의 결론은 digest 문서로 증류한다](../../ops-workflow/adr/adr-0035-distill-conclusions-into-digest.md) |
 | ADR-0036 | adr | proposed | adr | [ADR-0036 — ADR의 생명주기는 네 상태로 돌고, 결정은 supersede로만 바뀐다](../../ops-workflow/adr/adr-0036-adr-lifecycle-states-and-transitions.md) |
 | — | digest | current | discussion, digest, adr, claude-code-skills | [논의에서 설계까지 — discussion과 digest가 돌아가는 모양 (2026-10-07 시점)](../../ops-workflow/digest/261006_1640_digest-layer-decisions.md) |
-| — | digest | current | ticket-engineer, tdd-loop, tdd-green, ac-verifier, obs-toolkit, github-issues, claude-code | [TDD 집행 흐름 — ticket-engineer가 티켓 하나를 테스트부터 끝까지 집행하는 모양 (2026-10-11 시점)](../../ops-workflow/digest/261011_1740_tdd-execution-flow.md) |
+| — | digest | current | ticket-engineer, tdd-loop, tdd-red-reviewer, tdd-green, ac-verifier, obs-toolkit, github-issues, claude-code | [TDD 집행 흐름 — ticket-engineer가 티켓 하나를 테스트부터 끝까지 집행하는 모양 (2026-10-19 시점)](../../ops-workflow/digest/261011_1740_tdd-execution-flow.md) |
 | — | discussion | active | claude-code-skills | [skill 초판 마찰 로그](../../ops-workflow/discussion/260712_1731_skill-friction-log.md) |
 | — | discussion | active | adr | [ADR 선행 사례 조사 — 무엇이 표준이고, 무엇이 우리 발명이고, 무엇이 실패하는가](../../ops-workflow/discussion/260714_1417_adr-prior-art-survey.md) |
 | — | discussion | active | adr | [ADR 문서를 무슨 포맷으로 적을 것인가](../../ops-workflow/discussion/260715_1401_adr-document-format.md) |

@@ -13,7 +13,7 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | ADR-0017 | adr | ops-workflow | proposed | [ADR-0017 — 리프 티켓은 선행 의존을 명시하고, 열린 선행 위에는 착수하지 않는다](../../ops-workflow/adr/adr-0017-leaf-ticket-declares-dependencies.md) |
 | ADR-0033 | adr | ops-workflow | proposed | [ADR-0033 — 티켓 Status는 여섯이다: 진행 단계와 확신만 표현한다](../../ops-workflow/adr/adr-0033-ticket-status-roster-and-meaning.md) |
 | — | discussion | ai-agent | active | [agent 코드 생산량과 사람의 이해 병목 — 외부 조사와 이 하네스에의 대입](../../ai-agent/discussion/260910_1817_agent-code-comprehension-bottleneck.md) |
-| — | digest | ops-workflow | current | [TDD 집행 흐름 — ticket-engineer가 티켓 하나를 테스트부터 끝까지 집행하는 모양 (2026-10-11 시점)](../../ops-workflow/digest/261011_1740_tdd-execution-flow.md) |
+| — | digest | ops-workflow | current | [TDD 집행 흐름 — ticket-engineer가 티켓 하나를 테스트부터 끝까지 집행하는 모양 (2026-10-19 시점)](../../ops-workflow/digest/261011_1740_tdd-execution-flow.md) |
 | — | discussion | ops-workflow | active | [티켓(컨트롤 플레인) 결정을 ADR로 승격하기 — 후보 분해와 논점](../../ops-workflow/discussion/260716_1348_ticket-decisions-adr-candidates.md) |
 | — | discussion | ops-workflow | active | [티켓 본문 구성 — 공통 계약과 타입별 절의 층화 제안](../../ops-workflow/discussion/260723_2039_ticket-body-structure.md) |
 | — | discussion | ops-workflow | done | [PR 머지와 티켓 종료 — close는 판단인가 의례인가](../../ops-workflow/discussion/260727_1608_pr-merge-auto-close.md) |
