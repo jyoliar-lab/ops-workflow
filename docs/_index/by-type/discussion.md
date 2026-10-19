@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (83)
+# by-type / discussion (84)
 
 | status | goal | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|---|
@@ -17,7 +17,7 @@
 | done | — | ai-agent | obs-toolkit, pytest, pyright | — | [obs-toolkit 테스트 스위트 — 무엇을 향해 재편하고, 무엇이 그 뒤를 지키나](../../ai-agent/discussion/260923_2005_obs-toolkit-test-suite-refactor.md) |
 | active | — | ai-agent | obs-toolkit, claude-code, prometheus, loki, tempo, careerhub-dev | — | [obs-toolkit 으로 agent 가 트러블슈팅을 얼마나 잘 하나 — 무엇을 재고, 어디서 문제를 내고, 무엇으로 돌리나](../../ai-agent/discussion/261003_1949_obs-toolkit-troubleshooting-eval.md) |
 | active | — | ai-agent | obs-toolkit, claude-code, careerhub-prod, argocd, prometheus, loki, tempo | — | [obs-toolkit 측정 설계 — 장애 종류 · 주입 · 비교군 · 하네스](../../ai-agent/discussion/261003_2013_obs-toolkit-eval-design-faults-arms-harness.md) |
-| active | obs-toolkit-test-quality | ai-agent | obs-toolkit, pytest, tdd-loop, ticket-engineer | — | [obs-toolkit 테스트 품질 — 무엇이 낮추고 있고, 티켓은 어떤 모양인가](../../ai-agent/discussion/261019_1623_obs-toolkit-test-quality-and-ac.md) |
+| active | obs-toolkit-test-quality | ai-agent | obs-toolkit, pytest, mutmut | — | [obs-toolkit 테스트 품질 — 무엇이 낮추고 있고, 티켓은 어떤 모양인가](../../ai-agent/discussion/261019_1623_obs-toolkit-test-quality.md) |
 | done | obs-toolkit-test-quality | ai-agent | obs-toolkit, pytest, mutmut | — | [mutation testing — 무엇이고 도구는 무엇이 있나 — 조사 (2026-10-19)](../../ai-agent/discussion/261019_1640_mutation-testing-tools-survey.md) |
 | done | — | careerhub-front | svelte, svelte-spa-router, rollup, api-composer, auth-service | — | [careerhub-front 리뉴얼 — 결정 축 벌리기](../../careerhub-front/discussion/260717_1456_frontend-renewal-decision-axes.md) |
 | active | — | careerhub-front | nextjs | — | [렌더링 전략 — 화면별로 어디서, 언제 그리나 (축 B)](../../careerhub-front/discussion/260717_1550_rendering-strategy-per-route.md) |
@@ -86,4 +86,5 @@
 | done | tdd-execution-flow | ops-workflow | ticket-engineer, tdd-loop, ac-verifier, tdd-green, obs-toolkit, claude-code | — | [red 승인을 subagent에게 — 테스트 검토·보강 subagent와 ac-verifier의 역할 분리](../../ops-workflow/discussion/261011_1705_red-review-subagent.md) |
 | done | tdd-execution-flow | ops-workflow | ticket-engineer, tdd-loop, github-issues, obs-toolkit, claude-code | — | [시나리오 코멘트의 갱신 — 제자리 수정과 변경의 가시화](../../ops-workflow/discussion/261014_1530_scenario-comment-in-place-diff.md) |
 | done | — | ops-workflow | adr | ADR-0001, ADR-0002, ADR-0004, ADR-0006, ADR-0032, ADR-0036, ADR-0009, ADR-0010, ADR-0033 | [정책 ADR 첫 accept 시도 — 무엇이 고쳐졌고, 왜 얼리지 않았나](../../ops-workflow/discussion/261018_1908_policy-adr-accept-attempt-record.md) |
+| active | tdd-execution-flow | ops-workflow | ticket-engineer, tdd-loop, github-issues, obs-toolkit | — | [tdd-loop 의 바닥과 애플리케이션 AC — 테스트가 약속 대신 구현을 고정하는 기제](../../ops-workflow/discussion/261019_1939_tdd-loop-floor-and-app-ac.md) |
 | rejected | — | palworld | palworld-server | — | [팰월드 1.0 서버를 홈랩 쿠버네티스에](../../palworld/discussion/260726_0149_palworld-server-on-homelab-k8s.md) |

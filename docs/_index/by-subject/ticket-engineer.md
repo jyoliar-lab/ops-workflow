@@ -7,7 +7,6 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | id | type | topic | status | 문서 |
 |---|---|---|---|---|
 | ADR-0017 | adr | ops-workflow | proposed | [ADR-0017 — 리프 티켓은 선행 의존을 명시하고, 열린 선행 위에는 착수하지 않는다](../../ops-workflow/adr/adr-0017-leaf-ticket-declares-dependencies.md) |
-| — | discussion | ai-agent | active | [obs-toolkit 테스트 품질 — 무엇이 낮추고 있고, 티켓은 어떤 모양인가](../../ai-agent/discussion/261019_1623_obs-toolkit-test-quality-and-ac.md) |
 | — | discussion | careerhub-front | active | [careerhub-web의 테스트 층 — TDD 루프가 도는 층과 회귀 그물로 남는 층](../../careerhub-front/discussion/261017_2030_careerhub-web-tdd-loop-layers.md) |
 | — | digest | ops-workflow | current | [TDD 집행 흐름 — ticket-engineer가 티켓 하나를 테스트부터 끝까지 집행하는 모양 (2026-10-11 시점)](../../ops-workflow/digest/261011_1740_tdd-execution-flow.md) |
 | — | discussion | ops-workflow | done | [ticket-engineer 워크스페이스 엣지 케이스 — 낡은 클론·남의 브랜치·중단된 작업](../../ops-workflow/discussion/260722_2030_ticket-engineer-workspace-edge-cases.md) |
@@ -19,3 +18,4 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | ops-workflow | active | [인프라 AC 의 세 종류 — 약속이 상태일 때 무엇이 증거인가](../../ops-workflow/discussion/260930_1828_infra-ac-kinds.md) |
 | — | discussion | ops-workflow | done | [red 승인을 subagent에게 — 테스트 검토·보강 subagent와 ac-verifier의 역할 분리](../../ops-workflow/discussion/261011_1705_red-review-subagent.md) |
 | — | discussion | ops-workflow | done | [시나리오 코멘트의 갱신 — 제자리 수정과 변경의 가시화](../../ops-workflow/discussion/261014_1530_scenario-comment-in-place-diff.md) |
+| — | discussion | ops-workflow | active | [tdd-loop 의 바닥과 애플리케이션 AC — 테스트가 약속 대신 구현을 고정하는 기제](../../ops-workflow/discussion/261019_1939_tdd-loop-floor-and-app-ac.md) |

@@ -6,14 +6,14 @@ topic: ai-agent
 subjects: [obs-toolkit, pytest, mutmut]
 status: done
 ref-adrs: []
-related: [261019_1623_obs-toolkit-test-quality-and-ac.md]
+related: [261019_1623_obs-toolkit-test-quality.md]
 ---
 
 # mutation testing — 무엇이고 도구는 무엇이 있나 — 조사 (2026-10-19)
 
 ## 질문
 
-논의 문서 `261019_1623_obs-toolkit-test-quality-and-ac.md` 의 축 4-1 이 묻는다.
+논의 문서 `261019_1623_obs-toolkit-test-quality.md` 의 축 4-1 이 묻는다.
 "거짓 안전감" — 테스트가 많아 보이지만 약속 위반을 잡는지 믿기 어려운 상태 — 를 재는 척도로 mutation testing 을 쓸 수 있는가.
 그러려면 그것이 무엇이고, 어떤 생태계에 어떤 도구가 있고, 비용이 얼마이며, 무엇을 못 하는지를 알아야 한다.
 이 문서는 그 사실만 모은다. 판정은 없다.
