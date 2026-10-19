@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (81)
+# by-type / discussion (83)
 
 | status | goal | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|---|
@@ -17,6 +17,8 @@
 | done | — | ai-agent | obs-toolkit, pytest, pyright | — | [obs-toolkit 테스트 스위트 — 무엇을 향해 재편하고, 무엇이 그 뒤를 지키나](../../ai-agent/discussion/260923_2005_obs-toolkit-test-suite-refactor.md) |
 | active | — | ai-agent | obs-toolkit, claude-code, prometheus, loki, tempo, careerhub-dev | — | [obs-toolkit 으로 agent 가 트러블슈팅을 얼마나 잘 하나 — 무엇을 재고, 어디서 문제를 내고, 무엇으로 돌리나](../../ai-agent/discussion/261003_1949_obs-toolkit-troubleshooting-eval.md) |
 | active | — | ai-agent | obs-toolkit, claude-code, careerhub-prod, argocd, prometheus, loki, tempo | — | [obs-toolkit 측정 설계 — 장애 종류 · 주입 · 비교군 · 하네스](../../ai-agent/discussion/261003_2013_obs-toolkit-eval-design-faults-arms-harness.md) |
+| active | obs-toolkit-test-quality | ai-agent | obs-toolkit, pytest, tdd-loop, ticket-engineer | — | [obs-toolkit 테스트 품질 — 무엇이 낮추고 있고, 티켓은 어떤 모양인가](../../ai-agent/discussion/261019_1623_obs-toolkit-test-quality-and-ac.md) |
+| done | obs-toolkit-test-quality | ai-agent | obs-toolkit, pytest, mutmut | — | [mutation testing — 무엇이고 도구는 무엇이 있나 — 조사 (2026-10-19)](../../ai-agent/discussion/261019_1640_mutation-testing-tools-survey.md) |
 | done | — | careerhub-front | svelte, svelte-spa-router, rollup, api-composer, auth-service | — | [careerhub-front 리뉴얼 — 결정 축 벌리기](../../careerhub-front/discussion/260717_1456_frontend-renewal-decision-axes.md) |
 | active | — | careerhub-front | nextjs | — | [렌더링 전략 — 화면별로 어디서, 언제 그리나 (축 B)](../../careerhub-front/discussion/260717_1550_rendering-strategy-per-route.md) |
 | rejected | — | careerhub-front | api-composer, userinfo-service | — | [계측 — 무엇을 신뢰할 수 있고, 어디서 보내나 (축 H)](../../careerhub-front/discussion/260717_1617_measurement-trust-and-transport.md) |
