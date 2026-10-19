@@ -4,7 +4,7 @@ kind: deliberation
 goal: tdd-execution-flow
 topic: ops-workflow
 subjects: [ticket-engineer, tdd-loop, github-issues, obs-toolkit]
-status: active
+status: done
 ref-adrs: []
 related: [260930_1356_tdd-flow-in-ticket-engineer.md, 260930_1828_infra-ac-kinds.md, 261011_1705_red-review-subagent.md, 260910_1900_promise-gate-per-repository-class.md, ../../ai-agent/discussion/261019_1623_obs-toolkit-test-quality.md]
 tickets: [94, 102, 109, 111, 119, 120]
@@ -83,6 +83,8 @@ A 는 obs-toolkit 의 경계 정의 · 소스 인터페이스 · 리팩토링 �
 A-3-1 이 obs-toolkit 의 경계를 정했지만 ticket-engineer 는 저장소마다 다른 경계를 모른다.
 
 - **A. 범용 규칙 파일** — ticket-engineer 의 `.claude/rules/` 에 좋은 테스트의 범용 특징(공개 경계 위에서 · 한 동작 · fake · mock 으로 내부 동작을 검증하지 않는다 · 대역은 정적 응답)을 적고 준수를 지시한다. 저장소마다 규칙 파일이 없어도 하한이 생긴다 / 경계가 어디인지는 여전히 저장소가 말해야 한다.
+  "한 동작" 의 뜻 — 동작은 결과 하나다. 한 결과의 여러 성질은 한 테스트 안의 여러 단언이고, 결과가 둘이면 테스트가 둘이다. Given · When 은 fixture · 헬퍼 · parametrize 로 공유한다.
+  "단언 하나 = 테스트 하나" 가 아니다 — 그렇게 읽으면 4-2 의 append-only(같은 결과의 새 성질은 기존 테스트에 단언을 더한다)와 충돌한다. (채팅, 2026-10-19)
 - B. 층 규칙에 하한 — §1.5 를 "저장소가 정한 공개 경계 위에서 가장 낮은 층" 으로 고치고, 경계는 저장소 규칙 파일(obs-toolkit 이면 `python-tests.md`)이 정한다. 경계가 없는 저장소에서는 지금과 같다 / 저장소 규칙 파일이 경계를 적어야 작동한다.
 - C. red 검토자 판정 항목 — "Then 이 내부 형태(튜플 자리 · 질의 전문 · private 속성)를 말한다" 를 약함의 모양 목록에 더한다. 행을 쓸 때가 아니라 검토에서 잡힌다 / 표 승인 뒤라 되감기 비용이 든다.
 - D. 안 한다 — 내부 결합 churn 은 제품이 raw · evidence 의 자리를 정하던 10일(#94 → #111 → #119 → #120) 특유의 것일 수 있다 / 같은 규칙이 다음 저장소에서 같은 결과를 낸다.
