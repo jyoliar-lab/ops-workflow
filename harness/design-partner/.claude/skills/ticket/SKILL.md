@@ -43,6 +43,7 @@ create.py \
 ### 본문 — `templates/`의 타입별 템플릿에서 시작한다
 
 `epic.md`(Feature도 이것 — 컨테이너 공통) · `task.md` · `bug.md`.
+리프의 **Acceptance Criteria 절은 저장소 부류의 조각으로 채운다** — `ac-app.md`(애플리케이션: 동작 · 검사) · `ac-infra.md`(인프라 IaC · GitOps: 형상 · 수렴 · 지속). 그룹을 고르는 법과 각 그룹의 증거는 조각의 주석이 말한다.
 
 **초안은 `tmp/github-issues/<슬러그>.md` 에 쓴다**(gitignored).
 
