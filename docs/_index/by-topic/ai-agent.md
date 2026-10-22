@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / ai-agent (15)
+# by-topic / ai-agent (17)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -19,3 +19,5 @@
 | — | discussion | active | obs-toolkit, claude-code, careerhub-prod, argocd, prometheus, loki, tempo | [obs-toolkit 측정 설계 — 장애 종류 · 주입 · 비교군 · 하네스](../../ai-agent/discussion/261003_2013_obs-toolkit-eval-design-faults-arms-harness.md) |
 | — | discussion | active | obs-toolkit, pytest, mutmut | [obs-toolkit 테스트 품질 — 무엇이 낮추고 있고, 티켓은 어떤 모양인가](../../ai-agent/discussion/261019_1623_obs-toolkit-test-quality.md) |
 | — | discussion | done | obs-toolkit, pytest, mutmut | [mutation testing — 무엇이고 도구는 무엇이 있나 — 조사 (2026-10-19)](../../ai-agent/discussion/261019_1640_mutation-testing-tools-survey.md) |
+| — | discussion | done | obs-toolkit, pytest, mutmut | [테스트 커버리지와 mutation testing — 무엇이 다르고, 서로 무엇을 대체하지 못하나](../../ai-agent/discussion/261020_1303_coverage-vs-mutation-testing-survey.md) |
+| — | discussion | done | obs-toolkit, pytest, mutmut | [mutation testing — 절차 · 용어 · 결과 해석, 그리고 obs-toolkit 적용 — 조사 (2026-10-21)](../../ai-agent/discussion/261021_1310_mutation-testing-procedure-and-obs-toolkit.md) |
