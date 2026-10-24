@@ -4,10 +4,10 @@ kind: deliberation
 goal: obs-toolkit-test-quality
 topic: ai-agent
 subjects: [obs-toolkit, pytest, mutmut]
-status: active
+status: done
 ref-adrs: []
-related: [260923_2005_obs-toolkit-test-suite-refactor.md, 261019_1640_mutation-testing-tools-survey.md, 261020_1303_coverage-vs-mutation-testing-survey.md, 261021_1310_mutation-testing-procedure-and-obs-toolkit.md, ../../ops-workflow/discussion/261019_1939_tdd-loop-floor-and-app-ac.md, 261022_1244_pytest-test-case-grouping.md]
-tickets: [92, 94, 102, 105, 107, 109, 111, 119, 120, 122, 123, 126, 127]
+related: [260923_2005_obs-toolkit-test-suite-refactor.md, 261019_1640_mutation-testing-tools-survey.md, 261020_1303_coverage-vs-mutation-testing-survey.md, 261021_1310_mutation-testing-procedure-and-obs-toolkit.md, ../../ops-workflow/discussion/261019_1939_tdd-loop-floor-and-app-ac.md, 261022_1244_pytest-test-case-grouping.md, 261022_1301_obs-toolkit-adapter-structure-survey.md, 261022_1334_obs-toolkit-adapter-interface-scope.md]
+tickets: [92, 94, 102, 105, 107, 109, 111, 119, 120, 122, 123, 126, 127, 128]
 ---
 
 # obs-toolkit 테스트 품질 — 무엇이 낮추고 있고, 티켓은 어떤 모양인가
@@ -262,6 +262,8 @@ tdd-loop 비대상이면 시나리오 승인과 기존 테스트 처분표가 �
 
 A 와 B 는 누락 갈래에 대해 같다 — 어느 쪽이든 토큰 헤더 · 파라미터 키 · 기본값은 ③(3-1 경계 위의 테스트)이 채운다.
 
+**판정(사람, 2026-10-22): A — 환경 획득은 진입점에만, 선언은 배선과 분리된 자리에.** 범위의 세부는 `261022_1334_obs-toolkit-adapter-interface-scope.md` 가 정했다 — core 일곱 함수의 `env` 필수화까지(4-1 B), Task 둘(4-2 B), 시계도 주입, mutmut 예외는 ③. 이 문서의 열린 축은 이것으로 전부 판정됐다.
+
 ## 5. 반대편 — 이 설계가 틀리는 조건
 
 - 공개 경계를 단위 연산으로 두면 `*_query` 조립기의 PromQL · LogQL 문법 오류는 "나간 요청의 성질" 로만 잡힌다. format 의 replay 는 녹화된 응답이라 실 백엔드의 거부를 재현하지 못한다. 문자열 전문 단언을 지우는 만큼 그 오류는 실환경에서만 드러난다.
@@ -297,8 +299,8 @@ ADR 은 없다.
 1′. **mutation · 커버리지 도구 도입 Task — #127 (발행, 2026-10-21)** — target 은 obs-toolkit. Feature #126(obs-toolkit 테스트 품질 — Feature #92 의 하위)의 첫 리프이고, ② ③ 도 그 Feature 의 리프로 더한다. mutmut 3.8.0 은 정해졌고 커버리지 도구는 작업자와 협의한다. 소스 · 테스트 · CI 무변경, 예외 0 으로 첫 측정, 생존의 분류와 `no tests` · 미실행 줄의 대조를 코멘트에. 동작 AC 없음(TDD 비대상). 선행 없음. 부모는 #92. **② ③ 에 앞선다.**
 
 1. **하네스 개선 Task** — B §8. target 은 ops-workflow 와 ticket-engineer. ② ③ 의 선행이다.
-2. **인터페이스 · 시그니처 개선 Task(②)** — target 은 obs-toolkit. 초안 `tmp/github-issues/obs-toolkit-adapter-seams.md`. Goal 은 3-5, Context 는 §2 의 왜곡 ①②③ 실측, AC 는 4-8 A(동작 — 주입구 명시 · 미명시 / 선언 — CLI 인터페이스 불변, 스냅샷 변경 0 / 검사 — `cli` 패치 0 · `RunResult` 자리 읽기 0). 고치는 모양은 작업자가 정한다. tdd-loop 대상(동작 행이 있다). 선행 없음 — 하네스 Task(#122 · #123)는 close 됐다. 부모는 #92.
+2. **인터페이스 · 시그니처 개선 Task(②)** — 2026-10-22 에 둘로 갈렸다(`261022_1334` 4-2). 초안 `tmp/github-issues/obs-toolkit-adapter-seams-a.md`(환경 · 시계 · Client 주입 · doctor) · `-b.md`(매핑 · 선언 · typed `RunResult`). 아래는 분리 전의 문장이다 — target 은 obs-toolkit. Goal 은 3-5, Context 는 §2 의 왜곡 ①②③ 실측, AC 는 4-8 A(동작 — 주입구 명시 · 미명시 / 선언 — CLI 인터페이스 불변, 스냅샷 변경 0 / 검사 — `cli` 패치 0 · `RunResult` 자리 읽기 0). 고치는 모양은 작업자가 정한다. tdd-loop 대상(동작 행이 있다). 선행 없음 — 하네스 Task(#122 · #123)는 close 됐다. 부모는 #92.
 3. **테스트 리팩토링 Task(③)** — target 은 obs-toolkit. 초안 `tmp/github-issues/obs-toolkit-test-refactor.md`. Goal 은 3-5 와 3-1 의 경계 표, Requirements 는 3-3 의 협의 절차 · 3-4 의 후보 규칙 · 4-1 의 측정 절차와 도구의 자리, AC 는 4-9 B(검사 — mutation 후 ≥ 전 · 문장 커버리지 후 ≥ 전 · contracts 의 `*_lines` 호출 0 · private 참조와 obs 모듈 패치 0 · 조립기 직접 호출 0 · 생성식 안 `and` 0 · 중복 정의 0 / 선언 — 스냅샷 내용 변경 0). tdd-loop 비대상(동작 없음). 선행은 ②. 부모는 #92.
 
 - **조사 문서** — `261019_1640_mutation-testing-tools-survey.md`(도구 · 비용) · `261020_1303_coverage-vs-mutation-testing-survey.md`(커버리지와의 분담). 4-1 은 둘을 읽은 뒤 판정됐다.
-- 열린 축 4-1 · 4-7 · 4-8 · 4-9 는 판정됐고 **4-10 은 열려 있다** — ①′ 의 측정을 읽은 뒤 판정한다. 그때까지 `active` 다. ①′ 의 초안은 사람이 읽고 발행한다 — 발행은 design-partner 가 `create.py` 로.
+- 열린 축 4-1 · 4-7 · 4-8 · 4-9 · 4-10 전부 판정됐다(4-10 은 2026-10-22, ①′ 의 측정을 읽은 뒤). ② 의 초안은 둘(`adapter-seams-a` · `-b`)이 됐다 — `261022_1334`. ①′ 의 초안은 사람이 읽고 발행한다 — 발행은 design-partner 가 `create.py` 로.
