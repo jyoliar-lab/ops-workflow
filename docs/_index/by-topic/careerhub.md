@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / careerhub (39)
+# by-topic / careerhub (44)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -15,6 +15,7 @@
 | ADR-0029 | adr | accepted | auth-service, api-composer, jwt, oidc | [ADR-0029 — 토큰의 신뢰는 데이터 경로의 로컬 검증으로만 얻는다](../../careerhub/adr/adr-0029-data-path-local-token-verification.md) |
 | ADR-0030 | adr | accepted | zitadel, keycloak, postgresql, auth-service | [ADR-0030 — IdP 제품으로 Zitadel을 채택한다](../../careerhub/adr/adr-0030-adopt-zitadel-as-idp.md) |
 | ADR-0031 | adr | accepted | auth-service, api-composer, jwt, oidc | [ADR-0031 — 인가 전파는 발급 시점 클레임 주입으로 한다](../../careerhub/adr/adr-0031-issuance-time-claim-injection.md) |
+| — | digest | current | careerhub-front, auth-service, api-composer, careerhub-httproute, careerhub-nginx-gateway, cloudflare-tunnel, cloudflared, external-dns, nginx-gateway-fabric, jyoliar-platform-terraform, oidc-provider, zitadel | [레거시 커리어허브의 임시 공개 — 설계와 전환 순서 (2026-10-26 시점)](../../careerhub/digest/261026_1715_legacy-public-exposure-blueprint.md) |
 | — | discussion | active | adsense, posting-provider, review-crawler, posting-skillscanner | [careerhub 는 무엇으로 돈을 버나 — 그리고 그게 성립하나](../../careerhub/discussion/260717_1853_revenue-model-and-viability.md) |
 | — | discussion | done | openapi, api-composer | [api-composer OpenAPI 스펙의 원천 — code-first vs spec-first](../../careerhub/discussion/260726_1653_openapi-spec-source-of-truth.md) |
 | — | discussion | done | openapi, api-composer, careerhub-web | [백엔드 스펙 변경을 프론트에 전파하는 방법 — 푸시인가 구독인가](../../careerhub/discussion/260730_1524_spec-change-propagation-to-frontend.md) |
@@ -43,3 +44,7 @@
 | — | discussion | rejected | keycloak, zitadel, auth-service | [Keycloak operator·plugin으로 클레임 훅 타겟의 GitOps 주입이 가능한가](../../careerhub/discussion/260811_2134_keycloak-operator-claim-hook-feasibility.md) |
 | — | discussion | active | zitadel, jwt, auth-service, careerhub-api-composer, careerhub-web, openapi | [JWT 클레임 스키마 계약 — 원천을 어디에 어떤 포맷으로 두나](../../careerhub/discussion/260817_1640_jwt-claim-schema-contract-source.md) |
 | — | discussion | active | zitadel, google-oauth, careerhub-web, playwright | [실제 Google 연합 로그인 여정의 검증 — 스모크와 회귀 그물의 이원화](../../careerhub/discussion/260820_2216_real-google-federation-journey-verification.md) |
+| — | discussion | done | auth-service, careerhub-front, api-composer, careerhub-httproute, jwt, google-oauth, zitadel | [레거시 스택 임시 공개 — 인증 기능을 어떻게 처분하나](../../careerhub/discussion/261026_1610_legacy-public-exposure-auth-disposition.md) |
+| — | discussion | done | cloudflare-tunnel, cloudflared, external-dns, nginx-gateway-fabric, jyoliar-platform-terraform | [Cloudflare Tunnel · external-dns · 엣지 보호 — 조사 (2026-10-26)](../../careerhub/discussion/261026_1631_cloudflare-tunnel-dns-edge-survey.md) |
+| — | discussion | done | cloudflare-tunnel, cloudflared, external-dns, careerhub-nginx-gateway, careerhub-httproute, nginx-gateway-fabric, jyoliar-platform-terraform, zitadel | [레거시 스택 임시 공개 — Cloudflare 쪽 배선과 엣지 보호](../../careerhub/discussion/261026_1632_cloudflare-exposure-wiring-and-edge.md) |
+| — | discussion | done | nginx-gateway-fabric, cloudflare-tunnel, cloudflared, external-dns, careerhub-nginx-gateway, careerhub-httproute, oidc-provider, jyoliar-platform-terraform, external-secrets | [공개 Gateway 토폴로지 — 터널 하나 · Gateway 한 단인가 두 단인가](../../careerhub/discussion/261026_1811_public-gateway-topology-and-tunnel-handoff.md) |

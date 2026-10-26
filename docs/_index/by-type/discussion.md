@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (91)
+# by-type / discussion (95)
 
 | status | goal | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|---|
@@ -66,6 +66,10 @@
 | rejected | — | careerhub | keycloak, zitadel, auth-service | ADR-0030 | [Keycloak operator·plugin으로 클레임 훅 타겟의 GitOps 주입이 가능한가](../../careerhub/discussion/260811_2134_keycloak-operator-claim-hook-feasibility.md) |
 | active | — | careerhub | zitadel, jwt, auth-service, careerhub-api-composer, careerhub-web, openapi | ADR-0031, ADR-0018, ADR-0020, ADR-0014, ADR-0029 | [JWT 클레임 스키마 계약 — 원천을 어디에 어떤 포맷으로 두나](../../careerhub/discussion/260817_1640_jwt-claim-schema-contract-source.md) |
 | active | — | careerhub | zitadel, google-oauth, careerhub-web, playwright | ADR-0028, ADR-0030 | [실제 Google 연합 로그인 여정의 검증 — 스모크와 회귀 그물의 이원화](../../careerhub/discussion/260820_2216_real-google-federation-journey-verification.md) |
+| done | legacy-public-exposure | careerhub | auth-service, careerhub-front, api-composer, careerhub-httproute, jwt, google-oauth, zitadel | ADR-0028 | [레거시 스택 임시 공개 — 인증 기능을 어떻게 처분하나](../../careerhub/discussion/261026_1610_legacy-public-exposure-auth-disposition.md) |
+| done | legacy-public-exposure | careerhub | cloudflare-tunnel, cloudflared, external-dns, nginx-gateway-fabric, jyoliar-platform-terraform | — | [Cloudflare Tunnel · external-dns · 엣지 보호 — 조사 (2026-10-26)](../../careerhub/discussion/261026_1631_cloudflare-tunnel-dns-edge-survey.md) |
+| done | legacy-public-exposure | careerhub | cloudflare-tunnel, cloudflared, external-dns, careerhub-nginx-gateway, careerhub-httproute, nginx-gateway-fabric, jyoliar-platform-terraform, zitadel | ADR-0034 | [레거시 스택 임시 공개 — Cloudflare 쪽 배선과 엣지 보호](../../careerhub/discussion/261026_1632_cloudflare-exposure-wiring-and-edge.md) |
+| done | legacy-public-exposure | careerhub | nginx-gateway-fabric, cloudflare-tunnel, cloudflared, external-dns, careerhub-nginx-gateway, careerhub-httproute, oidc-provider, jyoliar-platform-terraform, external-secrets | ADR-0034 | [공개 Gateway 토폴로지 — 터널 하나 · Gateway 한 단인가 두 단인가](../../careerhub/discussion/261026_1811_public-gateway-topology-and-tunnel-handoff.md) |
 | active | — | homelab | prometheus, alertmanager, kubelet, longhorn, kube-prometheus-stack | — | [Prometheus TSDB 만석과 이중 감시 실패 — 2026-07-30 장애 기록](../../homelab/discussion/260730_2245_prometheus-tsdb-full-double-monitoring-failure.md) |
 | active | — | homelab | prometheus, grafana, kube-prometheus-stack | — | [룰이 참조하는 메트릭의 부재 감지 — 공식 기능·공식 가이드·대안 도구 조사](../../homelab/discussion/260731_1233_rule-metric-absence-detection-options.md) |
 | done | — | homelab | aws-ec2, jyoliar-k8s, onpremise-k8s, baremetal | — | [은퇴한 환경(aws-ec2) 코드의 보존 방식](../../homelab/discussion/260807_2002_retired-env-code-archiving.md) |

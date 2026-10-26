@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / api-composer (25)
+# by-subject / api-composer (27)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -17,6 +17,7 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | careerhub-front | done | [토큰 저장 — 서버가 생긴 뒤에 다시 여는 축 D](../../careerhub-front/discussion/260722_1617_token-storage-after-server-exists.md) |
 | — | discussion | careerhub-front | active | [회귀를 무엇이 잡나 — 그리고 그물이 무언가를 실제로 막나](../../careerhub-front/discussion/260722_1618_regression-net-and-merge-gate.md) |
 | — | discussion | careerhub-front | done | [프론트가 공표 태그에서 TS 타입을 만드는 방법 — 소비자가 당긴다](../../careerhub-front/discussion/260802_1607_frontend-pulls-published-spec-tag.md) |
+| — | digest | careerhub | current | [레거시 커리어허브의 임시 공개 — 설계와 전환 순서 (2026-10-26 시점)](../../careerhub/digest/261026_1715_legacy-public-exposure-blueprint.md) |
 | — | discussion | careerhub | done | [api-composer OpenAPI 스펙의 원천 — code-first vs spec-first](../../careerhub/discussion/260726_1653_openapi-spec-source-of-truth.md) |
 | — | discussion | careerhub | done | [백엔드 스펙 변경을 프론트에 전파하는 방법 — 푸시인가 구독인가](../../careerhub/discussion/260730_1524_spec-change-propagation-to-frontend.md) |
 | — | discussion | careerhub | done | [계약 선합의 패턴의 gRPC 경계 일반화 — proto의 원천은 어디인가](../../careerhub/discussion/260730_1620_contract-pattern-to-grpc-boundaries.md) |
@@ -31,3 +32,4 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | careerhub | active | [Zitadel 도입은 auth-service의 요구사항을 얼마나 해소하는가 — 항목별 판정과 잔여 목록](../../careerhub/discussion/260805_1801_zitadel-coverage-of-auth-requirements.md) |
 | — | discussion | careerhub | done | [Zitadel의 비-JWT 인증 경로와 권한 변경의 즉시 발효](../../careerhub/discussion/260806_1931_zitadel-non-jwt-auth-and-immediacy.md) |
 | — | discussion | careerhub | done | [게이트웨이 엣지 JWT 검증 패턴 — 해부와 careerhub 대입](../../careerhub/discussion/260806_2054_gateway-edge-jwt-verification-pattern.md) |
+| — | discussion | careerhub | done | [레거시 스택 임시 공개 — 인증 기능을 어떻게 처분하나](../../careerhub/discussion/261026_1610_legacy-public-exposure-auth-disposition.md) |

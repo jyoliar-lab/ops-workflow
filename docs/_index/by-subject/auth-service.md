@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / auth-service (28)
+# by-subject / auth-service (30)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -14,6 +14,7 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | careerhub-front | done | [careerhub-front 리뉴얼 — 결정 축 벌리기](../../careerhub-front/discussion/260717_1456_frontend-renewal-decision-axes.md) |
 | — | discussion | careerhub-front | done | [토큰 저장 — 서버가 생긴 뒤에 다시 여는 축 D](../../careerhub-front/discussion/260722_1617_token-storage-after-server-exists.md) |
 | — | discussion | careerhub-front | active | [회귀를 무엇이 잡나 — 그리고 그물이 무언가를 실제로 막나](../../careerhub-front/discussion/260722_1618_regression-net-and-merge-gate.md) |
+| — | digest | careerhub | current | [레거시 커리어허브의 임시 공개 — 설계와 전환 순서 (2026-10-26 시점)](../../careerhub/digest/261026_1715_legacy-public-exposure-blueprint.md) |
 | — | discussion | careerhub | active | [auth-service의 구조적 결함 — 공개 전환 전에 무엇을 정하고 무엇을 지금 닫나](../../careerhub/discussion/260804_1735_auth-service-structural-defects.md) |
 | — | discussion | careerhub | done | [auth-service를 다시 짓는다면 로그인을 무엇으로 구현하나 — 직접 구현과 기성 IdP 사이](../../careerhub/discussion/260804_1831_auth-rebuild-implementation-approach.md) |
 | — | discussion | careerhub | active | [비밀번호 없이 소셜 로그인만 제공해도 되는가 — 의무와, 대신 지는 대가](../../careerhub/discussion/260805_1245_password-free-social-only-obligations.md) |
@@ -34,3 +35,4 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | careerhub | done | [Zitadel 발급 훅 target/execution 등록 — GitOps 경로 조사](../../careerhub/discussion/260811_2031_zitadel-actions-target-gitops-registration.md) |
 | — | discussion | careerhub | rejected | [Keycloak operator·plugin으로 클레임 훅 타겟의 GitOps 주입이 가능한가](../../careerhub/discussion/260811_2134_keycloak-operator-claim-hook-feasibility.md) |
 | — | discussion | careerhub | active | [JWT 클레임 스키마 계약 — 원천을 어디에 어떤 포맷으로 두나](../../careerhub/discussion/260817_1640_jwt-claim-schema-contract-source.md) |
+| — | discussion | careerhub | done | [레거시 스택 임시 공개 — 인증 기능을 어떻게 처분하나](../../careerhub/discussion/261026_1610_legacy-public-exposure-auth-disposition.md) |

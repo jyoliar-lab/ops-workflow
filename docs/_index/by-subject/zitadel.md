@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / zitadel (16)
+# by-subject / zitadel (19)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -8,6 +8,7 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 |---|---|---|---|---|
 | ADR-0030 | adr | careerhub | accepted | [ADR-0030 — IdP 제품으로 Zitadel을 채택한다](../../careerhub/adr/adr-0030-adopt-zitadel-as-idp.md) |
 | — | discussion | careerhub-front | done | [토큰 저장 — 서버가 생긴 뒤에 다시 여는 축 D](../../careerhub-front/discussion/260722_1617_token-storage-after-server-exists.md) |
+| — | digest | careerhub | current | [레거시 커리어허브의 임시 공개 — 설계와 전환 순서 (2026-10-26 시점)](../../careerhub/digest/261026_1715_legacy-public-exposure-blueprint.md) |
 | — | discussion | careerhub | done | [auth-service를 다시 짓는다면 로그인을 무엇으로 구현하나 — 직접 구현과 기성 IdP 사이](../../careerhub/discussion/260804_1831_auth-rebuild-implementation-approach.md) |
 | — | discussion | careerhub | active | [Zitadel 도입은 auth-service의 요구사항을 얼마나 해소하는가 — 항목별 판정과 잔여 목록](../../careerhub/discussion/260805_1801_zitadel-coverage-of-auth-requirements.md) |
 | — | discussion | careerhub | done | [Zitadel 전환 시 테스트 전용 로그인 경로는 어떻게 되는가 — 티켓 #7 재판정](../../careerhub/discussion/260805_2044_test-login-path-under-zitadel.md) |
@@ -22,3 +23,5 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | careerhub | rejected | [Keycloak operator·plugin으로 클레임 훅 타겟의 GitOps 주입이 가능한가](../../careerhub/discussion/260811_2134_keycloak-operator-claim-hook-feasibility.md) |
 | — | discussion | careerhub | active | [JWT 클레임 스키마 계약 — 원천을 어디에 어떤 포맷으로 두나](../../careerhub/discussion/260817_1640_jwt-claim-schema-contract-source.md) |
 | — | discussion | careerhub | active | [실제 Google 연합 로그인 여정의 검증 — 스모크와 회귀 그물의 이원화](../../careerhub/discussion/260820_2216_real-google-federation-journey-verification.md) |
+| — | discussion | careerhub | done | [레거시 스택 임시 공개 — 인증 기능을 어떻게 처분하나](../../careerhub/discussion/261026_1610_legacy-public-exposure-auth-disposition.md) |
+| — | discussion | careerhub | done | [레거시 스택 임시 공개 — Cloudflare 쪽 배선과 엣지 보호](../../careerhub/discussion/261026_1632_cloudflare-exposure-wiring-and-edge.md) |

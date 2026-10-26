@@ -143,6 +143,7 @@
 ## ADR-0028 — 인증은 외부 IdP 제품이 소유하고, 인가·도메인 상태는 앱이 소유한다
 
 - [토큰 저장 — 서버가 생긴 뒤에 다시 여는 축 D](../careerhub-front/discussion/260722_1617_token-storage-after-server-exists.md) — `discussion` · `done`
+- [레거시 커리어허브의 임시 공개 — 설계와 전환 순서 (2026-10-26 시점)](../careerhub/digest/261026_1715_legacy-public-exposure-blueprint.md) — `digest` · `current`
 - [auth-service가 굳이 필요한가 — Keycloak이 원장까지 갖는 프레임의 재검토](../careerhub/discussion/260805_1635_auth-service-elimination-via-keycloak.md) — `discussion` · `done`
 - [Zitadel 도입은 auth-service의 요구사항을 얼마나 해소하는가 — 항목별 판정과 잔여 목록](../careerhub/discussion/260805_1801_zitadel-coverage-of-auth-requirements.md) — `discussion` · `active`
 - [Zitadel 전환 시 테스트 전용 로그인 경로는 어떻게 되는가 — 티켓 #7 재판정](../careerhub/discussion/260805_2044_test-login-path-under-zitadel.md) — `discussion` · `done`
@@ -151,6 +152,7 @@
 - [Zitadel 위임 Epic의 일 쪼갬 — 왜 이렇게 갈랐고, 무엇을 버렸나](../careerhub/discussion/260807_0158_zitadel-epic-work-breakdown.md) — `discussion` · `done`
 - [리뉴얼은 prod에 바로 — 병행 스택·컷오버·스키마 동결의 정제](../careerhub/discussion/260810_2252_renewal-parallel-stack-prod-cutover.md) — `discussion` · `active`
 - [실제 Google 연합 로그인 여정의 검증 — 스모크와 회귀 그물의 이원화](../careerhub/discussion/260820_2216_real-google-federation-journey-verification.md) — `discussion` · `active`
+- [레거시 스택 임시 공개 — 인증 기능을 어떻게 처분하나](../careerhub/discussion/261026_1610_legacy-public-exposure-auth-disposition.md) — `discussion` · `done`
 
 ## ADR-0029 — 토큰의 신뢰는 데이터 경로의 로컬 검증으로만 얻는다
 
@@ -196,7 +198,10 @@
 
 ## ADR-0034 — terraform은 GitOps가 생성한 인프라에 의존하지 않는다
 
+- [레거시 커리어허브의 임시 공개 — 설계와 전환 순서 (2026-10-26 시점)](../careerhub/digest/261026_1715_legacy-public-exposure-blueprint.md) — `digest` · `current`
 - [Zitadel 발급 훅 target/execution 등록 — GitOps 경로 조사](../careerhub/discussion/260811_2031_zitadel-actions-target-gitops-registration.md) — `discussion` · `done`
+- [레거시 스택 임시 공개 — Cloudflare 쪽 배선과 엣지 보호](../careerhub/discussion/261026_1632_cloudflare-exposure-wiring-and-edge.md) — `discussion` · `done`
+- [공개 Gateway 토폴로지 — 터널 하나 · Gateway 한 단인가 두 단인가](../careerhub/discussion/261026_1811_public-gateway-topology-and-tunnel-handoff.md) — `discussion` · `done`
 
 ## ADR-0035 — 수렴한 논의의 결론은 digest 문서로 증류한다
 

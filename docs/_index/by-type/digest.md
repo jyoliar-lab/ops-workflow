@@ -1,8 +1,9 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / digest (2)
+# by-type / digest (3)
 
 | status | goal | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|---|
+| current | legacy-public-exposure | careerhub | careerhub-front, auth-service, api-composer, careerhub-httproute, careerhub-nginx-gateway, cloudflare-tunnel, cloudflared, external-dns, nginx-gateway-fabric, jyoliar-platform-terraform, oidc-provider, zitadel | ADR-0028, ADR-0034 | [레거시 커리어허브의 임시 공개 — 설계와 전환 순서 (2026-10-26 시점)](../../careerhub/digest/261026_1715_legacy-public-exposure-blueprint.md) |
 | current | discussion-readability | ops-workflow | discussion, digest, adr, claude-code-skills | ADR-0035, ADR-0023, ADR-0024, ADR-0022 | [논의에서 설계까지 — discussion과 digest가 돌아가는 모양 (2026-10-07 시점)](../../ops-workflow/digest/261006_1640_digest-layer-decisions.md) |
 | current | tdd-execution-flow | ops-workflow | ticket-engineer, tdd-loop, tdd-red-reviewer, tdd-green, ac-verifier, obs-toolkit, github-issues, claude-code | ADR-0016, ADR-0017 | [TDD 집행 흐름 — ticket-engineer가 티켓 하나를 테스트부터 끝까지 집행하는 모양 (2026-10-19 시점)](../../ops-workflow/digest/261011_1740_tdd-execution-flow.md) |
