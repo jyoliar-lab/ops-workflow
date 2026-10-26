@@ -180,7 +180,7 @@ Zitadel 호스트(`id.careerhub`)를 이번에 공개하는가.
 
 ## 6. 버린 것
 
-- **"Cloudflare 설정은 대시보드에서 손으로"** — 터널 ingress 와 CNAME 은 코드가 든다(4-1). WAF · 레이트리밋 · 봇 설정은 Cloudflare 측 상태라 ADR-0034 의 "선언 수단이 없으면 절차 기록" 쪽이다 — terraform `cloudflare_ruleset` 으로 들 수도 있으나 반년짜리 설정에 terraform 리소스를 늘리지 않는다. 절차 기록으로 남긴다.
+- **"Cloudflare 설정은 대시보드에서 손으로 켜고 절차 기록으로 남긴다"** — 처음엔 반년짜리 설정에 terraform 리소스를 늘리지 않는다고 봤다가 버렸다. 레이트리밋(`cloudflare_ruleset` · `http_ratelimit`) · AI 봇 차단과 BFM 끔(`cloudflare_bot_management`) · Always HTTPS · 최소 TLS · HSTS(`cloudflare_zone_setting`)는 전부 provider 5.18 에 있고, 존 설정은 클러스터 상태가 아니라 ADR-0034 방향에서 terraform 의 자리다. 이미 `cloudflare/` 모듈이 존·터널·API 토큰을 든다. 무료 관리형 WAF 룰셋만 자동 배포라 리소스가 없다. 존 단위 설정(`zone_setting` · `bot_management`)은 이 존의 모든 호스트에 걸리므로, 호스트를 가려야 하는 것(레이트리밋)만 `expression` 으로 좁힌다.
 - **기존 k8s-oidc 터널 재사용** — 3-4 에서 버렸다.
 - **포트포워딩** — 3-1 에서 버렸다.
 
@@ -188,11 +188,11 @@ Zitadel 호스트(`id.careerhub`)를 이번에 공개하는가.
 
 아니다.
 공개 Gateway · 터널 · 애노테이션은 전부 매니페스트와 terraform 한두 리소스이고, 되돌리면 한 시간 안에 사설 상태로 돌아간다.
-Cloudflare 측 설정도 토글이다.
+Cloudflare 측 설정도 terraform 리소스 몇 개라 destroy 로 돌아간다.
 단, 4-1 의 판정은 ADR-0034 의 적용 사례가 된다 — ADR-0034 가 accept 되면 그 Consequences 의 "이관 대상" 목록에 k8s-oidc 터널의 원격 ingress 도 들어간다. 이 논의가 그것을 만들지는 않는다.
 
 ## 8. 다음
 
-- 판정이 나면 리프 티켓: terraform(새 터널 seed + SSM) · jyoliar-k8s(공개 Gateway · HTTPRoute 재부착 · cloudflared 디플로이 · ExternalSecret · 애노테이션) · careerhub-front(robots · noindex — 261026_1610 의 프론트 태그와 같은 PR). Cloudflare 측 토글(WAF · 레이트리밋 · AI 봇 · HTTPS)은 절차 기록을 가진 Task 하나.
+- 판정이 나면 리프 티켓: terraform(터널 · 엣지 보호 리소스 — 레이트리밋 ruleset · bot_management · zone_setting 셋) · jyoliar-k8s(공개 Gateway · HTTPRoute 재부착 · cloudflared · 애노테이션) · careerhub-front(/login 안내 — 261026_1610 의 프론트 태그). 터널의 모양은 261026_1811 이 이어받아 정했다.
 - 같은 goal 의 다음 관점: 크롤링 콘텐츠(Wanted · Jumpit · Blind)의 공개 위험.
 - 발행 시점은 사람이 정한다 — 지금은 아니다.

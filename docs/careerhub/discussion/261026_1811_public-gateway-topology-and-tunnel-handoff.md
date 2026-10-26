@@ -215,5 +215,5 @@ Gateway 하나 · ConfigMap 하나 · HTTPRoute 의 parentRef · terraform 리�
 
 - digest(261026_1715)를 고쳐 쓴다 — 터널 공유와 재생성 단계 · careerhub 공개 Gateway 가 HTTP 만 · cloudflared 는 cloudflare-system 한 벌.
 - 실측 하나를 전환 전에 닫는다 — HTTP 리스너에서의 `rewriteClientIP` 동작.
-- 티켓은 사람이 시점을 정한다. 모양은 terraform(터널 로컬 관리 전환 · 자격증명 SSM) · jyoliar-k8s(cloudflare-system 의 자격증명 ExternalSecret · ConfigMap · cloudflared 실행 인자, careerhub-prod 의 공개 Gateway · careerhub 라우트 · frontend 태그) · careerhub-front(/login 안내) · Cloudflare 토글 절차.
+- 티켓은 사람이 시점을 정한다. 모양은 terraform(터널 로컬 관리 전환 · 자격증명 출력 · 엣지 보호 리소스) · jyoliar-k8s(cloudflare-system 의 ConfigMap · cloudflared 실행 인자 · 자격증명 스크립트, careerhub-prod 의 공개 Gateway · careerhub 라우트 · frontend 태그) · careerhub-front(/login 안내).
 - 공개 서비스가 둘 이상이 되면 3-2 · 4-1 을 다시 연다 — 플랫폼 공개 Gateway 로 옮기는 논의.

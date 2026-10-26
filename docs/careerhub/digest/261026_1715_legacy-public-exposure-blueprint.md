@@ -67,7 +67,7 @@ auth-service Deployment 는 계속 돌지만 어느 Gateway 에서도 라우팅�
 | 터널 ingress · cloudflared | jyoliar-k8s `cloudflare-system`(bootstrap phase 1) | ConfigMap `config.yml` · Deployment(`cloudflared tunnel --config … run <UUID>`, 자격증명 파일 마운트) |
 | careerhub 공개 Gateway · HTTPRoute · DNS 의도 | jyoliar-k8s `careerhub-prod` | Gateway + NginxProxy · `careerhub-httproute` 의 parentRef · Gateway 의 `target` 애노테이션 · Route 의 `cloudflare-proxied` |
 | 실제 careerhub DNS 레코드 | external-dns | Gateway `target`(`<UUID>.cfargotunnel.com`) → CNAME, Route `cloudflare-proxied: "true"` → 프록시 |
-| 엣지 보호 토글 | Cloudflare 대시보드 | 절차 기록과 함께 사람이 켠다 |
+| 엣지 보호 | terraform `cloudflare/` | `cloudflare_ruleset`(`http_ratelimit`) · `cloudflare_bot_management` · `cloudflare_zone_setting` × 3. 무료 관리형 WAF 룰셋은 자동이라 리소스가 없다 |
 
 ## 데이터 흐름 — K 의 요청 하나
 
@@ -89,9 +89,9 @@ auth-service Deployment 는 계속 돌지만 어느 Gateway 에서도 라우팅�
 터널 설정 이관(B → C-1)은 k8s-oidc 를 잠깐 끊으므로, 그 단계만 시각을 고른다.
 
 ```
-A. 프론트 태그            B. terraform — 터널 로컬 관리 전환        D. Cloudflare 토글
- /login 안내 화면          config_src=local · tunnel_secret           레이트리밋 · AI 봇
- → v0.0.4 이미지           → 터널 재생성(UUID 변경) · CNAME 갱신      · Always HTTPS · HSTS
+A. 프론트 태그            B. terraform — 터널 로컬 관리 전환        D. terraform — 엣지 보호
+ /login 안내 화면          config_src=local · tunnel_secret           ruleset(레이트리밋) · bot_management
+ → v0.0.4 이미지           → 터널 재생성(UUID 변경) · CNAME 갱신      · zone_setting(HTTPS · TLS · HSTS)
                            → 자격증명 JSON 을 SSM 에
       │                         │                                       │
       │                         ▼                                       │
@@ -124,17 +124,16 @@ careerhub-front 의 `/login` 화면을 "리뉴얼 중" 안내로 바꾸고 태�
 apply 한 순간부터 옛 토큰으로 붙어 있던 cloudflared 는 끊긴다 — C-1 을 바로 잇는다.
 산출물은 **새 터널 UUID**(C-2 의 `target` 값)와 **자격증명 JSON**(C-1 에서 스크립트에 넣을 값)이다.
 
-### D. Cloudflare — 엣지 토글 (독립 · 절차 기록)
+### D. terraform — 엣지 보호 (독립)
 
-존 설정이라 DNS 가 바뀌기 전에 켜 둘 수 있다.
+존 설정이라 DNS 가 바뀌기 전에 apply 해 둘 수 있다. B 와 같은 `cloudflare/` 모듈이지만 터널 리소스와 독립이라 따로 apply 해도 된다.
 
-- 무료 관리형 WAF 룰셋 — 기본 적용 상태를 확인한다.
-- 레이트리밋 규칙 1개 — 호스트 `careerhub.jyo-liar.com` · 경로 `/api/*` · IP 기준 · 10초.
-- AI 크롤러 차단 — Training · Agent 를 Block.
-- Always Use HTTPS · 최소 TLS 1.2 · HSTS.
-- Bot Fight Mode 는 켜지 않는다.
+- `cloudflare_ruleset` — `phase = "http_ratelimit"`, 규칙 1개: `expression` 으로 호스트 `careerhub.jyo-liar.com` 과 경로 `/api/*` 를 좁히고, `ratelimit { characteristics = ["ip.src"], period = 10, requests_per_period = <임계>, mitigation_timeout = 10 }`. Free 의 한도(규칙 1 · 10초 · IP)를 값으로 지킨다.
+- `cloudflare_bot_management` — `ai_bots_protection = "block"`, `fight_mode = false`(켜지 않기로 한 판정이 코드에 남는다).
+- `cloudflare_zone_setting` × 3 — `always_use_https = "on"` · `min_tls_version = "1.2"` · `security_header`(HSTS).
+- 무료 관리형 WAF 룰셋은 Free 존에 자동 배포라 리소스가 없다. apply 뒤 대시보드에서 적용 상태만 확인한다.
 
-켠 항목과 값은 절차 기록으로 남긴다 — 코드가 들지 않는 유일한 상태다.
+`zone_setting` 과 `bot_management` 는 존 전역이라 `id.careerhub` · `*.mg` 에도 걸린다 — 전부 HTTPS 호스트라 무해하다. 호스트를 가려야 하는 레이트리밋만 `expression` 이 좁힌다.
 
 ### C-1. cloudflare-system — 새 자격증명과 ConfigMap 으로 (B 직후)
 
@@ -182,7 +181,7 @@ ArgoCD 가 적용하면 external-dns 가 다음 주기에 `careerhub.jyo-liar.co
 
 ## 운영 — 공개 기간과 그 끝
 
-- 레거시 코드는 공개 기간 내내 손대지 않는다. 바뀌는 것은 프론트 태그 하나와 매니페스트 · terraform · Cloudflare 토글뿐이다.
+- 레거시 코드는 공개 기간 내내 손대지 않는다. 바뀌는 것은 프론트 태그 하나와 매니페스트 · terraform 뿐이다. Cloudflare 측에 손으로 켜는 것은 없다.
 - 공개 호스트가 하나 더 생기면 cloudflare-system 의 ConfigMap 에 줄 하나와 그 앱의 Gateway 또는 라우트가 더해진다. 공개 서비스가 둘 이상이 되면 여러 호스트를 받는 플랫폼 공개 Gateway 로 옮기는 논의를 연다.
 - 검색엔진은 막지 않는다. 운영 중 필요가 보이면 그때 다시 정한다.
 - 컷오버(신스택이 apex 를 승계하는 날)에는 공개 Gateway 와 터널 ingress 가 그대로 쓰이고, `careerhub-httproute` 의 백엔드가 careerhub-web 과 신 api-composer 로 바뀐다. `/auth` 룰의 재도입과 `id.careerhub` 의 공개 여부는 그날의 결정이다.
