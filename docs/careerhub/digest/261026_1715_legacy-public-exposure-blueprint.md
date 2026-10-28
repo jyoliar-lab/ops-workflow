@@ -92,7 +92,7 @@ auth-service Deployment 는 계속 돌지만 어느 Gateway 에서도 라우팅�
 A. 프론트 태그            B. terraform — 터널 로컬 관리 전환        D. terraform — 엣지 보호
  /login 안내 화면          config_src=local · tunnel_secret           ruleset(레이트리밋) · bot_management
  → v0.0.4 이미지           → 터널 재생성(UUID 변경) · CNAME 갱신      · zone_setting(HTTPS · TLS · HSTS)
-                           → 자격증명 JSON 을 SSM 에
+                           → 자격증명 JSON 을 출력으로
       │                         │                                       │
       │                         ▼                                       │
       │                 C-1. cloudflared 를 새 자격증명·ConfigMap 으로   │
