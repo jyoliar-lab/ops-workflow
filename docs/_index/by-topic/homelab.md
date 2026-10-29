@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / homelab (7)
+# by-topic / homelab (9)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -11,3 +11,5 @@
 | — | discussion | done | prometheus, loki, tempo, grafana, kube-prometheus-stack, mcp-grafana, kagent, ops-workflow-agent, ticket-engineer-agent | [agent 의 Prometheus·Loki·Tempo 읽기 접근 — 경로 옵션](../../homelab/discussion/260829_1912_agent-observability-read-access-options.md) |
 | — | discussion | done | prometheus, loki, tempo, nginx-gateway-fabric, ops-workflow-agent, ticket-engineer-agent | [네이티브 관측 API 를 직접 부르면서 read-only 를 구조로 거는 방안](../../homelab/discussion/260829_2038_raw-observability-api-read-only-enforcement.md) |
 | — | discussion | done | alloy, tempo, prometheus, spanmetrics, opentelemetry, careerhub-prod, obs-toolkit | [careerhub 서비스의 RED 는 어디서 나오나 — Alloy spanmetrics 를 고른 이유](../../homelab/discussion/260916_1635_red-metrics-source-alloy-spanmetrics.md) |
+| — | discussion | done | cloudflared, nginx-gateway-fabric, oidc-provider, zitadel, kubernetes, cri-o, etcd, coredns, longhorn, tailscale, argocd, cert-manager, external-secrets, mongodb, cloudnative-pg, postgresql, pgbouncer, auth-service, careerhub-api-composer, careerhub-front, careerhub-review-crawler, grafana, grafana-alloy, prometheus, loki | [레거시 공개 전 운영 컴포넌트 전수 취약점 점검 — 조사 (2026-10-29)](../../homelab/discussion/261029_1359_pre-exposure-component-vulnerability-survey.md) |
+| — | discussion | active | cri-o, nginx-gateway-fabric, oidc-provider, cloudflared, auth-service, cloudnative-pg, postgresql, pgbouncer, mongodb, zitadel, kubernetes, argocd, longhorn, coredns, cert-manager, external-secrets, grafana-alloy, grafana, prometheus, tailscale | [공개 전 취약점 처리 — 치명도 · 해결 · 난이도의 순위](../../homelab/discussion/261029_1413_pre-exposure-patch-priority-and-difficulty.md) |
