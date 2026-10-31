@@ -153,6 +153,7 @@
 - [리뉴얼은 prod에 바로 — 병행 스택·컷오버·스키마 동결의 정제](../careerhub/discussion/260810_2252_renewal-parallel-stack-prod-cutover.md) — `discussion` · `active`
 - [실제 Google 연합 로그인 여정의 검증 — 스모크와 회귀 그물의 이원화](../careerhub/discussion/260820_2216_real-google-federation-journey-verification.md) — `discussion` · `active`
 - [레거시 스택 임시 공개 — 인증 기능을 어떻게 처분하나](../careerhub/discussion/261026_1610_legacy-public-exposure-auth-disposition.md) — `discussion` · `done`
+- [커리어허브 조직 Overview — 시작의 동기, 서비스·인프라 구조, 인프라 README 셋](../careerhub/discussion/261031_1903_careerhub-org-overview-and-infra-readmes.md) — `discussion` · `done`
 
 ## ADR-0029 — 토큰의 신뢰는 데이터 경로의 로컬 검증으로만 얻는다
 
@@ -179,6 +180,7 @@
 - [Zitadel 배치 실측 — 서브패스 가부와 소셜 sub 보존 조건 판정](../careerhub/discussion/260811_1452_zitadel-placement-social-sub-verdict.md) — `discussion` · `active`
 - [Keycloak operator·plugin으로 클레임 훅 타겟의 GitOps 주입이 가능한가](../careerhub/discussion/260811_2134_keycloak-operator-claim-hook-feasibility.md) — `discussion` · `rejected`
 - [실제 Google 연합 로그인 여정의 검증 — 스모크와 회귀 그물의 이원화](../careerhub/discussion/260820_2216_real-google-federation-journey-verification.md) — `discussion` · `active`
+- [커리어허브 조직 Overview — 시작의 동기, 서비스·인프라 구조, 인프라 README 셋](../careerhub/discussion/261031_1903_careerhub-org-overview-and-infra-readmes.md) — `discussion` · `done`
 
 ## ADR-0031 — 인가 전파는 발급 시점 클레임 주입으로 한다
 

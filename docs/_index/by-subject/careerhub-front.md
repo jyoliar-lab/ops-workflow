@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / careerhub-front (14)
+# by-subject / careerhub-front (15)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -19,4 +19,5 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | careerhub | active | [careerhub 라우팅 — 경로 기반에서 호스트 기반으로, 그리고 공개면 판정](../../careerhub/discussion/260810_1801_path-to-host-based-routing.md) |
 | — | discussion | careerhub | active | [리뉴얼은 prod에 바로 — 병행 스택·컷오버·스키마 동결의 정제](../../careerhub/discussion/260810_2252_renewal-parallel-stack-prod-cutover.md) |
 | — | discussion | careerhub | done | [레거시 스택 임시 공개 — 인증 기능을 어떻게 처분하나](../../careerhub/discussion/261026_1610_legacy-public-exposure-auth-disposition.md) |
+| — | discussion | careerhub | done | [커리어허브 조직 Overview — 시작의 동기, 서비스·인프라 구조, 인프라 README 셋](../../careerhub/discussion/261031_1903_careerhub-org-overview-and-infra-readmes.md) |
 | — | discussion | homelab | done | [레거시 공개 전 운영 컴포넌트 전수 취약점 점검 — 조사 (2026-10-29)](../../homelab/discussion/261029_1359_pre-exposure-component-vulnerability-survey.md) |

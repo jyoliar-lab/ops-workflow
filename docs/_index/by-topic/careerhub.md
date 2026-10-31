@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / careerhub (44)
+# by-topic / careerhub (45)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -48,3 +48,4 @@
 | — | discussion | done | cloudflare-tunnel, cloudflared, external-dns, nginx-gateway-fabric, jyoliar-platform-terraform | [Cloudflare Tunnel · external-dns · 엣지 보호 — 조사 (2026-10-26)](../../careerhub/discussion/261026_1631_cloudflare-tunnel-dns-edge-survey.md) |
 | — | discussion | done | cloudflare-tunnel, cloudflared, external-dns, careerhub-nginx-gateway, careerhub-httproute, nginx-gateway-fabric, jyoliar-platform-terraform, zitadel | [레거시 스택 임시 공개 — Cloudflare 쪽 배선과 엣지 보호](../../careerhub/discussion/261026_1632_cloudflare-exposure-wiring-and-edge.md) |
 | — | discussion | done | nginx-gateway-fabric, cloudflare-tunnel, cloudflared, external-dns, careerhub-nginx-gateway, careerhub-httproute, oidc-provider, jyoliar-platform-terraform, external-secrets | [공개 Gateway 토폴로지 — 터널 하나 · Gateway 한 단인가 두 단인가](../../careerhub/discussion/261026_1811_public-gateway-topology-and-tunnel-handoff.md) |
+| — | discussion | done | github-org-profile, readme, onpremise-k8s, jyoliar-k8s, jyoliar-platform-terraform, careerhub-front, auth-service, zitadel, careerhub-web, careerhub-incident-agent | [커리어허브 조직 Overview — 시작의 동기, 서비스·인프라 구조, 인프라 README 셋](../../careerhub/discussion/261031_1903_careerhub-org-overview-and-infra-readmes.md) |
