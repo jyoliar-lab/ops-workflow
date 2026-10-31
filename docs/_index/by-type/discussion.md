@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (97)
+# by-type / discussion (99)
 
 | status | goal | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|---|
@@ -100,4 +100,6 @@
 | done | tdd-execution-flow | ops-workflow | ticket-engineer, tdd-loop, github-issues, obs-toolkit, claude-code | — | [시나리오 코멘트의 갱신 — 제자리 수정과 변경의 가시화](../../ops-workflow/discussion/261014_1530_scenario-comment-in-place-diff.md) |
 | done | — | ops-workflow | adr | ADR-0001, ADR-0002, ADR-0004, ADR-0006, ADR-0032, ADR-0036, ADR-0009, ADR-0010, ADR-0033 | [정책 ADR 첫 accept 시도 — 무엇이 고쳐졌고, 왜 얼리지 않았나](../../ops-workflow/discussion/261018_1908_policy-adr-accept-attempt-record.md) |
 | done | tdd-execution-flow | ops-workflow | ticket-engineer, tdd-loop, github-issues, obs-toolkit | — | [tdd-loop 의 바닥과 애플리케이션 AC — 테스트가 약속 대신 구현을 고정하는 기제](../../ops-workflow/discussion/261019_1939_tdd-loop-floor-and-app-ac.md) |
+| done | public-face | ops-workflow | github-org-profile, readme, ops-workflow, ticket-engineer, ops-workflow-steward, obs-toolkit, github-issues | — | [공개 얼굴 — 조직 Overview와 하네스 README의 분담, 공개 전환 점검](../../ops-workflow/discussion/261031_1601_public-face-overview-and-readmes.md) |
+| done | public-face | ops-workflow | github-org-profile, discussion, digest, adr, github-issues, github-projects, ticket-engineer, tdd, jyoliar-k8s, jyoliar-platform-terraform, onpremise-k8s | — | [조직 Overview — 하네스가 아니라 일의 흐름을 적는다](../../ops-workflow/discussion/261031_1733_overview-workflow-narrative.md) |
 | rejected | — | palworld | palworld-server | — | [팰월드 1.0 서버를 홈랩 쿠버네티스에](../../palworld/discussion/260726_0149_palworld-server-on-homelab-k8s.md) |

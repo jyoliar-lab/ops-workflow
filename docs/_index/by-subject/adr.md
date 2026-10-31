@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / adr (21)
+# by-subject / adr (22)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -27,3 +27,4 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | ops-workflow | done | [discussion 위에 결론 층을 둔다 — 읽을 수 없는 로그와 얼어붙는 영수증 사이](../../ops-workflow/discussion/261006_1549_digest-layer-over-discussion.md) |
 | — | discussion | ops-workflow | done | [digest를 청사진으로 — 결정의 요약이 아니라 결정된 설계의 서술](../../ops-workflow/discussion/261007_1947_digest-as-blueprint.md) |
 | — | discussion | ops-workflow | done | [정책 ADR 첫 accept 시도 — 무엇이 고쳐졌고, 왜 얼리지 않았나](../../ops-workflow/discussion/261018_1908_policy-adr-accept-attempt-record.md) |
+| — | discussion | ops-workflow | done | [조직 Overview — 하네스가 아니라 일의 흐름을 적는다](../../ops-workflow/discussion/261031_1733_overview-workflow-narrative.md) |

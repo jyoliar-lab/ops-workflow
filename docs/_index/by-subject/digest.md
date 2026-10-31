@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / digest (6)
+# by-subject / digest (7)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -12,3 +12,4 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | ops-workflow | done | [discussion 작성 스킬 — 질문은 인터뷰로, 문서에는 지형과 판정만](../../ops-workflow/discussion/261006_2122_discussion-skill-interview-first.md) |
 | — | discussion | ops-workflow | done | [digest 작성 스킬 — 수렴을 판정하고 거부할 수 있는 증류](../../ops-workflow/discussion/261007_1623_digest-skill-refuse-and-review.md) |
 | — | discussion | ops-workflow | done | [digest를 청사진으로 — 결정의 요약이 아니라 결정된 설계의 서술](../../ops-workflow/discussion/261007_1947_digest-as-blueprint.md) |
+| — | discussion | ops-workflow | done | [조직 Overview — 하네스가 아니라 일의 흐름을 적는다](../../ops-workflow/discussion/261031_1733_overview-workflow-narrative.md) |

@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / obs-toolkit (22)
+# by-subject / obs-toolkit (23)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -28,3 +28,4 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | ops-workflow | done | [red 승인을 subagent에게 — 테스트 검토·보강 subagent와 ac-verifier의 역할 분리](../../ops-workflow/discussion/261011_1705_red-review-subagent.md) |
 | — | discussion | ops-workflow | done | [시나리오 코멘트의 갱신 — 제자리 수정과 변경의 가시화](../../ops-workflow/discussion/261014_1530_scenario-comment-in-place-diff.md) |
 | — | discussion | ops-workflow | done | [tdd-loop 의 바닥과 애플리케이션 AC — 테스트가 약속 대신 구현을 고정하는 기제](../../ops-workflow/discussion/261019_1939_tdd-loop-floor-and-app-ac.md) |
+| — | discussion | ops-workflow | done | [공개 얼굴 — 조직 Overview와 하네스 README의 분담, 공개 전환 점검](../../ops-workflow/discussion/261031_1601_public-face-overview-and-readmes.md) |
