@@ -163,7 +163,8 @@ lab Overview 의 코드 저장소 행은 조직이 아니라 인프라 저장소
 
 ### 3-9. 범위 밖
 
-**선택: careerhub-incident-agent · careerhub-web · jyoliar-lab 링크는 넣지 않는다. 관측 스택(Prometheus · Loki · Tempo · Alloy)은 홈랩 내부 구성에 넣는다.** PoC 와 미배포 리뉴얼은 "준비 중" 이 되고, 일하는 방식은 이 Overview 의 주제가 아니다. (인터뷰, 2026-10-31)
+**선택: careerhub-incident-agent · jyoliar-lab 링크는 넣지 않는다. careerhub-web 은 서비스 구조 절에는 넣지 않되 저장소 표에는 공개 저장소로 넣는다. 관측 스택(Prometheus · Loki · Tempo · Alloy)은 홈랩 내부 구성에 넣는다.** PoC 는 "준비 중" 이 되고, 일하는 방식은 이 Overview 의 주제가 아니다.
+미배포 리뉴얼 프런트는 흐름도에 없으니 서비스 절에서는 빼되, 공개 저장소인데 표에서 빠지면 조직의 저장소 목록과 표가 어긋나 보인다. (인터뷰, 2026-10-31. 처음에는 careerhub-web 도 전부 뺐으나 서비스 저장소를 공개로 돌리면서 저장소 표에만 넣었다)
 
 ### 3-10. 세 README
 
@@ -190,11 +191,13 @@ lab Overview 의 코드 저장소 행은 조직이 아니라 인프라 저장소
 
 ### 3-12. 저장소 안내의 비공개 표기
 
-**선택: 공개 셋은 링크로, 서비스 저장소 11개는 이름만 링크 없이 나열하고 "비공개 · 요청 시 열람" 한 줄.** 서비스 절의 이름과 저장소가 1:1 로 대응함을 보인다. (인터뷰, 2026-10-31)
+**선택: 저장소 절을 인프라 저장소 · 애플리케이션 저장소 두 표로 나눈다. 애플리케이션 표는 저장소 · 그림에서 · 역할 세 열로 흐름도의 이름과 저장소를 1:1 로 잇고, 공개 여덟은 링크, 수집 배치 둘(careerhub-posting-provider · careerhub-review-crawler)은 이름만 링크 없이 두고 "비공개" 와 이유 한 문장을 적는다.** 이유는 수집 대상 사이트(Wanted · JumpIt · TeamBlind)의 부하다 — 수집 코드가 퍼지면 그 사이트들에 뜻하지 않은 부하를 줄 수 있다. (인터뷰, 2026-10-31. 처음에는 서비스 11개를 전부 "비공개 · 요청 시 열람" 으로 두었으나, 공개 전 시크릿 스캔(전 이력 · 실값 0건)을 거쳐 서비스 저장소도 공개로 돌리기로 하면서 수집 배치 둘만 비공개로 남겼다)
 
 <details><summary>버린 안</summary>
 
 - 공개 셋만 표에 — 서비스와 저장소의 대응이 안 보인다
+- 서비스 11개 전부 비공개 · 요청 시 열람 — 공개할 수 없는 이유가 없었다. 스캔으로 확인했다
+- 수집 배치 둘도 공개 — 코드 자체보다 코드가 퍼진 뒤 수집 대상 사이트가 받는 부하가 문제다. 비공개 이유는 숨길 것이 아니라 Overview 에 적는다
 
 </details>
 
@@ -204,7 +207,7 @@ lab Overview 의 코드 저장소 행은 조직이 아니라 인프라 저장소
 
 ### 3-14. 이어받는 것
 
-**선택: 한국어만 · 운영 수치 없음 · 저장소 먼저 공개하고 Overview 는 마지막. 단 onpremise-k8s 는 #73 이 close 된 뒤에 공개하고, 그 전의 Overview 는 저장소 표에 "공개 예정" 과 #73 링크로 적는다.** `261031_1601` 의 3-4 · 3-5 · 4-2 를 그대로 쓴다. 공개 순서에 3-11 의 private 전환이 앞에 붙는다. (인터뷰, 2026-10-31. 처음에는 인프라 셋을 함께 공개하려 했으나 평문 키(§2)가 드러나 onpremise-k8s 를 뒤로 뺐다)
+**선택: 한국어만 · 운영 수치 없음 · 저장소 먼저 공개하고 Overview 는 마지막. 단 onpremise-k8s 는 #73 이 close 된 뒤에 공개하고, 그 전의 Overview 는 저장소 표에 "공개 예정" 과 #73 링크로 적는다.** `261031_1601` 의 3-4 · 3-5 · 4-2 를 그대로 쓴다. 같은 문서의 4-1 A(careerhub 서비스 비공개)는 이어받지 않고 3-12 로 대체한다. 공개 순서에 3-11 의 private 전환이 앞에 붙는다. (인터뷰, 2026-10-31. 처음에는 인프라 셋을 함께 공개하려 했으나 평문 키(§2)가 드러나 onpremise-k8s 를 뒤로 뺐다)
 
 ## 4. 열린 축 — 논의
 
@@ -225,7 +228,7 @@ lab Overview 의 코드 저장소 행은 조직이 아니라 인프라 저장소
 
 - lab Overview 에 careerhub 절을 더하는 길 — 조직이 둘이고 주제가 다르다(일하는 방식 / 시스템).
 - 세 README 를 외부인용으로 — 입구가 Overview 로 정해지면서 필요가 사라졌다.
-- 서비스 저장소 README 정비 — 비공개다.
+- 서비스 저장소 README 정비 — 공개로 돌리지만 이 논의의 범위는 인프라 셋이다. 필요하면 별도 논의.
 - 흐름도 갱신 — 레거시 흐름이 공개된 현재이고 리뉴얼은 진행 중이다.
 - 인프라 그림 — 글과 표로 충분하다.
 - 설계 결정을 "왜" 와 함께 — 이력서의 어필이지 Overview 의 설명이 아니다(`tmp/resume-devops.md` 는 그쪽에 쓴다).
@@ -241,6 +244,7 @@ public → private 전환은 되돌릴 수 있는 방향이고(반대 방향이 
 - Overview 초안 `profile/README.md` — 3-4 의 순서로, `jyoliar-careerhub/.github` 의 로컬 클론에 쓴다(lab 과 같은 방식). 흐름도 이미지는 `profile/` 아래 파일로 사람이 올린다. 커밋은 사람 승인 뒤.
 - 조직 description 한 줄 — 초안의 첫 문장이 정해지면 사람이 GitHub 설정에서 바꾼다.
 - 옛 public 넷 private 전환 → jyoliar-k8s · jyoliar-platform-terraform public 전환 → Overview 게시 — 전부 사람. 순서는 3-14.
+- 서비스 저장소 여덟(careerhub-front · careerhub-web · careerhub-api-composer · careerhub-posting-service · careerhub-review-service · careerhub-userinfo-service · auth-service · careerhub-posting-skillscanner)의 public 전환 — 사람. 수집 배치 둘은 private 로 둔다(3-12). 공개 전 스캔은 2026-10-31 에 전 이력 대상으로 마쳤고 실값은 없었다.
 - onpremise-k8s 공개는 #73(Vault 분리 · 키 로테이션) close 뒤다. 공개 시점에 Overview 저장소 표의 "공개 예정" 을 링크로 바꾼다. #73 의 집행 순서는 그 티켓의 작업 가이드 코멘트에 있다.
 - README 셋 — 코드 저장소 쓰기이므로 티켓이다. 한 Task 에 target 셋이거나 저장소별 Task 셋 — 검수 단위가 저장소마다 다르면 셋이다. onpremise-k8s 는 IBM 원본 교체.
 - lab Overview 는 바꾸지 않는다(3-1).
