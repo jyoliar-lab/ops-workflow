@@ -10,6 +10,7 @@ related:
   - docs/careerhub/discussion/260810_1801_path-to-host-based-routing.md
   - docs/careerhub/discussion/260810_2252_renewal-parallel-stack-prod-cutover.md
   - docs/careerhub/discussion/261102_1903_stg-env-external-dependencies-survey.md
+  - docs/homelab/discussion/261102_2007_terraform-env-vs-shared-resource-separation-survey.md
 ---
 
 # 리뉴얼을 위한 careerhub stg 환경 — 네임스페이스·데이터·환경 축
@@ -188,6 +189,8 @@ stg DB 백업은 범위 밖인데 PG base는 백업을 전제한다.
 
 하위 선택 — PG 백업 선언의 처분: stg overlay에서 ObjectStore·ScheduledBackup을 `$patch: delete`로 빼고 Cluster의 plugins·projectedVolumeTemplate을 비우는 것이 "stg 백업 없음"과 정합이다. stg 버킷을 만드는 길(`backup` 워크스페이스 ×2)은 범위 밖 판정과 어긋난다. PriorityClass는 `database-prod`보다 낮은 값을 하나 더 두거나 기존 `database-dev`(500)를 쓴다 — 이름을 바꾸는 것은 티켓의 것이다.
 
+**판정(사람, 2026-11-02): C — prod 토폴로지(PG 2 + pooler 1 · Mongo 2 + arbiter 1)에 선언 스토리지만 줄인다. 백업 선언은 overlay에서 삭제한다.**
+
 pooler: 신 세대 auth-service도 `DB_HOST=careerhub-postgresql-pooler`를 보므로 어느 안에서도 1개는 남긴다. 매니페스트 분기를 피하는 값이 pooler 하나보다 크다.
 
 ### 4-2. 수집 데이터(posting·review)의 복사 방법
@@ -203,6 +206,8 @@ prod에 `mongodb-readonly`(readAnyDatabase)가 있고, NetworkPolicy가 없어 s
 
 mongosync는 Community 지원이 불확실하고 1회 복사에 과하다 — 옵션에 올리지 않는다.
 
+**판정(사람, 2026-11-02): A — mongodump → mongorestore Job. 재실행 가능하게 만든다.**
+
 ### 4-3. stg Zitadel의 로그인 수단
 
 실측·조사: prod Zitadel의 Google IdP는 레거시 auth-service와 같은 Google 클라이언트를 쓴다(§2).
@@ -215,19 +220,84 @@ Zitadel 로컬 로그인은 정책 스위치가 있고 기본 상태는 실측�
 - C. Zitadel 로컬 계정만 — stg에 Google IdP를 선언하지 않고 username/password로 들어간다. 외부 의존 0. 지는 조건: 소셜 로그인 경로(브로커 콜백·자동 연결·클레임 주입)가 prod 직전까지 미검증으로 남는다 — pre-prod라는 역할과 어긋난다.
 - D. 안 한다 — Zitadel 없이. 3-8과 충돌한다.
 
+**판정(사람, 2026-11-02): A — stg 전용 Google 클라이언트(콘솔 수동 1회), SSM `/…/careerhub/stg/oauth/google-client`.**
+
 ### 4-4. terraform의 환경 축 구조
 
 실측: stg가 요구하는 환경별 산출물은 Zitadel masterkey 파라미터와(4-3 A를 고르면) Google 클라이언트 파라미터 둘이다.
 `backup`은 이미 `env` 파생이고 저장소 CLAUDE.md는 "env는 이름의 재료, 같은 워크스페이스가 다른 환경으로 한 벌 더 설 수 있게"라고 선언한다.
 리터럴 `prod`는 세 파일이고 그중 `oauth/admin.tf`는 클러스터 스코프의 오분류다.
 사람의 전제는 "클러스터 스코프와 환경 스코프가 분리돼 있지 않아 재설계가 필요하다"였다 — 분리돼 있지 않은 것은 맞지만, 재설계가 요구되는 범위는 파일 셋의 경로 문자열이다.
+모범사례 조사(`homelab/261102_2007` 조사 문서)는 환경별 루트의 표현(디렉터리냐 워크스페이스냐)을 가르지 않고, 공유 리소스의 처리만 일치시킨다 — 별도 루트·환경 축 없음·출력으로만 단방향 전달. A·B 어느 쪽이든 `oauth/admin.tf`의 공유 루트 이동과 공유 루트에서의 `env` 변수 제거는 같다.
 
 - **A. 워크스페이스 복제** — 디렉터리는 그대로 두고 TFC 워크스페이스를 환경마다 띄운다(`zitadel`·`oauth` 디렉터리에 prod·stg 워크스페이스, `env` 변수만 다르다). SSM 경로를 `var.env`로 파생시켜 리터럴을 지운다. 저장소의 선언과 `backup`의 모양 그대로다. "디렉터리 하나 = 워크스페이스 하나" 관례가 "디렉터리 하나 = 워크스페이스 묶음"으로 바뀐다 — README 한 줄. 이기는 조건: 환경별 리소스가 적고(지금 둘) 종류가 같을 때. 지는 조건: 환경별 리소스가 종류별 디렉터리에 흩어져 "stg에 뭐가 있나"를 TFC에서만 볼 수 있다.
-- **B. 디렉터리 분리** — `cluster/{iam,ci,cloudflare,alert,…}`와 `envs/{prod,stg}/` 또는 `careerhub-env` 모듈을 환경별 루트가 호출한다. 사람의 제안이다. 이기는 조건: 환경별 리소스가 늘어 묶음으로 보고 싶을 때, 또는 세 번째 환경이 서서 A의 워크스페이스 매트릭스가 커질 때. 지는 조건: 지금은 산출물 둘에 모듈·루트 3층을 세우는 비용이 더 크고, 기존 워크스페이스의 state 이동(`terraform state mv` 또는 재생성 — masterkey는 `prevent_destroy`라 재생성 불가, 반드시 이동)이 따른다. `oauth/admin.tf`의 재분류(cluster로)는 어느 안에서도 해야 하는 일이다.
+- **B. 디렉터리 분리** — `cluster/{iam,ci,cloudflare,alert,…}`와 `envs/{prod,stg}/` 또는 `careerhub-env` 모듈을 환경별 루트가 호출한다. 사람의 제안이다. E가 이것을 모범사례로 구체화한 형태다. 이기는 조건: 환경별 리소스가 늘어 묶음으로 보고 싶을 때, 또는 세 번째 환경이 서서 A의 워크스페이스 매트릭스가 커질 때. 지는 조건: 지금은 산출물 둘에 모듈·루트 3층을 세우는 비용이 더 크고, 기존 워크스페이스의 state 이동(`terraform state mv` 또는 재생성 — masterkey는 `prevent_destroy`라 재생성 불가, 반드시 이동)이 따른다. `oauth/admin.tf`의 재분류(cluster로)는 어느 안에서도 해야 하는 일이다.
 - C. 단일 워크스페이스에 `for_each` envs — 상태 하나에 prod·stg가 공존하고 stg 추가가 변수 한 줄이다. 지는 조건: stg 실험의 plan이 prod 리소스와 같은 state를 지나 blast radius가 합쳐진다. `backup`을 stateful이라 따로 뗀 원칙과 역방향이다.
 - D. 안 한다 — SSM을 손으로 넣는다. 저장소 규칙(AWS CLI 금지)과 desired=코드 원칙(CLAUDE.md §2)을 깬다. 현상 유지의 비용은 "stg의 자격증명이 코드 밖에 산다"이고, 다음 환경 때 같은 수동이 반복된다.
+- **E. 모범사례 합성 — 공유 루트는 환경 축 없이, 환경 루트는 얇게, 변동성으로 한 번 더 가른다** — 조사 문서(`homelab/261102_2007`)의 세 뼈대를 이 저장소에 그대로 올린 형태다. 공유 리소스는 Gruntwork의 `_global`처럼 환경 축 없는 루트에, 환경별 리소스는 Google의 `environments/<env>/`처럼 모듈을 부르는 얇은 루트에, 그 안에서 stateful(백업 버킷)과 그 외를 HashiCorp의 변동성 기준으로 다른 state에 둔다. 워크스페이스 이름은 `<app>-<layer>-<env>`를 따른다.
 
-A에서 B로 넘어가는 조건을 적어 두는 것이 이 축의 판정에 포함된다 — 환경별 리소스 종류가 셋을 넘거나 세 번째 환경이 서는 시점이 후보다.
+  **트리.**
+
+  ```
+  _modules/
+    tfc_remote_state/            # 기존
+    nat/                         # 기존
+    careerhub-env/               # 신규 — 환경 하나의 careerhub 재료. var.env 를 받는다
+      masterkey.tf               #   random_password + aws_ssm_parameter ".../careerhub/${var.env}/zitadel/masterkey" (prevent_destroy)
+      google-client.tf           #   aws_ssm_parameter ".../careerhub/${var.env}/oauth/google-client"
+      variables.tf               #   env · google_client_id · google_client_secret
+      outputs.tf                 #   파라미터 이름(경로)만 — 값은 내보내지 않는다
+  shared/                        # 환경 축 없음 — 모든 환경이 소비한다. env 변수를 받지 않는다
+    iam/                         # 기존 iam/ 이동 — OIDC Provider · IRSA Role(external-secrets · ecr-image-puller)
+    ci/                          # 기존 ci/ 이동 — ECR · CodeBuild
+    cloudflare/                  # 기존 cloudflare/ 이동 — zone · 터널 · 엣지 · external-dns 토큰
+    alert/                       # 기존 alert/ 이동 — Discord 채널 · webhook
+    admin-oauth/                 # 기존 oauth/admin.tf 이동 — argocd 등 클러스터 서비스의 Google 클라이언트. 경로 "admin/prod" 의 prod 는 이름만 남은 오분류라 "admin/" 으로
+  envs/
+    prod/
+      careerhub/                 # 얇은 루트 — module "careerhub" { source = "../../../_modules/careerhub-env"  env = "prod" … }
+      backup/                    # 기존 backup/ 이동 — stateful(S3 버킷) 이라 careerhub 와 state 를 섞지 않는다(변동성). iam 출력을 tfc_remote_state 로 읽는다(지금과 같다)
+    stg/
+      careerhub/                 # 같은 모듈, env = "stg". 백업은 범위 밖이라 stg/backup 은 지금 만들지 않는다
+  lab/
+    vpc/  vpn/                   # AWS 모의 환경(env=onpremise) — 홈랩 환경 축 밖이라 따로 둔다
+  ```
+
+  **환경 루트의 전부.** `envs/stg/careerhub/main.tf` 는 이것으로 끝난다.
+
+  ```hcl
+  module "careerhub" {
+    source               = "../../../_modules/careerhub-env"
+    env                  = "stg"
+    google_client_id     = var.google_client_id       # 워크스페이스 변수(sensitive) — 콘솔에서 만든 stg 클라이언트
+    google_client_secret = var.google_client_secret
+  }
+  ```
+
+  **워크스페이스(HCP Terraform).** 디렉터리 하나 = 워크스페이스 하나는 유지되고, 이름이 좌표를 드러낸다.
+
+  | 워크스페이스 | working directory | 비고 |
+  |---|---|---|
+  | `shared-iam` · `shared-ci` · `shared-cloudflare` · `shared-alert` · `shared-admin-oauth` | `shared/<name>` | 기존 워크스페이스의 working directory 만 바꾼다 — state 는 그대로 |
+  | `careerhub-secrets-prod` | `envs/prod/careerhub` | 신규 — 기존 `zitadel`·`oauth` 워크스페이스에서 state 를 옮겨 받는다 |
+  | `careerhub-secrets-stg` | `envs/stg/careerhub` | 신규 — 변수 넣고 apply 하면 파라미터 둘이 생긴다 |
+  | `careerhub-backup-prod` | `envs/prod/backup` | 기존 `onpremise-backup` 의 working directory 변경 + 개명 |
+
+  **공유 → 환경 전달.** 환경 루트가 공유 루트를 읽을 때만 `tfc_remote_state` 를 쓴다 — `envs/prod/backup` 이 `shared-iam` 의 `k8s_oidc_provider_arn` 을 읽는 지금 모양 그대로다. 반대 방향(공유 루트가 환경 루트를 읽는 것)은 없다 — 조사 문서 §6.
+
+  **이행 — 세 번의 state 이동이 핵심이고 전부 되돌릴 수 있다.**
+  1. `git mv` 로 `iam`·`ci`·`cloudflare`·`alert`·`backup`·`vpc`·`vpn` 을 옮기고, 각 워크스페이스의 working directory 설정을 바꾼다. plan 이 "No changes" 여야 한다. 공유 루트의 `env` 변수·`default_tags` 의 `env` 는 여기서 걷어낸다(태그 변경은 in-place 라 plan 에 보이되 재생성은 없다).
+  2. `_modules/careerhub-env` 를 쓰고 `envs/prod/careerhub` 워크스페이스를 만든 뒤, `zitadel` 워크스페이스의 `random_password.zitadel_masterkey`·`aws_ssm_parameter.zitadel_masterkey` 와 `oauth` 워크스페이스의 `aws_ssm_parameter.google_client` 를 새 워크스페이스로 옮긴다(`terraform state pull` → `state mv -state … -state-out …` → `state push`, 그 뒤 옛 워크스페이스에서 `state rm`). **masterkey 는 `prevent_destroy` 이고 값이 바뀌면 Zitadel 이 기동 불능이라 import 로 다시 만드는 길이 없다 — 이동만 된다.** 이동 뒤 plan 이 "No changes" 인 것이 합격선이다.
+  3. `oauth/admin.tf` 의 파라미터를 `shared-admin-oauth` 로 같은 방식으로 옮긴다. 경로를 `admin/prod` 에서 `admin/` 로 바꾸는 것은 파라미터 재생성이라 소비자(ExternalSecret 패치)와 같은 PR 이어야 한다 — 지금 하지 않고 이름만 옮겨도 된다.
+  4. `envs/stg/careerhub` 워크스페이스를 만들고 stg 클라이언트 변수를 넣고 apply 한다. 이것이 stg 가 받는 전부다.
+
+  **세 번째 환경이 서면** `envs/<env>/careerhub/` 디렉터리 하나와 워크스페이스 하나다. 공유 루트는 손대지 않는다.
+
+  이기는 조건: 저장소 트리가 그 자체로 분류표가 되길 원할 때 — "공유인가 환경별인가" 를 경로가 답하고, 공유 루트에 `env` 가 없다는 것이 코드로 드러난다. 모범사례 셋이 전부 이 모양을 가리킨다. 지는 조건: 네 안 중 선행 작업이 가장 크다 — 디렉터리 이동 7건·working directory 변경·state 이동 3건이 리소스 둘을 위해 지금 일어난다. masterkey 이동은 되돌릴 수 있지만 실수의 대가가 Zitadel 기동 불능이다. 워크스페이스 수는 A 와 같다(컴포넌트 × 환경) — 줄어드는 것이 아니라 이름과 자리가 바뀌는 것이다.
+
+A를 고르면 E로 넘어가는 조건을 함께 적는 것이 이 축의 판정에 포함된다 — 환경 사이에 구성 차이가 생기거나(튜토리얼의 기준), 환경별 리소스 종류가 셋을 넘거나, 세 번째 환경이 서는 시점이 후보다. E는 A와 공유 리소스 처리가 같으므로, A에서 먼저 하는 `admin.tf` 이동과 공유 루트의 `env` 제거는 E로 가는 길의 1단계이기도 하다.
+
+**검토 중(사람, 2026-11-02): E.** 판정이 아니다 — 이행 절차의 검토 뒤에 판정 줄로 바꾼다.
 
 ## 5. 반대편 — 이 설계가 틀리는 조건
 

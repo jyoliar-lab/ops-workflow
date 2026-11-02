@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (102)
+# by-type / discussion (103)
 
 | status | goal | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|---|
@@ -81,6 +81,7 @@
 | done | — | homelab | alloy, tempo, prometheus, spanmetrics, opentelemetry, careerhub-prod, obs-toolkit | — | [careerhub 서비스의 RED 는 어디서 나오나 — Alloy spanmetrics 를 고른 이유](../../homelab/discussion/260916_1635_red-metrics-source-alloy-spanmetrics.md) |
 | done | cluster-vulnerability-remediation | homelab | cloudflared, nginx-gateway-fabric, oidc-provider, zitadel, kubernetes, cri-o, etcd, coredns, longhorn, tailscale, argocd, cert-manager, external-secrets, mongodb, cloudnative-pg, postgresql, pgbouncer, auth-service, careerhub-api-composer, careerhub-front, careerhub-review-crawler, grafana, grafana-alloy, prometheus, loki | — | [레거시 공개 전 운영 컴포넌트 전수 취약점 점검 — 조사 (2026-10-29)](../../homelab/discussion/261029_1359_pre-exposure-component-vulnerability-survey.md) |
 | active | cluster-vulnerability-remediation | homelab | cri-o, nginx-gateway-fabric, oidc-provider, cloudflared, auth-service, cloudnative-pg, postgresql, pgbouncer, mongodb, zitadel, kubernetes, argocd, longhorn, coredns, cert-manager, external-secrets, grafana-alloy, grafana, prometheus, tailscale | — | [공개 전 취약점 처리 — 치명도 · 해결 · 난이도의 순위](../../homelab/discussion/261029_1413_pre-exposure-patch-priority-and-difficulty.md) |
+| active | careerhub-env-separation | homelab | jyoliar-platform-terraform, terraform-cloud | — | [terraform에서 환경별 리소스와 공유 리소스를 가르는 모범사례 — 조사 (2026-11-02)](../../homelab/discussion/261102_2007_terraform-env-vs-shared-resource-separation-survey.md) |
 | active | — | ops-workflow | claude-code-skills | — | [skill 초판 마찰 로그](../../ops-workflow/discussion/260712_1731_skill-friction-log.md) |
 | active | — | ops-workflow | adr | — | [ADR 선행 사례 조사 — 무엇이 표준이고, 무엇이 우리 발명이고, 무엇이 실패하는가](../../ops-workflow/discussion/260714_1417_adr-prior-art-survey.md) |
 | active | — | ops-workflow | adr | — | [ADR 문서를 무슨 포맷으로 적을 것인가](../../ops-workflow/discussion/260715_1401_adr-document-format.md) |
