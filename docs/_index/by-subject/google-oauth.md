@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / google-oauth (11)
+# by-subject / google-oauth (12)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -17,3 +17,4 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | careerhub | active | [Zitadel 도입은 auth-service의 요구사항을 얼마나 해소하는가 — 항목별 판정과 잔여 목록](../../careerhub/discussion/260805_1801_zitadel-coverage-of-auth-requirements.md) |
 | — | discussion | careerhub | active | [실제 Google 연합 로그인 여정의 검증 — 스모크와 회귀 그물의 이원화](../../careerhub/discussion/260820_2216_real-google-federation-journey-verification.md) |
 | — | discussion | careerhub | done | [레거시 스택 임시 공개 — 인증 기능을 어떻게 처분하나](../../careerhub/discussion/261026_1610_legacy-public-exposure-auth-disposition.md) |
+| — | discussion | careerhub | active | [stg 환경의 외부 의존 — Google OAuth 클라이언트 관리·MongoDB 복사 도구 조사 (2026-11-02)](../../careerhub/discussion/261102_1903_stg-env-external-dependencies-survey.md) |

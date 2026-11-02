@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / careerhub (45)
+# by-topic / careerhub (47)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -49,3 +49,5 @@
 | — | discussion | done | cloudflare-tunnel, cloudflared, external-dns, careerhub-nginx-gateway, careerhub-httproute, nginx-gateway-fabric, jyoliar-platform-terraform, zitadel | [레거시 스택 임시 공개 — Cloudflare 쪽 배선과 엣지 보호](../../careerhub/discussion/261026_1632_cloudflare-exposure-wiring-and-edge.md) |
 | — | discussion | done | nginx-gateway-fabric, cloudflare-tunnel, cloudflared, external-dns, careerhub-nginx-gateway, careerhub-httproute, oidc-provider, jyoliar-platform-terraform, external-secrets | [공개 Gateway 토폴로지 — 터널 하나 · Gateway 한 단인가 두 단인가](../../careerhub/discussion/261026_1811_public-gateway-topology-and-tunnel-handoff.md) |
 | — | discussion | done | github-org-profile, readme, onpremise-k8s, jyoliar-k8s, jyoliar-platform-terraform, careerhub-front, auth-service, zitadel, careerhub-web, careerhub-incident-agent | [커리어허브 조직 Overview — 시작의 동기, 서비스·인프라 구조, 인프라 README 셋](../../careerhub/discussion/261031_1903_careerhub-org-overview-and-infra-readmes.md) |
+| — | discussion | active | careerhub-stg, careerhub-dev, careerhub-prod, jyoliar-k8s, jyoliar-platform-terraform, argocd, mongodb, cloudnativepg, zitadel, external-secrets, careerhub-web | [리뉴얼을 위한 careerhub stg 환경 — 네임스페이스·데이터·환경 축](../../careerhub/discussion/261102_1903_renewal-stg-environment-namespace-data-env-axis.md) |
+| — | discussion | active | zitadel, google-oauth, jyoliar-platform-terraform, mongodb | [stg 환경의 외부 의존 — Google OAuth 클라이언트 관리·MongoDB 복사 도구 조사 (2026-11-02)](../../careerhub/discussion/261102_1903_stg-env-external-dependencies-survey.md) |

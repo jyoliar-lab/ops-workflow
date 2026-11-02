@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (100)
+# by-type / discussion (102)
 
 | status | goal | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|---|
@@ -71,6 +71,8 @@
 | done | legacy-public-exposure | careerhub | cloudflare-tunnel, cloudflared, external-dns, careerhub-nginx-gateway, careerhub-httproute, nginx-gateway-fabric, jyoliar-platform-terraform, zitadel | ADR-0034 | [레거시 스택 임시 공개 — Cloudflare 쪽 배선과 엣지 보호](../../careerhub/discussion/261026_1632_cloudflare-exposure-wiring-and-edge.md) |
 | done | legacy-public-exposure | careerhub | nginx-gateway-fabric, cloudflare-tunnel, cloudflared, external-dns, careerhub-nginx-gateway, careerhub-httproute, oidc-provider, jyoliar-platform-terraform, external-secrets | ADR-0034 | [공개 Gateway 토폴로지 — 터널 하나 · Gateway 한 단인가 두 단인가](../../careerhub/discussion/261026_1811_public-gateway-topology-and-tunnel-handoff.md) |
 | done | public-face | careerhub | github-org-profile, readme, onpremise-k8s, jyoliar-k8s, jyoliar-platform-terraform, careerhub-front, auth-service, zitadel, careerhub-web, careerhub-incident-agent | ADR-0028, ADR-0030 | [커리어허브 조직 Overview — 시작의 동기, 서비스·인프라 구조, 인프라 README 셋](../../careerhub/discussion/261031_1903_careerhub-org-overview-and-infra-readmes.md) |
+| active | careerhub-env-separation | careerhub | careerhub-stg, careerhub-dev, careerhub-prod, jyoliar-k8s, jyoliar-platform-terraform, argocd, mongodb, cloudnativepg, zitadel, external-secrets, careerhub-web | ADR-0034 | [리뉴얼을 위한 careerhub stg 환경 — 네임스페이스·데이터·환경 축](../../careerhub/discussion/261102_1903_renewal-stg-environment-namespace-data-env-axis.md) |
+| active | careerhub-env-separation | careerhub | zitadel, google-oauth, jyoliar-platform-terraform, mongodb | — | [stg 환경의 외부 의존 — Google OAuth 클라이언트 관리·MongoDB 복사 도구 조사 (2026-11-02)](../../careerhub/discussion/261102_1903_stg-env-external-dependencies-survey.md) |
 | active | — | homelab | prometheus, alertmanager, kubelet, longhorn, kube-prometheus-stack | — | [Prometheus TSDB 만석과 이중 감시 실패 — 2026-07-30 장애 기록](../../homelab/discussion/260730_2245_prometheus-tsdb-full-double-monitoring-failure.md) |
 | active | — | homelab | prometheus, grafana, kube-prometheus-stack | — | [룰이 참조하는 메트릭의 부재 감지 — 공식 기능·공식 가이드·대안 도구 조사](../../homelab/discussion/260731_1233_rule-metric-absence-detection-options.md) |
 | done | — | homelab | aws-ec2, jyoliar-k8s, onpremise-k8s, baremetal | — | [은퇴한 환경(aws-ec2) 코드의 보존 방식](../../homelab/discussion/260807_2002_retired-env-code-archiving.md) |
