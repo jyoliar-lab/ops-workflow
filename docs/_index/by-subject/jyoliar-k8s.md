@@ -7,7 +7,7 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | id | type | topic | status | 문서 |
 |---|---|---|---|---|
 | ADR-0034 | adr | homelab | proposed | [ADR-0034 — terraform은 GitOps가 생성한 인프라에 의존하지 않는다](../../homelab/adr/adr-0034-terraform-gitops-dependency-direction.md) |
-| — | digest | careerhub | current | [careerhub 환경 분리 — terraform 환경 축과 stg 환경 (2026-11-03 시점)](../../careerhub/digest/261103_1444_terraform-env-axis-and-stg-environment.md) |
+| — | digest | careerhub | current | [careerhub 환경 분리 — terraform 환경 축 · 프로젝트와 stg 환경 (2026-11-03 시점)](../../careerhub/digest/261103_1444_terraform-env-axis-and-stg-environment.md) |
 | — | discussion | careerhub | done | [Zitadel 위임 Epic의 일 쪼갬 — 왜 이렇게 갈랐고, 무엇을 버렸나](../../careerhub/discussion/260807_0158_zitadel-epic-work-breakdown.md) |
 | — | discussion | careerhub | done | [Zitadel 발급 훅 target/execution 등록 — GitOps 경로 조사](../../careerhub/discussion/260811_2031_zitadel-actions-target-gitops-registration.md) |
 | — | discussion | careerhub | done | [커리어허브 조직 Overview — 시작의 동기, 서비스·인프라 구조, 인프라 README 셋](../../careerhub/discussion/261031_1903_careerhub-org-overview-and-infra-readmes.md) |

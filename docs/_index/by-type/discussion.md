@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (104)
+# by-type / discussion (106)
 
 | status | goal | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|---|
@@ -83,6 +83,8 @@
 | active | cluster-vulnerability-remediation | homelab | cri-o, nginx-gateway-fabric, oidc-provider, cloudflared, auth-service, cloudnative-pg, postgresql, pgbouncer, mongodb, zitadel, kubernetes, argocd, longhorn, coredns, cert-manager, external-secrets, grafana-alloy, grafana, prometheus, tailscale | — | [공개 전 취약점 처리 — 치명도 · 해결 · 난이도의 순위](../../homelab/discussion/261029_1413_pre-exposure-patch-priority-and-difficulty.md) |
 | done | careerhub-env-separation | homelab | jyoliar-platform-terraform, terraform-cloud | — | [terraform에서 환경별 리소스와 공유 리소스를 가르는 모범사례 — 조사 (2026-11-02)](../../homelab/discussion/261102_2007_terraform-env-vs-shared-resource-separation-survey.md) |
 | done | careerhub-env-separation | homelab | jyoliar-platform-terraform, terraform-cloud, zitadel, external-secrets, jyoliar-k8s | ADR-0034 | [terraform 구조 개선 이행 — 이동만으로 되는 워크스페이스와 state 이동이 따르는 워크스페이스](../../homelab/discussion/261103_1429_terraform-restructure-migration-plan.md) |
+| done | careerhub-env-separation | homelab | terraform-cloud, tfe-provider, variable-set, jyoliar-platform-terraform, aws-tags | — | [Terraform Cloud 프로젝트 · variable set 재설계 — env는 프로젝트가 주고, 태그는 남긴다](../../homelab/discussion/261103_1809_tfc-project-and-variable-set-redesign.md) |
+| done | careerhub-env-separation | homelab | terraform-cloud, tfe-provider, variable-set, jyoliar-platform-terraform | — | [tfe provider의 프로젝트 · variable set 자원 — 조사 (2026-11-03)](../../homelab/discussion/261103_1809_tfe-project-variable-set-provider-survey.md) |
 | active | — | ops-workflow | claude-code-skills | — | [skill 초판 마찰 로그](../../ops-workflow/discussion/260712_1731_skill-friction-log.md) |
 | active | — | ops-workflow | adr | — | [ADR 선행 사례 조사 — 무엇이 표준이고, 무엇이 우리 발명이고, 무엇이 실패하는가](../../ops-workflow/discussion/260714_1417_adr-prior-art-survey.md) |
 | active | — | ops-workflow | adr | — | [ADR 문서를 무슨 포맷으로 적을 것인가](../../ops-workflow/discussion/260715_1401_adr-document-format.md) |

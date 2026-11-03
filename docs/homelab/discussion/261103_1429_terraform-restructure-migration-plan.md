@@ -211,3 +211,10 @@ masterkey 이동은 one-way door가 아니라 **실수가 one-way인 작업**이
 
 이 뒤에 stg 환경 구축이 온다 — `envs/stg/careerhub`와 `careerhub-secrets-stg`가 그 첫 조각이고, 그것은 stg 논의의 티켓이다.
 티켓의 저장소는 `jyoliar-careerhub/jyoliar-platform-terraform`이고, 4단계만 `jae2274/jyoliar-k8s`가 더해진다.
+
+**쪼갬(사람, 2026-11-03).** 이 이행은 Feature 하나(근거 ADR 없음, 부모 없음)이고 리프는 일곱이다.
+단계 하나가 Task 하나이되, 3단계는 둘로 가른다 — 루트·모듈 작성과 `tfc` 선언(PR)과 **사람이 수행하는 state 이동**(가이드가 본문)은 수행자와 합격선이 다르다.
+4단계는 target 저장소 둘(terraform·jyoliar-k8s)을 가진 Task 하나다 — "한 번에"가 요구라서다.
+선행은 0→1→{2, 3}→4→5→6이고 2와 3은 병행한다.
+Task 단위의 기준: PR 하나 크기, 합격선이 그 Task 안에서 혼자 판정된다, 사람만 할 수 있는 작업은 코드 PR과 다른 Task다.
+버린 쪼갬 — 3단계를 한 Task로(PR과 콘솔 세션이 한 합격선을 나눠 쓴다) · 전체를 Task 하나로(합격선 여섯이 한 티켓에 쌓인다).

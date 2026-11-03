@@ -331,6 +331,11 @@ ADR-0034(terraform은 클러스터 안을 모른다)는 이번 설계와 정합�
 ## 8. 다음
 
 - **순서 — terraform 구조 개선(4-4 E)이 먼저, stg 환경 구축은 그 뒤다**(사람, 2026-11-03). 구조 개선의 이행 계획은 `homelab/261103_1429`이 다룬다.
+- **쪼갬(사람, 2026-11-03).** stg 구축은 Feature 하나이고, terraform 구조 개선 Feature와 부모로 묶지 않는다 — 둘은 다른 저장소의 다른 흐름이다.
+  Feature 사이에는 선행을 걸 수 없으므로(선행은 리프의 것) 순서는 **stg Feature의 발행 자체를 terraform Feature 완료 뒤로 미루는 것**으로 지킨다.
+  리프의 밑그림은 여덟이다 — `careerhub-dev` 폐기와 뼈대 개명 · DB overlay(토폴로지·작은 스토리지·백업 선언 삭제) · Gateway·인증서·HTTPRoute · 수집 데이터 복사 Job · `careerhub-secrets-stg`(terraform, Google 콘솔 클라이언트 포함) · apps overlay(secrets 경로·gRPC·composer·auth-service·jobs suspend) · Zitadel overlay와 구성 선언 · careerhub-web stg 배포(#78 선행).
+  terraform에 실제로 걸리는 리프는 `careerhub-secrets-stg` 하나다 — 나머지는 k8s만 고친다.
+  버린 쪼갬 — 두 Feature를 Epic으로 묶는 것(공표된 근거 ADR이 없고, 묶는 것이 두 저장소를 한 흐름으로 보이게 한다) · 리프 단위 자연 의존으로 k8s 리프를 먼저 여는 것(사람이 발행 시점으로 순서를 잡는 쪽을 택했다).
 - 그 뒤 티켓 — Epic의 근거 ADR이 없으므로 Feature "careerhub stg 환경 구축" 아래 리프로 낸다. 리프의 종류는 stg DB overlay(Mongo·PG·백업 삭제 패치)·apps stg overlay(dev appset 뼈대의 개명 포함)·Gateway·인증서·HTTPRoute·jobs suspend·Zitadel stg overlay와 선언·데이터 복사 Job·terraform env 파생과 stg 워크스페이스·기존 careerhub-dev Mongo 폐기다. 트리는 GitHub에 산다.
 - **#78 재조정** — careerhub-web 매니페스트가 base + overlay 모양이어야 stg가 소비한다. #78은 apex(prod)만 보고 있다.
 - **컷오버 재논의** — 별도 discussion(goal은 리뉴얼 컷오버). `260810_2252`·#79의 전제(검증은 prod 중단 창 안에서)가 "검증은 stg에서"로 바뀐다. prod가 로그인을 제공하지 않으므로 중단 창의 의미도 달라진다.

@@ -6,7 +6,7 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 
 | id | type | topic | status | 문서 |
 |---|---|---|---|---|
-| — | digest | careerhub | current | [careerhub 환경 분리 — terraform 환경 축과 stg 환경 (2026-11-03 시점)](../../careerhub/digest/261103_1444_terraform-env-axis-and-stg-environment.md) |
+| — | digest | careerhub | current | [careerhub 환경 분리 — terraform 환경 축 · 프로젝트와 stg 환경 (2026-11-03 시점)](../../careerhub/digest/261103_1444_terraform-env-axis-and-stg-environment.md) |
 | — | discussion | careerhub | active | [Zitadel masterkey — 운영 중 변경(회전)은 어떻게 되는가](../../careerhub/discussion/260810_1910_zitadel-masterkey-rotation-paths.md) |
 | — | discussion | careerhub | done | [공개 Gateway 토폴로지 — 터널 하나 · Gateway 한 단인가 두 단인가](../../careerhub/discussion/261026_1811_public-gateway-topology-and-tunnel-handoff.md) |
 | — | discussion | careerhub | done | [리뉴얼을 위한 careerhub stg 환경 — 네임스페이스·데이터·환경 축](../../careerhub/discussion/261102_1903_renewal-stg-environment-namespace-data-env-axis.md) |

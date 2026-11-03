@@ -9,7 +9,7 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | ADR-0030 | adr | careerhub | accepted | [ADR-0030 — IdP 제품으로 Zitadel을 채택한다](../../careerhub/adr/adr-0030-adopt-zitadel-as-idp.md) |
 | — | discussion | careerhub-front | done | [토큰 저장 — 서버가 생긴 뒤에 다시 여는 축 D](../../careerhub-front/discussion/260722_1617_token-storage-after-server-exists.md) |
 | — | digest | careerhub | current | [레거시 커리어허브의 임시 공개 — 설계와 전환 순서 (2026-10-26 시점)](../../careerhub/digest/261026_1715_legacy-public-exposure-blueprint.md) |
-| — | digest | careerhub | current | [careerhub 환경 분리 — terraform 환경 축과 stg 환경 (2026-11-03 시점)](../../careerhub/digest/261103_1444_terraform-env-axis-and-stg-environment.md) |
+| — | digest | careerhub | current | [careerhub 환경 분리 — terraform 환경 축 · 프로젝트와 stg 환경 (2026-11-03 시점)](../../careerhub/digest/261103_1444_terraform-env-axis-and-stg-environment.md) |
 | — | discussion | careerhub | done | [auth-service를 다시 짓는다면 로그인을 무엇으로 구현하나 — 직접 구현과 기성 IdP 사이](../../careerhub/discussion/260804_1831_auth-rebuild-implementation-approach.md) |
 | — | discussion | careerhub | active | [Zitadel 도입은 auth-service의 요구사항을 얼마나 해소하는가 — 항목별 판정과 잔여 목록](../../careerhub/discussion/260805_1801_zitadel-coverage-of-auth-requirements.md) |
 | — | discussion | careerhub | done | [Zitadel 전환 시 테스트 전용 로그인 경로는 어떻게 되는가 — 티켓 #7 재판정](../../careerhub/discussion/260805_2044_test-login-path-under-zitadel.md) |

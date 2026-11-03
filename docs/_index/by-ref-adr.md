@@ -201,7 +201,7 @@
 ## ADR-0034 — terraform은 GitOps가 생성한 인프라에 의존하지 않는다
 
 - [레거시 커리어허브의 임시 공개 — 설계와 전환 순서 (2026-10-26 시점)](../careerhub/digest/261026_1715_legacy-public-exposure-blueprint.md) — `digest` · `current`
-- [careerhub 환경 분리 — terraform 환경 축과 stg 환경 (2026-11-03 시점)](../careerhub/digest/261103_1444_terraform-env-axis-and-stg-environment.md) — `digest` · `current`
+- [careerhub 환경 분리 — terraform 환경 축 · 프로젝트와 stg 환경 (2026-11-03 시점)](../careerhub/digest/261103_1444_terraform-env-axis-and-stg-environment.md) — `digest` · `current`
 - [Zitadel 발급 훅 target/execution 등록 — GitOps 경로 조사](../careerhub/discussion/260811_2031_zitadel-actions-target-gitops-registration.md) — `discussion` · `done`
 - [레거시 스택 임시 공개 — Cloudflare 쪽 배선과 엣지 보호](../careerhub/discussion/261026_1632_cloudflare-exposure-wiring-and-edge.md) — `discussion` · `done`
 - [공개 Gateway 토폴로지 — 터널 하나 · Gateway 한 단인가 두 단인가](../careerhub/discussion/261026_1811_public-gateway-topology-and-tunnel-handoff.md) — `discussion` · `done`
