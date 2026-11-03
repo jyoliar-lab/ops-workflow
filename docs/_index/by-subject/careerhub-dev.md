@@ -7,4 +7,4 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | id | type | topic | status | 문서 |
 |---|---|---|---|---|
 | — | discussion | ai-agent | active | [obs-toolkit 으로 agent 가 트러블슈팅을 얼마나 잘 하나 — 무엇을 재고, 어디서 문제를 내고, 무엇으로 돌리나](../../ai-agent/discussion/261003_1949_obs-toolkit-troubleshooting-eval.md) |
-| — | discussion | careerhub | active | [리뉴얼을 위한 careerhub stg 환경 — 네임스페이스·데이터·환경 축](../../careerhub/discussion/261102_1903_renewal-stg-environment-namespace-data-env-axis.md) |
+| — | discussion | careerhub | done | [리뉴얼을 위한 careerhub stg 환경 — 네임스페이스·데이터·환경 축](../../careerhub/discussion/261102_1903_renewal-stg-environment-namespace-data-env-axis.md) |

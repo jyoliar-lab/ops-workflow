@@ -4,7 +4,7 @@ kind: survey
 goal: careerhub-env-separation
 topic: careerhub
 subjects: [zitadel, google-oauth, jyoliar-platform-terraform, mongodb]
-status: active
+status: done
 related:
   - docs/careerhub/discussion/261102_1903_renewal-stg-environment-namespace-data-env-axis.md
 ---

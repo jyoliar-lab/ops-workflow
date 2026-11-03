@@ -4,13 +4,14 @@ kind: deliberation
 goal: careerhub-env-separation
 topic: careerhub
 subjects: [careerhub-stg, careerhub-dev, careerhub-prod, jyoliar-k8s, jyoliar-platform-terraform, argocd, mongodb, cloudnativepg, zitadel, external-secrets, careerhub-web]
-status: active
+status: done
 ref-adrs: [ADR-0034]
 related:
   - docs/careerhub/discussion/260810_1801_path-to-host-based-routing.md
   - docs/careerhub/discussion/260810_2252_renewal-parallel-stack-prod-cutover.md
   - docs/careerhub/discussion/261102_1903_stg-env-external-dependencies-survey.md
   - docs/homelab/discussion/261102_2007_terraform-env-vs-shared-resource-separation-survey.md
+  - docs/homelab/discussion/261103_1429_terraform-restructure-migration-plan.md
 ---
 
 # 리뉴얼을 위한 careerhub stg 환경 — 네임스페이스·데이터·환경 축
@@ -297,7 +298,7 @@ Zitadel 로컬 로그인은 정책 스위치가 있고 기본 상태는 실측�
 
 A를 고르면 E로 넘어가는 조건을 함께 적는 것이 이 축의 판정에 포함된다 — 환경 사이에 구성 차이가 생기거나(튜토리얼의 기준), 환경별 리소스 종류가 셋을 넘거나, 세 번째 환경이 서는 시점이 후보다. E는 A와 공유 리소스 처리가 같으므로, A에서 먼저 하는 `admin.tf` 이동과 공유 루트의 `env` 제거는 E로 가는 길의 1단계이기도 하다.
 
-**검토 중(사람, 2026-11-02): E.** 판정이 아니다 — 이행 절차의 검토 뒤에 판정 줄로 바꾼다.
+**판정(사람, 2026-11-03): E — 공유 루트는 환경 축 없이, 환경 루트는 얇게, 변동성으로 한 번 더 가른다. 이행 절차는 별도 논의(§8)에서 계획한다.**
 
 ## 5. 반대편 — 이 설계가 틀리는 조건
 
@@ -329,7 +330,8 @@ ADR-0034(terraform은 클러스터 안을 모른다)는 이번 설계와 정합�
 
 ## 8. 다음
 
-- 4-1~4-4의 판정을 받는다. 그 뒤 티켓 — Epic의 근거 ADR이 없으므로 Feature "careerhub stg 환경 구축" 아래 리프로 낸다. 리프의 종류는 stg DB overlay(Mongo·PG·백업 삭제 패치)·apps stg overlay(dev appset 뼈대의 개명 포함)·Gateway·인증서·HTTPRoute·jobs suspend·Zitadel stg overlay와 선언·데이터 복사 Job·terraform env 파생과 stg 워크스페이스·기존 careerhub-dev Mongo 폐기다. 트리는 GitHub에 산다.
+- **순서 — terraform 구조 개선(4-4 E)이 먼저, stg 환경 구축은 그 뒤다**(사람, 2026-11-03). 구조 개선의 이행 계획은 `homelab/261103_1429`이 다룬다.
+- 그 뒤 티켓 — Epic의 근거 ADR이 없으므로 Feature "careerhub stg 환경 구축" 아래 리프로 낸다. 리프의 종류는 stg DB overlay(Mongo·PG·백업 삭제 패치)·apps stg overlay(dev appset 뼈대의 개명 포함)·Gateway·인증서·HTTPRoute·jobs suspend·Zitadel stg overlay와 선언·데이터 복사 Job·terraform env 파생과 stg 워크스페이스·기존 careerhub-dev Mongo 폐기다. 트리는 GitHub에 산다.
 - **#78 재조정** — careerhub-web 매니페스트가 base + overlay 모양이어야 stg가 소비한다. #78은 apex(prod)만 보고 있다.
 - **컷오버 재논의** — 별도 discussion(goal은 리뉴얼 컷오버). `260810_2252`·#79의 전제(검증은 prod 중단 창 안에서)가 "검증은 stg에서"로 바뀐다. prod가 로그인을 제공하지 않으므로 중단 창의 의미도 달라진다.
 - **임시 test 환경** — 필요할 때 부트스트랩하고 끝나면 지우는 환경은 사람이 아이디어 단계로 둔 것이다. 이 논의에서 검토하지 않았고, 같은 goal의 다음 관점이 될 수 있다.

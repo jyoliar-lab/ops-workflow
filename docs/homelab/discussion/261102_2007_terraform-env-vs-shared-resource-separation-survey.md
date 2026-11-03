@@ -4,7 +4,7 @@ kind: survey
 goal: careerhub-env-separation
 topic: homelab
 subjects: [jyoliar-platform-terraform, terraform-cloud]
-status: active
+status: done
 related:
   - docs/careerhub/discussion/261102_1903_renewal-stg-environment-namespace-data-env-axis.md
 ---
