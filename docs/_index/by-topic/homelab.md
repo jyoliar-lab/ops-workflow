@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / homelab (14)
+# by-topic / homelab (15)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -18,3 +18,4 @@
 | — | discussion | done | jyoliar-platform-terraform, terraform-cloud, zitadel, external-secrets, jyoliar-k8s | [terraform 구조 개선 이행 — 이동만으로 되는 워크스페이스와 state 이동이 따르는 워크스페이스](../../homelab/discussion/261103_1429_terraform-restructure-migration-plan.md) |
 | — | discussion | done | terraform-cloud, tfe-provider, variable-set, jyoliar-platform-terraform, aws-tags | [Terraform Cloud 프로젝트 · variable set 재설계 — env는 프로젝트가 주고, 태그는 남긴다](../../homelab/discussion/261103_1809_tfc-project-and-variable-set-redesign.md) |
 | — | discussion | done | terraform-cloud, tfe-provider, variable-set, jyoliar-platform-terraform | [tfe provider의 프로젝트 · variable set 자원 — 조사 (2026-11-03)](../../homelab/discussion/261103_1809_tfe-project-variable-set-provider-survey.md) |
+| — | discussion | done | jyoliar-platform-terraform, cloudnativepg, barman-cloud-plugin, terraform-cloud, aws-s3, aws-iam, careerhub-prod, careerhub-stg, jyoliar-k8s | [CNPG 백업 루트를 모듈로 — `_modules/cnpg-backup` 과 `prod-careerhub` 로의 합병](../../homelab/discussion/261104_1636_cnpg-backup-module-and-workspace-merge.md) |

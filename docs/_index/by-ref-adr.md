@@ -209,6 +209,7 @@
 - [리뉴얼을 위한 careerhub stg 환경 — 네임스페이스·데이터·환경 축](../careerhub/discussion/261102_1903_renewal-stg-environment-namespace-data-env-axis.md) — `discussion` · `done`
 - [jyoliar-platform-terraform 구조 개선 — 환경 축 · 프로젝트 · 이행 (2026-11-04 시점)](../homelab/digest/261104_1558_platform-terraform-env-axis-and-projects.md) — `digest` · `current`
 - [terraform 구조 개선 이행 — 이동만으로 되는 워크스페이스와 state 이동이 따르는 워크스페이스](../homelab/discussion/261103_1429_terraform-restructure-migration-plan.md) — `discussion` · `done`
+- [CNPG 백업 루트를 모듈로 — `_modules/cnpg-backup` 과 `prod-careerhub` 로의 합병](../homelab/discussion/261104_1636_cnpg-backup-module-and-workspace-merge.md) — `discussion` · `done`
 
 ## ADR-0035 — 수렴한 논의의 결론은 digest 문서로 증류한다
 

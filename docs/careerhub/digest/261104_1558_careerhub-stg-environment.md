@@ -2,7 +2,7 @@
 type: digest
 goal: careerhub-env-separation
 topic: careerhub
-subjects: [careerhub-stg, careerhub-prod, jyoliar-k8s, argocd, zitadel, mongodb, cloudnativepg, external-secrets, jyoliar-platform-terraform]
+subjects: [careerhub-stg, careerhub-prod, jyoliar-k8s, argocd, zitadel, mongodb, cloudnativepg, barman-cloud-plugin, external-secrets, jyoliar-platform-terraform]
 status: current
 ref-adrs: [ADR-0034]
 sources:
@@ -25,13 +25,14 @@ stg는 prod와 같은 토폴로지로 서서 리뉴얼 스택(careerhub-web·Zit
 ## 어휘
 
 - **env** — 환경 이름. `prod`·`stg`. 네임스페이스(`careerhub-<env>`)·SSM 경로(`/jyo-liar/k8s/baremetal/careerhub/<env>/…`)·DNS(`<env>-careerhub.jyo-liar.com`)·terraform 디렉터리(`envs/<env>/`)·HCP Terraform 프로젝트(`<env>-careerhub`)에 같은 글자로 들어간다.
-- **환경 루트** — terraform 저장소에서 한 환경의 리소스만 가진 얇은 루트. `envs/<env>/careerhub`. 모듈 `_modules/careerhub/auth`를 불러 그 환경의 masterkey와 Google 클라이언트 파라미터를 만든다.
+- **환경 루트** — terraform 저장소에서 한 환경의 리소스만 가진 얇은 루트. `envs/<env>/careerhub`. 모듈 `_modules/careerhub/auth`를 불러 그 환경의 masterkey와 Google 클라이언트 파라미터를, 모듈 `_modules/cnpg-backup`을 불러 그 환경 PG 클러스터의 백업 버킷과 IRSA Role을 만든다.
 - **프로젝트** — HCP Terraform에서 환경 루트의 워크스페이스가 사는 폴더. 프로젝트가 소유한 variable set이 `env`·`region`을 주므로 워크스페이스에는 그 변수가 없다.
 
 ## 1. terraform에서 받는 것
 
 stg의 terraform 쪽은 환경 루트 하나를 더하는 일이다.
-`envs/stg/careerhub`가 `module "auth"`로 `_modules/careerhub/auth`를 부르고, `tfc/`에 프로젝트 `stg-careerhub`·그것이 소유한 variable set `stg`(`env = stg`·`region = ap-northeast-2`)·워크스페이스 `stg-careerhub`(working directory `envs/stg/careerhub`, trigger에 모듈 경로)를 선언한다.
+`envs/stg/careerhub`가 `module "auth"`로 `_modules/careerhub/auth`를, `module "cnpg_backup"`으로 `_modules/cnpg-backup`을 부르고, `tfc/`에 프로젝트 `stg-careerhub`·그것이 소유한 variable set `stg`(`env = stg`·`region = ap-northeast-2`)·워크스페이스 `stg-careerhub`(working directory `envs/stg/careerhub`, trigger에 두 모듈 경로)를 선언한다.
+`shared-iam`의 remote state 소비자에 `stg-careerhub`를 더한다 — 백업 모듈에 넘길 OIDC Provider ARN을 거기서 읽는다.
 모듈은 prod와 같은 것이고 `env` 값만 프로젝트에서 달리 들어온다.
 
 ```hcl
@@ -43,10 +44,14 @@ module "auth" {
 }
 ```
 
-이 루트가 만드는 것은 셋이다 — `random_password` 하나와 SSM 파라미터 둘.
+`auth`가 만드는 것은 셋이다 — `random_password` 하나와 SSM 파라미터 둘.
 `/jyo-liar/k8s/baremetal/careerhub/stg/zitadel/masterkey`(32자, SecureString)와 `/jyo-liar/k8s/baremetal/careerhub/stg/oauth/google-client`(ID·secret의 JSON).
 둘 다 `prevent_destroy`이고 `env = stg`·`managed_by = terraform` 태그가 붙는다.
 prod의 것은 `/…/careerhub/prod/…`에 있고, 두 Zitadel은 서로의 값을 모른다.
+
+`cnpg_backup`은 네임스페이스 `careerhub-stg`와 Cluster 이름 `careerhub-postgresql`을 받아 S3 버킷 `cnpg-backup-careerhub-stg-careerhub-postgresql-<계정>`과 IRSA Role `cnpg-backup-careerhub-stg-careerhub-postgresql`을 만든다.
+버킷은 SSE-S3·공개 차단·라이프사이클(미완 멀티파트 7d)이 붙고 `prevent_destroy`다 — 버저닝은 없다.
+Role은 `careerhub-stg` 네임스페이스의 ServiceAccount `careerhub-postgresql`과 `careerhub-postgresql-restore` 둘만 신뢰한다.
 
 Google 클라이언트 ID·secret은 sensitive라 콘솔에서 `stg-careerhub` 워크스페이스 변수로 넣는다.
 `env`·`region`은 넣지 않는다 — 프로젝트 `stg-careerhub`의 variable set이 이미 준다.
@@ -77,7 +82,7 @@ Argo CD의 services 층에 `careerhub-stg` AppProject·ApplicationSet이 있고,
 **DB.** PG 2인스턴스 + pooler 1, Mongo 2멤버 + arbiter 1 — prod와 같은 토폴로지다.
 선언 스토리지만 작다(Mongo 10Gi·PG 5Gi 수준, 실 데이터는 5Gi 안).
 PriorityClass는 `database-prod`보다 낮다.
-PG 백업은 없다 — stg overlay가 ObjectStore·ScheduledBackup을 지우고 Cluster의 barman plugin·projected token 선언을 비운다.
+PG 백업은 prod와 같다 — stg overlay는 ObjectStore의 `destinationPath`와 `AWS_ROLE_ARN`만 1절의 stg 버킷·Role로 바꾸고, 보존 3d와 03:00 KST 스케줄은 base 그대로다.
 
 **앱.** 리뉴얼 스택만 — careerhub-web·Zitadel·api-composer·auth-service(신 세대)·posting·review·userinfo gRPC·수집 jobs.
 레거시 front와 Google OAuth 직접 처리 세대의 auth-service는 없다.
@@ -110,5 +115,5 @@ stg가 서면 리뉴얼의 검증 자리가 stg가 되고, prod 컷오버의 그
 - CI가 stg에 자동 배포하지 않는다 — 태그 인상은 사람의 PR이다.
 - 관측·알림은 환경별로 갈라지지 않는다.
 - NetworkPolicy가 없다 — stg pod는 prod DB에 네트워크로 닿는다.
-- stg DB 백업이 없다.
+- stg MongoDB 백업이 없다.
 - terraform 저장소의 공유 루트·프로젝트·이행 순서는 이 설계가 정하지 않는다.

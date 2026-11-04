@@ -12,6 +12,7 @@ related:
   - docs/careerhub/discussion/261102_1903_stg-env-external-dependencies-survey.md
   - docs/homelab/discussion/261102_2007_terraform-env-vs-shared-resource-separation-survey.md
   - docs/homelab/discussion/261103_1429_terraform-restructure-migration-plan.md
+  - docs/homelab/discussion/261104_1636_cnpg-backup-module-and-workspace-merge.md
 ---
 
 # 리뉴얼을 위한 careerhub stg 환경 — 네임스페이스·데이터·환경 축
@@ -38,7 +39,7 @@ terraform의 환경 축이 코드로 정리돼, 새 환경이 쓰는 SSM 파라�
 인터뷰 전에 열려 있던 것은 환경의 이름(dev/staging)·DB replica 수·terraform 구조였다.
 이름은 인터뷰에서 닫혔고(§3-1), 나머지 둘은 열린 축으로 남았다(§4-1·§4-4).
 
-이번에 다루지 않는 것 — CI의 stg 자동 배포, 관측·알림의 환경 분리, NetworkPolicy 격리, stg DB 백업, 리뉴얼 컷오버 절차의 재편.
+이번에 다루지 않는 것 — CI의 stg 자동 배포, 관측·알림의 환경 분리, NetworkPolicy 격리, stg MongoDB 백업, 리뉴얼 컷오버 절차의 재편.
 마지막 것은 이 논의가 전제를 바꾸므로 §8에서 별도 논의로 가리킨다.
 
 ## 2. 실측
@@ -85,7 +86,7 @@ terraform의 환경 축이 코드로 정리돼, 새 환경이 쓰는 SSM 파라�
 - `env`는 TFC 워크스페이스 변수다. 이름 파생에 쓰는 곳은 `backup`(`homelab-cnpg-backup-${env}`, `cnpg_sa_namespace = careerhub-${env}`)·`vpc`·`vpn`이다.
 - `prod`가 리터럴인 곳은 셋 — `oauth/google.tf`·`zitadel/masterkey.tf`(`careerhub/prod/…`)·`oauth/admin.tf`(`admin/prod/…`). 마지막 것은 이름만 prod이고 실체는 클러스터 서비스(argocd 등)의 OAuth라 클러스터 스코프다.
 - env와 무관한 클러스터 스코프: `iam`(external-secrets Role, `ecr-image-puller`의 sub 조건이 `system:serviceaccount:*:ecr-image-puller`라 어느 네임스페이스든 통과), `ci`(ECR은 환경 공용), `cloudflare`, `alert`.
-- 따라서 **새 환경이 요구하는 환경별 terraform 산출물은 둘뿐이다** — Zitadel masterkey 파라미터, 그리고 Google 브로커를 쓰면 `oauth/google-client` 파라미터. `backup`은 stg 백업이 범위 밖이라 필요 없다.
+- 따라서 **새 환경이 요구하는 환경별 terraform 산출물은 셋이다** — Zitadel masterkey 파라미터, Google 브로커를 쓰면 `oauth/google-client` 파라미터, 그리고 CNPG 백업 버킷·Role(처음 범위 밖이었다가 2026-11-04 되돌렸다 — `homelab/261104_1636`).
 - ADR-0034(proposed)는 terraform이 클러스터 안을 모른다고 규정한다 — stg Zitadel의 내부 구성은 GitOps 구성 Job이고 terraform은 SSM seed까지다.
 
 **리뉴얼 쪽 현황.**
@@ -180,7 +181,7 @@ terraform의 환경 축이 코드로 정리돼, 새 환경이 쓰는 SSM 파라�
 
 실측: prod는 PG 2 + pooler 1, Mongo 2 + arbiter 1이고, 요청의 거의 전부가 DB다(Mongo 3 pod = CPU 3·2.2Gi).
 Longhorn은 s0·s1 두 노드에만 있어 볼륨은 늘려도 분산되지 않는다.
-stg DB 백업은 범위 밖인데 PG base는 백업을 전제한다.
+PG base는 백업을 전제하고, stg도 그것을 그대로 쓴다(처음 범위 밖이었다가 2026-11-04 되돌렸다).
 사람의 전제는 "replica prod와 동일"이고, 3-1(상시 pre-prod)과 정합이다 — 업그레이드 리허설을 떠안는 환경이 이것 하나다.
 
 - **A. prod 동일** — PG 2 + pooler 1, Mongo 2 + arbiter 1, 선언 스토리지 그대로(Mongo 30Gi·PG 10Gi). 이기는 조건: 스위치오버·롤링 업그레이드·pgbouncer 변경을 prod 전에 볼 자리가 이것뿐일 때 — 지금이다. 지는 조건: CPU 요청 +3(w0가 이미 76%라 배치가 s0·s1·w1·w2로 밀린다)과 스토리지 선언 +123Gi(복제 2라 두 노드에 +246Gi, 가용 각 350Gi)를 상시로 든다. 실 데이터는 5Gi 안이라 선언만 큰 것이다.
@@ -188,9 +189,9 @@ stg DB 백업은 범위 밖인데 PG base는 백업을 전제한다.
 - **C. prod 토폴로지·작은 선언** — 인스턴스 수와 요청은 prod와 같되 선언 스토리지만 줄인다(Mongo 10Gi·PG 5Gi 수준). 이기는 조건: 스토리지 노드 둘에 +246Gi를 선언으로 묶어 두기 싫을 때. 실 데이터 5Gi 안이라 당장은 맞는다. 지는 조건: prod가 자라 stg 선언을 넘으면 stg에서 먼저 터진다 — 그때 늘리면 된다(Longhorn은 온라인 확장이 된다).
 - D. 안 한다 — stg가 prod DB를 공유한다. 격리의 반대이고 `260810_2252`가 거부한 것이다.
 
-하위 선택 — PG 백업 선언의 처분: stg overlay에서 ObjectStore·ScheduledBackup을 `$patch: delete`로 빼고 Cluster의 plugins·projectedVolumeTemplate을 비우는 것이 "stg 백업 없음"과 정합이다. stg 버킷을 만드는 길(`backup` 워크스페이스 ×2)은 범위 밖 판정과 어긋난다. PriorityClass는 `database-prod`보다 낮은 값을 하나 더 두거나 기존 `database-dev`(500)를 쓴다 — 이름을 바꾸는 것은 티켓의 것이다.
+하위 선택 — PG 백업 선언의 처분: stg overlay는 ObjectStore·ScheduledBackup을 그대로 두고 `destinationPath`·`AWS_ROLE_ARN`만 stg 버킷·Role로 바꾼다 — 버킷·Role은 `_modules/cnpg-backup`(`homelab/261104_1636`)이 `envs/stg/careerhub`에서 만든다. PriorityClass는 `database-prod`보다 낮은 값을 하나 더 두거나 기존 `database-dev`(500)를 쓴다 — 이름을 바꾸는 것은 티켓의 것이다.
 
-**판정(사람, 2026-11-02): C — prod 토폴로지(PG 2 + pooler 1 · Mongo 2 + arbiter 1)에 선언 스토리지만 줄인다. 백업 선언은 overlay에서 삭제한다.**
+**판정(사람, 2026-11-02): C — prod 토폴로지(PG 2 + pooler 1 · Mongo 2 + arbiter 1)에 선언 스토리지만 줄인다. PG 백업은 prod와 같게 둔다 — stg 버킷·Role은 `_modules/cnpg-backup`이 만든다(처음 "overlay에서 삭제"였다가 2026-11-04 되돌렸다, `homelab/261104_1636`).**
 
 pooler: 신 세대 auth-service도 `DB_HOST=careerhub-postgresql-pooler`를 보므로 어느 안에서도 1개는 남긴다. 매니페스트 분기를 피하는 값이 pooler 하나보다 크다.
 

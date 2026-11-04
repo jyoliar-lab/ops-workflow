@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / jyoliar-k8s (12)
+# by-subject / jyoliar-k8s (13)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -15,6 +15,7 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | careerhub | done | [리뉴얼을 위한 careerhub stg 환경 — 네임스페이스·데이터·환경 축](../../careerhub/discussion/261102_1903_renewal-stg-environment-namespace-data-env-axis.md) |
 | — | discussion | homelab | done | [은퇴한 환경(aws-ec2) 코드의 보존 방식](../../homelab/discussion/260807_2002_retired-env-code-archiving.md) |
 | — | discussion | homelab | done | [terraform 구조 개선 이행 — 이동만으로 되는 워크스페이스와 state 이동이 따르는 워크스페이스](../../homelab/discussion/261103_1429_terraform-restructure-migration-plan.md) |
+| — | discussion | homelab | done | [CNPG 백업 루트를 모듈로 — `_modules/cnpg-backup` 과 `prod-careerhub` 로의 합병](../../homelab/discussion/261104_1636_cnpg-backup-module-and-workspace-merge.md) |
 | — | discussion | ops-workflow | active | [약속 게이트의 저장소별 적용 — 테스트가 없는 곳에서 약속은 무엇에 담기나](../../ops-workflow/discussion/260910_1900_promise-gate-per-repository-class.md) |
 | — | discussion | ops-workflow | active | [인프라 AC 의 세 종류 — 약속이 상태일 때 무엇이 증거인가](../../ops-workflow/discussion/260930_1828_infra-ac-kinds.md) |
 | — | discussion | ops-workflow | done | [조직 Overview — 하네스가 아니라 일의 흐름을 적는다](../../ops-workflow/discussion/261031_1733_overview-workflow-narrative.md) |
