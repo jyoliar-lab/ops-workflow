@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / careerhub (48)
+# by-topic / careerhub (49)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -16,7 +16,8 @@
 | ADR-0030 | adr | accepted | zitadel, keycloak, postgresql, auth-service | [ADR-0030 — IdP 제품으로 Zitadel을 채택한다](../../careerhub/adr/adr-0030-adopt-zitadel-as-idp.md) |
 | ADR-0031 | adr | accepted | auth-service, api-composer, jwt, oidc | [ADR-0031 — 인가 전파는 발급 시점 클레임 주입으로 한다](../../careerhub/adr/adr-0031-issuance-time-claim-injection.md) |
 | — | digest | current | careerhub-front, auth-service, api-composer, careerhub-httproute, careerhub-nginx-gateway, cloudflare-tunnel, cloudflared, external-dns, nginx-gateway-fabric, jyoliar-platform-terraform, oidc-provider, zitadel | [레거시 커리어허브의 임시 공개 — 설계와 전환 순서 (2026-10-26 시점)](../../careerhub/digest/261026_1715_legacy-public-exposure-blueprint.md) |
-| — | digest | current | jyoliar-platform-terraform, terraform-cloud, tfe-provider, variable-set, aws-tags, careerhub-stg, careerhub-prod, jyoliar-k8s, argocd, zitadel, mongodb, cloudnativepg, external-secrets | [careerhub 환경 분리 — terraform 환경 축 · 프로젝트와 stg 환경 (2026-11-03 시점)](../../careerhub/digest/261103_1444_terraform-env-axis-and-stg-environment.md) |
+| — | digest | superseded | jyoliar-platform-terraform, terraform-cloud, tfe-provider, variable-set, aws-tags, careerhub-stg, careerhub-prod, jyoliar-k8s, argocd, zitadel, mongodb, cloudnativepg, external-secrets | [careerhub 환경 분리 — terraform 환경 축 · 프로젝트와 stg 환경 (2026-11-03 시점)](../../careerhub/digest/261103_1444_terraform-env-axis-and-stg-environment.md) |
+| — | digest | current | careerhub-stg, careerhub-prod, jyoliar-k8s, argocd, zitadel, mongodb, cloudnativepg, external-secrets, jyoliar-platform-terraform | [careerhub stg 환경 — 네임스페이스 · 데이터 · 환경 축 (2026-11-04 시점)](../../careerhub/digest/261104_1558_careerhub-stg-environment.md) |
 | — | discussion | active | adsense, posting-provider, review-crawler, posting-skillscanner | [careerhub 는 무엇으로 돈을 버나 — 그리고 그게 성립하나](../../careerhub/discussion/260717_1853_revenue-model-and-viability.md) |
 | — | discussion | done | openapi, api-composer | [api-composer OpenAPI 스펙의 원천 — code-first vs spec-first](../../careerhub/discussion/260726_1653_openapi-spec-source-of-truth.md) |
 | — | discussion | done | openapi, api-composer, careerhub-web | [백엔드 스펙 변경을 프론트에 전파하는 방법 — 푸시인가 구독인가](../../careerhub/discussion/260730_1524_spec-change-propagation-to-frontend.md) |

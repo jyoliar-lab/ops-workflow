@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / zitadel (26)
+# by-subject / zitadel (28)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -9,7 +9,8 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | ADR-0030 | adr | careerhub | accepted | [ADR-0030 — IdP 제품으로 Zitadel을 채택한다](../../careerhub/adr/adr-0030-adopt-zitadel-as-idp.md) |
 | — | discussion | careerhub-front | done | [토큰 저장 — 서버가 생긴 뒤에 다시 여는 축 D](../../careerhub-front/discussion/260722_1617_token-storage-after-server-exists.md) |
 | — | digest | careerhub | current | [레거시 커리어허브의 임시 공개 — 설계와 전환 순서 (2026-10-26 시점)](../../careerhub/digest/261026_1715_legacy-public-exposure-blueprint.md) |
-| — | digest | careerhub | current | [careerhub 환경 분리 — terraform 환경 축 · 프로젝트와 stg 환경 (2026-11-03 시점)](../../careerhub/digest/261103_1444_terraform-env-axis-and-stg-environment.md) |
+| — | digest | careerhub | superseded | [careerhub 환경 분리 — terraform 환경 축 · 프로젝트와 stg 환경 (2026-11-03 시점)](../../careerhub/digest/261103_1444_terraform-env-axis-and-stg-environment.md) |
+| — | digest | careerhub | current | [careerhub stg 환경 — 네임스페이스 · 데이터 · 환경 축 (2026-11-04 시점)](../../careerhub/digest/261104_1558_careerhub-stg-environment.md) |
 | — | discussion | careerhub | done | [auth-service를 다시 짓는다면 로그인을 무엇으로 구현하나 — 직접 구현과 기성 IdP 사이](../../careerhub/discussion/260804_1831_auth-rebuild-implementation-approach.md) |
 | — | discussion | careerhub | active | [Zitadel 도입은 auth-service의 요구사항을 얼마나 해소하는가 — 항목별 판정과 잔여 목록](../../careerhub/discussion/260805_1801_zitadel-coverage-of-auth-requirements.md) |
 | — | discussion | careerhub | done | [Zitadel 전환 시 테스트 전용 로그인 경로는 어떻게 되는가 — 티켓 #7 재판정](../../careerhub/discussion/260805_2044_test-login-path-under-zitadel.md) |
@@ -29,6 +30,7 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | careerhub | done | [커리어허브 조직 Overview — 시작의 동기, 서비스·인프라 구조, 인프라 README 셋](../../careerhub/discussion/261031_1903_careerhub-org-overview-and-infra-readmes.md) |
 | — | discussion | careerhub | done | [리뉴얼을 위한 careerhub stg 환경 — 네임스페이스·데이터·환경 축](../../careerhub/discussion/261102_1903_renewal-stg-environment-namespace-data-env-axis.md) |
 | — | discussion | careerhub | done | [stg 환경의 외부 의존 — Google OAuth 클라이언트 관리·MongoDB 복사 도구 조사 (2026-11-02)](../../careerhub/discussion/261102_1903_stg-env-external-dependencies-survey.md) |
+| — | digest | homelab | current | [jyoliar-platform-terraform 구조 개선 — 환경 축 · 프로젝트 · 이행 (2026-11-04 시점)](../../homelab/digest/261104_1558_platform-terraform-env-axis-and-projects.md) |
 | — | discussion | homelab | done | [레거시 공개 전 운영 컴포넌트 전수 취약점 점검 — 조사 (2026-10-29)](../../homelab/discussion/261029_1359_pre-exposure-component-vulnerability-survey.md) |
 | — | discussion | homelab | active | [공개 전 취약점 처리 — 치명도 · 해결 · 난이도의 순위](../../homelab/discussion/261029_1413_pre-exposure-patch-priority-and-difficulty.md) |
 | — | discussion | homelab | done | [terraform 구조 개선 이행 — 이동만으로 되는 워크스페이스와 state 이동이 따르는 워크스페이스](../../homelab/discussion/261103_1429_terraform-restructure-migration-plan.md) |

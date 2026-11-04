@@ -52,7 +52,6 @@
       "WebSearch",
       "WebFetch",
       "Fetch",
-
       "Bash(gh issue view:*)",
       "Bash(gh issue comment:*)",
       "Bash(gh issue list:*)",
@@ -106,8 +105,14 @@
   },
   "extraKnownMarketplaces": {
     "obs-toolkit": {
-      "source": { "source": "github", "repo": "jyoliar-lab/obs-toolkit", "sha": "bee7059bd493cc43c239fc5923473d30730f4b7a" }
+      "source": {
+        "source": "github",
+        "repo": "jyoliar-lab/obs-toolkit",
+        "sha": "5fc9dc4c348b5985e12fb5b15805dd232884ad09"
+      }
     }
   },
-  "enabledPlugins": { "obs-toolkit@obs-toolkit": true }
+  "enabledPlugins": {
+    "obs-toolkit@obs-toolkit": true
+  }
 }

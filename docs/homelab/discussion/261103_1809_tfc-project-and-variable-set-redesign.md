@@ -1,7 +1,7 @@
 ---
 type: discussion
 kind: deliberation
-goal: careerhub-env-separation
+goal: platform-terraform-restructure
 topic: homelab
 subjects: [terraform-cloud, tfe-provider, variable-set, jyoliar-platform-terraform, aws-tags]
 status: done

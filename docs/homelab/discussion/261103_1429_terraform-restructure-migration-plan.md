@@ -1,7 +1,7 @@
 ---
 type: discussion
 kind: deliberation
-goal: careerhub-env-separation
+goal: platform-terraform-restructure
 topic: homelab
 subjects: [jyoliar-platform-terraform, terraform-cloud, zitadel, external-secrets, jyoliar-k8s]
 status: done

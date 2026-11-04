@@ -3,7 +3,7 @@ type: digest
 goal: careerhub-env-separation
 topic: careerhub
 subjects: [jyoliar-platform-terraform, terraform-cloud, tfe-provider, variable-set, aws-tags, careerhub-stg, careerhub-prod, jyoliar-k8s, argocd, zitadel, mongodb, cloudnativepg, external-secrets]
-status: current
+status: superseded
 ref-adrs: [ADR-0034]
 sources:
   - docs/careerhub/discussion/261102_1903_renewal-stg-environment-namespace-data-env-axis.md
@@ -13,6 +13,8 @@ sources:
   - docs/homelab/discussion/261103_1809_tfe-project-variable-set-provider-survey.md
   - docs/homelab/discussion/261103_1809_tfc-project-and-variable-set-redesign.md
 superseded_by:
+  - docs/homelab/digest/261104_1558_platform-terraform-env-axis-and-projects.md
+  - docs/careerhub/digest/261104_1558_careerhub-stg-environment.md
 ---
 
 # careerhub 환경 분리 — terraform 환경 축 · 프로젝트와 stg 환경 (2026-11-03 시점)
@@ -42,7 +44,8 @@ tfc/                         # 메타 워크스페이스 — 아래 모든 프�
 _modules/
   tfc_remote_state/          # 다른 워크스페이스의 출력을 읽는다
   nat/
-  careerhub-env/             # 환경 하나의 careerhub 재료 — masterkey · google-client
+  careerhub/
+    auth/                    # 환경 하나의 careerhub 인증 재료 — masterkey · google-client
 shared/                      # 프로젝트 shared — env = shared
   iam/                       # OIDC Provider · IRSA Role(external-secrets · ecr-image-puller)
   ci/                        # ECR · CodeBuild
@@ -51,15 +54,16 @@ shared/                      # 프로젝트 shared — env = shared
   admin-oauth/               # argocd·grafana 로그인용 Google 클라이언트
 envs/
   prod/                      # 프로젝트 prod-careerhub — env = prod
-    careerhub/               # module "careerhub" { env = var.env }
+    careerhub/               # module "auth" { env = var.env }
     careerhub-backup/        # CNPG 백업 S3 버킷 · IRSA Role
   stg/                       # 프로젝트 stg-careerhub — env = stg
-    careerhub/               # module "careerhub" { env = var.env }
+    careerhub/               # module "auth" { env = var.env }
 lab/                         # 프로젝트 lab — env = lab
   vpc/  vpn/                 # AWS 모의 환경
 ```
 
-`_modules/careerhub-env`가 환경 하나의 careerhub 재료를 정의한다.
+`_modules/careerhub/auth`가 환경 하나의 careerhub 인증 재료를 정의한다.
+`_modules/careerhub/`는 디렉터리일 뿐이고, 모듈은 그 아래 `auth/`다.
 `random_password`로 32자 masterkey를 만들어 `/jyo-liar/k8s/baremetal/careerhub/${var.env}/zitadel/masterkey`에 SecureString으로 심고, 변수로 받은 Google 클라이언트 ID·secret을 `/jyo-liar/k8s/baremetal/careerhub/${var.env}/oauth/google-client`에 심는다.
 두 파라미터 모두 `prevent_destroy`다.
 출력은 파라미터의 경로이고, 값은 내보내지 않는다.
@@ -68,8 +72,8 @@ lab/                         # 프로젝트 lab — env = lab
 `env`는 리터럴이 아니라 변수다 — 값 `stg`는 프로젝트 `stg-careerhub`의 variable set이 준다.
 
 ```hcl
-module "careerhub" {
-  source               = "../../../_modules/careerhub-env"
+module "auth" {
+  source               = "../../../_modules/careerhub/auth"
   env                  = var.env
   google_client_id     = var.google_client_id
   google_client_secret = var.google_client_secret
@@ -107,8 +111,8 @@ provider "aws" {
 |---|---|---|---|
 | `tfc` | `Default Project` | 없음 | `tfc` |
 | `shared/iam` · `shared/ci` · `shared/cloudflare` · `shared/alert` · `shared/admin-oauth` | `shared` | `shared` — `env = shared` | `shared-iam` · `shared-ci` · `shared-cloudflare` · `shared-alert` · `shared-admin-oauth` |
-| `envs/prod/careerhub` · `envs/prod/careerhub-backup` | `prod-careerhub` | `prod` — `env = prod` | `careerhub-secrets-prod` · `prod-careerhub-backup` |
-| `envs/stg/careerhub` | `stg-careerhub` | `stg` — `env = stg` | `careerhub-secrets-stg` |
+| `envs/prod/careerhub` · `envs/prod/careerhub-backup` | `prod-careerhub` | `prod` — `env = prod` | `prod-careerhub` · `prod-careerhub-backup` |
+| `envs/stg/careerhub` | `stg-careerhub` | `stg` — `env = stg` | `stg-careerhub` |
 | `lab/vpc` · `lab/vpn` | `lab` | `lab` — `env = lab` | `lab-vpc` · `lab-vpn` |
 
 variable set은 프로젝트 소유다 — 그 프로젝트 안에만 붙고 다른 프로젝트에는 붙일 수 없다.
@@ -120,7 +124,7 @@ variable set은 프로젝트 소유다 — 그 프로젝트 안에만 붙고 다
 `main`에 머지되면 그 워크스페이스가 plan을 만들고, 사람이 콘솔에서 apply를 승인한다.
 VCS 루트의 코드에 `cloud`·`backend` 블록은 없다.
 `tfc`만 로컬 CLI다 — `tfc/`에 커밋된 `cloud` 블록으로 운영자 머신에서 plan·apply하고, state만 HCP에 둔다.
-워크스페이스는 자기 working directory와 `trigger_prefixes` 아래 파일이 바뀔 때만 run을 만든다 — `careerhub-secrets-*`는 `_modules/careerhub-env`를, `prod-careerhub-backup`·`lab-vpn`은 `_modules/tfc_remote_state`(와 `_modules/nat`)를 trigger prefix로 가진다.
+워크스페이스는 자기 working directory와 `trigger_prefixes` 아래 파일이 바뀔 때만 run을 만든다 — `prod-careerhub`·`stg-careerhub`는 `_modules/careerhub/auth`를, `prod-careerhub-backup`·`lab-vpn`은 `_modules/tfc_remote_state`(와 `_modules/nat`)를 trigger prefix로 가진다.
 
 `tfc/`가 이 표 전체를 선언한다 — 프로젝트는 `tfe_project`, variable set은 `tfe_variable_set`(`parent_project_id`로 소유 프로젝트를 가리킨다)과 `tfe_project_variable_set`(프로젝트에 붙인다), set의 변수 `env`·`region`은 `tfe_variable`(`variable_set_id`), 워크스페이스는 `tfe_workspace`·`tfe_workspace_settings` — 이름, working directory, 프로젝트, GitHub App 연결, 브랜치, trigger prefix, 실행 모드, remote state 소비자(`shared-iam` → `prod-careerhub-backup`, `lab-vpc` → `lab-vpn`).
 워크스페이스 고유의 비밀 아닌 변수(`cnpg_app_name`·`discord_server_id` 같은 것)도 `tfe_variable`로 선언한다.
@@ -132,11 +136,11 @@ VCS 루트의 코드에 `cloud`·`backend` 블록은 없다.
 
 사람이 Google 콘솔에서 stg용 OAuth 클라이언트를 만든다.
 redirect URI는 `https://id.stg-careerhub.jyo-liar.com/…`이다.
-그 ID와 secret을 `careerhub-secrets-stg` 워크스페이스의 sensitive 변수로 넣는다.
+그 ID와 secret을 `stg-careerhub` 워크스페이스의 sensitive 변수로 넣는다.
 `env = stg`와 `region`은 넣지 않는다 — 워크스페이스가 속한 프로젝트 `stg-careerhub`의 variable set이 이미 준다.
 
 `envs/stg/careerhub/main.tf`를 담은 PR이 `main`에 머지된다.
-`careerhub-secrets-stg`가 plan을 만든다 — `random_password` 하나, SSM 파라미터 둘.
+`stg-careerhub`가 plan을 만든다 — `random_password` 하나, SSM 파라미터 둘.
 사람이 apply를 승인하면 `/jyo-liar/k8s/baremetal/careerhub/stg/zitadel/masterkey`와 `/jyo-liar/k8s/baremetal/careerhub/stg/oauth/google-client`가 생긴다.
 두 파라미터에는 `env = stg`·`managed_by = terraform` 태그가 붙어 있다 — AWS 콘솔에서 파라미터만 봐도 stg의 것이고 terraform이 만든 것임이 읽힌다.
 terraform의 일은 여기서 끝난다 — 클러스터 안에서 그 값이 어떻게 쓰이는지 terraform은 모른다.
@@ -150,7 +154,7 @@ prod의 masterkey는 `/…/careerhub/prod/…`에, stg의 것은 `/…/careerhub
 ## 4. 이행 — prod의 masterkey가 새 자리로 가는 순서
 
 지금 prod의 masterkey는 `zitadel/` 디렉터리의 `prod-careerhub-zitadel` 워크스페이스 state에, Google 클라이언트 파라미터는 `oauth/` 디렉터리의 `careerhub-oauth` 워크스페이스 state에 있다.
-둘을 `careerhub-secrets-prod`로 옮기고 나머지 디렉터리를 새 자리로 보내는 순서는 다음이다.
+둘을 `prod-careerhub`로 옮기고 나머지 디렉터리를 새 자리로 보내는 순서는 다음이다.
 단계마다 합격선이 있고, 넘지 못하면 다음 단계로 가지 않는다.
 
 **0. 메타 워크스페이스.**
@@ -174,14 +178,14 @@ prod의 masterkey는 `/…/careerhub/prod/…`에, stg의 것은 `/…/careerhub
 `tfc` apply 뒤 8개 워크스페이스가 각자 plan을 만든다.
 합격선: `tfc`의 plan에 워크스페이스 destroy·create가 0이고, 8개 워크스페이스의 plan이 태그 update in-place(공유·실험은 `env` 값 변경 + `managed_by` 추가, prod는 `managed_by` 추가)만이며 destroy·create가 0이다.
 
-**3. `careerhub-secrets-prod`와 state 이동.**
-`_modules/careerhub-env`와 `envs/prod/careerhub`를 쓰고, `tfc/`에 `careerhub-secrets-prod`를 프로젝트 `prod-careerhub`에 선언한다(trigger prefix에 모듈 경로).
+**3. `prod-careerhub`와 state 이동.**
+`_modules/careerhub/auth`와 `envs/prod/careerhub`를 쓰고, `tfc/`에 `prod-careerhub`를 프로젝트 `prod-careerhub`에 선언한다(trigger prefix에 모듈 경로).
 머지 뒤 새 워크스페이스는 비어 있다 — 아직 run을 만들지 않는다.
 사람이 CLI로 한 세션에 셋을 옮긴다.
 `prod-careerhub-zitadel`·`careerhub-oauth` 워크스페이스에서 `terraform state pull`로 받은 원본을 그대로 보관한다.
-로컬에서 `state mv -state=<원본> -state-out=<새 state>`로 `random_password.zitadel_masterkey`·`aws_ssm_parameter.zitadel_masterkey`·`aws_ssm_parameter.google_client`를 `module.careerhub.<type>.<name>` 주소로 옮긴다.
-새 state를 `careerhub-secrets-prod`에 `state push`하고, 옛 두 워크스페이스에서 `state rm`으로 셋을 뗀다.
-합격선: `careerhub-secrets-prod`의 plan이 "No changes", `prod-careerhub-zitadel` 워크스페이스의 state가 비어 있음, SSM의 masterkey 값이 그대로여서 ExternalSecret 재동기화 뒤 prod Zitadel pod가 정상.
+로컬에서 `state mv -state=<원본> -state-out=<새 state>`로 `random_password.zitadel_masterkey`·`aws_ssm_parameter.zitadel_masterkey`·`aws_ssm_parameter.google_client`를 `module.auth.<type>.<name>` 주소로 옮긴다.
+새 state를 `prod-careerhub`에 `state push`하고, 옛 두 워크스페이스에서 `state rm`으로 셋을 뗀다.
+합격선: `prod-careerhub`의 plan이 "No changes", `prod-careerhub-zitadel` 워크스페이스의 state가 비어 있음, SSM의 masterkey 값이 그대로여서 ExternalSecret 재동기화 뒤 prod Zitadel pod가 정상.
 `prod-careerhub-zitadel` 워크스페이스를 `tfc/`에서 제거해 삭제한다.
 되돌리기는 보관한 원본 state를 옛 워크스페이스에 다시 push하는 것이다.
 
@@ -196,7 +200,7 @@ prod의 masterkey는 `/…/careerhub/prod/…`에, stg의 것은 `/…/careerhub
 terraform 저장소의 README·CLAUDE.md를 새 트리, 프로젝트 = `env` 값의 단위, "sensitive면 콘솔" 규칙, "`tfc/`만 CLI" 예외로 고친다.
 
 여기까지가 terraform 구조 개선이다.
-그 뒤 `envs/stg/careerhub`를 쓰고, `tfc/`에 프로젝트 `stg-careerhub`·variable set `stg`·워크스페이스 `careerhub-secrets-stg`를 선언하는 것이 stg 환경 구축의 첫 조각이다 — 3절의 여정이 그때 일어난다.
+그 뒤 `envs/stg/careerhub`를 쓰고, `tfc/`에 프로젝트 `stg-careerhub`·variable set `stg`·워크스페이스 `stg-careerhub`를 선언하는 것이 stg 환경 구축의 첫 조각이다 — 3절의 여정이 그때 일어난다.
 
 ## 5. stg 환경
 
