@@ -110,7 +110,8 @@
     "obs-toolkit": {
       "source": {
         "source": "github",
-        "repo": "jyoliar-lab/obs-toolkit"
+        "repo": "jyoliar-lab/obs-toolkit",
+        "ref": "v0.3.1"
       }
     }
   }
