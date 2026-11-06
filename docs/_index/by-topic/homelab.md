@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / homelab (15)
+# by-topic / homelab (17)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -19,3 +19,5 @@
 | — | discussion | done | terraform-cloud, tfe-provider, variable-set, jyoliar-platform-terraform, aws-tags | [Terraform Cloud 프로젝트 · variable set 재설계 — env는 프로젝트가 주고, 태그는 남긴다](../../homelab/discussion/261103_1809_tfc-project-and-variable-set-redesign.md) |
 | — | discussion | done | terraform-cloud, tfe-provider, variable-set, jyoliar-platform-terraform | [tfe provider의 프로젝트 · variable set 자원 — 조사 (2026-11-03)](../../homelab/discussion/261103_1809_tfe-project-variable-set-provider-survey.md) |
 | — | discussion | done | jyoliar-platform-terraform, cloudnativepg, barman-cloud-plugin, terraform-cloud, aws-s3, aws-iam, careerhub-prod, careerhub-stg, jyoliar-k8s | [CNPG 백업 루트를 모듈로 — `_modules/cnpg-backup` 과 `prod-careerhub` 로의 합병](../../homelab/discussion/261104_1636_cnpg-backup-module-and-workspace-merge.md) |
+| — | discussion | active | alertmanager, prometheus, cloudflare-tunnel, discord, careerhub, jyoliar-k8s, jyoliar-platform-terraform | [홈랩 바깥의 감시 주체 — 무엇을 어디서 보게 할까](../../homelab/discussion/261106_2031_external-monitoring-outside-homelab.md) |
+| — | discussion | active | alertmanager, prometheus, cloudflare-tunnel, discord, careerhub, healthchecks-io, better-stack, uptime-kuma | [홈랩 바깥의 감시 주체 — 선행 사례와 수신처 조사 (2026-11-06)](../../homelab/discussion/261106_2031_external-watchdog-receivers-survey.md) |

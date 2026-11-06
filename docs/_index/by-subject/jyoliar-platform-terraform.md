@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / jyoliar-platform-terraform (18)
+# by-subject / jyoliar-platform-terraform (19)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -23,4 +23,5 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | homelab | done | [Terraform Cloud 프로젝트 · variable set 재설계 — env는 프로젝트가 주고, 태그는 남긴다](../../homelab/discussion/261103_1809_tfc-project-and-variable-set-redesign.md) |
 | — | discussion | homelab | done | [tfe provider의 프로젝트 · variable set 자원 — 조사 (2026-11-03)](../../homelab/discussion/261103_1809_tfe-project-variable-set-provider-survey.md) |
 | — | discussion | homelab | done | [CNPG 백업 루트를 모듈로 — `_modules/cnpg-backup` 과 `prod-careerhub` 로의 합병](../../homelab/discussion/261104_1636_cnpg-backup-module-and-workspace-merge.md) |
+| — | discussion | homelab | active | [홈랩 바깥의 감시 주체 — 무엇을 어디서 보게 할까](../../homelab/discussion/261106_2031_external-monitoring-outside-homelab.md) |
 | — | discussion | ops-workflow | done | [조직 Overview — 하네스가 아니라 일의 흐름을 적는다](../../ops-workflow/discussion/261031_1733_overview-workflow-narrative.md) |

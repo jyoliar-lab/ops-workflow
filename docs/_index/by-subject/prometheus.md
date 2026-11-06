@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / prometheus (14)
+# by-subject / prometheus (16)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -19,4 +19,6 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | homelab | done | [careerhub 서비스의 RED 는 어디서 나오나 — Alloy spanmetrics 를 고른 이유](../../homelab/discussion/260916_1635_red-metrics-source-alloy-spanmetrics.md) |
 | — | discussion | homelab | done | [레거시 공개 전 운영 컴포넌트 전수 취약점 점검 — 조사 (2026-10-29)](../../homelab/discussion/261029_1359_pre-exposure-component-vulnerability-survey.md) |
 | — | discussion | homelab | active | [공개 전 취약점 처리 — 치명도 · 해결 · 난이도의 순위](../../homelab/discussion/261029_1413_pre-exposure-patch-priority-and-difficulty.md) |
+| — | discussion | homelab | active | [홈랩 바깥의 감시 주체 — 무엇을 어디서 보게 할까](../../homelab/discussion/261106_2031_external-monitoring-outside-homelab.md) |
+| — | discussion | homelab | active | [홈랩 바깥의 감시 주체 — 선행 사례와 수신처 조사 (2026-11-06)](../../homelab/discussion/261106_2031_external-watchdog-receivers-survey.md) |
 | — | discussion | ops-workflow | active | [인프라 AC 의 세 종류 — 약속이 상태일 때 무엇이 증거인가](../../ops-workflow/discussion/260930_1828_infra-ac-kinds.md) |

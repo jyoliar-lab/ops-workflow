@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / cloudflare-tunnel (4)
+# by-subject / cloudflare-tunnel (6)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -10,3 +10,5 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | careerhub | done | [Cloudflare Tunnel · external-dns · 엣지 보호 — 조사 (2026-10-26)](../../careerhub/discussion/261026_1631_cloudflare-tunnel-dns-edge-survey.md) |
 | — | discussion | careerhub | done | [레거시 스택 임시 공개 — Cloudflare 쪽 배선과 엣지 보호](../../careerhub/discussion/261026_1632_cloudflare-exposure-wiring-and-edge.md) |
 | — | discussion | careerhub | done | [공개 Gateway 토폴로지 — 터널 하나 · Gateway 한 단인가 두 단인가](../../careerhub/discussion/261026_1811_public-gateway-topology-and-tunnel-handoff.md) |
+| — | discussion | homelab | active | [홈랩 바깥의 감시 주체 — 무엇을 어디서 보게 할까](../../homelab/discussion/261106_2031_external-monitoring-outside-homelab.md) |
+| — | discussion | homelab | active | [홈랩 바깥의 감시 주체 — 선행 사례와 수신처 조사 (2026-11-06)](../../homelab/discussion/261106_2031_external-watchdog-receivers-survey.md) |
