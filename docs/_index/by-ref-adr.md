@@ -198,7 +198,7 @@
 
 - [정책 ADR 첫 accept 시도 — 무엇이 고쳐졌고, 왜 얼리지 않았나](../ops-workflow/discussion/261018_1908_policy-adr-accept-attempt-record.md) — `discussion` · `done`
 
-## ADR-0034 — terraform은 GitOps가 생성한 인프라에 의존하지 않는다
+## ADR-0034 — 인프라 저장소 간 의존 그래프는 DAG다: 순환이 없고, 방향은 하나다
 
 - [레거시 커리어허브의 임시 공개 — 설계와 전환 순서 (2026-10-26 시점)](../careerhub/digest/261026_1715_legacy-public-exposure-blueprint.md) — `digest` · `current`
 - [careerhub 환경 분리 — terraform 환경 축 · 프로젝트와 stg 환경 (2026-11-03 시점)](../careerhub/digest/261103_1444_terraform-env-axis-and-stg-environment.md) — `digest` · `superseded`

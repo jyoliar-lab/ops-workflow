@@ -6,7 +6,7 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 
 | id | type | topic | status | 문서 |
 |---|---|---|---|---|
-| ADR-0034 | adr | homelab | proposed | [ADR-0034 — terraform은 GitOps가 생성한 인프라에 의존하지 않는다](../../homelab/adr/adr-0034-terraform-gitops-dependency-direction.md) |
+| ADR-0034 | adr | homelab | proposed | [ADR-0034 — 인프라 저장소 간 의존 그래프는 DAG다: 순환이 없고, 방향은 하나다](../../homelab/adr/adr-0034-infra-repo-dependency-acyclic.md) |
 | — | discussion | ai-agent | active | [obs-toolkit 측정 설계 — 장애 종류 · 주입 · 비교군 · 하네스](../../ai-agent/discussion/261003_2013_obs-toolkit-eval-design-faults-arms-harness.md) |
 | — | digest | careerhub | superseded | [careerhub 환경 분리 — terraform 환경 축 · 프로젝트와 stg 환경 (2026-11-03 시점)](../../careerhub/digest/261103_1444_terraform-env-axis-and-stg-environment.md) |
 | — | digest | careerhub | current | [careerhub stg 환경 — 네임스페이스 · 데이터 · 환경 축 (2026-11-04 시점)](../../careerhub/digest/261104_1558_careerhub-stg-environment.md) |

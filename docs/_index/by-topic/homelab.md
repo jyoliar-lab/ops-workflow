@@ -4,8 +4,8 @@
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
-| ADR-0034 | adr | proposed | jyoliar-platform-terraform, jyoliar-k8s, argocd | [ADR-0034 — terraform은 GitOps가 생성한 인프라에 의존하지 않는다](../../homelab/adr/adr-0034-terraform-gitops-dependency-direction.md) |
-| — | digest | current | jyoliar-platform-terraform, terraform-cloud, tfe-provider, variable-set, aws-tags, zitadel, external-secrets | [jyoliar-platform-terraform 구조 개선 — 환경 축 · 프로젝트 · 이행 (2026-11-04 시점)](../../homelab/digest/261104_1558_platform-terraform-env-axis-and-projects.md) |
+| ADR-0034 | adr | proposed | jyoliar-platform-terraform, onpremise-k8s, jyoliar-k8s, terraform, ansible, argocd | [ADR-0034 — 인프라 저장소 간 의존 그래프는 DAG다: 순환이 없고, 방향은 하나다](../../homelab/adr/adr-0034-infra-repo-dependency-acyclic.md) |
+| — | digest | current | jyoliar-platform-terraform, terraform-cloud, tfe-provider, variable-set, aws-tags, zitadel, external-secrets, cloudnativepg, barman-cloud-plugin, aws-s3, aws-iam | [jyoliar-platform-terraform 구조 개선 — 환경 축 · 프로젝트 · 이행 (2026-11-04 시점)](../../homelab/digest/261104_1558_platform-terraform-env-axis-and-projects.md) |
 | — | discussion | active | prometheus, alertmanager, kubelet, longhorn, kube-prometheus-stack | [Prometheus TSDB 만석과 이중 감시 실패 — 2026-07-30 장애 기록](../../homelab/discussion/260730_2245_prometheus-tsdb-full-double-monitoring-failure.md) |
 | — | discussion | active | prometheus, grafana, kube-prometheus-stack | [룰이 참조하는 메트릭의 부재 감지 — 공식 기능·공식 가이드·대안 도구 조사](../../homelab/discussion/260731_1233_rule-metric-absence-detection-options.md) |
 | — | discussion | done | aws-ec2, jyoliar-k8s, onpremise-k8s, baremetal | [은퇴한 환경(aws-ec2) 코드의 보존 방식](../../homelab/discussion/260807_2002_retired-env-code-archiving.md) |
