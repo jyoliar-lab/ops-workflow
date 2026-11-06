@@ -103,16 +103,15 @@
       }
     ]
   },
+  "enabledPlugins": {
+    "obs-toolkit@obs-toolkit": true
+  },
   "extraKnownMarketplaces": {
     "obs-toolkit": {
       "source": {
         "source": "github",
-        "repo": "jyoliar-lab/obs-toolkit",
-        "sha": "5fc9dc4c348b5985e12fb5b15805dd232884ad09"
+        "repo": "jyoliar-lab/obs-toolkit"
       }
     }
-  },
-  "enabledPlugins": {
-    "obs-toolkit@obs-toolkit": true
   }
 }
