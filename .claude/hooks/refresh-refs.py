@@ -5,7 +5,7 @@ ticket-engineer 의 refresh-refs 와 같은 패턴이되, 방향이 다르다 �
 티켓이 저장소를 지목하고 hook 는 있는 것만 최신화하지만, 여기는 **목록이
 먼저다**: 필요한 참조 저장소를 `.claude/ref-repos.txt` 가 미리 정의한다.
   - 목록의 저장소가 없으면 clone 한다.
-  - 있으면 ff-only pull 로 최신화한다.
+  - 있으면 origin 을 목록의 URL 로 맞추고 ff-only pull 로 최신화한다.
   - ref 에 있는데 목록에 없는 디렉터리는 경고만 한다(지우지 않는다 — 사람 몫).
 ref 는 읽기 전용 참조다(CLAUDE.md §6) — 쓰기는 guard-write hook 가 거부한다.
 실패는 경고만 한다 — 세션을 막지 않는다(fail-open).
@@ -78,6 +78,12 @@ def main():
             if r.returncode != 0:
                 warn("경고: ref/%s clone 실패 — %s" % (name, r.stderr.strip()))
             continue
+        # 저장소가 이관되면 목록의 URL 이 바뀐다 — 기존 클론의 origin 도 따라간다
+        r = subprocess.run(["git", "-C", dest, "remote", "get-url", "origin"],
+                           capture_output=True, text=True)
+        if r.returncode == 0 and r.stdout.strip() != url:
+            subprocess.run(["git", "-C", dest, "remote", "set-url", "origin", url],
+                           capture_output=True, text=True)
         subprocess.run(["git", "-C", dest, "fetch", "--prune"],
                        capture_output=True, text=True)
         r = subprocess.run(["git", "-C", dest, "pull", "--ff-only"],
