@@ -41,6 +41,14 @@ ApplicationSet이 만든 Application은 정의가 바뀌거나 항목이 빠질 
 
 > Sync operations are triggered the same way as if they were triggered by the UI or CLI
 
+컨트롤러가 sync를 거는 계기는 앱의 OutOfSync 상태다.
+
+> RollingSync will capture external changes outside the ApplicationSet resource, since it relies on watching the OutOfSync status of the managed Applications.
+
+앞 단계가 전부 Healthy가 돼야 다음 단계로 넘어간다.
+
+> All Applications in each group must become Healthy before the ApplicationSet controller will proceed to update the next group of Applications.
+
 단계에 `maxUpdate: 0`을 두면 컨트롤러는 그 단계의 앱을 건드리지 않고 사람의 sync를 기다린다.
 문서의 예시 설명이 그 쓰임을 보인다.
 
@@ -146,6 +154,7 @@ generator가 더는 만들지 않는 Application을 컨트롤러가 지운다는
 ## 논의 문서로 가져가는 것
 
 - Progressive Syncs는 기본으로 꺼져 있고, 켜면 생성된 Application의 auto-sync를 강제로 끄고 컨트롤러가 단계 순서대로 sync를 건다.
+- 컨트롤러는 앱의 OutOfSync를 보고 sync를 건다 — template의 `automated`를 지워도 컨트롤러가 거는 sync는 멈추지 않는다.
 - `maxUpdate: 0`인 단계는 사람의 sync를 기다린다 — 사람이 뒤 단계를 먼저 누르는 것을 막는다는 보장은 문서에 없다.
 - Progressive Syncs는 문서가 스스로 "제거되거나 호환되지 않게 바뀔 수 있다"고 적은 기능이다.
 - 앱의 Sync 상태(OutOfSync · Unknown)와 Health 상태는 `argocd_app_info`의 라벨 `sync_status` · `health_status`로 나온다.

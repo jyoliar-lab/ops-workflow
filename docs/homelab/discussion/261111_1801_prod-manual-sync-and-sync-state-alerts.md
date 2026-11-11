@@ -27,10 +27,11 @@ selfHeal이 손으로 한 조치를 곧바로 되돌리는 것도 prod에서는 
 지금도 Synced가 아닌 앱은 Argo CD 화면을 열어 봤을 때에만 알게 된다.
 그래서 어긋남을 알럿으로 받는다 — prod만이 아니라 모든 앱에 대해서다.
 
-열려 있던 것은 셋이다.
+열려 있던 것은 넷이다.
 알럿을 어느 경로로 만들 것인가.
 환경에 따라 심각도를 어떻게 달리할 것인가.
 prod의 ApplicationSet 정의 자체는 여전히 자동으로 반영되는데, 그 길을 어디까지 막을 것인가.
+반영 순서를 지키는 기능(Progressive Syncs)을 켜면 그 기능이 sync를 대신 거는데, 그 아래에서 prod의 수동 반영을 어떻게 세울 것인가.
 
 ## 2. 실측
 
@@ -93,23 +94,20 @@ prod의 ApplicationSet 정의 자체는 여전히 자동으로 반영되는데, 
 
 ### 3-3. selfHeal
 
-**선택: prod에서는 함께 내려놓는다.** `automated`를 지우면 selfHeal도 사라진다. 손으로 한 조치가 되돌려지지 않는 것은 원하는 바이고, 남은 어긋남은 알럿이 알린다. (인터뷰, 2026-11-11)
+**선택: prod에서는 함께 내려놓는다.** 반영이 수동이 되면 selfHeal도 사라진다. 손으로 한 조치가 되돌려지지 않는 것은 원하는 바이고, 남은 어긋남은 알럿이 알린다. (인터뷰, 2026-11-11)
 
 <details><summary>버린 안</summary>
 
-- selfHeal만 남긴다 — Argo CD에서 selfHeal은 `automated` 아래의 설정이라 따로 남길 수 없다
+- selfHeal만 남긴다 — Argo CD에서 selfHeal은 자동 반영(`automated`)에 딸린 설정이라 따로 남길 수 없다
 
 </details>
 
 ### 3-4. 반영 순서
 
-**선택: 구조로 강제하지 않는다.** 순서가 필요한 것은 최초 구축 때이고, 평소 변경은 앱 단위라 재시도로 맞춰진다. 지금도 순서는 지켜지고 있지 않았다(§2). Progressive Syncs를 켜지 않는다. (인터뷰, 2026-11-11)
+**선택: Progressive Syncs를 켜서 선언된 순서가 실제로 지켜지게 한다.** 순서가 가장 필요한 것은 최초 구축 때이고 평소 변경은 재시도로 맞춰져 왔지만, 선언과 동작을 맞춘다. (사람, 2026-11-11)
 
-<details><summary>버린 안</summary>
-
-- Progressive Syncs를 켜고 첫 단계만 사람이 연다 — 켜는 순간 RollingSync를 선언한 7개 ApplicationSet 전부의 동작이 바뀌어 "공용 층은 자동 유지"와 부딪히고, 문서가 스스로 제거될 수 있다고 적은 기능이다
-
-</details>
+켜는 일 자체는 이 논의와 별개의 리프다.
+켜면 sync를 거는 주체가 바뀌므로, prod의 수동 반영을 세우는 수단도 달라진다 — §4-4의 열린 축이다.
 
 ### 3-5. 알럿으로 받을 상태
 
@@ -185,7 +183,7 @@ Notifications의 기본 트리거에는 OutOfSync가 없고, 카탈로그에 지
 
 ### 4-3. prod의 ApplicationSet 정의가 자동으로 닿는 길
 
-§3-1대로 두 ApplicationSet의 template에서 `automated`를 지우면 그 아래 Application 13개는 사람이 sync한다.
+§3-1대로 prod를 수동으로 돌리면(수단은 §4-4) 두 ApplicationSet 아래의 Application 13개는 사람이 sync한다.
 그러나 ApplicationSet `careerhub-prod`의 **정의 자체**는 `services` 층의 Application `careerhub-prod`가 나르고, 그 Application은 여전히 자동이다(§3-1이 `services` 층을 자동으로 두었다).
 
 그 길로 닿는 변경은 둘이다.
@@ -212,6 +210,35 @@ template의 변경(`targetRevision` · `path` · `syncPolicy`)은 Application의
   현상 유지의 비용: 지금과 같다. 바깥 ApplicationSet의 항목은 셋뿐이고 거의 바뀌지 않는다.
   다만 stg 뼈대 작업이 같은 디렉터리의 ApplicationSet을 고쳐 쓰는 시기라, 실수가 나기 가장 쉬운 때에 안전망이 없다.
 
+### 4-4. Progressive Syncs 아래에서 prod의 수동 반영
+
+Progressive Syncs를 켜면(§3-4) sync를 거는 주체가 Application에서 ApplicationSet 컨트롤러로 바뀐다(조사 문서).
+컨트롤러는 생성된 Application의 auto-sync를 강제로 끄고, 앱의 OutOfSync를 지켜보다가 단계 순서대로 sync를 직접 건다.
+그래서 template의 `automated`는 있든 없든 무시된다 — 꺼진 상태에서는 `automated`를 지우는 것이 수동 반영의 수단이었지만, 켠 뒤에는 그것만으로는 반영이 여전히 자동이다.
+
+켠 뒤의 수단은 단계의 `maxUpdate: 0`이다.
+컨트롤러는 그 단계의 앱을 건드리지 않고 사람의 sync를 기다린다 — 문서의 예시가 바로 이 쓰임이다.
+수동 반영은 가능하고, 어느 단계까지 반영됐는지를 ApplicationSet이 추적해 준다는 것이 덤이다.
+
+문서가 말하지 않는 것이 둘 있다.
+사람이 뒤 단계의 앱을 먼저 sync했을 때 컨트롤러가 막는가.
+앞 단계의 앱이 바뀌지 않은 변경에서, `maxUpdate: 0`인 앞 단계가 뒤 단계의 문으로 서는가.
+
+- **A. prod 두 ApplicationSet의 모든 단계를 `maxUpdate: 0`으로 둔다.**
+  prod의 모든 앱을 사람이 누르고, 컨트롤러는 단계의 진행만 추적한다.
+  이기는 조건: "prod에 닿는 것은 전부 사람이 연다"가 목표일 때. 어느 변경이든 문이 선다.
+  지는 조건: 순서는 강제가 아니라 표시다 — 사람이 뒤 단계를 먼저 눌러도 막힌다는 보장이 없다.
+- B. 첫 단계만 `maxUpdate: 0`으로 두고 나머지는 컨트롤러가 순서대로 건다.
+  사람이 첫 단계를 열면 뒤는 자동으로 따라온다.
+  이기는 조건: 한 번 눌러 전체를 순서대로 반영하고 싶을 때 — 최초 구축에 가장 잘 맞는다.
+  지는 조건: 뒤 단계의 앱만 바뀐 변경이 사람을 거치는지가 확인되지 않았다. 거치지 않는다면 변경이 어느 단계에 떨어지느냐에 따라 문이 있기도 없기도 하다.
+- C. prod 두 ApplicationSet에서 `strategy`를 빼고 `automated`도 지운다.
+  prod만 Progressive Syncs 밖에 두는 완전 수동이다.
+  이기는 조건: 컨트롤러의 개입 없이 가장 단순한 수동을 원할 때.
+  지는 조건: 순서가 가장 필요한 prod가 순서 선언을 잃는다.
+- D. 안 한다 — prod도 Progressive Syncs 아래에서 자동으로 둔다.
+  현상 유지의 비용: §1의 문제(남의 변경이 prod에 닿는다)가 그대로 남고, 순서만 얻는다.
+
 ## 5. 반대편 — 이 설계가 틀리는 조건
 
 - **공용 층은 여전히 자동이다.** CNPG 오퍼레이터나 게이트웨이 컨트롤러의 변경은 사람의 sync 없이 prod의 DB와 트래픽에 닿는다. "남의 변경이 prod에 닿는다"는 careerhub 매니페스트에 대해서만 막힌다.
@@ -224,12 +251,12 @@ template의 변경(`targetRevision` · `path` · `syncPolicy`)은 Application의
 ## 6. 버린 것
 
 - **AppProject의 sync window로 자동 반영만 막는 길.** `automated`를 남긴 채 prod AppProject에 상시 deny window를 걸고 수동 sync만 허용하는 방식이다. 결과는 `automated`를 지우는 것과 같은데 설정이 한 겹 더 생기고, "왜 자동인데 안 되나"를 읽는 사람이 window를 찾아가야 한다. 시간대별로 여닫을 필요가 생기면 그때 다시 본다.
-- **동작하지 않는 `strategy: RollingSync` 선언의 정리.** 7개 ApplicationSet의 죽은 선언은 읽는 사람을 속이지만, 걷어내는 일은 이 논의의 목표(prod 반영을 사람이 쥔다 · 어긋남을 안다)에 닿지 않는다.
+- **동작하지 않는 `strategy: RollingSync` 선언을 걷어내는 길.** 선언을 지워 동작에 맞추는 대신, 기능을 켜서 동작을 선언에 맞추기로 했다(§3-4).
 
 ## 7. 임계선 — ADR감인가
 
 ADR감이 아니다.
-`automated` 한 블록을 되살리면 원래대로이고, 알럿 룰은 지우면 끝이다 — 되돌리는 데 한 시간이 걸리지 않는다.
+ApplicationSet의 설정 몇 줄(`automated` · 단계의 `maxUpdate`)을 되살리면 원래대로이고, 알럿 룰은 지우면 끝이다 — 되돌리는 데 한 시간이 걸리지 않는다.
 "prod는 사람이 반영한다"는 운영 방침이지만 되돌리기 어려운 것을 낳지 않는다.
 §4-3의 A · B도 설정 한 줄이다.
 
@@ -237,7 +264,8 @@ ADR감이 아니다.
 
 ## 8. 다음
 
-- 열린 축 셋이 판정되면 Feature 하나 아래 리프 둘로 낸다 — 알럿(수집과 룰)이 먼저이고 auto-sync 제거가 그 뒤다. 걷어내기 전에 "어긋난 것을 사람이 안다"가 서 있어야 한다.
+- Progressive Syncs를 켜는 일은 리프로 나갔다 — prod를 자동인 채로 두고 순서만 지켜지게 한다. 공용 층의 selfHeal이 켠 뒤에도 유지되는지가 그 리프의 실측이고, 유지되지 않으면 §3-1의 "공용 층은 자동 유지"와 부딪혀 이 논의로 돌아온다.
+- 열린 축 넷이 판정되면 Feature 하나 아래 리프 둘로 낸다 — 알럿(수집과 룰)이 먼저이고 auto-sync 제거가 그 뒤다. 걷어내기 전에 "어긋난 것을 사람이 안다"가 서 있어야 한다.
 - §4-2는 `project` 라벨의 실측을 기다린다 — 알럿 리프가 수집을 붙인 뒤에야 닫을 수 있으면, 판정을 "수집 뒤 확정"으로 두고 리프의 요구사항에 실측을 넣는다.
 - stg 뼈대 리프(#164)가 같은 ApplicationSet을 고친다 — auto-sync 제거가 먼저 끝나면 #164의 owner 정정이 prod에 반영될 때 수동 sync가 한 번 든다.
 - obs-bench(#112 · #114)의 전제가 바뀐다는 것을 그 티켓에 알린다.
