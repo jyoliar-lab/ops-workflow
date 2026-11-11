@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / homelab (17)
+# by-topic / homelab (19)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -21,3 +21,5 @@
 | — | discussion | done | jyoliar-platform-terraform, cloudnativepg, barman-cloud-plugin, terraform-cloud, aws-s3, aws-iam, careerhub-prod, careerhub-stg, jyoliar-k8s | [CNPG 백업 루트를 모듈로 — `_modules/cnpg-backup` 과 `prod-careerhub` 로의 합병](../../homelab/discussion/261104_1636_cnpg-backup-module-and-workspace-merge.md) |
 | — | discussion | active | alertmanager, prometheus, cloudflare-tunnel, discord, careerhub, jyoliar-k8s, jyoliar-platform-terraform | [홈랩 바깥의 감시 주체 — 무엇을 어디서 보게 할까](../../homelab/discussion/261106_2031_external-monitoring-outside-homelab.md) |
 | — | discussion | active | alertmanager, prometheus, cloudflare-tunnel, discord, careerhub, healthchecks-io, better-stack, uptime-kuma | [홈랩 바깥의 감시 주체 — 선행 사례와 수신처 조사 (2026-11-06)](../../homelab/discussion/261106_2031_external-watchdog-receivers-survey.md) |
+| — | discussion | done | argocd, applicationset, argocd-notifications, prometheus | [Argo CD의 sync 정책 · 메트릭 · 알림 · ApplicationSet 삭제 동작 — 조사 (2026-11-11)](../../homelab/discussion/261111_1800_argocd-sync-policy-metrics-notifications-survey.md) |
+| — | discussion | active | argocd, applicationset, careerhub-prod, prometheus, alertmanager, jyoliar-k8s | [prod 반영을 사람이 쥐고, 어긋난 Argo CD 앱을 알럿으로 안다](../../homelab/discussion/261111_1801_prod-manual-sync-and-sync-state-alerts.md) |

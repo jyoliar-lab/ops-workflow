@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / careerhub-prod (6)
+# by-subject / careerhub-prod (7)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -12,3 +12,4 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | careerhub | done | [리뉴얼을 위한 careerhub stg 환경 — 네임스페이스·데이터·환경 축](../../careerhub/discussion/261102_1903_renewal-stg-environment-namespace-data-env-axis.md) |
 | — | discussion | homelab | done | [careerhub 서비스의 RED 는 어디서 나오나 — Alloy spanmetrics 를 고른 이유](../../homelab/discussion/260916_1635_red-metrics-source-alloy-spanmetrics.md) |
 | — | discussion | homelab | done | [CNPG 백업 루트를 모듈로 — `_modules/cnpg-backup` 과 `prod-careerhub` 로의 합병](../../homelab/discussion/261104_1636_cnpg-backup-module-and-workspace-merge.md) |
+| — | discussion | homelab | active | [prod 반영을 사람이 쥐고, 어긋난 Argo CD 앱을 알럿으로 안다](../../homelab/discussion/261111_1801_prod-manual-sync-and-sync-state-alerts.md) |

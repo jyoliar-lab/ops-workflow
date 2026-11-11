@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / prometheus (16)
+# by-subject / prometheus (18)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -21,4 +21,6 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | homelab | active | [공개 전 취약점 처리 — 치명도 · 해결 · 난이도의 순위](../../homelab/discussion/261029_1413_pre-exposure-patch-priority-and-difficulty.md) |
 | — | discussion | homelab | active | [홈랩 바깥의 감시 주체 — 무엇을 어디서 보게 할까](../../homelab/discussion/261106_2031_external-monitoring-outside-homelab.md) |
 | — | discussion | homelab | active | [홈랩 바깥의 감시 주체 — 선행 사례와 수신처 조사 (2026-11-06)](../../homelab/discussion/261106_2031_external-watchdog-receivers-survey.md) |
+| — | discussion | homelab | done | [Argo CD의 sync 정책 · 메트릭 · 알림 · ApplicationSet 삭제 동작 — 조사 (2026-11-11)](../../homelab/discussion/261111_1800_argocd-sync-policy-metrics-notifications-survey.md) |
+| — | discussion | homelab | active | [prod 반영을 사람이 쥐고, 어긋난 Argo CD 앱을 알럿으로 안다](../../homelab/discussion/261111_1801_prod-manual-sync-and-sync-state-alerts.md) |
 | — | discussion | ops-workflow | active | [인프라 AC 의 세 종류 — 약속이 상태일 때 무엇이 증거인가](../../ops-workflow/discussion/260930_1828_infra-ac-kinds.md) |
