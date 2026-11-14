@@ -42,7 +42,7 @@ rel = os.path.relpath(path, root)
 
 if fm.get("type") != "adr":
     die("거부: adr 문서가 아니다 (type: %s)" % (fm.get("type") or "없음"),
-        "  postmortem 을 frozen 으로 바꾸는 스크립트는 아직 없다 — 미결이다(마찰 로그).")
+        "  postmortem 을 frozen 으로 바꾸는 스크립트는 아직 없다 — 미결이다.")
 
 status = fm.get("status", "")
 if status == "accepted":

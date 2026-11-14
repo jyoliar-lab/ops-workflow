@@ -6,7 +6,8 @@ CLAUDE.md 의 산문 규칙 중 구조로 옮길 수 있는 것을 여기서 강
 
 Write/Edit/MultiEdit:
   허용 — <git 루트>/**                (이 저장소: docs/ · .claude/ · harness/ · CLAUDE.md
-                                       · tmp/ — 초안 인박스(마찰 로그·이슈 초안). §6)
+                                       · tmp/ — 초안 인박스(이슈 초안). §6)
+  허용 — ~/.claude/projects/<슬러그>/memory/**   (이 저장소의 Claude Code 메모리)
   거부 — docs/_index/**               (생성물 — 도구만 쓴다. §7. 재생성은 hook 자동)
   거부 — workspace/**                 (참조 저장소 로컬 클론 — agent 는 **읽고
          인용할 뿐** 고치지 않는다(§6). 코드 변경은 그 저장소의 PR 로, 사람이 한다)
@@ -76,6 +77,14 @@ def under(path, root):
     return path == root or path.startswith(root + os.sep)
 
 
+def memory_dir(proj: str) -> str:
+    """이 저장소의 Claude Code 메모리 디렉터리 — ~/.claude/projects/<슬러그>/memory.
+    슬러그는 저장소 루트 절대경로의 영숫자 외 문자를 '-'로 바꾼 것이다."""
+    config: str = os.environ.get("CLAUDE_CONFIG_DIR") or os.path.expanduser("~/.claude")
+    slug: str = re.sub(r"[^A-Za-z0-9]", "-", os.path.abspath(proj))
+    return os.path.join(config, "projects", slug, "memory")
+
+
 def main():
     try:
         data = json.load(sys.stdin)
@@ -121,7 +130,7 @@ def main():
             "변경이 필요하면 티켓으로 남기고, 그 저장소의 PR 로 사람이 한다." % fp
         )
 
-    if under(fp, proj):
+    if under(fp, proj) or under(fp, memory_dir(proj)):
         allow()
 
     tmp_roots = {tempfile.gettempdir(), "/tmp", "/private/tmp", "/var/folders"}

@@ -48,7 +48,7 @@ ops-workflow/
 ### 경계와 PATH
 
 - hook·권한은 루트 `.claude/settings.json` 하나다. 역할별 차이는 프롬프트와 스킬 가시성으로 낸다 — `refresh-refs`는 어느 역할에서도 돈다(ff-pull, 수 초).
-- 쓰기 경계(`guard-write.py`)는 git 루트다. `docs/_index/`·`workspace/`·저장소 밖은 거부, `gh issue close`는 거부, `git commit`·`push`는 사람에게 묻는다.
+- 쓰기 경계(`guard-write.py`)는 git 루트와 이 저장소의 Claude Code 메모리 디렉터리(`~/.claude/projects/<슬러그>/memory/`)다. `docs/_index/`·`workspace/`·그 밖은 거부, `gh issue close`는 거부, `git commit`·`push`는 사람에게 묻는다.
 - 스킬 스크립트는 `session-path.sh`가 PATH에 올린다 — 루트와 **모든** 하네스의 `.claude/skills/**/scripts` + `.claude/scripts` + `.claude/hooks`. hook은 어느 역할이 덧붙었는지 모르므로 전부 올린다. PATH는 경계가 아니다.
 - hook·스크립트는 그래도 `git rev-parse --show-toplevel`로 루트를 역산한다 — 하위 디렉터리에서 열어도 깨지지 않게.
 
@@ -90,4 +90,4 @@ ops-workflow/
 - 한다: 증상 기록용 Bug 티켓 생성 · 저장소·시스템 read 조사 · 확인 내용을 코멘트로 축적
 - 하지 않는다: 복구 · 문서 저작 · 티켓 close
 
-**초안 인박스 `tmp/`** 는 gitignored다. `tmp/staging/`은 하네스 자체의 마찰 로그, `tmp/github-issues/`는 이슈 본문 초안(`gh --body-file`로 게시).
+**초안 인박스 `tmp/`** 는 gitignored다. `tmp/github-issues/`는 이슈 본문 초안(`gh --body-file`로 게시).
