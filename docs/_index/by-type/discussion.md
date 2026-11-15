@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (121)
+# by-type / discussion (122)
 
 | status | goal | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|---|
@@ -100,6 +100,7 @@
 | active | external-homelab-monitoring | homelab | alertmanager, prometheus, cloudflare-tunnel, discord, careerhub, healthchecks-io, better-stack, uptime-kuma | — | [홈랩 바깥의 감시 주체 — 선행 사례와 수신처 조사 (2026-11-06)](../../homelab/discussion/261106_2031_external-watchdog-receivers-survey.md) |
 | done | prod-sync-gate-and-sync-alerts | homelab | argocd, applicationset, argocd-notifications, prometheus | — | [Argo CD의 sync 정책 · 메트릭 · 알림 · ApplicationSet 삭제 동작 — 조사 (2026-11-11)](../../homelab/discussion/261111_1800_argocd-sync-policy-metrics-notifications-survey.md) |
 | active | prod-sync-gate-and-sync-alerts | homelab | argocd, applicationset, careerhub-prod, prometheus, alertmanager, jyoliar-k8s | — | [prod 반영을 사람이 쥐고, 어긋난 Argo CD 앱을 알럿으로 안다](../../homelab/discussion/261111_1801_prod-manual-sync-and-sync-state-alerts.md) |
+| active | jobsearch-operator-harness | jobsearch-operator | jobsearch-operator, sqlite | — | [지원 현황을 담는 sqlite 스키마 — jobsearch-operator의 첫 구조](../../jobsearch-operator/discussion/261115_1407_application-tracking-sqlite-schema.md) |
 | active | — | ops-workflow | claude-code-skills | — | [skill 초판 마찰 로그](../../ops-workflow/discussion/260712_1731_skill-friction-log.md) |
 | active | — | ops-workflow | adr | — | [ADR 선행 사례 조사 — 무엇이 표준이고, 무엇이 우리 발명이고, 무엇이 실패하는가](../../ops-workflow/discussion/260714_1417_adr-prior-art-survey.md) |
 | active | — | ops-workflow | adr | — | [ADR 문서를 무슨 포맷으로 적을 것인가](../../ops-workflow/discussion/260715_1401_adr-document-format.md) |
