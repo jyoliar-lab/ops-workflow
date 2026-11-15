@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-subject / loki (9)
+# by-subject / loki (10)
 
 topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이다.
 
@@ -12,6 +12,7 @@ topic·type 을 가로지른다 — 세부 주제 검색의 유일한 수단이�
 | — | discussion | ai-agent | active | [환원 연산 12개 — 코드 없이 되는 것과 안 되는 것 (#94 · #95 · #96)](../../ai-agent/discussion/260917_1742_reduction-ops-without-code.md) |
 | — | discussion | ai-agent | active | [obs-toolkit 으로 agent 가 트러블슈팅을 얼마나 잘 하나 — 무엇을 재고, 어디서 문제를 내고, 무엇으로 돌리나](../../ai-agent/discussion/261003_1949_obs-toolkit-troubleshooting-eval.md) |
 | — | discussion | ai-agent | active | [obs-toolkit 측정 설계 — 장애 종류 · 주입 · 비교군 · 하네스](../../ai-agent/discussion/261003_2013_obs-toolkit-eval-design-faults-arms-harness.md) |
+| — | discussion | careerhub | active | [서류 지원 후 관측할 수 있는 신호 — 무엇을 만들고 어디까지 구분할 것인가](../../careerhub/discussion/261115_1321_post-application-observable-signals.md) |
 | — | discussion | homelab | done | [agent 의 Prometheus·Loki·Tempo 읽기 접근 — 경로 옵션](../../homelab/discussion/260829_1912_agent-observability-read-access-options.md) |
 | — | discussion | homelab | done | [네이티브 관측 API 를 직접 부르면서 read-only 를 구조로 거는 방안](../../homelab/discussion/260829_2038_raw-observability-api-read-only-enforcement.md) |
 | — | discussion | homelab | done | [레거시 공개 전 운영 컴포넌트 전수 취약점 점검 — 조사 (2026-10-29)](../../homelab/discussion/261029_1359_pre-exposure-component-vulnerability-survey.md) |

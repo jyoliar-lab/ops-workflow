@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (119)
+# by-type / discussion (121)
 
 | status | goal | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|---|
@@ -81,6 +81,8 @@
 | active | jobseeker-company-matching | careerhub | — | — | [경력 공백·짧은 재직에 대한 고용주별 민감도 — 조사 (2026-11-15)](../../careerhub/discussion/261115_1220_gap-tenure-employer-sensitivity-survey.md) |
 | active | jobseeker-company-matching | careerhub | careerhub-posting-service, careerhub-posting-provider, careerhub-posting-skillscanner | — | [서류 통과 가능성으로 채용공고를 선별하는 방식 — 한 사람의 구직으로 먼저 검증한다](../../careerhub/discussion/261115_1220_posting-selection-by-screening-odds.md) |
 | active | jobseeker-company-matching | careerhub | — | — | [공고 쪽 요인과 서류 통과 확률 — 조사 (2026-11-15)](../../careerhub/discussion/261115_1220_posting-side-callback-factors-survey.md) |
+| active | jobseeker-company-matching | careerhub | careerhub-front, careerhub-public-gateway, loki | — | [서류 지원 후 관측할 수 있는 신호 — 무엇을 만들고 어디까지 구분할 것인가](../../careerhub/discussion/261115_1321_post-application-observable-signals.md) |
+| active | jobseeker-company-matching | careerhub | — | — | [서류 지원 후 관측할 수 있는 신호 — 조사 (2026-11-15)](../../careerhub/discussion/261115_1321_post-application-signals-survey.md) |
 | active | — | homelab | prometheus, alertmanager, kubelet, longhorn, kube-prometheus-stack | — | [Prometheus TSDB 만석과 이중 감시 실패 — 2026-07-30 장애 기록](../../homelab/discussion/260730_2245_prometheus-tsdb-full-double-monitoring-failure.md) |
 | active | — | homelab | prometheus, grafana, kube-prometheus-stack | — | [룰이 참조하는 메트릭의 부재 감지 — 공식 기능·공식 가이드·대안 도구 조사](../../homelab/discussion/260731_1233_rule-metric-absence-detection-options.md) |
 | done | — | homelab | aws-ec2, jyoliar-k8s, onpremise-k8s, baremetal | — | [은퇴한 환경(aws-ec2) 코드의 보존 방식](../../homelab/discussion/260807_2002_retired-env-code-archiving.md) |
