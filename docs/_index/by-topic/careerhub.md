@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / careerhub (49)
+# by-topic / careerhub (57)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -53,3 +53,11 @@
 | — | discussion | done | github-org-profile, readme, onpremise-k8s, jyoliar-k8s, jyoliar-platform-terraform, careerhub-front, auth-service, zitadel, careerhub-web, careerhub-incident-agent | [커리어허브 조직 Overview — 시작의 동기, 서비스·인프라 구조, 인프라 README 셋](../../careerhub/discussion/261031_1903_careerhub-org-overview-and-infra-readmes.md) |
 | — | discussion | done | careerhub-stg, careerhub-dev, careerhub-prod, jyoliar-k8s, jyoliar-platform-terraform, argocd, mongodb, cloudnativepg, zitadel, external-secrets, careerhub-web | [리뉴얼을 위한 careerhub stg 환경 — 네임스페이스·데이터·환경 축](../../careerhub/discussion/261102_1903_renewal-stg-environment-namespace-data-env-axis.md) |
 | — | discussion | done | zitadel, google-oauth, jyoliar-platform-terraform, mongodb | [stg 환경의 외부 의존 — Google OAuth 클라이언트 관리·MongoDB 복사 도구 조사 (2026-11-02)](../../careerhub/discussion/261102_1903_stg-env-external-dependencies-survey.md) |
+| — | discussion | active | — | [고용 방식별 구직자·기업 상호 만족도 — 조사 (2026-11-14)](../../careerhub/discussion/261114_1952_hiring-channel-mutual-satisfaction-survey.md) |
+| — | discussion | active | — | [고용 전 구직자·기업 적합성 확인 수단 — 조사 (2026-11-14)](../../careerhub/discussion/261114_1952_prehire-fit-prediction-survey.md) |
+| — | discussion | active | — | [이력서·채용공고에서 읽히는 적합 단서와 그 신뢰도 — 조사 (2026-11-14)](../../careerhub/discussion/261114_1952_resume-posting-fit-cues-survey.md) |
+| — | discussion | active | — | [이력서–채용공고 매칭 제품 사례와 사용자 반응 — 조사 (2026-11-14)](../../careerhub/discussion/261114_1952_resume-posting-matching-products-survey.md) |
+| — | discussion | active | — | [이력서–채용공고 매칭 기법 — 조사 (2026-11-14)](../../careerhub/discussion/261114_1952_resume-posting-matching-techniques-survey.md) |
+| — | discussion | active | — | [경력 공백·짧은 재직에 대한 고용주별 민감도 — 조사 (2026-11-15)](../../careerhub/discussion/261115_1220_gap-tenure-employer-sensitivity-survey.md) |
+| — | discussion | active | careerhub-posting-service, careerhub-posting-provider, careerhub-posting-skillscanner | [서류 통과 가능성으로 채용공고를 선별하는 방식 — 한 사람의 구직으로 먼저 검증한다](../../careerhub/discussion/261115_1220_posting-selection-by-screening-odds.md) |
+| — | discussion | active | — | [공고 쪽 요인과 서류 통과 확률 — 조사 (2026-11-15)](../../careerhub/discussion/261115_1220_posting-side-callback-factors-survey.md) |
