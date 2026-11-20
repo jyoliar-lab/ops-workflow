@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-type / discussion (123)
+# by-type / discussion (126)
 
 | status | goal | topic | subjects | ref-adrs | 문서 |
 |---|---|---|---|---|---|
@@ -26,6 +26,9 @@
 | done | obs-toolkit-test-quality | ai-agent | obs-toolkit, pytest, mutmut | — | [obs-toolkit 어댑터 인터페이스 개선(②) — #127 측정 위에서 범위를 다시 정한다](../../ai-agent/discussion/261022_1334_obs-toolkit-adapter-interface-scope.md) |
 | done | obs-toolkit-test-quality | ai-agent | obs-toolkit, pytest, mutmut | — | [obs-toolkit 테스트 지우기 — "불필요한 테스트" 의 객관적 기준과 지운 뒤의 증명](../../ai-agent/discussion/261024_1641_obs-toolkit-test-deletion-criteria.md) |
 | done | obs-toolkit-test-quality | ai-agent | obs-toolkit, mutmut, pytest | — | [생존 mutant 를 어떻게 쓰나 — mutant 가 잘못된 구현 위에 있을 때를 가려내는 법 · 조사 (2026-10-24)](../../ai-agent/discussion/261024_1850_mutation-survivors-wrong-implementation-survey.md) |
+| done | parallel-agent-work-human-impact | ai-agent | task-switching, attention-residue, interruption, media-multitasking, vigilance-decrement, automation-complacency, out-of-the-loop, fan-out, wip-limit | — | [인간의 병렬 작업(멀티태스킹)에 관한 연구 — 조사 (2026-11-20)](../../ai-agent/discussion/261120_1808_human-multitasking-research-survey.md) |
+| done | parallel-agent-work-human-impact | ai-agent | claude-code, git-worktree, subagent, agent-teams, agent-view, codex, copilot-coding-agent, cursor, jules, devin, gas-town | — | [AI agent 병렬 작업의 모범 사례 — 조사 (2026-11-20)](../../ai-agent/discussion/261120_1809_ai-agent-parallel-work-practices-survey.md) |
+| active | parallel-agent-work-human-impact | ai-agent | claude-code, agent-view, agent-teams, git-worktree, subagent | — | [모범 사례대로의 AI agent 병렬 작업은 사람에게 무엇을 하는가](../../ai-agent/discussion/261120_1810_parallel-agent-work-human-impact.md) |
 | done | — | careerhub-front | svelte, svelte-spa-router, rollup, api-composer, auth-service | — | [careerhub-front 리뉴얼 — 결정 축 벌리기](../../careerhub-front/discussion/260717_1456_frontend-renewal-decision-axes.md) |
 | active | — | careerhub-front | nextjs | — | [렌더링 전략 — 화면별로 어디서, 언제 그리나 (축 B)](../../careerhub-front/discussion/260717_1550_rendering-strategy-per-route.md) |
 | rejected | — | careerhub-front | api-composer, userinfo-service | — | [계측 — 무엇을 신뢰할 수 있고, 어디서 보내나 (축 H)](../../careerhub-front/discussion/260717_1617_measurement-trust-and-transport.md) |
@@ -101,7 +104,7 @@
 | done | prod-sync-gate-and-sync-alerts | homelab | argocd, applicationset, argocd-notifications, prometheus | — | [Argo CD의 sync 정책 · 메트릭 · 알림 · ApplicationSet 삭제 동작 — 조사 (2026-11-11)](../../homelab/discussion/261111_1800_argocd-sync-policy-metrics-notifications-survey.md) |
 | active | prod-sync-gate-and-sync-alerts | homelab | argocd, applicationset, careerhub-prod, prometheus, alertmanager, jyoliar-k8s | — | [prod 반영을 사람이 쥐고, 어긋난 Argo CD 앱을 알럿으로 안다](../../homelab/discussion/261111_1801_prod-manual-sync-and-sync-state-alerts.md) |
 | done | jobsearch-operator-harness | jobsearch-operator | jobsearch-operator, sqlite | — | [지원 현황을 담는 sqlite 스키마 — jobsearch-operator의 첫 구조](../../jobsearch-operator/discussion/261115_1407_application-tracking-sqlite-schema.md) |
-| active | jobsearch-operator-harness | jobsearch-operator | jobsearch-operator, sqlite | — | [jobsearch-operator에서 자주 쓸 기능 — 무엇을 스크립트로 둘 것인가](../../jobsearch-operator/discussion/261115_1430_frequent-operations-as-scripts.md) |
+| done | jobsearch-operator-harness | jobsearch-operator | jobsearch-operator, sqlite | — | [jobsearch-operator에서 자주 쓸 기능 — 무엇을 스크립트로 둘 것인가](../../jobsearch-operator/discussion/261115_1430_frequent-operations-as-scripts.md) |
 | active | — | ops-workflow | claude-code-skills | — | [skill 초판 마찰 로그](../../ops-workflow/discussion/260712_1731_skill-friction-log.md) |
 | active | — | ops-workflow | adr | — | [ADR 선행 사례 조사 — 무엇이 표준이고, 무엇이 우리 발명이고, 무엇이 실패하는가](../../ops-workflow/discussion/260714_1417_adr-prior-art-survey.md) |
 | active | — | ops-workflow | adr | — | [ADR 문서를 무슨 포맷으로 적을 것인가](../../ops-workflow/discussion/260715_1401_adr-document-format.md) |

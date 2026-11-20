@@ -1,6 +1,6 @@
 <!-- 생성물. 손으로 고치지 않는다 (CLAUDE.md §7) — build-index.py 가 만든다 (hook 자동 · /docs-index). -->
 
-# by-topic / ai-agent (22)
+# by-topic / ai-agent (25)
 
 | id | type | status | subjects | 문서 |
 |---|---|---|---|---|
@@ -26,3 +26,6 @@
 | — | discussion | done | obs-toolkit, pytest, mutmut | [obs-toolkit 어댑터 인터페이스 개선(②) — #127 측정 위에서 범위를 다시 정한다](../../ai-agent/discussion/261022_1334_obs-toolkit-adapter-interface-scope.md) |
 | — | discussion | done | obs-toolkit, pytest, mutmut | [obs-toolkit 테스트 지우기 — "불필요한 테스트" 의 객관적 기준과 지운 뒤의 증명](../../ai-agent/discussion/261024_1641_obs-toolkit-test-deletion-criteria.md) |
 | — | discussion | done | obs-toolkit, mutmut, pytest | [생존 mutant 를 어떻게 쓰나 — mutant 가 잘못된 구현 위에 있을 때를 가려내는 법 · 조사 (2026-10-24)](../../ai-agent/discussion/261024_1850_mutation-survivors-wrong-implementation-survey.md) |
+| — | discussion | done | task-switching, attention-residue, interruption, media-multitasking, vigilance-decrement, automation-complacency, out-of-the-loop, fan-out, wip-limit | [인간의 병렬 작업(멀티태스킹)에 관한 연구 — 조사 (2026-11-20)](../../ai-agent/discussion/261120_1808_human-multitasking-research-survey.md) |
+| — | discussion | done | claude-code, git-worktree, subagent, agent-teams, agent-view, codex, copilot-coding-agent, cursor, jules, devin, gas-town | [AI agent 병렬 작업의 모범 사례 — 조사 (2026-11-20)](../../ai-agent/discussion/261120_1809_ai-agent-parallel-work-practices-survey.md) |
+| — | discussion | active | claude-code, agent-view, agent-teams, git-worktree, subagent | [모범 사례대로의 AI agent 병렬 작업은 사람에게 무엇을 하는가](../../ai-agent/discussion/261120_1810_parallel-agent-work-human-impact.md) |
